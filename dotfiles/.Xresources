@@ -61,12 +61,6 @@ URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 URxvt.keysym.Control-Meta-c: builtin-string:
 URxvt.keysym.Control-Meta-v: builtin-string:
-
-
-
-!!! TESTING !!!
 ! Transparency - higher value = higher transparency:
-! URxvt.transparent: true
-! URxvt.shading: 67
-!
-! Font size increase
+URxvt.transparent: true
+URxvt.shading: 50
