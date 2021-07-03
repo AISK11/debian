@@ -51,8 +51,8 @@ URxvt*internalBorder: 1
 URxvt*externalBorder: 1
 ! Line space in pixels between each row:
 URxvt*lineSpace: 0
-! Terminal name:
-URxvt*termName: screen-256color
+! Terminal name (let be commented to Home and End buttons to work):
+!URxvt*termName: xterm-256color
 ! Disable iso14755:
 URxvt*iso14755: False
 URxvt*iso14755_52: False
@@ -69,5 +69,4 @@ URxvt.keysym.Control-Meta-v: builtin-string:
 ! URxvt.transparent: true
 ! URxvt.shading: 67
 !
-!URxvt.keysym.Control-+: font-size:increase
-!URxvt.keysym.Control--: font-size:decrease
+! Font size increase
