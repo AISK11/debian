@@ -34,6 +34,9 @@ export HISTSIZE=2000
 export HISTFILE="${HOME}/.zsh_history"
 export SAVEHIST=${HISTSIZE}
 
+# PATH variable:
+export PATH=${PATH}:/sbin:/usr/sbin
+
 # Aliases:
 alias ls='ls --color=always'
 alias ip='ip -c'
