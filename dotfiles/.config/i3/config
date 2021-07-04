@@ -20,7 +20,7 @@ default_border pixel 1
 #hide_edge_borders both
 
 # FONT FOR WINDOW TITLES AND BAR:
-font pango:DejavuSansMono 10
+font pango:DejavuSansMono 11
 
 
 ### SHORTCUTS:
@@ -29,7 +29,11 @@ bindsym $mod+Return exec i3-sensible-terminal
 # KILL FOCUSED WINDOW:
 bindsym $mod+Shift+q kill
 # DMENU:
-bindsym $mod+d exec dmenu_run -b -fn monospace -nb "#393e46" -nf "#ffd369" -sb "#ffd369" -sf "#393e46" -i
+#bindsym $mod+d exec dmenu_run -b -fn monospace -nb "#393e46" -nf "#ffd369" -sb "#ffd369" -sf "#393e46" -i
+# ROFI ('rofi -dump-xresources'):
+bindsym $mod+d exec "rofi -modi run -show run -width 25 -lines 10 -columns 1 -font 'DejavuSansMono 11' -bw 1 -location 0 -disable-history:true -sidebar-mode:false -hide-scrollbar -color-window '#393e46, #ffd369, #ffd369' -color-normal '#393e46, #ffd369, #454b54, #ffd369, #393e46'"
+
+
 # CHANGE FOCUS:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
