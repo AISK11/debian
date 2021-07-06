@@ -182,3 +182,9 @@ exec numlockx on
 bindsym Print exec --no-startup-id ~/.config/i3/scripts/i3_prtsc.sh
 # KEYBOARD SWITCHING ('man xkeyboard-config'; 'localectl list-x11-keymap-variants [sk]'):
 exec --no-startup-id setxkbmap -model pc105 -layout "us,sk" -variant ",qwerty" -option 'grp:shifts_toggle' 
+
+### Fn Key shortcuts
+# Backlight
+#exec xbacklight -set 50
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/i3_brightness_decrease.sh
