@@ -193,4 +193,7 @@ bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/i3_brightness_decrease.s
 #exec amixer set Master mute
 bindsym XF86AudioLowerVolume exec amixer set Master 5%-
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
-
+# MIC CONTROL:
+#exec amixer set Capture 50%
+#exec amixer set Capture nocap
+bindsym XF86AudioMicMute exec amixer set Capture toggle
