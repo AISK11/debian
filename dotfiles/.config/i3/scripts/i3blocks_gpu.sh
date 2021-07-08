@@ -25,11 +25,11 @@ echo "${GPU_UTIL}% ${GPU_TEMP}C"
 echo "${GPU_UTIL}% ${GPU_TEMP}C"
 
 # Color:
-if [ ${GPU_UTIL} -lt 33 ]; then
+if [ ${GPU_TEMP} -lt 70 ]; then
     echo "#4BFF57"
-elif [ ${GPU_UTIL} -lt 66 ]; then
+elif [ ${GPU_TEMP} -lt 80 ]; then
     echo "#FFFF4A"  
-elif [ ${GPU_UTIL} -lt 90 ]; then
+elif [ ${GPU_TEMP} -lt 90 ]; then
     echo "#FF994A" 
 else
     echo "#FF4A4A"
