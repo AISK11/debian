@@ -189,11 +189,11 @@ exec --no-startup-id setxkbmap -model pc105 -layout "us,sk" -variant ",qwerty" -
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/i3_brightness_decrease.sh
 # AUDIO CONTROL:
-#exec amixer set Master 50%
-#exec amixer set Master mute
+exec amixer set Master 50%
+exec amixer set Master mute
 bindsym XF86AudioLowerVolume exec amixer set Master 5%-
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
 # MIC CONTROL:
-#exec amixer set Capture 50%
-#exec amixer set Capture nocap
+exec amixer set Capture 50%
+exec amixer set Capture nocap
 bindsym XF86AudioMicMute exec amixer set Capture toggle
