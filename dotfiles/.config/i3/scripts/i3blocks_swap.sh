@@ -16,8 +16,8 @@ elif [ ${#PERCENTAGE} -eq 2 ]; then
     PERCENTAGE=" ${PERCENTAGE}";
 fi
 
-echo "${PERCENTAGE}"
-echo "${PERCENTAGE}"
+echo "${PERCENTAGE}%"
+echo "${PERCENTAGE}%"
 
 # Color
 if [[ ${PERCENTAGE} -lt 33 ]]; then
