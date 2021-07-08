@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Author: AISK11
-# Description: This script shows GPU utilization in percentage and temperature in degree Celsius.
+# Description: This script shows Nvidia GPU utilization in percentage and temperature in degree Celsius.
 # Created for: i3blocks
 # Dependencies: nvidia-smi inux-headers-amd64 nvidia-driver firmware-misc-nonfree
 
