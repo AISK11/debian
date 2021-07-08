@@ -16,7 +16,9 @@ INTERFACE_STATE=$(ip a | grep ${INTERFACE} | grep -v "inet" | cut -d' ' -f9)
 
 if [ "${INTERFACE_STATE}" = "DOWN" ]
 then
-    printf "DOWN\n"
+    echo "DOWN"
+    echo "DOWN"
+    echo "#FF4A4A"
 elif [ "${INTERFACE_STATE}" = "UP" ]
 then
     RX_OLD=$(cat /sys/class/net/${INTERFACE}/statistics/rx_bytes)
@@ -78,5 +80,7 @@ then
         echo "RX ${RX_BITS} Mb/s; TX ${TX_BITS} Mb/s"
     fi
 else
-    printf "UNKNOWN\n"
+    echo "UNKNOWN"
+    echo "UNKNOWN"
+    echo "#FF4A4A"
 fi
