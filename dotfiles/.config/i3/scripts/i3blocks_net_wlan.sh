@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Author: AISK11
-# Description: This script calculates network throughput for interface "eth0" in b/s every second.
+# Description: This script calculates network throughput for interface "wlan0" in b/s every second.
 # 1 MB/s = 8 Mb/s
 # 1 Mb/s = 1,000 kb/s = 1,000,000 b/s
 # Created for: i3blocks
 # Dependencies: iproute2 wireless-tools
 
-# interfaces=<eth0|wlan0|lo>
+# interfaces=<wlan0|wlp0s20f3>
 INTERFACE="wlan0"
 INTERFACE_STATE=$(ip a | grep ${INTERFACE} | grep -v "inet" | cut -d' ' -f9)
 
