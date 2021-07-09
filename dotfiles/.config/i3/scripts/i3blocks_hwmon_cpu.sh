@@ -19,7 +19,7 @@ elif [ ${#USAGE1} -eq 2 ]; then
 fi
 
 if [ ${#USAGE2} -eq 1 ]; then
-    USAGE1=" ${USAGE1}"
+    USAGE2="0${USAGE2}"
 fi
 
 echo "${USAGE1}.${USAGE2}%"
