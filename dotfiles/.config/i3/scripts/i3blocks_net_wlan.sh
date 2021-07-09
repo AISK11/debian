@@ -64,7 +64,7 @@ then
         elif [ ${#TX_BITS} -eq 2 ]; then
             TX_BITS=" ${TX_BITS}"
         fi 
-        echo "RX ${RX_BITS} Mb/s; TX ${TX_BITS} Mb/s"
+        echo "RX ${RX_BITS} kb/s; TX ${TX_BITS} kb/s"
     else
         # Add leading space in front of variable:
         if [ ${#RX_BITS} -eq 1 ]; then
@@ -77,7 +77,7 @@ then
         elif [ ${#TX_BITS} -eq 2 ]; then
             TX_BITS=" ${TX_BITS}"
         fi 
-        echo "RX ${RX_BITS} Mb/s; TX ${TX_BITS} Mb/s"
+        echo "RX ${RX_BITS}  b/s; TX ${TX_BITS}  b/s"
     fi
 else
     echo "UNKNOWN"
