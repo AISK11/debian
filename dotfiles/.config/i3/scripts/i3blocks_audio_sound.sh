@@ -10,7 +10,7 @@ AUDIO_STATUS=$(amixer get Master | grep "Front Left:" | cut -d "[" -f 3 | tr -d 
 if [ "${AUDIO_STATUS}" = "off" ]; then
     echo " off"
     echo " off"
-    echo "#FFFFFF"
+    echo "#FF4A4A"
 else
     AUDIO_VOLUME=$(amixer get Master | grep "Front Left:" | egrep -o "[0-9]{1,3}%" | tr -d "%")
     # Add leading space in front of variable:
@@ -21,5 +21,5 @@ else
     fi
     echo "${AUDIO_VOLUME}%"
     echo "${AUDIO_VOLUME}%"
-    echo "#FF4A4A"
+    echo "#FFFFFF"    
 fi
