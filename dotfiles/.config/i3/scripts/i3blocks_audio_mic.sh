@@ -19,7 +19,7 @@ else
     elif [ ${#MIC_VOLUME} -eq 2 ]; then
         MIC_VOLUME=" ${MIC_VOLUME}";
     fi
-    echo " ${MIC_VOLUME}%"
-    echo " ${MIC_VOLUME}%"
+    echo "${MIC_VOLUME}%"
+    echo "${MIC_VOLUME}%"
     echo "#FF4A4A"
 fi
