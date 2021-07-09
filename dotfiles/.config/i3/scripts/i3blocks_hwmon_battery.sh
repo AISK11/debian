@@ -8,10 +8,10 @@
 BATTERY=$(acpi -b | egrep -o "[0-9]{1,3}%" | tr -d "%")
 STATUS=$(acpi -b | awk '{print $3}')
 
-if [ "${STATUS}" = "Charging," ]; then
-    STATUS="+"
+if [ "${STATUS}" = "Discharging," ]; then
+    STATUS=" "
 else
-    STATUS="-"
+    STATUS=""
 fi
 
 
