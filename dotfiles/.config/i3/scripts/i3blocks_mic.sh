@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Author: AISK11
-# Description: This script shows CPU utilization in percentage.
+# Description: This script shows MICrophone usage and volume.
 # Created for: i3blocks
 # Dependencies: alsa
 
