@@ -8,8 +8,8 @@
 MIC_STATUS=$(amixer get Capture | grep "Front Left:" | cut -d "[" -f 3 | tr -d "]")
 
 if [ "${MIC_STATUS}" = "off" ]; then
-    echo " off"
-    echo " off"
+    echo " off"
+    echo " off"
     echo "#FFFFFF"
 else
     MIC_VOLUME=$(amixer get Capture | grep "Front Left:" | egrep -o "[0-9]{1,3}%" | tr -d "%")
@@ -19,7 +19,7 @@ else
     elif [ ${#MIC_VOLUME} -eq 2 ]; then
         MIC_VOLUME=" ${MIC_VOLUME}";
     fi
-    echo "${MIC_VOLUME}%"
-    echo "${MIC_VOLUME}%"
+    echo " ${MIC_VOLUME}%"
+    echo " ${MIC_VOLUME}%"
     echo "#FF4A4A"
 fi
