@@ -7,7 +7,7 @@
 
 !!! Change font size !!!
 ! Load extension from ~/.urxvt/ext/fint-size
-URxvt.perl-ext-common: ...,font-size
+URxvt.perl-ext-common: default,font-size
 ! Change font: Control + Num+; Control + Num-; Control + Num0.
 URxvt.keysym.Control-KP_Add:     font-size:increase
 URxvt.keysym.Control-KP_Subtract:   font-size:decrease
