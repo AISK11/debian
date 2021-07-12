@@ -35,8 +35,8 @@ URxvt*scrollWithBuffer: True
 ! Save number of linex to scroll buffer [1000]:
 URxvt*saveLines: 650000
 ! Fading - when focus is lost, fade text by given %:
-URxvt*fading: 30
-URxvt*fadeColor: Black
+!URxvt*fading: 30
+!URxvt*fadeColor: Black
 ! Font (see 'fc-list'):
 URxvt*font: xft:DejavuSansMono:size=10
 URxvt*boldFont: xft:DejavuSansMono-Bold=10
