@@ -15,7 +15,7 @@ set expandtab
 
 " Colors:
 syntax on
-#colorscheme murphy
+"colorscheme murphy
 
 " Filename edited:
 set laststatus=2
