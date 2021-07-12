@@ -5,14 +5,14 @@
 # Created for: i3blocks
 # Dependencies: alsa
 
-MIC_STATUS=$(amixer get Capture | grep "Front Left:" | cut -d "[" -f 3 | tr -d "]")
+MIC_STATUS=$(amixer get Capture | grep "Left: Capture" | grep -w -o "on\|off")
 
 if [ "${MIC_STATUS}" = "off" ]; then
     echo " off"
     echo " off"
     echo "#FFFFFF"
 else
-    MIC_VOLUME=$(amixer get Capture | grep "Front Left:" | egrep -o "[0-9]{1,3}%" | tr -d "%")
+    MIC_VOLUME=$(amixer get Capture | grep "Left: Capture" | egrep -o "[0-9]{1,3}%" | tr -d "%" )
     # Add leading space in front of variable:
     if [ ${#MIC_VOLUME} -eq 1 ]; then
         MIC_VOLUME="  ${MIC_VOLUME}"
