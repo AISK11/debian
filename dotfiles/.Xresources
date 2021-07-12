@@ -86,7 +86,7 @@ URxvt.color1:   #BD2000
 ! Dark Blue:
 !URxvt.color4:   #0000A8
 ! Dark Purple:
-!URxvt.color5:   #A800A8
+URxvt.color5:   #A300FF
 ! Dark Cyan:
 !URxvt.color6:   #00A8A8
 ! Dark White:
@@ -102,7 +102,7 @@ URxvt.color11:  #FFD369
 ! Light Blue:
 URxvt.color12:  #0000FF
 ! Light Purple:
-!URxvt.color13:  #FF00FF
+URxvt.color13:  #CB95EA
 ! Light Cyan:
 !URxvt.color14:  #00FFFF
 ! Light White:
