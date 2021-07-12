@@ -12,7 +12,7 @@ if [ "${MIC_STATUS}" = "off" ]; then
     echo " off"
     echo "#FFFFFF"
 else
-    MIC_VOLUME=$(amixer get Capture | grep "Left: Capture" | egrep -o "[0-9]{1,3}%" | tr -d "%" )
+    MIC_VOLUME=$(amixer get Capture | tail -n 1 | egrep -o "[0-9]{1,3}%" | tr -d "%" )
     # Add leading space in front of variable:
     if [ ${#MIC_VOLUME} -eq 1 ]; then
         MIC_VOLUME="  ${MIC_VOLUME}"
