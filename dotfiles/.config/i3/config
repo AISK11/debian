@@ -10,9 +10,9 @@
 set $mod Mod4
 
 # i3-gaps SETTINGS:
-gaps inner 10
-gaps outer 10
-smart_gaps on
+#gaps inner 10
+#gaps outer 10
+#smart_gaps on
 
 
 # Dim inactive windows [0-1]:
