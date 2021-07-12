@@ -5,14 +5,14 @@
 # Created for: i3blocks
 # Dependencies: alsa
 
-AUDIO_STATUS=$(amixer get Master | grep "Front Left:" | cut -d "[" -f 3 | tr -d "]")
+AUDIO_STATUS=$(amixer get Master | tail -n 1 | grep -w -o "on\|off")
 
 if [ "${AUDIO_STATUS}" = "off" ]; then
     echo " off"
     echo " off"
     echo "#FF4A4A"
 else
-    AUDIO_VOLUME=$(amixer get Master | grep "Front Left:" | egrep -o "[0-9]{1,3}%" | tr -d "%")
+    AUDIO_VOLUME=$(amixer get Master | tail -n 1 | egrep -o "[0-9]{1,3}%" | tr -d "%")
     # Add leading space in front of variable:
     if [ ${#AUDIO_VOLUME} -eq 1 ]; then
         AUDIO_VOLUME="  ${AUDIO_VOLUME}"
