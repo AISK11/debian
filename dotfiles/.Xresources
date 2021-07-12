@@ -96,11 +96,11 @@ URxvt.color8:   #393E46
 ! Light Red:
 URxvt.color9:   #FF0000
 ! Light Green:
-!URxvt.color10:  #00FF54
+URxvt.color10:  #00FF00
 ! Light Yellow:
 URxvt.color11:  #FFD369
 ! Light Blue:
-!URxvt.color12:  #0000FF
+URxvt.color12:  #0000FF
 ! Light Purple:
 !URxvt.color13:  #FF00FF
 ! Light Cyan:
