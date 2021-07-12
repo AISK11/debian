@@ -5,6 +5,21 @@
 !# sudo apt install rxvt-unicode-256color
 !##################################################################
 
+!!! Change font size !!!
+! Load extension from ~/.urxvt/ext/fint-size
+URxvt.perl-ext-common: ...,font-size
+! Change font: Control + Num+; Control + Num-; Control + Num0.
+URxvt.keysym.Control-KP_Add:     font-size:increase
+URxvt.keysym.Control-KP_Subtract:   font-size:decrease
+URxvt.keysym.Control-KP_0:  font-size:reset
+! Change font by X size:
+URxvt.font-size.step: 4
+! Not needed:
+!URxvt.keysym.Control-a:   font-size:incglobal
+!URxvt.keysym.Control-b: font-size:decglobal
+! Show size and font currently used:
+!URxvt.keysym.Control-S:  font-size:show
+
 !!! SETTINGS !!!
 ! Double buffering - increase performance:
 URxvt*buffered: true
