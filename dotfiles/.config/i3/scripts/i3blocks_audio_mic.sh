@@ -5,7 +5,7 @@
 # Created for: i3blocks
 # Dependencies: alsa
 
-MIC_STATUS=$(amixer get Capture | grep "Left: Capture" | grep -w -o "on\|off")
+MIC_STATUS=$(amixer get Capture | tail -n 1 | grep -w -o "on\|off")
 
 if [ "${MIC_STATUS}" = "off" ]; then
     echo " off"
