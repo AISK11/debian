@@ -77,33 +77,33 @@ URxvt*saveLines: 650000
 !!! CUSTOM COLORS !!!
 ! Black:
 URxvt.color0:   #000000
-! Dark Red 
-URxvt.color1:   #A80000
+! Dark Red:
+URxvt.color1:   #BD2000
 ! Dark Green:
-URxvt.color2:   #00A800
+!URxvt.color2:   #00A800
 ! Dark Yellow:
-URxvt.color3:   #A8A800
+!URxvt.color3:   #A8A800
 ! Dark Blue:
-URxvt.color4:   #0000A8
+!URxvt.color4:   #0000A8
 ! Dark Purple:
-URxvt.color5:   #A800A8
+!URxvt.color5:   #A800A8
 ! Dark Cyan:
-URxvt.color6:   #00A8A8
-! Dark White
-URxvt.color7:   #A8A8A8
+!URxvt.color6:   #00A8A8
+! Dark White:
+!URxvt.color7:   #A8A8A8
 ! Light Black / Gray:
-URxvt.color8:   #000054
-! Light Red
-URxvt.color9:   #FF0054
-! Light Green
-URxvt.color10:  #00FF54
-! Light Yellow
-URxvt.color11:  #FFFF54
-! Light Blue
-URxvt.color12:  #0000FF
-! Light Purple
-URxvt.color13:  #FF00FF
+URxvt.color8:   #393E46
+! Light Red:
+URxvt.color9:   #FF0000
+! Light Green:
+!URxvt.color10:  #00FF54
+! Light Yellow:
+URxvt.color11:  #FFD369
+! Light Blue:
+!URxvt.color12:  #0000FF
+! Light Purple:
+!URxvt.color13:  #FF00FF
 ! Light Cyan:
-URxvt.color14:  #00FFFF
+!URxvt.color14:  #00FFFF
 ! Light White:
 URxvt.color15:  #FFFFFF
