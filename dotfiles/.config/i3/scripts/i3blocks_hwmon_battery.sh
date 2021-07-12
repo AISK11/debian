@@ -36,8 +36,8 @@ elif [ ${BATTERY} -gt 30 ]; then
     echo " ${BATTERY}% ${STATUS}"
     echo "#FFFF4A"  
 elif [ ${BATTERY} -gt 15 ]; then
-    echo " ${BATTERY}% ${STATUS}"
-    echo " ${BATTERY}% ${STATUS}"
+    echo " ${BATTERY}% ${STATUS}"
+    echo " ${BATTERY}% ${STATUS}"
     echo "#FF994A" 
 else
     echo " ${BATTERY}% ${STATUS}"
