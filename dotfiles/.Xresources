@@ -80,17 +80,17 @@ URxvt.color0:   #000000
 ! Dark Red:
 URxvt.color1:   #BD2000
 ! Dark Green:
-!URxvt.color2:   #00A800
+URxvt.color2:   #2B9348
 ! Dark Yellow:
 URxvt.color3:   #FB9846
 ! Dark Blue:
-!URxvt.color4:   #0000A8
+URxvt.color4:   #002FB0
 ! Dark Purple:
 URxvt.color5:   #A300FF
 ! Dark Cyan:
 URxvt.color6:   #00C1FF
 ! Dark White:
-!URxvt.color7:   #A8A8A8
+URxvt.color7:   #DEE2E6
 ! Light Black / Gray:
 URxvt.color8:   #393E46
 ! Light Red:
