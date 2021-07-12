@@ -1,0 +1,204 @@
+##################################################################
+# Author: AISK11
+# Location: ~/.config/i3/config
+
+# Packages installed:
+# sudo apt install apt install i3 i3bar i3blocks rofi i3lock feh numlockx scrot compton
+##################################################################
+
+# SET MOD KEY: Window key = Mod4; Alt key = Mod1:
+set $mod Mod4
+
+# i3-gaps SETTINGS:
+gaps inner 10
+gaps outer 10
+smart_gaps on
+
+
+# Dim inactive windows [0-1]:
+exec compton --xrender-sync --xrender-sync-fence --inactive-dim 0.25 -b
+
+# WINDOW BORDER SIZE:
+default_border pixel 1 
+#for_window [class="."] border pixel 3
+#hide_edge_borders both
+
+# FONT FOR WINDOW TITLES AND BAR:
+font pango:DejavuSansMono 11
+
+
+### SHORTCUTS:
+# START TEMINAL:
+bindsym $mod+Return exec i3-sensible-terminal
+# KILL FOCUSED WINDOW:
+bindsym $mod+Shift+q kill
+# DMENU:
+#bindsym $mod+d exec dmenu_run -b -fn monospace -nb "#393e46" -nf "#ffd369" -sb "#ffd369" -sf "#393e46" -i
+# ROFI ('rofi -dump-xresources'):
+bindsym $mod+d exec "rofi -modi run -show run -width 25 -lines 10 -columns 1 -font 'DejavuSansMono 11' -bw 1 -location 0 -disable-history -sidebar-mode:false -hide-scrollbar -color-window '#393e46, #ffd369, #ffd369' -color-normal '#393e46, #ffd369, #454b54, #ffd369, #393e46'"
+
+
+# CHANGE FOCUS:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+#bindsym $mod+semicolon focus right
+# MOVE FOCUSED WINDOWS:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+#bindsym $mod+semicolon focus right
+# SPLIT IN HORIZONTAL ORIENTATION:
+bindsym $mod+h split h
+# SPLIT IN VERTICAL ORIENTATION:
+bindsym $mod+v split v
+# ENTER FULLSCREEN FOR FOCUSED CONTAINER:
+bindsym $mod+f fullscreen toggle
+# CHANGE CONTAINER LAYOUT (stacked, tabbed, toggle split):
+#bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+#bindsym $mod+e layout toggle split
+# TOGGLE TILING/FLOATING:
+#bindsym $mod+Shift+space floating toggle
+# CHANGE FOCUS BETWEEN TILING/FLOATING WINDOWS:
+#bindsym $mod+space focus mode_toggle
+# USE Mouse+$mod TO DRAG FLOATING WINDOWS TO THEIR WANTED POSITION:
+#floating_modifier $mod
+# FOCUS PARENT CONTAINER:
+#bindsym $mod+a focus parent
+# FOCUS CHILD CONTAINER:
+#bindsym $mod+d focus child
+# RESIZE WINDOW:
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+# RELOAD THE CONFIG FILE:
+#bindsym $mod+Shift+c reload
+# RESTART i3 INPLACE (preserves your layout/session, can be used to upgrade i3):
+bindsym $mod+Shift+r restart
+# EXIT i3:
+#bindsym $mod+Shift+e exec killall -9 startx
+
+
+### WORKSPACES:
+# DEFINE WORKSPACES:
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+# SWITCH TO WORKSPACE:
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+# MOVE FOCUSED CONTAINTER TO WORKSPACE:
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+
+### i3 BAR + i3 BLOCKS:
+# COLOR VARIABLES:
+set $selected-color     #ffd369
+#set $selected-color     #3366ff
+set $unselected-color   #393e46
+set $urgent-color     #bd2000
+client.focused              #000000    $selected-color    #000000     $urgent-color
+client.unfocused            #000000    $unselected-color  #000000     #000000
+client.focused_inactive     #000000    $unselected-color  #000000     #000000
+client.urgent               #000000    $urgent-color  #000000     #000000
+set $bar-bg     #222831
+# i3 BAR:
+bar {
+        status_command i3blocks -c /etc/i3blocks.conf
+        position top
+        separator_symbol "|"
+        colors {
+            background $bar-bg
+            separator $unselected-color
+            focused_workspace   $selected-color $selected-color $unselected-color
+            inactive_workspace  $unselected-color $unselected-color $selected-color
+            urgent_workspace   $urgent-color $urgent-color #ffffff 
+        }
+}
+
+
+### WALLPAPER:
+# WALLPAPER:
+exec --no-startup-id feh --bg-scale ~/.config/i3/wallpaper.png
+# RENDER WALLPAPER NICELY (i3-gaps):
+exec --no-startup-id exec bash ${HOME}/.fehbg
+# LOCK SCREEN:
+bindsym $mod+l exec i3lock -i ~/.config/i3/lockscreen.png -efu
+
+
+### OTHER FEATURES:
+# LOAD TERMINAL EMULATOR SETTINGS:
+exec xrdb ~/.Xresources
+# NUMLOCK ON START OF i3:
+exec numlockx on
+# PRINTSCREEN:
+bindsym Print exec --no-startup-id ~/.config/i3/scripts/i3_prtsc.sh
+# KEYBOARD SWITCHING ('man xkeyboard-config'; 'localectl list-x11-keymap-variants [sk]'):
+exec --no-startup-id setxkbmap -model pc105 -layout "us,sk" -variant ",qwerty" -option 'grp:shifts_toggle' 
+
+### Fn KEY SHORTCUTS:
+# BACKLIGHT CONTROL:
+#exec xbacklight -set 50
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/i3_brightness_decrease.sh
+# AUDIO CONTROL:
+exec amixer set Master 50%
+exec amixer set Master mute
+bindsym XF86AudioMute exec amixer set Master toggle
+bindsym XF86AudioLowerVolume exec amixer set Master 5%-
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
+# MIC CONTROL:
+exec amixer set Capture 50%
+exec amixer set Capture nocap
+bindsym XF86AudioMicMute exec amixer set Capture toggle
