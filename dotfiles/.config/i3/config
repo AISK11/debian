@@ -10,9 +10,9 @@
 set $mod Mod4
 
 # i3-gaps SETTINGS:
-#gaps inner 10
-#gaps outer 10
-#smart_gaps on
+gaps inner 10
+gaps outer 10
+smart_gaps on
 
 
 # Dim inactive windows [0-1]:
@@ -195,6 +195,7 @@ bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/i3_brightness_decrease.s
 # AUDIO CONTROL:
 exec amixer set Master 50%
 exec amixer set Master mute
+bindsym XF86AudioMute exec amixer set Master toggle
 bindsym XF86AudioLowerVolume exec amixer set Master 5%-
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
 # MIC CONTROL:
