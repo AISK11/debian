@@ -5,24 +5,11 @@
 !# sudo apt install rxvt-unicode-256color
 !##################################################################
 
+!!! SETTINGS !!!
 ! Double buffering - increase performance:
 URxvt*buffered: true
 ! Window with specified X window geometry [80x24]:
 URxvt*geometry: 240x84
-! Background color [Black] and Foreground color [White]:
-URxvt*background: Black
-URxvt*foreground: White
-! Highlighted (selected text): 
-URxvt*highlightColor: White
-URxvt*highlightTextColor: Black
-! Set cursor color:
-!URxvt*cursorColor: Yellow
-!URxvt*cursorColor2: Black
-URxvt*cursorBlink: True
-! True - set cursor underlined; False - square cursor:
-URxvt*cursorUnderline: False
-! JumpScroll (True - less updates; False - more updates):
-URxvt*jumpScroll: False
 ! skipScroll (True 60 times per second screen update; False - every line update):
 URxvt*skipScroll: True
 ! Scroll type [rxvt, plain, next, xterm]
@@ -32,16 +19,6 @@ URxvt*scrollBar: False
 ! Scroll to bottom when receive output:
 URxvt*scrollTtyOutput: True
 URxvt*scrollWithBuffer: True
-! Save number of linex to scroll buffer [1000]:
-URxvt*saveLines: 650000
-! Fading - when focus is lost, fade text by given %:
-!URxvt*fading: 30
-!URxvt*fadeColor: Black
-! Font (see 'fc-list'):
-URxvt*font: xft:DejavuSansMono:size=10
-URxvt*boldFont: xft:DejavuSansMono-Bold=10
-!Urxvt*italicFont: 
-!Urxvt*boldItalicFont:
 ! Window Title:
 URxvt*title: urxvt
 ! Visual Bell:
@@ -56,11 +33,77 @@ URxvt*lineSpace: 0
 ! Disable iso14755:
 URxvt*iso14755: False
 URxvt*iso14755_52: False
-! Copy Paste:
+
+!!! COPY PASTE !!!
+!Copy Paste:
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 URxvt.keysym.Control-Meta-c: builtin-string:
 URxvt.keysym.Control-Meta-v: builtin-string:
+
+!!! TRANSPACRENCY !!!
 ! Transparency - higher value = higher transparency:
 URxvt.transparent: true
-URxvt.shading: 50
+URxvt.shading: 50!!! FONTS !!!
+! Font (see 'fc-list'):
+URxvt*font: xft:DejavuSansMono:size=10
+URxvt*boldFont: xft:DejavuSansMono-Bold=10
+!Urxvt*italicFont: 
+!Urxvt*boldItalicFont:
+
+!!! CURSOR !!!
+! Set cursor color:
+!URxvt*cursorColor: Yellow
+!URxvt*cursorColor2: Black
+URxvt*cursorBlink: True
+! True - set cursor underlined; False - square cursor:
+URxvt*cursorUnderline: False
+
+!!! COLORS !!!
+!! Background color [Black] and Foreground color [White]:
+URxvt*background: Black
+URxvt*foreground: White
+! Highlighted (selected text): 
+URxvt*highlightColor: White
+URxvt*highlightTextColor: Black
+ JumpScroll (True - less updates; False - more updates):
+URxvt*jumpScroll: False
+ Save number of linex to scroll buffer [1000]:
+URxvt*saveLines: 650000
+! Fading - when focus is lost, fade text by given %:
+!URxvt*fading: 30
+!URxvt*fadeColor: Black
+
+!!! CUSTOM COLORS !!!
+! Black:
+URxvt.color0:   #000000
+! Dark Red 
+URxvt.color1:   #A80000
+! Dark Green:
+URxvt.color2:   #00A800
+! Dark Yellow:
+URxvt.color3:   #A8A800
+! Dark Blue:
+URxvt.color4:   #0000A8
+! Dark Purple:
+URxvt.color5:   #A800A8
+! Dark Cyan:
+URxvt.color6:   #00A8A8
+! Dark White
+URxvt.color7:   #A8A8A8
+! Light Black / Gray:
+URxvt.color8:   #000054
+! Light Red
+URxvt.color9:   #FF0054
+! Light Green
+URxvt.color10:  #00FF54
+! Light Yellow
+URxvt.color11:  #FFFF54
+! Light Blue
+URxvt.color12:  #0000FF
+! Light Purple
+URxvt.color13:  #FF00FF
+! Light Cyan:
+URxvt.color14:  #00FFFF
+! Light White:
+URxvt.color15:  #FFFFFF
