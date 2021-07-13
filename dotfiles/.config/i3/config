@@ -167,6 +167,8 @@ bar {
         }
 }
 
+# EXECUTE urxvt terminal as daemon:
+exec urxvtd --quiet --opendisplay --fork
 
 ### WALLPAPER:
 # WALLPAPER:
