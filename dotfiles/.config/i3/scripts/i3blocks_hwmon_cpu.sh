@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/bash
 
 # Author: AISK11
 # Description: This script shows CPU utilization in percentage.
