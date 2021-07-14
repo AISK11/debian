@@ -20,9 +20,9 @@ echo "${PERCENTAGE}%"
 echo "${PERCENTAGE}%"
 
 # Color
-if [[ ${PERCENTAGE} -lt 33 ]]; then
+if [[ ${PERCENTAGE} -lt 50 ]]; then
     echo "#4BFF57"
-elif [[ ${PERCENTAGE} -lt 66 ]]; then
+elif [[ ${PERCENTAGE} -lt 75 ]]; then
     echo "#FFFF4A" 
 elif [[ ${PERCENTAGE} -lt 90 ]]; then
     echo "#FF994A" 
