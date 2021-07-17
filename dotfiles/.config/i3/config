@@ -16,7 +16,7 @@ smart_gaps on
 
 
 # Dim inactive windows [0-1]:
-exec compton --xrender-sync --xrender-sync-fence --inactive-dim 0.25 -b
+exec --no-startup-id compton --xrender-sync --xrender-sync-fence --inactive-dim 0.25 -b
 
 # WINDOW BORDER SIZE:
 default_border pixel 1 
@@ -168,13 +168,13 @@ bar {
 }
 
 # EXECUTE urxvt terminal as daemon:
-exec urxvtd --quiet --opendisplay --fork
+exec --no-startup-id urxvtd --quiet --opendisplay --fork
 
 ### WALLPAPER:
 # WALLPAPER:
 exec --no-startup-id feh --bg-scale ~/.config/i3/wallpaper.png
 # RENDER WALLPAPER NICELY (i3-gaps):
-exec --no-startup-id exec bash ${HOME}/.fehbg
+exec --no-startup-id bash ${HOME}/.fehbg
 # LOCK SCREEN:
 bindsym $mod+l exec i3lock -i ~/.config/i3/lockscreen.png -efu
 
