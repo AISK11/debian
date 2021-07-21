@@ -35,7 +35,11 @@ bindsym $mod+Shift+q kill
 # DMENU:
 #bindsym $mod+d exec dmenu_run -b -fn monospace -nb "#393e46" -nf "#ffd369" -sb "#ffd369" -sf "#393e46" -i
 # ROFI ('rofi -dump-xresources'):
-bindsym $mod+d exec "rofi -modi run -show run -width 25 -lines 10 -columns 1 -font 'DejavuSansMono 11' -bw 1 -location 0 -disable-history -sidebar-mode:false -hide-scrollbar -color-window '#393e46, #ffd369, #ffd369' -color-normal '#393e46, #ffd369, #454b54, #ffd369, #393e46'"
+#bindsym $mod+d exec "rofi -modi run -show run -width 25 -lines 10 -columns 1 -font 'DejavuSansMono 11' -bw 1 -location 0 -disable-history -sidebar-mode:false -hide-scrollbar -color-window '#393e46, #ffd369, #ffd369' -color-normal '#393e46, #ffd369, #454b54, #ffd369, #393e46'"
+
+bindsym $mod+d exec "rofi --combi-modi window,drun,ssh,combi -show run -width 25 -lines 10 -columns 1 -font 'DejavuSansMono 11' -bw 1 -location 0 -disable-history -sidebar-mode:false -hide-scrollbar -color-window '#393e46, #ffd369, #ffd369' -color-normal '#393e46, #ffd369, #454b54, #ffd369, #393e46'"
+
+# bindsym $mod+d exec --no-startup-id "rofi -show drun -font \\"DejaVu 9\\" -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'"
 
 
 # CHANGE FOCUS:
@@ -108,8 +112,8 @@ bindsym $mod+Shift+r restart
 
 ### WORKSPACES:
 # DEFINE WORKSPACES:
-set $ws1 "1"
-set $ws2 "2"
+set $ws1 "1: CLI"
+set $ws2 "2: WWW"
 set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
@@ -141,6 +145,8 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
+# ASSIGN APP TO WINDOW ACCORDING TO CLASS: $(xprop) - use 2nd variable of WM_CLASS
+assign [class="Firefox-esr"] $ws2
 
 ### i3 BAR + i3 BLOCKS:
 # COLOR VARIABLES:
