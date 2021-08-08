@@ -59,7 +59,8 @@ URxvt.keysym.Control-Meta-v: builtin-string:
 !!! TRANSPACRENCY !!!
 ! Transparency - higher value = higher transparency:
 URxvt.transparent: true
-URxvt.shading: 50!!! FONTS !!!
+URxvt.shading: 50
+!!! FONTS !!!
 ! Font (see 'fc-list'):
 URxvt*font: xft:DejavuSansMono:size=10
 URxvt*boldFont: xft:DejavuSansMono-Bold=10
