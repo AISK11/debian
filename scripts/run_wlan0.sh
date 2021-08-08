@@ -17,5 +17,5 @@ doas ip l set ${INTERFACE} up
 doas rm -f /run/wpa_supplicant/${INTERFACE}
 doas systemctl start wpa_supplicant.service
 doas systemctl start dhcpcd.service
-doas wpa_supplicant -B -D wext -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf
+doas wpa_supplicant -B -D wext -i ${INTERFACE} -c /etc/wpa_supplicant/wpa_supplicant.conf
 doas dhcpcd ${INTERFACE}
