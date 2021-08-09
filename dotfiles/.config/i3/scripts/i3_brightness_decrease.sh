@@ -3,13 +3,13 @@
 # Author: AISK11
 # Description: This script will decrease screen brightness by 10%, but prevent 0% brightness.
 # Created for: ~/.config/i3/config:
-# bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+# bindsym XF86MonBrightnessUp exec doas light -A 10
 # bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/i3_brightness_decrease.sh
-# Dependencies: xbacklight
+# Dependencies: light
 
-if [ "$(xbacklight -get | cut -d'.' -f1)" -le "10" ]
+if [ "$(light -G | cut -d '.' -f 1)" -le "10" ]
 then
-    xbacklight -set 1
+    doas light -S 1
 else
-    xbacklight -dec 10
+    doas light -U 10
 fi
