@@ -3,7 +3,7 @@
 # Location: ~/.config/i3/config
 
 # Packages installed:
-# sudo apt install apt install i3 i3bar i3blocks rofi i3lock feh numlockx scrot compton
+# sudo apt install apt install i3 i3bar i3blocks rofi i3lock feh numlockx scrot compton light
 ##################################################################
 
 # SET MOD KEY: Window key = Mod4; Alt key = Mod1:
@@ -198,7 +198,11 @@ exec --no-startup-id setxkbmap -model pc105 -layout "us,sk" -variant ",qwerty" -
 ### Fn KEY SHORTCUTS:
 # BACKLIGHT CONTROL:
 #exec xbacklight -set 50
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+#bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+#bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/i3_brightness_decrease.sh
+# LIGHT CONTROL:
+# exec doas light -S 50
+bindsym XF86MonBrightnessUp exec doas light -A 10
 bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/i3_brightness_decrease.sh
 # AUDIO CONTROL:
 exec amixer set Master 50%
