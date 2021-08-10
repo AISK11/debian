@@ -195,6 +195,9 @@ bindsym Print exec --no-startup-id ~/.config/i3/scripts/i3_prtsc.sh
 # KEYBOARD SWITCHING ('man xkeyboard-config'; 'localectl list-x11-keymap-variants [sk]'):
 exec --no-startup-id setxkbmap -model pc105 -layout "us,sk" -variant ",qwerty" -option 'grp:shifts_toggle' 
 
+# Allow GUI programs to be run as root:
+exec xhost local:root
+
 ### Fn KEY SHORTCUTS:
 # BACKLIGHT CONTROL:
 #exec xbacklight -set 50
