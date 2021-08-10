@@ -13,7 +13,7 @@ URxvt.keysym.Control-KP_Add:     font-size:increase
 URxvt.keysym.Control-KP_Subtract:   font-size:decrease
 URxvt.keysym.Control-KP_0:  font-size:reset
 ! Change font by X size:
-URxvt.font-size.step: 4
+URxvt.font-size.step: 2
 ! Not needed:
 !URxvt.keysym.Control-a:   font-size:incglobal
 !URxvt.keysym.Control-b: font-size:decglobal
