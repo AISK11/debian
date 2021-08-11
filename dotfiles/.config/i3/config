@@ -205,7 +205,7 @@ exec xhost local:root
 #bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/i3_brightness_decrease.sh
 # LIGHT CONTROL:
 # exec doas light -S 50
-bindsym XF86MonBrightnessUp exec doas light -A 10
+bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/i3_brightness_decrease.sh
 # AUDIO CONTROL:
 exec amixer set Master 50%
