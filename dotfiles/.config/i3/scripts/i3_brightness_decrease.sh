@@ -9,7 +9,7 @@
 
 if [ "$(light -G | cut -d '.' -f 1)" -le "10" ]
 then
-    doas light -S 1
+    light -S 1
 else
-    doas light -U 10
+    light -U 10
 fi
