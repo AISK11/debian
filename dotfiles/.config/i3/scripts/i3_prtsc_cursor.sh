@@ -15,10 +15,10 @@ FILENAME="$(date '+%Y-%m-%d_%H:%M:%S').png"
 
 if [ -d ${DIRECTORY} ]
 then
-    scrot --silent ${DIRECTORY}${FILENAME}
+    scrot --silent --pointer ${DIRECTORY}${FILENAME}
 else
     mkdir -p ~/.screenshots/
-    scrot --silent ${DIRECTORY}${FILENAME}
+    scrot --silent --pointer ${DIRECTORY}${FILENAME}
 fi
 
 # select print screened image to clipboard:
