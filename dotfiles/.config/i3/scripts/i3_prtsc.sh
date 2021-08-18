@@ -14,7 +14,7 @@ DIRECTORY="/home/$(whoami)/.screenshots/"
 FILENAME="$(date '+%Y-%m-%d_%H:%M:%S').png"
 
 if [[ ! -d ${DIRECTORY} ]]; then
-    mkdir -p ~/.screenshots/ 
+    mkdir -p ${DIRECTORY} 
 fi
 
 if [[ "$1" = "-p" ]]; then
