@@ -195,7 +195,7 @@ exec numlockx on
 # PRINTSCREEN:
 bindsym Print exec --no-startup-id ~/.config/i3/scripts/i3_prtsc.sh
 # PRINTSCREEN WITH CURSOR:
-bindsym $mod+Print exec --no-startup-id ~/.config/i3/scripts/i3_prtsc_cursor.sh
+bindsym $mod+Print exec --no-startup-id ~/.config/i3/scripts/i3_prtsc.sh -p
 # KEYBOARD SWITCHING ('man xkeyboard-config'; 'localectl list-x11-keymap-variants [sk]'):
 exec --no-startup-id setxkbmap -model pc105 -layout "us,sk" -variant ",qwerty" -option 'grp:shifts_toggle' 
 
