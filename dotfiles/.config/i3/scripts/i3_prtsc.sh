@@ -13,20 +13,14 @@
 DIRECTORY="/home/$(whoami)/.screenshots/"
 FILENAME="$(date '+%Y-%m-%d_%H:%M:%S').png"
 
-if [ -d ${DIRECTORY} ]
-then
-    if [[ "$1" = "-p" ]]; then
-        scrot --silent --pointer ${DIRECTORY}${FILENAME}
-    else
-        scrot --silent ${DIRECTORY}${FILENAME}
-    fi
-else
+if [[ ! -d ${DIRECTORY} ]]; then
     mkdir -p ~/.screenshots/ 
-    if [[ "$1" = "-p" ]]; then
-        scrot --silent --pointer ${DIRECTORY}${FILENAME}
-    else
-        scrot --silent ${DIRECTORY}${FILENAME}
-    fi
+fi
+
+if [[ "$1" = "-p" ]]; then
+    scrot --silent --pointer ${DIRECTORY}${FILENAME}
+else
+    scrot --silent ${DIRECTORY}${FILENAME}
 fi
 
 # select print screened image to clipboard:
