@@ -39,6 +39,8 @@ bindsym $mod+Shift+q kill
 
 bindsym $mod+d exec "rofi --combi-modi window,drun,ssh,combi -show run -width 25 -lines 10 -columns 1 -font 'DejavuSansMono 11' -bw 1 -location 0 -disable-history -sidebar-mode:false -hide-scrollbar -color-window '#393e46, #ffd369, #ffd369' -color-normal '#393e46, #ffd369, #454b54, #ffd369, #393e46'"
 
+
+
 # bindsym $mod+d exec --no-startup-id "rofi -show drun -font \\"DejaVu 9\\" -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'"
 
 
@@ -192,6 +194,8 @@ exec xrdb ~/.Xresources
 exec numlockx on
 # PRINTSCREEN:
 bindsym Print exec --no-startup-id ~/.config/i3/scripts/i3_prtsc.sh
+# PRINTSCREEN WITH CURSOR:
+bindsym $mod+Print exec --no-startup-id ~/.config/i3/scripts/i3_prtsc_cursor.sh
 # KEYBOARD SWITCHING ('man xkeyboard-config'; 'localectl list-x11-keymap-variants [sk]'):
 exec --no-startup-id setxkbmap -model pc105 -layout "us,sk" -variant ",qwerty" -option 'grp:shifts_toggle' 
 
@@ -214,6 +218,6 @@ bindsym XF86AudioMute exec amixer set Master toggle
 bindsym XF86AudioLowerVolume exec amixer set Master 5%-
 bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
 # MIC CONTROL:
-exec amixer set Capture 50%
+exec amixer set Capture 30%
 exec amixer set Capture nocap
 bindsym XF86AudioMicMute exec amixer set Capture toggle
