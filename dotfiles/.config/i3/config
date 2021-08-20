@@ -23,7 +23,7 @@ default_border pixel 1
 #for_window [class="."] border pixel 3
 #hide_edge_borders both
 
-# FONT FOR WINDOW TITLES AND BAR:
+# FONT FOR WINDOW TITLES AND BAR (also bar size):
 font pango:DejavuSansMono 11
 
 
@@ -35,13 +35,7 @@ bindsym $mod+Shift+q kill
 # DMENU:
 #bindsym $mod+d exec dmenu_run -b -fn monospace -nb "#393e46" -nf "#ffd369" -sb "#ffd369" -sf "#393e46" -i
 # ROFI ('rofi -dump-xresources'):
-#bindsym $mod+d exec "rofi -modi run -show run -width 25 -lines 10 -columns 1 -font 'DejavuSansMono 11' -bw 1 -location 0 -disable-history -sidebar-mode:false -hide-scrollbar -color-window '#393e46, #ffd369, #ffd369' -color-normal '#393e46, #ffd369, #454b54, #ffd369, #393e46'"
-
 bindsym $mod+d exec "rofi --combi-modi window,drun,ssh,combi -show run -width 25 -lines 10 -columns 1 -font 'DejavuSansMono 11' -bw 1 -location 0 -disable-history -sidebar-mode:false -hide-scrollbar -color-window '#393e46, #ffd369, #ffd369' -color-normal '#393e46, #ffd369, #454b54, #ffd369, #393e46'"
-
-
-
-# bindsym $mod+d exec --no-startup-id "rofi -show drun -font \\"DejaVu 9\\" -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'"
 
 
 # CHANGE FOCUS:
