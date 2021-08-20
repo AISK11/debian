@@ -12,7 +12,7 @@ Set up dotfiles:\
 `chmod +x ~/.config/i3/scripts/*`\
 `tar xvjf .icons.tar.bz2`\
 `tar xvjf .themes.tar.bz2`\
-`rm *\.bz2`\
+`rm .*\.bz2`\
 `doas cp ~/debian/config_files/i3blocks.conf /etc/i3blocks.conf`\
 `rm -rf ~/debian`
 
