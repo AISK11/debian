@@ -18,6 +18,7 @@ Set up dotfiles:\
 
 Set up vim and zsh as default:\
 `doas update-alternatives --config editor`\
+`doas update-alternatives --config x-terminal-emulator`\
 `chsh -s /bin/zsh`
 
 Compile i3-gaps:\
