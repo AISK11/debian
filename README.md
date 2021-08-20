@@ -17,7 +17,7 @@ Set up dotfiles:\
 `rm -rf ~/debian`
 
 Set up vim and zsh as default:\
-`update-alternatives --config editor`\
+`doas update-alternatives --config editor`\
 `chsh -s /bin/zsh`
 
 Compile i3-gaps:\
