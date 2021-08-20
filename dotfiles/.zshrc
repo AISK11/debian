@@ -41,6 +41,10 @@ export PATH=${PATH}:/sbin:/usr/sbin
 alias ls='ls --color=always'
 alias ip='ip -c'
 alias grep='grep --color'
+alias la='ls -lah'
+alias lightcord='cd ~/Lightcord && npm start &'
+alias wireshark='doas wireshark'
+alias mp3_download='youtube-dl -x --no-playlist --audio-format "mp3" --audio-quality 0 --console-title'
 
 # start X:
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; 
