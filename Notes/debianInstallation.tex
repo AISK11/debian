@@ -87,8 +87,8 @@
 %\clearpage % official blank page
 \tableofcontents
 
-\chapter{Flash USB}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CHAPTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\chapter{Check Harddrive}
 \section{Check for Bad Sectors}
 \textbf{Block:} = every file must occupy at least 1 block. 0b file occupy whole block.\newline
 512b = good for lot of small files. More blocks = more metadata.\newline
@@ -119,12 +119,33 @@ HAVE UMOUNTED FS!!!
 # -w = write patterns to every byte (0xaa)
 \end{Verbatim}
 
+\chapter{Flash USB}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CHAPTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Flash ISO to USB}
 \subsection{Fast Flash}
 \begin{Verbatim}[commandchars=\\\{\}]
 HAVE UMOUNTED FS!!!
     \textcolor{root}{root#} \textcolor{command}{dd} if=<\textcolor{file}{/<PATH>/<ISO.iso>}> of=<\textcolor{block}{/dev/sdX}> [bs=4M | status=progress]
 \end{Verbatim}
+
+\section{Disk Encryption Law}
+\underline{\url{https://www.gp-digital.org/world-map-of-encryption/}}
+\underline{\url{https://privacytools.io/providers/}}
+
+%\chapter{Installation}
+%\section{iwlwifi driver while installing}
+%\subsection{USB stick}
+%\begin{Verbatim}[commandchars=\\\{\}]
+%Have filesystem formatted as FAT32 (exFAT not yet supported)
+%\end{Verbatim}
+%\subsection{Download and extract iwlwifi driver}
+%\url{cdimage.debian.org/cdimage/unofficial/non-free/firmware/} -> testing -> current -> firmware.tar.gz
+%\begin{Verbatim}[commandchars=\\\{\}]
+%tar xvzf *.tar.gz
+%
+%cp firmware-iwlwifi <USB_STICK>
+%
+%Plug USB to PC while installing
+%\end{Verbatim}
 
 
 \chapter{Basic Functionality}
@@ -165,13 +186,34 @@ blacklist pcspkr
     \end{small}
 \end{center}
 
+Notes:
+\begin{itemize}
+    \item Avoid using "stable"! ("testing" is OK).
+    \item Testing does not have newest security updates! Use name of current stable distro.
+\end{itemize}
 \begin{Verbatim}[commandchars=\\\{\}]
 File (\textcolor{file}{/etc/apt/sources.list}):
-deb http://deb.debian.org/debian testing main [contrib] [non-free]
-deb-src http://deb.debian.org/debian testing main [contrib] [non-free]
+\textcolor{comment}{# deb http://deb.debian.org/debian testing main [contrib] [non-free]}
+\textcolor{comment}{# deb-src http://deb.debian.org/debian testing main [contrib] [non-free]}
 
+deb http://deb.debian.org/debian testing main contrib non-free
+deb-src http://deb.debian.org/debian testing main contrib non-free
+
+deb http://deb.debian.org/debian-security/ bullseye-security main contrib non-free
+deb-src http://deb.debian.org/debian-security/ bullseye-security main contrib non-free
+
+deb http://deb.debian.org/debian bullseye-updates main contrib non-free
+deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free
+    
+    \textcolor{root}{root#} \textcolor{command}{apt} clean
     \textcolor{root}{root#} \textcolor{command}{apt} update
     \textcolor{root}{root#} \textcolor{command}{apt} full-upgrade
+    \textcolor{root}{root#} \textcolor{command}{apt} autoremove
+    \textcolor{root}{root#} \textcolor{command}{init} 6
+
+Check:
+    \textcolor{user}{user\$} \textcolor{command}{uname} -a 
+    \textcolor{user}{user\$} \textcolor{command}{lsb_release} -a 
 \end{Verbatim}
 
 
@@ -280,10 +322,6 @@ File (\textcolor{file}{/etc/doas.conf}) (0644):
 \textcolor{comment}{#<permit|deny> [nopass|persist] <USER>[:GROUP] [as <USER2>]}
 \textcolor{comment}{[cmd <COMMAND> [args <ARGUMENTS>]}
 permit nopass <USER>
-\end{Verbatim}
-\subsection{Run GUI as root}
-\begin{Verbatim}[commandchars=\\\{\}]
-    \textcolor{user}{user\$} \textcolor{command}{xhost} local:root
 \end{Verbatim}
 
 \section{Hostname}
@@ -412,6 +450,11 @@ File: (\textcolor{file}{/etc/sysctl.conf}):
 net.ipv6.conf.all.disable_ipv6 = 1
 \end{Verbatim}
 
+\section{Disable networking service}
+\begin{Verbatim}[commandchars=\\\{\}]
+    \textcolor{root}{root#} systemctl disable networking.service
+\end{Verbatim}
+
 \section{Configure Interfaces}
 \subsection{Disable hotplug}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -522,6 +565,8 @@ Start interface:
     \textcolor{root}{root#} \textcolor{command}{ip} l set <wlan0> up
 
 2. Connect to WiFi:
+Remove previous saved config (if exists):
+    \textcolor{root}{root#} \textcolor{command}{rm} -f \textcolor{file}{/run/wpa_supplicant/wlan0}
 Start wpa_supplicant:
     \textcolor{root}{root#} \textcolor{command}{systemctl} start wpa_supplicant.service
 Start DHCP:
@@ -544,8 +589,8 @@ Run DHCP on interface:
 \subsection{Config files}
 \begin{Verbatim}[commandchars=\\\{\}]
 Config files:
-\textcolor{file}{/etc/vim/vimrc} - global
-\textcolor{file}{~/.vimrc} - per user
+(\textcolor{file}{/etc/vim/vimrc}) - global
+(\textcolor{file}{~/.vimrc}) - per user
 
 Adjust:
 \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.vimrc}}
@@ -579,17 +624,37 @@ File (\textcolor{file}{~/.zshrc}) (0644):
 \end{Verbatim}
 
 
+\chapter{Sound}
+\section{Audio control}
+\begin{Verbatim}[commandchars=\\\{\}]
+- Get Master/Capture audio:
+    \textcolor{user}{user\$} \textcolor{command}{amixer} get <Master/Capture>
 
+- Set mute/unmute/toggle Master/Capture audio:
+    \textcolor{user}{user\$} \textcolor{command}{amixer} set <Master/Capture> <mute|unmute|toggle>
+
+- Set volume Master/Capture audio:
+A) Specific value:
+    \textcolor{user}{user\$} \textcolor{command}{amixer} set <Master/Capture> <0-100>\%
+A) Increase/decrease value:
+    \textcolor{user}{user\$} \textcolor{command}{amixer} set <Master/Capture> <0-100>\%<+|->    
+\end{Verbatim}
+
+
+\section{Mic Problems}
+\begin{Verbatim}[commandchars=\\\{\}]
+- In case of mic problems, try to install pulseaduio:
+    \textcolor{root}{root#} \textcolor{command}{apt} install pulseaudio
+\end{Verbatim}
 
 \chapter{X + i3}
 \section{X}
 \subsection{Installation}
 \begin{Verbatim}[commandchars=\\\{\}]
-    \textcolor{root}{root#} \textcolor{command}{apt} install xorg
+    \textcolor{root}{root#} \textcolor{command}{apt} install xorg x11-xserver-utils xinit
 \end{Verbatim}
 \subsection{Start X on tty1}
 \begin{Verbatim}[commandchars=\\\{\}]
-Start X on startup:
 File (\textcolor{file}{~/.bash_profile}||\textcolor{file}{~/.bashrc}||\textcolor{file}{~/.zshrc}) (0644):
 \textcolor{comment}{# if (length of \$DISPLAY is 0 && \$(tty) = /dev/tty1) startx}
 if [[ -z \$DISPLAY ]] && [[ \$(tty) = /dev/tty1 ]]; then
@@ -603,16 +668,18 @@ fi
     \textcolor{root}{root#} \textcolor{command}{apt} install i3 --no-install-recommends
     \textcolor{root}{root#} \textcolor{command}{apt} install i3-wm 
 \end{Verbatim}
-\subsection{i3-gaps from source}
+\subsection{i3-gaps from source (do not install with i3)}
 \begin{Verbatim}[commandchars=\\\{\}]
-URL: https://github.com/Airblader/i3/wiki/Building-from-source
+URL: (\underline{https://github.com/Airblader/i3/wiki/Building-from-source})
 
 - Clone i3-gaps:
     \textcolor{user}{user\$} \textcolor{command}{cd} \textcolor{dir}{/etc/}
     \textcolor{root}{root#} \textcolor{command}{git} clone https://www.github.com/Airblader/i3 i3-gaps
+    \textcolor{user}{user\$} \textcolor{command}{cd} \textcolor{dir}{./i3-gaps/}
+
 
 - Install dependencies
-    \textcolor{root}{root#} \textcolor{command}{apt} install meson
+    \textcolor{root}{root#} \textcolor{command}{apt} install make meson
     \textcolor{root}{root#} \textcolor{command}{apt} install dh-autoreconf libxcb-keysyms1-dev 
 libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev
 libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev 
@@ -633,33 +700,37 @@ File (\textcolor{file}{~/.xinitrc}) (0644):
 \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.xinitrc}}
 \end{Verbatim}
 \subsection{i3config}
+\subsubsection{Installation}
 \begin{Verbatim}[commandchars=\\\{\}]
-- Install:
     \textcolor{root}{root#} \textcolor{command}{apt} install i3blocks i3lock numlockx rofi feh scrot
-    compton
-    
-- Configuration:
+    compton light xclip
+\end{Verbatim}
+\subsubsection{Configuration}
+\begin{Verbatim}[commandchars=\\\{\}]   
 File (\textcolor{file}{~/.config/i3/config}) (0644):
 \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.config/i3/config}}
 \end{Verbatim}
 
-\subsection{urxvt}
+\section{urxvt}
+\subsection{Installation}
 \begin{Verbatim}[commandchars=\\\{\}]
-- Installation:
     \textcolor{root}{root#} \textcolor{command}{apt} install rxvt-unicode-256color
+\end{Verbatim}
 
-- Configuration:
+\subsection{Configuration}
+\begin{Verbatim}[commandchars=\\\{\}]
 File (\textcolor{file}{~/.Xresources}) (0644):
 \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.Xresources}}
 
 - Refresh X database for file and restart urxvt:
     \textcolor{root}{root#} \textcolor{command}{xrdb} \textcolor{file}{~/.Xresources}
-    
+
 - Execute read in X database every time i3 is started:
 File (\textcolor{file}{~/.config/i3/config}) (0644):
-exec xrdb ~/.Xresources
-
-- Set ad default emulator:
+exec xrdb ~/.Xresources    
+\end{Verbatim}
+\subsection{Set as default emulator}
+\begin{Verbatim}[commandchars=\\\{\}]    
     \textcolor{root}{root#} \textcolor{command}{update-alternatives} --config x-terminal-emulator
 \end{Verbatim}
 
@@ -708,6 +779,9 @@ Dir (\textcolor{dir}{~/.config/i3/scripts/}):
 Directories:
     \textcolor{dir}{.themes}
     \textcolor{dir}{.icons}
+    
+Icons:
+    \underline{https://github.com/EliverLara/candy-icons}
 \end{Verbatim}
 \subsection{Cursor}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -823,8 +897,9 @@ __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia <APPLICATION>
 \section{Update System}
 \subsection{Update}
 \begin{Verbatim}[commandchars=\\\{\}]
+    \textcolor{root}{root#} \textcolor{command}{apt} clean
     \textcolor{root}{root#} \textcolor{command}{apt} update
-    \textcolor{root}{root#} \textcolor{command}{apt} <upgrade|full-upgrade>
+    \textcolor{root}{root#} \textcolor{command}{apt} <upgrade|full-upgrade> [-y]
 \end{Verbatim}
 \subsection{Remove no longer used files}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -851,7 +926,7 @@ __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia <APPLICATION>
 - List alll files in system provided bypackage:
     \textcolor{user}{user\$} \textcolor{command}{dpkg} -L <PACKAGE>
     
-- Finf to which package file belongs to:
+- Find to which package file belongs to:
     \textcolor{user}{user\$} \textcolor{command}{dpkg} -S <FILE>
 \end{Verbatim}
 
@@ -860,6 +935,30 @@ __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia <APPLICATION>
 A)  \textcolor{root}{root#} \textcolor{command}{apt} purge <PACKAGE>
 B)  \textcolor{root}{root#} \textcolor{command}{dpkg} --purge <PACKAGE>
 \end{Verbatim}
+
+\section{Find non-free packages}
+\begin{Verbatim}[commandchars=\\\{\}]
+- Installation:
+    \textcolor{root}{root#} \textcolor{command}{apt} install vrms
+
+- Usage:
+    \textcolor{user}{user\$} vrms
+\end{Verbatim}
+
+\section{Downgrade to stable from testing}
+\begin{Verbatim}[commandchars=\\\{\}]
+1. Make sure, that \textcolor{file}{/etc/apt/sources.list} contains only current stable.
+2. Edit file: (\textcolor{file}{/etc/apt/preferences}):
+Package: *
+Pin: release a=stable
+Pin-Priority: 1001
+
+3. Degrade:
+    \textcolor{root}{root#} \textcolor{command}{apt} update
+    \textcolor{root}{root#} \textcolor{command}{apt} upgrade
+    \textcolor{root}{root#} \textcolor{command}{apt} dist-upgrade
+\end{Verbatim}
+
 
 
 \chapter{Security}
@@ -974,7 +1073,7 @@ USER ---> virsh (CLI) --------> libvirt -> |       QEMU       |
 
 - Config:
     \textcolor{root}{root#} \textcolor{command}{cp} -r \textcolor{file}{/etc/libvirt/libvirt.conf} \textcolor{dir}{~/.config/libvirt}
-    \textcolor{root}{root#} \textcolor{command}{chown} <USER> \textcolor{file}{~/.config/libvirt/libvirt.conf}
+    \textcolor{root}{root#} \textcolor{command}{chown} <USER> \textcolor{file}{~/.config/libvirt/libvirt.conf/}
 - File (\textcolor{file}{~/.congif/libvirt/libvirt.conf}):
 \textcolor{comment}{# Uri default system/user}:
 uri_default = "qemu:///system"
@@ -1060,9 +1159,50 @@ Note: Interfaces should not have IP address and should be DONE in this step!
     \textcolor{root}{root#} \textcolor{command}{ip} l set <br0> up
 \end{Verbatim}
 
+\section{Guest Virtual Machines}
+\subsection{Allow Copy Paste}
+\subsubsection{Linux}
+\begin{Verbatim}[commandchars=\\\{\}]
+apt install spice-vdagent
+\end{Verbatim}
+
+
 
 
 \chapter{APPs}
+\section{MTP devices}
+\begin{Verbatim}[commandchars=\\\{\}]
+Note: use original cable, some cables may not work.
+On Phone -> Transfer Files.
+
+- Install:
+    \textcolor{root}{root} \textcolor{command}{apt} install mtp-tools jmtpf
+
+- Check if MTP device is detected:
+    \textcolor{user}{user\$} \textcolor{command}{mtp-detect}
+
+- Mount MTP device:
+    \textcolor{root}{root#} \textcolor{command}{mkdir} \textcolor{dir}{/mnt/mtp/}
+    \textcolor{root}{root#} \textcolor{command}{chmod} 0777 \textcolor{dir}{/mnt/mtp/}
+    \textcolor{root}{root#} \textcolor{command}{jmtpfs} \textcolor{dir}{/mnt/mtp/}
+    
+- Umount:
+    \textcolor{root}{root#} \textcolor{command}{fusermount} -u \textcolor{dir}{/mnt/mtp/}
+\end{Verbatim}
+
+\section{youtube-dl}
+\begin{Verbatim}[commandchars=\\\{\}]
+MP3:
+    \textcolor{user}{user\$} \textcolor{command}{youtube-dl} --no-playlist -x --audio-format "mp3" 
+    --audio-quality 0 "<URL>"
+\end{Verbatim}
+
+
+
+
+
+
+
 \section{KeePassXC}
 \begin{Verbatim}[commandchars=\\\{\}]
 # apt install keepassxc
@@ -1093,6 +1233,27 @@ firefox-esr git psmisc
 ocrmypdf - pdf to selectable text
 perf stat <COMMAND>
 \end{Verbatim}
+
+
+\section{Problems}
+\subsection{Kernel Panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)}
+\begin{Verbatim}[commandchars=\\\{\}]
+What caused it? Updating package linux-image and linux-headers to newer version
+
+How to fix? 
+1. Boot with old kernel from GRUB
+Find kernel images:
+apt list --installed | grep "linux-image"
+
+
+
+2. Update kernel
+# update-initramfs -u -k 5.10.0-8-amd64
+
+3 # grub-mkconfig -o /boot/grub/grub.cfg
+
+\end{Verbatim}
+
 
 
 \end{document}
