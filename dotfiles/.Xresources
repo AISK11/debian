@@ -82,9 +82,9 @@ URxvt*foreground: White
 ! Highlighted (selected text): 
 URxvt*highlightColor: White
 URxvt*highlightTextColor: Black
-JumpScroll (True - less updates; False - more updates):
+! JumpScroll (True - less updates; False - more updates):
 URxvt*jumpScroll: False
-Save number of linex to scroll buffer [1000]:
+! Save number of linex to scroll buffer [1000]:
 URxvt*saveLines: 650000
 ! Fading - when focus is lost, fade text by given %:
 !URxvt*fading: 30
