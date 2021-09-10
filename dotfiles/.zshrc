@@ -46,6 +46,12 @@ alias lightcord='cd ~/Lightcord && npm start &'
 alias wireshark='doas wireshark'
 alias mp3_download='youtube-dl -x --no-playlist --audio-format "mp3" --audio-quality 0 --console-title'
 
+#Functions:
+mem()
+{
+    ps -eo rss,pid,euser,args --sort %mem | grep -i $@ | grep -v grep | awk '{printf $1/1024 "MB"; $1=""; print }'
+}
+
 # start X:
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; 
 then 
