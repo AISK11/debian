@@ -6,9 +6,10 @@
 "#################################################################
 
 " Tab = 4 chars:
+set autoindent
+set noexpandtab
 set tabstop=4
 set shiftwidth=4
-set expandtab
 
 " Number lines:
 "set number
