@@ -41,6 +41,7 @@ export PATH=${PATH}:/sbin:/usr/sbin
 alias ls='ls --color=always'
 alias ip='ip -c'
 alias grep='grep --color'
+alias egrep='egrep --color=always'
 alias la='ls -lah'
 alias lightcord='cd ~/Lightcord && npm start &'
 alias wireshark='doas wireshark'
