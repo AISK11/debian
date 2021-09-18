@@ -39,13 +39,16 @@ export PATH=${PATH}:/sbin:/usr/sbin
 
 # Aliases:
 alias ls='ls --color=always'
-alias ip='ip -c'
+alias l='ls -l'
+alias ll='ls -l'
+alias la='ls -lah'
 alias grep='grep --color'
 alias egrep='egrep --color=always'
-alias la='ls -lah'
-alias lightcord='cd ~/Lightcord && npm start &'
+alias ip='ip -c'
 alias wireshark='doas wireshark'
+alias lightcord='cd ~/Lightcord && npm start &'
 alias mp3_download='youtube-dl -x --no-playlist --audio-format "mp3" --audio-quality 0 --console-title'
+alias www='firefox'
 
 #Functions:
 mem()
