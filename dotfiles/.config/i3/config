@@ -174,11 +174,11 @@ exec --no-startup-id urxvtd --quiet --opendisplay --fork
 
 ### WALLPAPER:
 # WALLPAPER:
-exec --no-startup-id feh --bg-scale ~/.config/i3/wallpaper.png
+exec --no-startup-id feh --bg-scale ~/.config/i3/images/wallpaper.png
 # RENDER WALLPAPER NICELY (i3-gaps):
 exec --no-startup-id bash ${HOME}/.fehbg
 # LOCK SCREEN:
-bindsym $mod+l exec i3lock -i ~/.config/i3/lockscreen.png -efu
+bindsym $mod+l exec i3lock -i ~/.config/i3/images/lockscreen.png -efu
 
 
 ### OTHER FEATURES:
