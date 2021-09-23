@@ -12,4 +12,5 @@ xset s noblank
 xset -dpms
 
 # Execute i3 WM after X is started:
+xrandr -s 1920x1080
 exec i3
