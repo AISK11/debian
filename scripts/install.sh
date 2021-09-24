@@ -11,6 +11,7 @@
 USER=$(echo $HOME | cut -d "/" -f 3)
 HOSTNAME=$(hostname)
 TIMEZONE="Europe/Copenhagen"
+HOME=/home/${USER}
 
 #################################################
 ## Disable speaker bell:
