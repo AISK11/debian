@@ -231,3 +231,4 @@ init 6
 #apt install macchanger nmap hping3 ethtool arping mtr arpspoof aircrack-ng
 # htop imagemagick vrms
 # keepassxc kvm 
+#lightcord steam
