@@ -6,123 +6,123 @@
 !##################################################################
 
 !!! Change font size !!!
-! Load extension from ~/.urxvt/ext/fint-size
+!! Load extension from ~/.urxvt/ext/fint-size
 URxvt.perl-ext-common: default,font-size
-! Change font: Control + Num+; Control + Num-; Control + Num0.
+!! Change font: Control + Num+; Control + Num-; Control + Num0.
 URxvt.keysym.Control-KP_Add:     font-size:increase
 URxvt.keysym.Control-KP_Subtract:   font-size:decrease
 URxvt.keysym.Control-KP_0:  font-size:reset
-! Change font by X size:
+!! Change font by X size:
 URxvt.font-size.step: 2
-! Not needed:
+!! Not needed:
 !URxvt.keysym.Control-a:   font-size:incglobal
 !URxvt.keysym.Control-b: font-size:decglobal
-! Show size and font currently used:
+!! Show size and font currently used:
 !URxvt.keysym.Control-S:  font-size:show
 
 !!! SETTINGS !!!
-! Double buffering - increase performance:
+!! Double buffering - increase performance:
 URxvt*buffered: true
-! Window with specified X window geometry [80x24]:
+!! Window with specified X window geometry [80x24]:
 URxvt*geometry: 240x84
-! skipScroll (True 60 times per second screen update; False - every line update):
+!! skipScroll (True 60 times per second screen update; False - every line update):
 URxvt*skipScroll: True
-! Scroll type [rxvt, plain, next, xterm]
+!! Scroll type [rxvt, plain, next, xterm]
 URxvt*scrollstyle: plain
-! Disable scrollBar:
+!! Disable scrollBar:
 URxvt*scrollBar: False
-! Scroll to bottom when receive output:
+!! Scroll to bottom when receive output:
 URxvt*scrollTtyOutput: True
 URxvt*scrollWithBuffer: True
-! Window Title:
+!! Window Title:
 URxvt*title: urxvt
-! Visual Bell:
+!! Visual Bell:
 URxvt*visualBell: False
-! Border in pixels for text since WM border:
+!! Border in pixels for text since WM border:
 URxvt*internalBorder: 1
 URxvt*externalBorder: 1
-! Line space in pixels between each row:
+!! Line space in pixels between each row:
 URxvt*lineSpace: 0
-! Terminal name (let be commented to Home and End buttons to work):
+!! Terminal name (let be commented to Home and End buttons to work):
 !URxvt*termName: xterm-256color
-! Disable iso14755:
+!! Disable iso14755:
 URxvt*iso14755: False
 URxvt*iso14755_52: False
 
 !!! COPY PASTE !!!
-!Copy Paste:
+!! Copy Paste:
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 URxvt.keysym.Control-Meta-c: builtin-string:
 URxvt.keysym.Control-Meta-v: builtin-string:
 
 !!! TRANSPACRENCY !!!
-! Transparency - higher value = higher transparency:
+!! Transparency - higher value = higher transparency:
 URxvt.transparent: true
 URxvt.shading: 50
 !!! FONTS !!!
-! Font (see 'fc-list'):
+!! Font (see 'fc-list'):
 URxvt*font: xft:DejavuSansMono:size=10
 URxvt*boldFont: xft:DejavuSansMono-Bold=10
 !Urxvt*italicFont: 
 !Urxvt*boldItalicFont:
 
 !!! CURSOR !!!
-! Set cursor color:
+!! Set cursor color:
 !URxvt*cursorColor: Yellow
 !URxvt*cursorColor2: Black
 URxvt*cursorBlink: True
-! True - set cursor underlined; False - square cursor:
+!! True - set cursor underlined; False - square cursor:
 URxvt*cursorUnderline: False
 
 !!! COLORS !!!
 !! Background color [Black] and Foreground color [White]:
 URxvt*background: Black
 URxvt*foreground: White
-! Highlighted (selected text): 
+!! Highlighted (selected text): 
 URxvt*highlightColor: White
 URxvt*highlightTextColor: Black
-! JumpScroll (True - less updates; False - more updates):
+!! JumpScroll (True - less updates; False - more updates):
 URxvt*jumpScroll: False
-! Save number of linex to scroll buffer [1000]:
+!! Save number of linex to scroll buffer [1000]:
 URxvt*saveLines: 650000
-! Fading - when focus is lost, fade text by given %:
+!! Fading - when focus is lost, fade text by given %:
 !URxvt*fading: 30
 !URxvt*fadeColor: Black
 
 !!! CUSTOM COLORS !!!
-! Black:
+!! Black:
 URxvt.color0:   #000000
-! Dark Red:
+!! Dark Red:
 URxvt.color1:   #BD2000
-! Dark Green:
+!! Dark Green:
 URxvt.color2:   #2B9348
-! Dark Yellow:
+!! Dark Yellow:
 URxvt.color3:   #FB9846
-! Dark Blue:
+!! Dark Blue:
 URxvt.color4:   #002FB0
-! Dark Purple:
+!! Dark Purple:
 URxvt.color5:   #A300FF
-! Dark Cyan:
+!! Dark Cyan:
 URxvt.color6:   #00C1FF
-! Dark White:
+!! Dark White:
 URxvt.color7:   #DEE2E6
-! Light Black / Gray:
+!! Light Black / Gray:
 URxvt.color8:   #393E46
-! Light Red:
+!! Light Red:
 URxvt.color9:   #FF0000
-! Light Green:
+!! Light Green:
 URxvt.color10:  #00FF00
-! Light Yellow:
+!! Light Yellow:
 URxvt.color11:  #FFD369
-! Light Blue:
+!! Light Blue:
 URxvt.color12:  #0000FF
-! Light Purple:
+!! Light Purple:
 URxvt.color13:  #CB95EA
-! Light Cyan:
+!! Light Cyan:
 URxvt.color14:  #00E0FF
-! Light White:
+!! Light White:
 URxvt.color15:  #FFFFFF
 
-! Blur (0 - off, 128 = max):
+!! Blur (0 - off, 128 = max):
 URxvt.blurRadius: 10
