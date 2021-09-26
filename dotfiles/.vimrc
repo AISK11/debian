@@ -5,20 +5,20 @@
 " sudo apt install vim
 "#################################################################
 
-" Tab = 4 chars:
+"" Tab = 4 chars:
 set autoindent
 set noexpandtab
 set tabstop=4
 set shiftwidth=4
 
-" Number lines:
+"" Number lines:
 "set number
 
-" Colors:
+"" Colors:
 syntax on
 "colorscheme murphy
 
-" Filename edited:
+"" Filename edited:
 set laststatus=2
-" Statusline:
+"" Statusline:
 set statusline=%F\ %p%%\ [%l:%c]\ %M\ %R
