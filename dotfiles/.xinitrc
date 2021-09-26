@@ -6,11 +6,11 @@
 # sudo apt install i3 --no-install-recommends
 ##################################################################
 
-# Disable screen saver:
+## Disable screen saver:
 xset s off
 xset s noblank
 xset -dpms
 
-# Execute i3 WM after X is started:
+## Execute i3 WM after X is started:
 xrandr -s 1920x1080
 exec i3
