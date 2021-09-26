@@ -619,9 +619,190 @@ network=\{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Shell and Texteditor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Shell and Texteditor}
+\chapter{Texteditor and Shell}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Texteditor}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{vim}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install vim
+\end{Verbatim}
+    \item Set as default text editor:
+    \begin{enumerate}
+        \item Show available editors:
+        \begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{update-alternatives} --list editor
+\end{Verbatim}
+        \item Change default editor:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{update-alternatives} --set editor /usr/bin/vim.basic
+\end{Verbatim}
+    \end{enumerate}
+    \item Configure:
+\newline File (\textcolor{file}{\~/.vimrc}):
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{comment}{"" Tab = 4 chars:}
+set autoindent
+set noexpandtab
+set tabstop=4
+set shiftwidth=4
+
+\textcolor{comment}{"" Number lines:}
+"set number
+
+\textcolor{comment}{"" Colors:}
+syntax on
+"colorscheme murphy
+
+\textcolor{comment}{"" Filename edited:}
+set laststatus=2
+\textcolor{comment}{"" Statusline:}
+set statusline=\%F\char92 \%p\%\%\char92 [\%l:\%c]\char92 \%M\char92 \%R
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{bvi}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install bvi
+\end{Verbatim}
+    \item Configure:
+\newline File (\textcolor{file}{\~/.bvirc}):
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{comment}{"" Enable edit:}
+set memmove
+\end{Verbatim}
+\end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Shell}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{zsh}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install zsh zsh-autosuggestions zsh-syntax-highlighting
+\end{Verbatim}
+    \item Set as default shell:
+    \begin{itemize}
+        \item User change:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{chsh} -s \textcolor{file}{/bin/zsh}
+\end{Verbatim}
+        \item Root change:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{usermod} -s \textcolor{file}{/bin/zsh} <USER>
+\end{Verbatim}
+    \end{itemize}
+    \item Configure:
+\newline File (\textcolor{file}{\~/.zshrc}):
+\newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.zshrc}}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Web Browser %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Web Browser}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install firefox-esr
+\end{Verbatim}
+    \item Set as default browser:
+    \begin{enumerate}
+        \item Show available browsers:
+        \begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{update-alternatives} --list x-www-browser
+\end{Verbatim}
+        \item Change default browser:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{update-alternatives} --set x-www-browser /usr/bin/firefox-esr
+\end{Verbatim}
+    \end{enumerate}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Audio %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Audio}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Audio Control}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install alsa-utils
+\end{Verbatim}
+\end{enumerate}
+\begin{itemize}
+    \item Get Master/Capture audio:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{amixer} get <Master/Capture>
+\end{Verbatim}
+    \item Set mute/unmute/toggle Master/Capture audio:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{amixer} set <Master/Capture> <mute|unmute|toggle>
+\end{Verbatim}
+    \item Set volume Master/Capture audio:
+    \begin{itemize}
+        \item Specific value:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{amixer} set <Master/Capture> <0-100>\%
+\end{Verbatim}
+        \item Increase/decrease value:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{amixer} set <Master/Capture> <0-100>\%<+|->    
+\end{Verbatim}
+    \end{itemize}
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Microphone}
+In case of mic problems, try to install pulseaudio.
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install pulseaduio
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% X %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{X}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install xorg x11-xserver-utils xinit
+\end{Verbatim}
+    \item Start X on tty1:
+\newline File (\textcolor{file}{\~/.bash\_profile}||\textcolor{file}{\~/.bashrc}||\textcolor{file}{\~/.zshrc}):
+\begin{Verbatim}[commandchars=\\\{\}]
+if [[ -z \$DISPLAY ]] && [[ \$(tty) = /dev/tty1 ]]; then
+    source /etc/profile
+    startx
+fi
+\end{Verbatim}
+    \item xinit configuration:
+\newline File (\textcolor{file}{\~/.xinitrc}):
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{comment}{## Disable screen saver:}
+xset s off
+xset s noblank
+xset -dpms
+
+\textcolor{comment}{## Execute i3 WM after X is started:}
+xrandr -s 1920x1080
+exec i3
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% i3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{i3}
+
+
+
+
+
 
 
 
