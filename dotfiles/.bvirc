@@ -5,4 +5,5 @@
 " sudo apt install bvi
 "#################################################################
 
+"" Enable edit:
 set memmove
