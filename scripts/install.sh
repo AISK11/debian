@@ -8,13 +8,14 @@
 ## Execute this script with root privileges!
 
 ## EDIT variables:
+VIRTUAL=0	# change to 1 if installing on VM
 USER="changeme"	# CHANGE
 HOSTNAME=$(hostname)
 TIMEZONE="Europe/Copenhagen"
 HOME=/home/${USER}
 PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin"
 
-if [[ ${USER} = "changeme" ]]; then
+if [[ "${USER}" = "changeme" ]]; then
 	echo "You need to change variable for USER!"
 	exit 1
 fi
@@ -129,7 +130,7 @@ echo -e "nameserver 1.1.1.1" >> /etc/resolv.conf &&
 echo -e "nameserver 1.0.0.1" >> /etc/resolv.conf &&
 echo -e "\n[+] DNS servers updated." || echo -e "\n[-] Error while updating DNS servers!"
 
-##! WiFi wpasupplicant template:
+## WiFi wpasupplicant template:
 apt install wpasupplicant -y
 echo -e "# Basic settings and language for zones:" > /etc/wpa_supplicant/wpa_supplicant.conf &&
 echo -e "ctrl_interface=/run/wpa_supplicant" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
@@ -206,7 +207,7 @@ apt install rxvt-unicode-256color -y &&
 update-alternatives --set x-terminal-emulator /usr/bin/urxvt &&
 echo -e "\n[+] rxvt-unicode set as default X-terminal." || echo -e "\n[-] Error while setting up rxvt-unicode!"
 
-##! Copy dotfiles from my github:
+## Copy dotfiles from my github:
 cd ~ &&
 git clone https://github.com/AISK11/debian &&
 cp -r ~/debian/dotfiles/. ~ &&
@@ -221,9 +222,13 @@ rm -rf ~/debian &&
 chown -R ${USER}:${USER} ~
 echo -e "\n[+] custom dotfiles were applied." || echo -e "\n[-] Error while applying custom dotfiles!"
 
-##! Install Nvidia:
-apt install intel-gpu-tools nvtop nvidia-detect linux-headers-amd64 nvidia-driver firmware-misc-nonfree -y &&
-echo -e "\n[+] Nvidia installed." || echo -e "\n[-] Error while installing Nvidia!"
+## Install Nvidia:
+if [[ "${VIRTUAL}" -eq "0" ]]; then
+	apt install intel-gpu-tools nvtop nvidia-detect linux-headers-amd64 nvidia-driver firmware-misc-nonfree -y &&
+	echo -e "\n[+] Nvidia installed." || echo -e "\n[-] Error while installing Nvidia!"
+else
+	echo -e "\n [*] VIRTUAL flag set, skipping installing of Nvidia driver"
+fi
 
 # Install Additional Packages:
 apt install psmisc htop &&
