@@ -8,13 +8,20 @@
 ## Execute this script with root privileges!
 
 ## EDIT variables:
-USER=changeme	# CHANGE
+USER=i"changeme"	# CHANGE
 HOSTNAME=$(hostname)
 TIMEZONE="Europe/Copenhagen"
 HOME=/home/${USER}
+PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin"
+
+if [[ ${USER} = "changeme" ]]; then
+	echo "You need to change variable for USER!"
+	exit 1
+fi
+
 
 #################################################
-## Disable speaker bell:
+##! Disable speaker bell:
 echo -e "set bell-style none" >> /etc/inputrc &&
 echo -e "blacklist pcspkr" > /etc/modprobe.d/blacklist.conf &&
 depmod -a &&
@@ -37,7 +44,7 @@ echo -e "\n[+] System updated and also installed apt-file package!" || echo -e "
 apt install firmware-iwlwifi -y &&
 echo -e "\n[+] Installed firmware for iwlwifi" || echo -e "\n[-] Error while installing iwlwifi driver"
 
-## GRUB settings:
+##! GRUB settings:
 sed -i 's/GRUB_CMDLINE_LINUX=".*"/GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"/g' /etc/default/grub &&
 sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT=0/g' /etc/default/grub &&
 sed -i 's/GRUB_TIMEOUT=.*/GRUB_TIMEOUT=1/g' /etc/default/grub &&
@@ -82,7 +89,7 @@ echo -e "XKBOPTIONS=\"\"" >> /etc/default/keyboard &&
 echo -e "BACKSPACE=\"guess\"" >> /etc/default/keyboard &&
 echo -e "\n[+] CLI keyboard set." || echo -e "\n[-] Error while setting CLI keyboard!"
 
-## Block bluetooth and unblock WiFi:
+##! Block bluetooth and unblock WiFi:
 apt install rfkill -y &&
 rfkill block bluetooth &&
 rfkill unblock wlan &&
@@ -102,7 +109,7 @@ echo -e "#allow-hotplug wlan0" >> /etc/network/interfaces &&
 echo -e "iface wlan0 inet manual" >> /etc/network/interfaces &&
 echo -e "\n[+] Set up startup settings for network interfaces." || echo -e "\n[-] Error while setting up network interfaces!"
 
-## Better DHCP client:
+##! Better DHCP client:
 apt install dhcpcd5 -y &&
 systmectl disable dhcpcd.service &&
 sed -i 's/^hostname/#hostname/g' /etc/dhcpcd.conf &&
@@ -122,7 +129,7 @@ echo -e "nameserver 1.1.1.1" >> /etc/resolv.conf &&
 echo -e "nameserver 1.0.0.1" >> /etc/resolv.conf &&
 echo -e "\n[+] DNS servers updated." || echo -e "\n[-] Error while updating DNS servers!"
 
-## WiFi wpasupplicant template:
+##! WiFi wpasupplicant template:
 echo -e "# Basic settings and language for zones:" > /etc/wpa_supplicant/wpa_supplicant.conf &&
 echo -e "ctrl_interface=/run/wpa_supplicant" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
 echo -e "update_config=1" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
@@ -164,7 +171,7 @@ apt install vim bvi -y &&
 update-alternatives --set editor /usr/bin/vim.basic &&
 echo -e "\n[+] vim installed and set as default editor." || echo -e "\n[-] Error while setting up vim!"
 
-## zsh:
+##! zsh:
 apt install zsh zsh-autosuggestions zsh-syntax-highlighting -y &&
 usermod -s /bin/zsh ${USER} &&
 echo -e "\n[+] zsh installed and set for user '${USER}'" || echo -e "\n[-] Error while setting up zsh for user '${USER}'!"
@@ -198,7 +205,7 @@ apt install rxvt-unicode-256color -y &&
 update-alternatives --set x-terminal-emulator /usr/bin/urxvt &&
 echo -e "\n[+] rxvt-unicode set as default X-terminal." || echo -e "\n[-] Error while setting up rxvt-unicode!"
 
-## Copy dotfiles from my github:
+##! Copy dotfiles from my github:
 cd ~ &&
 git clone https://github.com/AISK11/debian &&
 cp -r ~/debian/dotfiles/.* ~ &&
@@ -212,7 +219,7 @@ rm -rf .themes.tar.bz2 &&
 rm -rf ~/debian &&
 echo -e "\n[+] custom dotfiles were applied." || echo -e "\n[-] Error while applying custom dotfiles!"
 
-## Install Nvidia:
+##! Install Nvidia:
 apt install intel-gpu-tool nvtop nvidia-detect install linux-headers-amd64 nvidia-driver firmware-misc-nonfree -y &&
 echo -e "\n[+] Nvidia installed." || echo -e "\n[-] Error while installing Nvidia!"
 
