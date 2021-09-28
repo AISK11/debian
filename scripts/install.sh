@@ -21,7 +21,7 @@ fi
 
 
 #################################################
-##! Disable speaker bell:
+## Disable speaker bell:
 echo -e "set bell-style none" >> /etc/inputrc &&
 echo -e "blacklist pcspkr" > /etc/modprobe.d/blacklist.conf &&
 depmod -a &&
@@ -44,7 +44,7 @@ echo -e "\n[+] System updated and also installed apt-file package!" || echo -e "
 apt install firmware-iwlwifi -y &&
 echo -e "\n[+] Installed firmware for iwlwifi" || echo -e "\n[-] Error while installing iwlwifi driver"
 
-##! GRUB settings:
+## GRUB settings:
 sed -i 's/GRUB_CMDLINE_LINUX=".*"/GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"/g' /etc/default/grub &&
 sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT=0/g' /etc/default/grub &&
 sed -i 's/GRUB_TIMEOUT=.*/GRUB_TIMEOUT=1/g' /etc/default/grub &&
@@ -89,7 +89,7 @@ echo -e "XKBOPTIONS=\"\"" >> /etc/default/keyboard &&
 echo -e "BACKSPACE=\"guess\"" >> /etc/default/keyboard &&
 echo -e "\n[+] CLI keyboard set." || echo -e "\n[-] Error while setting CLI keyboard!"
 
-##! Block bluetooth and unblock WiFi:
+## Block bluetooth and unblock WiFi:
 apt install rfkill -y &&
 rfkill block bluetooth &&
 rfkill unblock wlan &&
@@ -109,9 +109,9 @@ echo -e "#allow-hotplug wlan0" >> /etc/network/interfaces &&
 echo -e "iface wlan0 inet manual" >> /etc/network/interfaces &&
 echo -e "\n[+] Set up startup settings for network interfaces." || echo -e "\n[-] Error while setting up network interfaces!"
 
-##! Better DHCP client:
+## Better DHCP client:
 apt install dhcpcd5 -y &&
-systmectl disable dhcpcd.service &&
+systemctl disable dhcpcd.service &&
 sed -i 's/^hostname/#hostname/g' /etc/dhcpcd.conf &&
 sed -i 's/^persistent/#persistent/g' /etc/dhcpcd.conf &&
 sed -i 's/^option domain_name_servers,/#option domain_name_servers,/g' /etc/dhcpcd.conf &&
@@ -130,6 +130,7 @@ echo -e "nameserver 1.0.0.1" >> /etc/resolv.conf &&
 echo -e "\n[+] DNS servers updated." || echo -e "\n[-] Error while updating DNS servers!"
 
 ##! WiFi wpasupplicant template:
+apt install wpasupplicant -y
 echo -e "# Basic settings and language for zones:" > /etc/wpa_supplicant/wpa_supplicant.conf &&
 echo -e "ctrl_interface=/run/wpa_supplicant" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
 echo -e "update_config=1" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
@@ -208,23 +209,28 @@ echo -e "\n[+] rxvt-unicode set as default X-terminal." || echo -e "\n[-] Error 
 ##! Copy dotfiles from my github:
 cd ~ &&
 git clone https://github.com/AISK11/debian &&
-cp -r ~/debian/dotfiles/.* ~ &&
-cp ~/debian.config_files/i3blocks.conf /etc/i3blocks.conf &&
-cp ~/debian.config_files/xorg.conf /etc/X11/xorg.conf &&
+cp -r ~/debian/dotfiles/. ~ &&
+cp ~/debian/config_files/i3blocks.conf /etc/i3blocks.conf &&
+cp ~/debian/config_files/xorg.conf /etc/X11/xorg.conf &&
 chmod +x ~/.config/i3/scripts/* &&
 tar xvjf .icons.tar.bz2 &&
 rm -rf .icons.tar.bz2 &&
 tar xvjf .themes.tar.bz2 && 
 rm -rf .themes.tar.bz2 &&
 rm -rf ~/debian &&
+chown -R ${USER}:${USER} ~
 echo -e "\n[+] custom dotfiles were applied." || echo -e "\n[-] Error while applying custom dotfiles!"
 
 ##! Install Nvidia:
-apt install intel-gpu-tool nvtop nvidia-detect install linux-headers-amd64 nvidia-driver firmware-misc-nonfree -y &&
+apt install intel-gpu-tools nvtop nvidia-detect linux-headers-amd64 nvidia-driver firmware-misc-nonfree -y &&
 echo -e "\n[+] Nvidia installed." || echo -e "\n[-] Error while installing Nvidia!"
 
+# Install Additional Packages:
+apt install psmisc htop &&
+echo -e "\n[+] Packages psmisc and htop installed." || echo -e "\n[-] Error while installing psmisc and htop!"
+
 ## Install support for MTP:
-apt install mtp-tools jmtpf -y &&
+apt install mtp-tools jmtpfs -y &&
 echo -e "\n[+] Installed support for MTP devices." || echo -e "\n[-] MTP tools could not be installed!"
 
 ## Update before restart:
