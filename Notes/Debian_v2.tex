@@ -241,7 +241,7 @@ GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"
 \textcolor{comment}{## highlighted default entry:}
 GRUB_DEFAULT=0
 \textcolor{comment}{## boot default entry in X seconds, 0=immediately, -1=never:}
-GRUB_TIMEOUT=-1
+GRUB_TIMEOUT=1
 \textcolor{comment}{## menu=timeout to select entry, hidden=timeout to show grub:}
 GRUB_TIMEOUT_STYLE=menu
 \textcolor{comment}{## disable recovery menu entry:}
@@ -1054,6 +1054,24 @@ __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia \%command\%
 \chapter{Programs - WiP}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{System}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{apt-file}
+Needed for: \textbf{apt-file}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root} \textcolor{command}{apt} install apt-file
+\end{Verbatim}
+    \item Initialize:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root} \textcolor{command}{apt-file} update
+\end{Verbatim}
+    \item Usage:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root} \textcolor{command}{apt-file} search -x <FILE>
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{psmisc}
 Needed for: \textbf{killall}
 \begin{enumerate}
