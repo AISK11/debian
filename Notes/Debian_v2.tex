@@ -830,9 +830,136 @@ exec i3
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{i3-gaps (do not install with i3)}
+URL: (\underline{https://github.com/Airblader/i3/wiki/Building-from-source})
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install make meson git ninja-build
+dh-autoreconf libxcb-keysyms1-dev
+libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev
+libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev 
+libxcb-xinerama0-dev libxkbcommon-x11-dev libpango1.0-dev
+libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 
+libxcb-xrm-dev libxcb-shape0 libxcb-shape0-dev
+\end{Verbatim} 
+    \item Clone i3-haps:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{cd} \textcolor{dir}{/etc/}
+\textcolor{root}{root#} \textcolor{command}{git} clone https://www.github.com/Airblader/i3 i3-gaps
+\textcolor{user}{user\$} \textcolor{command}{cd} \textcolor{dir}{./i3-gaps/}
+\end{Verbatim}
+    \item Compile:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{mkdir} -p \textcolor{dir}{build} && cd \textcolor{dir}{build}
+\textcolor{root}{root#} \textcolor{command}{meson} --prefix \textcolor{file}{/usr/local}
+\textcolor{root}{root#} \textcolor{command}{ninja}
+\textcolor{root}{root#} \textcolor{command}{ninja} install
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{run i3 after Xorg}
+\begin{enumerate}
+    \item Run i3 on X init:
+\newline File (\textcolor{file}{\~/.xinitrc}):
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{comment}{# Disable screen saver:}
+xset s off
+xset s noblank
+xset -dpms
 
-
-
+\textcolor{comment}{# Execute i3 WM after X is started:}
+exec i3
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{i3 config}
+\begin{enumerate}
+    \item i3 configuration:
+\newline File (\textcolor{file}{\~/.config/i3/config}):
+\newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.config/i3/config}}
+    \item i3 scripts:
+\newline \underline{\url{https://github.com/AISK11/debian/tree/main/dotfiles/.config/i3/scripts}}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{chmod} +x \textcolor{file}{~/.config/i3/scripts/*}
+\end{Verbatim}
+    \item i3 wallpaper and lock screen:
+\newline \underline{\url{https://github.com/AISK11/debian/tree/main/dotfiles/.config/i3/images}}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% i3 Programs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{i3 Programs}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{i3blocks}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install i3blocks i3lock numlockx rofi feh scrot light xclip
+\end{Verbatim}
+    \item i3blocks config:
+\newline File (\textcolor{file}{/etc/i3blocks.conf}):
+\newline \underline{\url{https://github.com/AISK11/debian/blob/main/config_files/i3blocks.conf}}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{urxvt}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install rxvt-unicode-256color compton
+\end{Verbatim}
+    \item Configuration:
+\newline File (\textcolor{file}{\~/.Xresources}):
+\newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.Xresources}}
+    \item Load changed config:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{xrdb} \textcolor{file}{~/.Xresources}
+\end{Verbatim}
+    \item Set as default CLI emulator:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{update-alternatives} --list x-terminal-emulator
+\textcolor{root}{root#} \textcolor{command}{update-alternatives} --set x-terminal-emulator \textcolor{file}{/usr/bin/urxvt}
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Fonts}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install imagemagick
+\end{Verbatim}
+    \item List installed fonts:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{fc-list}
+\end{Verbatim}
+    \item Display specific font:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{display} </PATH/TO/font.ttf>
+\end{Verbatim}
+    \item Font Awesome:
+\newline Dir (\textcolor{dir}{\~/.fonts/}):
+\newline \underline{\url{https://github.com/AISK11/debian/tree/main/dotfiles/.fonts}}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{lxappearance (GTK)}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install lxappearance
+\end{Verbatim}
+    \item Add themes and icons:
+\newline Dir (\textcolor{dir}{\~/.themes/}):
+\newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.themes.tar.bz2}}
+\newline Dir (\textcolor{dir}{\~/.icons/}):
+\newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.icons.tar.bz2}}
+    \item Change GTK theme and icons:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{lxappearance}
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Nvidia + Intel GPU (Optimus) %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Nvidia + Intel GPU (Optimus)}
 
 
 
