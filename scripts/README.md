@@ -1,9 +1,8 @@
-* WiP
-cd ~
-su
-apt install vim git
-git clone https://github.com/aisk11/debian
-cd ./debian/scripts/
-
-# change variables
-bash install.sh
+# WiP
+`cd ~`\
+`su`\
+`apt install vim git -y`\
+`git clone https://github.com/aisk11/debian`\
+`cd ./debian/scripts/`\
+Change variabless in script.\
+`bash install.sh`
