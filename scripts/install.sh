@@ -219,7 +219,7 @@ rm -rf .icons.tar.bz2 &&
 tar xvjf .themes.tar.bz2 && 
 rm -rf .themes.tar.bz2 &&
 rm -rf ~/debian &&
-chown -R ${USER}:${USER} ~
+chown -R ${USER}:${USER} ~ &&
 echo -e "\n[+] custom dotfiles were applied." || echo -e "\n[-] Error while applying custom dotfiles!"
 
 ## Install Nvidia:
