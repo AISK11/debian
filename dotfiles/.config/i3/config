@@ -3,7 +3,7 @@
 # Location: ~/.config/i3/config
 
 # Packages installed:
-# sudo apt install apt install i3 i3bar i3blocks rofi i3lock feh numlockx scrot compton light
+# sudo apt install apt install i3 i3bar i3blocks rofi i3lock feh numlockx scrot compton light xclip
 ##################################################################
 
 ## SET MOD KEY: Window key = Mod4; Alt key = Mod1:
