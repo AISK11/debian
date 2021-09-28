@@ -1044,6 +1044,136 @@ __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia \%command\%
 \end{Verbatim}
 \end{itemize}
 \end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% KVM %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{KVM - WiP}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Programs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Programs - WiP}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{System}
+\subsection{psmisc}
+Needed for: \textbf{killall}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root} \textcolor{command}{apt} install mpsmisc
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Devices}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{MTP}
+Note: use original cable, some cables may not work.
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root} \textcolor{command}{apt} install mtp-tools jmtpf
+\end{Verbatim}
+    \item Check if MTP device is detected:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{mtp-detect}
+\end{Verbatim}
+    \item Mount MTP device:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{mkdir} \textcolor{dir}{/mnt/mtp/}
+\textcolor{root}{root#} \textcolor{command}{chmod} 0777 \textcolor{dir}{/mnt/mtp/}
+\textcolor{root}{root#} \textcolor{command}{jmtpfs} \textcolor{dir}{/mnt/mtp/}
+\end{Verbatim}
+    \item Unmount MTP device:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{fusermount} -u \textcolor{dir}{/mnt/mtp/}
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Security}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{KeePassXC}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install keepassxc
+\end{Verbatim}
+    \item Usage:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{keepassxc}
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Download/Convert}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{youtube-dl}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install youtube-dl
+\end{Verbatim}
+    \item Usage:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{youtube-dl} -x --no-playlist --audio-format "mp3" --audio-quality 0 
+--console-title "<URL>"
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{ocrmypdf}
+PDF to OCR PDF.
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install ocrmypdf
+\end{Verbatim}
+    \item Usage:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{ocrmypdf} <INPUT.pdf> <OUTPUT.pdf>
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Images to PDF}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install imagemagick
+\end{Verbatim}
+    \item Fix Error \textit{"convert-im6.q16: attempt to perform an operation not allowed by the security policy `PDF' @ error/constitute.c/IsCoderAuthorized/421."}:
+\newline File (\textcolor{file}{/etc/ImageMagick-6/policy.xml}):
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{comment}{<!-- Add read/write rights -->}
+<policy domain="coder" rights="read|write" pattern="PDF" />
+\end{Verbatim}
+    \item Convert images to PDF:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{convert} <IMAGES> <OUTPUT>.pdf
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Multimedia}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Play Video}
+\begin{enumerate}
+    \item Dependencies: mpv
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Edit Video}
+\begin{enumerate}
+    \item Dependencies: openshot-qt
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Record Video}
+\begin{enumerate}
+    \item Dependencies: obs-studio
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Social}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Lightcord}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Flex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Gomatrix}
+
+
 
 
 \end{document}
