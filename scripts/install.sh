@@ -8,7 +8,7 @@
 ## Execute this script with root privileges!
 
 ## EDIT variables:
-USER=i"changeme"	# CHANGE
+USER="changeme"	# CHANGE
 HOSTNAME=$(hostname)
 TIMEZONE="Europe/Copenhagen"
 HOME=/home/${USER}
