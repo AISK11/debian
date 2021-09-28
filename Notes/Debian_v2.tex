@@ -521,7 +521,7 @@ slaac private
 \begin{enumerate}
     \item Remove previous lease info:
 \begin{Verbatim}[commandchars=\\\{\}]
-    \textcolor{root}{root#} \textcolor{command}{rm} -f /var/lib/dhcpcd/*
+\textcolor{root}{root#} \textcolor{command}{rm} -f /var/lib/dhcpcd/*
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -551,7 +551,7 @@ nameserver 1.0.0.1
 \end{Verbatim}
     \item Check carrier speed:
 \begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{user}{pi\$} \textcolor{command}{ethtool} <eth0>
+\textcolor{user}{user\$} \textcolor{command}{ethtool} <eth0>
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -561,7 +561,7 @@ nameserver 1.0.0.1
 \begin{enumerate}
     \item Check carrier speed:
 \begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{user}{pi\$} \textcolor{command}{iwlist} <wlan0> bitrate
+\textcolor{user}{user\$} \textcolor{command}{iwlist} <wlan0> bitrate
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -626,7 +626,7 @@ network=\{
 \end{Verbatim}
     \item Start DHCP:
 \begin{Verbatim}[commandchars=\\\{\}]
-    \textcolor{root}{root#} \textcolor{command}{systemctl} start dhcpcd.service
+\textcolor{root}{root#} \textcolor{command}{systemctl} start dhcpcd.service
 \end{Verbatim}
     \item Apply wpa\_supplicant settings (WiFi only):
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -635,7 +635,7 @@ network=\{
 \end{Verbatim}
     \item Run DHCP on interface:
 \begin{Verbatim}[commandchars=\\\{\}]
-    \textcolor{root}{root#} \textcolor{command}{dhcpcd} <wlan0>
+\textcolor{root}{root#} \textcolor{command}{dhcpcd} <wlan0>
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
