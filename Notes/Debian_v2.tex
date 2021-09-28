@@ -97,7 +97,7 @@
 \tableofcontents
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Physical Access %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Pre-Installation %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Pre-Installation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -139,7 +139,8 @@
     \item Unmount FS!
     \item Check for bad blocks:
 \begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{root}{root#} \textcolor{command}{badblocks} [-b 4096] [-w [-t 0xaa]] [-v] [-s] [-o <FILE>] <\textcolor{block}{/dev/sdX[Y]}>
+\textcolor{root}{root#} \textcolor{command}{badblocks} [-b 4096] [-w [-t 0xaa]] [-v] [-s] [-o <FILE>] 
+<\textcolor{block}{/dev/sdX[Y]}>
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -319,7 +320,7 @@ set menu_color_highlight=black/white
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{doas}
 \begin{enumerate}
-    \item Install:
+    \item Dependenices1:
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install doas
 \end{Verbatim}
@@ -331,6 +332,11 @@ set menu_color_highlight=black/white
 permit nopass <USER>
 \end{Verbatim}    
 \end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Run GUI programs as root}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{xhost} local:root
+\end{Verbatim}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Hostname}
 \begin{enumerate}
@@ -488,6 +494,19 @@ net.ipv6.conf.all.disable_ipv6 = 1
 ###persistent
 \textcolor{comment}{## A list of options to request from the DHCP server.}
 ###option domain_name_servers, domain_name, domain_search, host_name
+
+\textcolor{comment}{## Rapid commit support.}
+option rapid_commit
+\textcolor{comment}{## A list of options to request from the DHCP server.}
+option classless_static_routes
+\textcolor{comment}{## Respect the network MTU. This is applied to DHCP routes.}
+option interface_mtu
+\textcolor{comment}{## A ServerID is required by RFC2131.}
+require dhcp_server_identifier
+\textcolor{comment}{## Generate SLAAC address using the Hardware Address of the interface}
+###slaac hwaddr
+\textcolor{comment}{## OR generate Stable Private IPv6 Addresses based from the DUID}
+slaac private
 \end{Verbatim}
     \item Purge old DHCP client:
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -503,7 +522,7 @@ net.ipv6.conf.all.disable_ipv6 = 1
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{DNS}
+\section{DNS}
 \begin{enumerate}
     \item Set up custom DNS servers:
 \newline File: (\textcolor{file}{/etc/resolv.conf}) (0644):
@@ -776,10 +795,12 @@ In case of mic problems, try to install pulseaudio.
     \item Start X on tty1:
 \newline File (\textcolor{file}{\~/.bash\_profile}||\textcolor{file}{\~/.bashrc}||\textcolor{file}{\~/.zshrc}):
 \begin{Verbatim}[commandchars=\\\{\}]
+...
 if [[ -z \$DISPLAY ]] && [[ \$(tty) = /dev/tty1 ]]; then
     source /etc/profile
     startx
 fi
+...
 \end{Verbatim}
     \item xinit configuration:
 \newline File (\textcolor{file}{\~/.xinitrc}):
@@ -798,8 +819,17 @@ exec i3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% i3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{i3}
-
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{i3 (do not install with i3-gaps)}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install i3 --no-install-recommends
+\textcolor{root}{root#} \textcolor{command}{apt} install i3-wm
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{i3-gaps (do not install with i3)}
 
 
 
