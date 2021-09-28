@@ -10,9 +10,9 @@
 ## EDIT variables:
 VIRTUAL=0	# change to 1 if installing on VM
 USER="changeme"	# CHANGE
-HOSTNAME=$(hostname)
+HOSTNAME="$(hostname)"
 TIMEZONE="Europe/Copenhagen"
-HOME=/home/${USER}
+HOME="/home/${USER}"
 PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin"
 
 if [[ "${USER}" = "changeme" ]]; then
