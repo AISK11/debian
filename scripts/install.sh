@@ -15,15 +15,15 @@ HOME=/home/${USER}
 
 #################################################
 ## Disable speaker bell:
-echo "set bell-style none" >> /etc/inputrc &&
-echo "blacklist pcspkr" > /etc/modprobe.d/blacklist.conf &&
+echo -e "set bell-style none" >> /etc/inputrc &&
+echo -e "blacklist pcspkr" > /etc/modprobe.d/blacklist.conf &&
 depmod -a &&
 update-initramfs -u &&
-echo "\n[+] pcspkr disabled." || echo "\n[-] Error while disabling pcspkr!"
+echo -e "\n[+] pcspkr disabled." || echo -e "\n[-] Error while disabling pcspkr!"
 
 ## Add contrib and non-free packages to debian:
 sed -i 's/deb.*main$/& contrib non-free/g' /etc/apt/sources.list &&
-echo "\n[+] Added contrib and non-free packages to /etc/apt/sources.list." || echo "\n[-] Error, could not add contrib and non-free packages to /etc/apt/sources.list!"
+echo -e "\n[+] Added contrib and non-free packages to /etc/apt/sources.list." || echo -e "\n[-] Error, could not add contrib and non-free packages to /etc/apt/sources.list!"
 
 ## Update system:
 apt clean &&
@@ -31,11 +31,11 @@ apt update &&
 apt full-upgrade -y &&
 apt install apt-file -y &&
 apt-file update &&
-echo "\n[+] System updated and also installed apt-file package!" || echo "\n[-] Error while updating system or installing apt-file package!"
+echo -e "\n[+] System updated and also installed apt-file package!" || echo -e "\n[-] Error while updating system or installing apt-file package!"
 
 ## Driver for iwlwifi:
 apt install firmware-iwlwifi -y &&
-echo "\n[+] Installed firmware for iwlwifi" || echo "\n[-] Error while installing iwlwifi driver"
+echo -e "\n[+] Installed firmware for iwlwifi" || echo -e "\n[-] Error while installing iwlwifi driver"
 
 ## GRUB settings:
 sed -i 's/GRUB_CMDLINE_LINUX=".*"/GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"/g' /etc/default/grub &&
@@ -44,63 +44,63 @@ sed -i 's/GRUB_TIMEOUT=.*/GRUB_TIMEOUT=1/g' /etc/default/grub &&
 sed -i 's/GRUB_TIMEOUT_STYLE=.*/GRUB_TIMEOUT_STYLE=menu/g' /etc/default/grub &&
 sed -i 's/GRUB_DISABLE_RECOVERY=.*/GRUB_DISABLE_RECOVERY=true/g' /etc/default/grub &&
 ## GRUB colors:
-echo "set color_normal=white/black" > /boot/grub/custom.cfg &&
-echo "set color_highlight=black/white" >> /boot/grub/custom.cfg &&
-echo "set menu_color_normal=white/black" >> /boot/grub/custom.cfg &&
-echo "set menu_color_highlight=black/white" >> /boot/grub/custom.cfg &&
+echo -e "set color_normal=white/black" > /boot/grub/custom.cfg &&
+echo -e "set color_highlight=black/white" >> /boot/grub/custom.cfg &&
+echo -e "set menu_color_normal=white/black" >> /boot/grub/custom.cfg &&
+echo -e "set menu_color_highlight=black/white" >> /boot/grub/custom.cfg &&
 grub-mkconfig -o /boot/grub/grub.cfg &&
-echo "\n[+] GRUB configuration updated." || echo "\n[-] Error while updating GRUB!"
+echo -e "\n[+] GRUB configuration updated." || echo -e "\n[-] Error while updating GRUB!"
 
 ## doas:
 apt install doas -y &&
-echo "permit nopass ${USER}" > /etc/doas.conf &&
-echo "\n[+] User ${USER} added to '/etc/doas.conf'." || echo "\n[-] Error while adding user ${USER} to '/etc/doas.conf'!" 
+echo -e "permit nopass ${USER}" > /etc/doas.conf &&
+echo -e "\n[+] User ${USER} added to '/etc/doas.conf'." || echo -e "\n[-] Error while adding user ${USER} to '/etc/doas.conf'!" 
 
 ## hostname:
-echo "${HOSTNAME}" > /etc/hostname &&
+echo -e "${HOSTNAME}" > /etc/hostname &&
 sed -i "s/127\.0\.1\.1.*/127\.0\.1\.1\t${HOSTNMAE}/g" /etc/hosts &&
-echo "\n[+] Hostname updated with ${HOSTNAME}." || echo "\n[-] Error while changing hostname with ${HOSTNAME}!"
+echo -e "\n[+] Hostname updated with ${HOSTNAME}." || echo -e "\n[-] Error while changing hostname with ${HOSTNAME}!"
 
 ## timezone:
 timedatectl set-timezone ${TIMEZONE} &&
-echo "\n[+] Timezone ${TIMEZONE} updated." || echo "\n[-] Error. Timezone '${TIMEZONE}' could not be changed!"
+echo -e "\n[+] Timezone ${TIMEZONE} updated." || echo -e "\n[-] Error. Timezone '${TIMEZONE}' could not be changed!"
 
 ## locale:
-echo "LANG=en_US.UTF-8" > /etc/default/locale &&
-echo "# First day in a week MON, not SUN:" >> /etc/default/locale &&
-echo "#LC_TIME=\"en_GB.UTF-8\"" >> /etc/default/locale &&
-echo "# Default paper size:" >> /etc/default/locale &&
-echo "#LC_PAPER=\"en_GB.UTF-8\"" >> /etc/default/locale &&
-echo "#LC_MEASUREMENT=\"en_GB.UTF-8\"" >> /etc/default/locale &&
-echo "\n[+] Locales updated!" || echo "\n[-] Error while changing locales!"
+echo -e "LANG=en_US.UTF-8" > /etc/default/locale &&
+echo -e "# First day in a week MON, not SUN:" >> /etc/default/locale &&
+echo -e "#LC_TIME=\"en_GB.UTF-8\"" >> /etc/default/locale &&
+echo -e "# Default paper size:" >> /etc/default/locale &&
+echo -e "#LC_PAPER=\"en_GB.UTF-8\"" >> /etc/default/locale &&
+echo -e "#LC_MEASUREMENT=\"en_GB.UTF-8\"" >> /etc/default/locale &&
+echo -e "\n[+] Locales updated!" || echo -e "\n[-] Error while changing locales!"
 
 ## CLI Keyboard:
-echo "XKBMODEL=\"pc105\"" > /etc/default/keyboard &&
-echo "XKBLAYOUT=\"us\"" >> /etc/default/keyboard &&
-echo "XKBVARIANT=\"\"" >> /etc/default/keyboard &&
-echo "XKBOPTIONS=\"\"" >> /etc/default/keyboard &&
-echo "BACKSPACE=\"guess\"" >> /etc/default/keyboard &&
-echo "\n[+] CLI keyboard set." || echo "\n[-] Error while setting CLI keyboard!"
+echo -e "XKBMODEL=\"pc105\"" > /etc/default/keyboard &&
+echo -e "XKBLAYOUT=\"us\"" >> /etc/default/keyboard &&
+echo -e "XKBVARIANT=\"\"" >> /etc/default/keyboard &&
+echo -e "XKBOPTIONS=\"\"" >> /etc/default/keyboard &&
+echo -e "BACKSPACE=\"guess\"" >> /etc/default/keyboard &&
+echo -e "\n[+] CLI keyboard set." || echo -e "\n[-] Error while setting CLI keyboard!"
 
 ## Block bluetooth and unblock WiFi:
 apt install rfkill -y &&
 rfkill block bluetooth &&
 rfkill unblock wlan &&
 # dpkg --purge bluez bluetooth &&
-echo "\n[+] Bluetooth was blocked and WiFi unblocked." || echo "\n[-] Error while setting up rfkill!"
+echo -e "\n[+] Bluetooth was blocked and WiFi unblocked." || echo -e "\n[-] Error while setting up rfkill!"
 
 ## Disable networking service (is unnecessary):
 systemctl disable networking.service &&
-echo "\n[+] networking.service disabled." || echo "\n[-] Error while disabling networking.service!"
+echo -e "\n[+] networking.service disabled." || echo -e "\n[-] Error while disabling networking.service!"
 
 ## Disable hotplug of interfaces and do not autoconnect to network:
-echo "auto lo" > /etc/network/interfaces &&
-echo "iface lo inet loopback" >> /etc/network/interfaces &&
-echo "#allow-hotplug eth0" >> /etc/network/interfaces &&
-echo "iface eth0 inet manual" >> /etc/network/interfaces &&
-echo "#allow-hotplug wlan0" >> /etc/network/interfaces &&
-echo "iface wlan0 inet manual" >> /etc/network/interfaces &&
-echo "\n[+] Set up startup settings for network interfaces." || echo "\n[-] Error while setting up network interfaces!"
+echo -e "auto lo" > /etc/network/interfaces &&
+echo -e "iface lo inet loopback" >> /etc/network/interfaces &&
+echo -e "#allow-hotplug eth0" >> /etc/network/interfaces &&
+echo -e "iface eth0 inet manual" >> /etc/network/interfaces &&
+echo -e "#allow-hotplug wlan0" >> /etc/network/interfaces &&
+echo -e "iface wlan0 inet manual" >> /etc/network/interfaces &&
+echo -e "\n[+] Set up startup settings for network interfaces." || echo -e "\n[-] Error while setting up network interfaces!"
 
 ## Better DHCP client:
 apt install dhcpcd5 -y &&
@@ -109,73 +109,73 @@ sed -i 's/^hostname/#hostname/g' /etc/dhcpcd.conf &&
 sed -i 's/^persistent/#persistent/g' /etc/dhcpcd.conf &&
 sed -i 's/^option domain_name_servers,/#option domain_name_servers,/g' /etc/dhcpcd.conf &&
 dpkg --purge isc-dhcp-client isc-dhcp-common &&
-echo "\n[+] DHCPCD5 installed and set up." || echo "\n[-] Error while setting up DHCPCD5!"
+echo -e "\n[+] DHCPCD5 installed and set up." || echo -e "\n[-] Error while setting up DHCPCD5!"
 
 ## DNS:
-echo "# Uncensored DNS - Denmark - Unicast" > /etc/resolv.conf &&
-echo "nameserver 89.233.43.71" >> /etc/resolv.conf &&
-echo "# CZ.NIC" >> /etc/resolv.conf &&
-echo "nameserver 193.17.47.1" >> /etc/resolv.conf &&
-echo "nameserver 185.43.135.1" >> /etc/resolv.conf &&
-echo "# Quad9" >> /etc/resolv.conf &&
-echo "nameserver 1.1.1.1" >> /etc/resolv.conf &&
-echo "nameserver 1.0.0.1" >> /etc/resolv.conf &&
-echo "\n[+] DNS servers updated." || echo "\n[-] Error while updating DNS servers!"
+echo -e "# Uncensored DNS - Denmark - Unicast" > /etc/resolv.conf &&
+echo -e "nameserver 89.233.43.71" >> /etc/resolv.conf &&
+echo -e "# CZ.NIC" >> /etc/resolv.conf &&
+echo -e "nameserver 193.17.47.1" >> /etc/resolv.conf &&
+echo -e "nameserver 185.43.135.1" >> /etc/resolv.conf &&
+echo -e "# Quad9" >> /etc/resolv.conf &&
+echo -e "nameserver 1.1.1.1" >> /etc/resolv.conf &&
+echo -e "nameserver 1.0.0.1" >> /etc/resolv.conf &&
+echo -e "\n[+] DNS servers updated." || echo -e "\n[-] Error while updating DNS servers!"
 
 ## WiFi wpasupplicant template:
-echo "# Basic settings and language for zones:" > /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "ctrl_interface=/run/wpa_supplicant" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "update_config=1" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "country=<2-LETTER-ISO-CODE>\n" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "# Password protected:" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "network={" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\tssid=\"<ESSID>\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\tscan_ssid=1 # Find hidden network" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\tkey_mgmt=WPA-PSK WPA-EAP" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\tpsk=\"<PLAINTEXT-PASSWD>\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\t#psk=<32byte-HEX-NUMBER>" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\tpriority=1 # To which WiFi connect first" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "}\n" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "# WPA-EAP protected::" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "network={" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\tssid=\"<ESSID>\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\tscan_ssid=1" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\tkey_mgmt=WPA-EAP" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\t#eap=PEAP" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\tidentity=\"<USERNAME>@<DOMAIN>\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\tpassword=\"<PLAINTEXT-PASSWD>\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\t#psk=<32byte-HEX-NUMBER>" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\t#ca_cert=\"/etc/cert/ca.pem\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\t#phase1=\"peaplabel=0\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\tphase2=\"auth=MSCHAPV2\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\tpriority=2" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "}\n" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "# Unprotected:" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "network={" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\tssid=\"<ESSID>\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\tscan_ssid=1 # Find hidden network" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\tkey_mgmt=NONE" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\tpriority=3 # To which WiFi connect first" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "}" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
-echo "\n[+] Added template for wpasupplicant" || echo "\n[-] Error while setting template for wpasupplicant!"
+echo -e "# Basic settings and language for zones:" > /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "ctrl_interface=/run/wpa_supplicant" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "update_config=1" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "country=<2-LETTER-ISO-CODE>\n" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "# Password protected:" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "network={" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\tssid=\"<ESSID>\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\tscan_ssid=1 # Find hidden network" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\tkey_mgmt=WPA-PSK WPA-EAP" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\tpsk=\"<PLAINTEXT-PASSWD>\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\t#psk=<32byte-HEX-NUMBER>" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\tpriority=1 # To which WiFi connect first" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "}\n" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "# WPA-EAP protected::" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "network={" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\tssid=\"<ESSID>\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\tscan_ssid=1" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\tkey_mgmt=WPA-EAP" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\t#eap=PEAP" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\tidentity=\"<USERNAME>@<DOMAIN>\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\tpassword=\"<PLAINTEXT-PASSWD>\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\t#psk=<32byte-HEX-NUMBER>" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\t#ca_cert=\"/etc/cert/ca.pem\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\t#phase1=\"peaplabel=0\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\tphase2=\"auth=MSCHAPV2\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\tpriority=2" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "}\n" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "# Unprotected:" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "network={" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\tssid=\"<ESSID>\"" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\tscan_ssid=1 # Find hidden network" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\tkey_mgmt=NONE" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\tpriority=3 # To which WiFi connect first" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "}" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
+echo -e "\n[+] Added template for wpasupplicant" || echo -e "\n[-] Error while setting template for wpasupplicant!"
 
 ## vim:
 apt install vim bvi -y &&
 update-alternatives --set editor /usr/bin/vim.basic &&
-echo "\n[+] vim installed and set as default editor." || echo "\n[-] Error while setting up vim!"
+echo -e "\n[+] vim installed and set as default editor." || echo -e "\n[-] Error while setting up vim!"
 
 ## zsh:
 apt install zsh zsh-autosuggestions zsh-syntax-highlighting -y &&
 usermod -s /bin/zsh ${USER} &&
-echo "\n[+] zsh installed and set for user '${USER}'" || echo "\n[-] Error while setting up zsh for user '${USER}'!"
+echo -e "\n[+] zsh installed and set for user '${USER}'" || echo -e "\n[-] Error while setting up zsh for user '${USER}'!"
 
 ## To fix mic issue:
 apt install pulseaudio -y &&
-echo "\n[+] pulseaudio installed." || echo "\n[-] Error while installing pulseaudio!"
+echo -e "\n[+] pulseaudio installed." || echo -e "\n[-] Error while installing pulseaudio!"
 
 # Install git:
 apt install git -y &&
-echo "\n[+] git installed." || echo "\n[-] Error while installing git!"
+echo -e "\n[+] git installed." || echo -e "\n[-] Error while installing git!"
 
 ## X server with i3:
 apt install xorg x11-xserver-utils xinit -y &&
@@ -187,16 +187,16 @@ mkdir -p build && cd build &&
 meson --prefix /usr/local &&
 ninja &&
 ninja install &&
-echo "\n[+] i3 compiled successfully." || echo "\n[-] Error while compiling i3!"
+echo -e "\n[+] i3 compiled successfully." || echo -e "\n[-] Error while compiling i3!"
 
 ## Install other X-utlities:
 apt install i3blocks i3lock numlockx rofi feh scrot compton light xclip lxappearance -y &&
-echo "\n[+] additional X utilities installed." || echo "\n[-] Error while installing other utilities!" 
+echo -e "\n[+] additional X utilities installed." || echo -e "\n[-] Error while installing other utilities!" 
 
 ## URXVT:
 apt install rxvt-unicode-256color -y &&
 update-alternatives --set x-terminal-emulator /usr/bin/urxvt &&
-echo "\n[+] rxvt-unicode set as default X-terminal." || echo "\n[-] Error while setting up rxvt-unicode!"
+echo -e "\n[+] rxvt-unicode set as default X-terminal." || echo -e "\n[-] Error while setting up rxvt-unicode!"
 
 ## Copy dotfiles from my github:
 cd ~ &&
@@ -210,21 +210,21 @@ rm -rf .icons.tar.bz2 &&
 tar xvjf .themes.tar.bz2 && 
 rm -rf .themes.tar.bz2 &&
 rm -rf ~/debian &&
-echo "\n[+] custom dotfiles were applied." || echo "\n[-] Error while applying custom dotfiles!"
+echo -e "\n[+] custom dotfiles were applied." || echo -e "\n[-] Error while applying custom dotfiles!"
 
 ## Install Nvidia:
 apt install intel-gpu-tool nvtop nvidia-detect install linux-headers-amd64 nvidia-driver firmware-misc-nonfree -y &&
-echo "\n[+] Nvidia installed." || echo "\n[-] Error while installing Nvidia!"
+echo -e "\n[+] Nvidia installed." || echo -e "\n[-] Error while installing Nvidia!"
 
 ## Install support for MTP:
 apt install mtp-tools jmtpf -y &&
-echo "\n[+] Installed support for MTP devices." || echo "\n[-] MTP tools could not be installed!"
+echo -e "\n[+] Installed support for MTP devices." || echo -e "\n[-] MTP tools could not be installed!"
 
 ## Update before restart:
 apt update &&
 apt full-upgrade -y &&
 apt autoremove &&
-echo "\n[+] System updated." || echo "\n[-] Error while updating system!"
+echo -e "\n[+] System updated." || echo -e "\n[-] Error while updating system!"
 
 ## Restart:
 init 6
