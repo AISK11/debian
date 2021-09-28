@@ -166,12 +166,12 @@
 \section{Disable pcspkr}
 \begin{enumerate}
     \item Turn off bell for CLI mode:
-\newline File: (\textcolor{file}{/etc/inputrc}):
+\newline File: (\textbf{\textcolor{file}{/etc/inputrc}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 set bell-style none
 \end{Verbatim}
     \item Blacklist pcspkr module:
-\newline File: (\textcolor{file}{/etc/modprobe.d/blacklist.conf}):
+\newline File: (\textbf{\textcolor{file}{/etc/modprobe.d/blacklist.conf}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 blacklist pcspkr
 \end{Verbatim}
@@ -187,7 +187,7 @@ blacklist pcspkr
 \begin{enumerate}
     \item Avoid using \textit{stable}, use \textit{release-name} instead.
     \item APT sources file:
-\newline File (\textcolor{file}{/etc/apt/sources.list}):
+\newline File (\textbf{\textcolor{file}{/etc/apt/sources.list}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{## deb http://deb.debian.org/debian testing main [contrib] [non-free]}
 \textcolor{comment}{## deb-src http://deb.debian.org/debian testing main [contrib] [non-free]}
@@ -233,7 +233,7 @@ deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free
 \section{Configuration}
 \begin{enumerate}
     \item Basic GRUB settings:
-\newline File (\textcolor{file}{/etc/default/grub}):
+\newline File (\textbf{\textcolor{file}{/etc/default/grub}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{## do not rename net interfaces:}
 GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"
@@ -281,7 +281,7 @@ GRUB_DISABLE_RECOVERY=true
 \end{center}
 \begin{enumerate}
     \item Edit customization file:
-\newline File (\textcolor{file}{/boot/grub/custom.cfg}):
+\newline File (\textbf{\textcolor{file}{/boot/grub/custom.cfg}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{## <foreground>/<background>}
 set color_normal=white/black
@@ -325,7 +325,7 @@ set menu_color_highlight=black/white
 \textcolor{root}{root#} \textcolor{command}{apt} install doas
 \end{Verbatim}
     \item Configuration:
-\newline File (\textcolor{file}{/etc/doas.conf}):
+\newline File (\textbf{\textcolor{file}{/etc/doas.conf}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{## <permit|deny> [nopass|persist] <USER>[:GROUP] [as <USER2>]}
 \textcolor{comment}{[cmd <COMMAND> [args <ARGUMENTS>]}
@@ -345,11 +345,11 @@ permit nopass <USER>
 \textcolor{user}{user\$} \textcolor{command}{hostname}
 \end{Verbatim}
     \item Change hostname:
-\newline File (\textcolor{file}{/etc/hostname}):
+\newline File (\textbf{\textcolor{file}{/etc/hostname}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 <HOSTNAME>
 \end{Verbatim}
-File (\textcolor{file}{/etc/hosts}):
+File (\textbf{\textcolor{file}{/etc/hosts}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 ...
 127.0.1.1   <HOSTNAME>
@@ -382,7 +382,7 @@ File (\textcolor{file}{/etc/hosts}):
 \textcolor{user}{user\$} \textcolor{command}{locale}
 \end{Verbatim}
     \item Change locales:
-\newline File: (\textcolor{file}{/etc/default/locale}):
+\newline File: (\textbf{\textcolor{file}{/etc/default/locale}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 LANG=en_US.UTF-8
 \textcolor{comment}{## First day in a week MON, not SUN:}
@@ -399,7 +399,7 @@ LANG=en_US.UTF-8
 \end{itemize}
 \begin{enumerate}
     \item Set keyboard:
-\newline File (\textcolor{file}{/etc/default/keyboard}):
+\newline File (\textbf{\textcolor{file}{/etc/default/keyboard}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 XKBMODEL="pc105"
 XKBLAYOUT="us"
@@ -417,7 +417,7 @@ BACKSPACE="guess"
 \begin{itemize}
     \item Check GRUB settings in \underline{\textbf{\ref{GRUB}}}
     \item Manually rename interfaces:
-\newline File: (\textcolor{file}{/etc/udev/rules.d/70-persistent-net.rules}):
+\newline File: (\textcolor{file}{\textbf{/etc/udev/rules.d/70-persistent-net.rules}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{## eth0:}
 #SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", \char092
@@ -449,7 +449,7 @@ BACKSPACE="guess"
 \section{Disable IPv6}
 \begin{enumerate}
     \item Disable IPv6 globally:
-\newline File: (\textcolor{file}{/etc/sysctl.conf}):
+\newline File: (\textcolor{file}{\textbf{/etc/sysctl.conf}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 net.ipv6.conf.all.disable_ipv6 = 1
 \end{Verbatim}
@@ -466,7 +466,7 @@ net.ipv6.conf.all.disable_ipv6 = 1
 \section{Disable interface autostart}
 \begin{enumerate}
     \item Disable hotplug:
-\newline File: (\textcolor{file}{/etc/network/interfaces}):
+\newline File: (\textbf{\textcolor{file}{/etc/network/interfaces}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 ###allow-hotplug eth0
 ###iface eth0 inet <manual|dhcp>
@@ -486,7 +486,7 @@ net.ipv6.conf.all.disable_ipv6 = 1
 \textcolor{root}{root#} \textcolor{command}{systemctl} disable dhcpcd.service
 \end{Verbatim}
     \item Configure DHCP client:
-\newline File: (\textcolor{file}{/etc/dhcpcd.conf}):
+\newline File: (\textbf{\textcolor{file}{/etc/dhcpcd.conf}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{## Inform DHCP server of our hostname for DDNS.}
 ###hostname
@@ -525,7 +525,7 @@ slaac private
 \section{DNS}
 \begin{enumerate}
     \item Set up custom DNS servers:
-\newline File: (\textcolor{file}{/etc/resolv.conf}) (0644):
+\newline File: (\textbf{\textcolor{file}{/etc/resolv.conf}}) (0644):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{## Uncensored DNS - Denmark - Unicast}
 nameserver 89.233.43.71
@@ -569,7 +569,7 @@ nameserver 1.0.0.1
 \textcolor{root}{root#} \textcolor{command}{apt} install wpasupplicant
 \end{Verbatim}
     \item Confiugre authentication file:
-\newline File \textcolor{file}{/etc/wpa\_supplicant/wpa\_supplicant.conf}):
+\newline File (\textbf{\textcolor{file}{/etc/wpa\_supplicant/wpa\_supplicant.conf}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{# Basic settings and language for zones:}
 ctrl_interface=/run/wpa_supplicant
@@ -660,7 +660,7 @@ network=\{
 \end{Verbatim}
     \end{enumerate}
     \item Configure:
-\newline File (\textcolor{file}{\~/.vimrc}):
+\newline File (\textbf{\textcolor{file}{\~/.vimrc}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{"" Tab = 4 chars:}
 set autoindent
@@ -689,7 +689,7 @@ set statusline=\%F\char92 \%p\%\%\char92 [\%l:\%c]\char92 \%M\char92 \%R
 \textcolor{root}{root#} \textcolor{command}{apt} install bvi
 \end{Verbatim}
     \item Configure:
-\newline File (\textcolor{file}{\~/.bvirc}):
+\newline File (\textbf{\textcolor{file}{\~/.bvirc}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{"" Enable edit:}
 set memmove
@@ -716,7 +716,7 @@ set memmove
 \end{Verbatim}
     \end{itemize}
     \item Configure:
-\newline File (\textcolor{file}{\~/.zshrc}):
+\newline File (\textbf{\textcolor{file}{\~/.zshrc}}):
 \newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.zshrc}}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -793,7 +793,7 @@ In case of mic problems, try to install pulseaudio.
 \textcolor{root}{root#} \textcolor{command}{apt} install xorg x11-xserver-utils xinit
 \end{Verbatim}
     \item Start X on tty1:
-\newline File (\textcolor{file}{\~/.bash\_profile}||\textcolor{file}{\~/.bashrc}||\textcolor{file}{\~/.zshrc}):
+\newline File (\textbf{\textcolor{file}{\~/.bash\_profile}}||\textbf{\textcolor{file}{\~/.bashrc}}||\textbf{\textcolor{file}{\~/.zshrc}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 ...
 if [[ -z \$DISPLAY ]] && [[ \$(tty) = /dev/tty1 ]]; then
@@ -803,7 +803,7 @@ fi
 ...
 \end{Verbatim}
     \item xinit configuration:
-\newline File (\textcolor{file}{\~/.xinitrc}):
+\newline File (\textbf{\textcolor{file}{\~/.xinitrc}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{## Disable screen saver:}
 xset s off
@@ -860,7 +860,7 @@ libxcb-xrm-dev libxcb-shape0 libxcb-shape0-dev
 \section{run i3 after Xorg}
 \begin{enumerate}
     \item Run i3 on X init:
-\newline File (\textcolor{file}{\~/.xinitrc}):
+\newline File (\textbf{\textcolor{file}{\~/.xinitrc}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{# Disable screen saver:}
 xset s off
@@ -875,7 +875,7 @@ exec i3
 \section{i3 config}
 \begin{enumerate}
     \item i3 configuration:
-\newline File (\textcolor{file}{\~/.config/i3/config}):
+\newline File (\textbf{\textcolor{file}{\~/.config/i3/config}}):
 \newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.config/i3/config}}
     \item i3 scripts:
 \newline \underline{\url{https://github.com/AISK11/debian/tree/main/dotfiles/.config/i3/scripts}}
@@ -897,7 +897,7 @@ exec i3
 \textcolor{root}{root#} \textcolor{command}{apt} install i3blocks i3lock numlockx rofi feh scrot light xclip
 \end{Verbatim}
     \item i3blocks config:
-\newline File (\textcolor{file}{/etc/i3blocks.conf}):
+\newline File (\textbf{\textcolor{file}{/etc/i3blocks.conf}}):
 \newline \underline{\url{https://github.com/AISK11/debian/blob/main/config_files/i3blocks.conf}}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -908,7 +908,7 @@ exec i3
 \textcolor{root}{root#} \textcolor{command}{apt} install rxvt-unicode-256color compton
 \end{Verbatim}
     \item Configuration:
-\newline File (\textcolor{file}{\~/.Xresources}):
+\newline File (\textbf{\textcolor{file}{\~/.Xresources}}):
 \newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.Xresources}}
     \item Load changed config:
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -936,7 +936,7 @@ exec i3
 \textcolor{user}{user\$} \textcolor{command}{display} </PATH/TO/font.ttf>
 \end{Verbatim}
     \item Font Awesome:
-\newline Dir (\textcolor{dir}{\~/.fonts/}):
+\newline Dir (\textbf{\textcolor{dir}{\~/.fonts/}}):
 \newline \underline{\url{https://github.com/AISK11/debian/tree/main/dotfiles/.fonts}}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -947,9 +947,9 @@ exec i3
 \textcolor{root}{root#} \textcolor{command}{apt} install lxappearance
 \end{Verbatim}
     \item Add themes and icons:
-\newline Dir (\textcolor{dir}{\~/.themes/}):
+\newline Dir (\textbf{\textcolor{dir}{\~/.themes/}}):
 \newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.themes.tar.bz2}}
-\newline Dir (\textcolor{dir}{\~/.icons/}):
+\newline Dir (\textbf{\textcolor{dir}{\~/.icons/}}):
 \newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.icons.tar.bz2}}
     \item Change GTK theme and icons:
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -960,7 +960,23 @@ exec i3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Nvidia + Intel GPU (Optimus) %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Nvidia + Intel GPU (Optimus)}
+\begin{enumerate}
+    \item Detect Video cards:
+\begin{itemize}
+    \item Detect with lspci:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{egrep} -i "vga|3d"
+\end{Verbatim}
+    \item Detect with xrandr:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{xrandr} --listproviders
+\end{Verbatim}
+\end{itemize}
+    \item Xorg config:
+\newline File (\textbf{\textcolor{file}{/etc/X11/xorg.conf}}):
+\newline \underline{\url{https://github.com/AISK11/debian/blob/main/config_files/xorg.conf}}
 
+\end{enumerate}
 
 
 \end{document}
