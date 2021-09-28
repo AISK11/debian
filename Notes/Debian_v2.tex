@@ -787,6 +787,8 @@ In case of mic problems, try to install pulseaudio.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% X %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{X}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Xorg}
 \begin{enumerate}
     \item Dependencies:
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -960,6 +962,8 @@ exec i3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Nvidia + Intel GPU (Optimus) %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Nvidia + Intel GPU (Optimus)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Detection and Xorg conf}
 \begin{enumerate}
     \item Detect Video cards:
 \begin{itemize}
@@ -975,7 +979,70 @@ exec i3
     \item Xorg config:
 \newline File (\textbf{\textcolor{file}{/etc/X11/xorg.conf}}):
 \newline \underline{\url{https://github.com/AISK11/debian/blob/main/config_files/xorg.conf}}
-
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Intel}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install intel-gpu-tool
+\end{Verbatim}
+    \item Checks:
+\begin{itemize}
+    \item Check if intel module is present:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{modinfo} i915
+\end{Verbatim}
+    \item Check intel GPU utilization:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{intel_gpu_top} [-s <MILISECONDS>]
+\end{Verbatim}
+\end{itemize}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Nvidia}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install nvidia-detect nvtop linux-headers-amd64 nvidia-driver
+firmware-misc-nonfree
+\end{Verbatim}    
+    \item Additional dependencies (\textbf{not needed!}):
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install nvidia-cuda-dev nvidia-cuda-toolkit 
+nvidia-opencl-common nvidia-opencl-icd
+\end{Verbatim}
+    \item Purge problematic primus-nvidia (required only during Steam install):
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} purge primus-nvidia
+\end{Verbatim}
+    \item Checks:
+\begin{itemize}
+    \item Check if Nvidia module is installed:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{modinfo} [-F version] nvidia-current
+\end{Verbatim}
+    \item Check suggested Nvidia packages:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{nvidia-detect}
+\end{Verbatim}
+    \item Check Nvidia GPU utilization:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{nvtop}
+\end{Verbatim}
+\end{itemize}
+    \item Run program with Nvidia GPU:
+\begin{itemize}
+    \item Linux programs:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia 
+\textcolor{command}{<APPLICATION>}
+\end{Verbatim}
+    \item Steam Game (set in Game Properties):
+\begin{Verbatim}[commandchars=\\\{\}]
+__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia \%command\%
+\end{Verbatim}
+\end{itemize}
 \end{enumerate}
 
 
