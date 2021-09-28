@@ -227,7 +227,7 @@ if [[ "${VIRTUAL}" -eq "0" ]]; then
 	apt install intel-gpu-tools nvtop nvidia-detect linux-headers-amd64 nvidia-driver firmware-misc-nonfree -y &&
 	echo -e "\n[+] Nvidia installed." || echo -e "\n[-] Error while installing Nvidia!"
 else
-	echo -e "\n [*] VIRTUAL flag set, skipping installing of Nvidia driver"
+	echo -e "\n[*] VIRTUAL flag set, skipping installing of Nvidia driver"
 fi
 
 # Install Additional Packages:
