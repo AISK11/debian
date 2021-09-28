@@ -8,7 +8,7 @@
 ## Execute this script with root privileges!
 
 ## EDIT variables:
-USER=$(echo $HOME | cut -d "/" -f 3)
+USER=changeme	# CHANGE
 HOSTNAME=$(hostname)
 TIMEZONE="Europe/Copenhagen"
 HOME=/home/${USER}
@@ -19,11 +19,11 @@ echo "set bell-style none" >> /etc/inputrc &&
 echo "blacklist pcspkr" > /etc/modprobe.d/blacklist.conf &&
 depmod -a &&
 update-initramfs -u &&
-echo "[+] Bell disabled." || echo "[-] Error while disabling bell!"
+echo "[+] pcspkr disabled." || echo "[-] Error while disabling pcspkr!"
 
 ## Add contrib and non-free packages to debian:
 sed -i 's/deb.*main$/& contrib non-free/g' /etc/apt/sources.list &&
-echo "[+] Added contrib and non free packages." || echo "[-] Error, could not add contrib and non-free packages!"
+echo "[+] Added contrib and non-free packages to /etc/apt/sources.list." || echo "[-] Error, could not add contrib and non-free packages to /etc/apt/sources.list!"
 
 ## Update system:
 apt clean &&
@@ -31,14 +31,15 @@ apt update &&
 apt full-upgrade -y &&
 apt install apt-file -y &&
 apt-file update &&
-echo "[+] System updated and also installed apt-file package!" || echo "[-] Error while updating system!"
+echo "[+] System updated and also installed apt-file package!" || echo "[-] Error while updating system or installing apt-file package!"
 
 ## Driver for iwlwifi:
-apt install firmware-iwlwifi -y
+apt install firmware-iwlwifi -y &&
+echo "[+] Installed firmware for iwlwifi" || echo "[-] Error while installing iwlwifi driver"
 
 ## GRUB settings:
 sed -i 's/GRUB_CMDLINE_LINUX=".*"/GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"/g' /etc/default/grub &&
-sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT=1/g' /etc/default/grub &&
+sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT=0/g' /etc/default/grub &&
 sed -i 's/GRUB_TIMEOUT=.*/GRUB_TIMEOUT=1/g' /etc/default/grub &&
 sed -i 's/GRUB_TIMEOUT_STYLE=.*/GRUB_TIMEOUT_STYLE=menu/g' /etc/default/grub &&
 sed -i 's/GRUB_DISABLE_RECOVERY=.*/GRUB_DISABLE_RECOVERY=true/g' /etc/default/grub &&
@@ -57,7 +58,7 @@ echo "[+] User ${USER} added to '/etc/doas.conf'." || echo "[-] Error while addi
 
 ## hostname:
 echo "${HOSTNAME}" > /etc/hostname &&
-sed -i 's/127\.0\.1\.1.*/127\.0\.1\.1\ttest/g' /etc/hosts &&
+sed -i "s/127\.0\.1\.1.*/127\.0\.1\.1\t${HOSTNMAE}/g" /etc/hosts &&
 echo "[+] Hostname updated with ${HOSTNAME}." || echo "[-] Error while changing hostname with ${HOSTNAME}!"
 
 ## timezone:
@@ -233,3 +234,4 @@ init 6
 # htop imagemagick vrms
 # keepassxc kvm 
 #lightcord steam
+
