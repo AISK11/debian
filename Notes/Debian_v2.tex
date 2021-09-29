@@ -1057,6 +1057,101 @@ __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia \%command\%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{KVM - WiP}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Scheme}
+\begin{verbatim}
+                                             +--+  +--+  +--+
+                                             |VM|  |VM|  |VM|
+                                             +--+  +--+  +--+
+     |--> virt-manager (GUI) |                 virt-viewer
+     |                       |             +------------------+
+USER ---> virsh (CLI) --------> libvirt -> |       QEMU       |
+     |                       |             +------------------+
+     |--> virt-install (CLI) |                       |
+                                           +------------------+
+                                           | kernel           |
+                   +----------|            |     +---------+  |
+                   | Hardware |----------->|     |   KVM   |  |
+                   +----------+            |     +---------+  |
+                                           +------------------+
+\end{verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Setup}
+\begin{enumerate}
+    \item Check if KVM is supported by CPU:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{egrep} "vmx|svm" \textcolor{file}{/proc/cpuinfo}
+\end{Verbatim}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install install qemu-system libvirt-clients 
+libvirt-daemon-system virt-manager
+\end{Verbatim}
+    \item Check if libvirtd is running:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{systemctl} status libvirtd.service
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Permissions}
+\begin{enumerate}
+    \item Add user to libvirt groups:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{usermod} -aG libvirt <USER>
+\textcolor{root}{root#} \textcolor{command}{usermod} -aG libvirt-qemu <USER>
+\end{Verbatim}
+    \item Check if user can list VMs (user mode):
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{virsh} list --all
+\end{Verbatim}
+    \item Configure for system mode:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{cp} -r \textcolor{file}{/etc/libvirt/libvirt.conf} \textcolor{dir}{~/.config/libvirt}
+\textcolor{root}{root#} \textcolor{command}{chown} <USER> \textcolor{file}{~/.config/libvirt/libvirt.conf/}
+\end{Verbatim}
+File (\textcolor{file}{~/.config/libvirt/libvirt.conf}):
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{comment}{# Uri default system/user}:
+uri_default = "qemu:///system"
+\end{Verbatim}
+    \item Check if user can list VMs (system mode):
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{virsh} list --all
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Start KVM/QEMU}
+\begin{enumerate}
+    \item 
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{systemctl} start libvirtd.service
+\textcolor{user}{user\$} \textcolor{command}{virt-manager}
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{VMs}
+\begin{itemize}
+    \item Files:
+    \begin{itemize}
+        \item ISO dir (move here ISOs):
+        \begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{mkdir} \textcolor{dir}{/var/lib/libvirt/iso}
+        \end{Verbatim}
+        \item VM images: (\textcolor{dir}{/var/lib/libvirt/images/}).
+        \item VM config: (\textcolor{dir}{/etc/libvirt/qemu/}).
+    \end{itemize}
+    \item Copy Paste:
+        \begin{itemize}
+            \item Linux:
+            \begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install spice-vdagent
+        \end{Verbatim}
+            \item Windows:
+            \newline \underline{\url{http://spice-space.org/}}
+        \end{itemize}
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Networking}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Programs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Programs - WiP}
