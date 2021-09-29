@@ -66,7 +66,7 @@ echo -e "\n[+] User ${USER} added to '/etc/doas.conf'." || echo -e "\n[-] Error 
 
 ## hostname:
 echo -e "${HOSTNAME}" > /etc/hostname &&
-sed -i "s/127\.0\.1\.1.*/127\.0\.1\.1\t${HOSTNMAE}/g" /etc/hosts &&
+sed -i "s/127\.0\.1\.1.*/127\.0\.1\.1\t${HOSTNAME}/g" /etc/hosts &&
 echo -e "\n[+] Hostname updated with ${HOSTNAME}." || echo -e "\n[-] Error while changing hostname with ${HOSTNAME}!"
 
 ## timezone:
