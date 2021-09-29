@@ -208,7 +208,7 @@ update-alternatives --set x-terminal-emulator /usr/bin/urxvt &&
 echo -e "\n[+] rxvt-unicode set as default X-terminal." || echo -e "\n[-] Error while setting up rxvt-unicode!"
 
 ## If directory exists from previous git clone, then delete it:
-DIRECTORY="./debian"
+DIRECTORY="~/debian"
 if [[ -d "${DIRECTORY}" ]]; then
     rm -rf "${DIRECTORY}"
     echo "[*] removed ${DIRECTORY}."
