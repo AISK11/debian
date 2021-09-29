@@ -116,6 +116,8 @@ systemctl disable dhcpcd.service &&
 sed -i 's/^hostname/#hostname/g' /etc/dhcpcd.conf &&
 sed -i 's/^persistent/#persistent/g' /etc/dhcpcd.conf &&
 sed -i 's/^option domain_name_servers,/#option domain_name_servers,/g' /etc/dhcpcd.conf &&
+sed -i 's/^slaac private/#&/g' /etc/dhcpcd.conf &&
+sed -i 's/#slaac hwaddr/slaac hwaddr/g' /etc/dhcpcd.conf &&
 dpkg --purge isc-dhcp-client isc-dhcp-common &&
 echo -e "\n[+] DHCPCD5 installed and set up." || echo -e "\n[-] Error while setting up DHCPCD5!"
 
