@@ -173,10 +173,19 @@ apt install vim bvi -y &&
 update-alternatives --set editor /usr/bin/vim.basic &&
 echo -e "\n[+] vim installed and set as default editor." || echo -e "\n[-] Error while setting up vim!"
 
-##! zsh:
+## zsh:
 apt install zsh zsh-autosuggestions zsh-syntax-highlighting -y &&
 usermod -s /bin/zsh ${USER} &&
 echo -e "\n[+] zsh installed and set for user '${USER}'" || echo -e "\n[-] Error while setting up zsh for user '${USER}'!"
+
+## Install firefox and set as default browser:
+apt install firefox-esr &&
+update-alternatives --set x-www-browser /usr/bin/firefox-esr &&
+echo -e "\n[+] Firefox installed and set as default browser." || echo -e "\n[-] Error while installing and setting up Firefox!"
+
+## Install audio control:
+apt install alsa-utils -y &&
+echo -e "\n[+] alsa-utils installed." || echo -e "\n[-] Error while installing alsa-utils!"
 
 ## To fix mic issue:
 apt install pulseaudio -y &&
