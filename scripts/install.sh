@@ -131,7 +131,7 @@ echo -e "nameserver 1.0.0.1" >> /etc/resolv.conf &&
 echo -e "\n[+] DNS servers updated." || echo -e "\n[-] Error while updating DNS servers!"
 
 ## WiFi wpasupplicant template:
-apt install wpasupplicant ethtool -y
+apt install wpasupplicant wireless-tools ethtool -y
 echo -e "# Basic settings and language for zones:" > /etc/wpa_supplicant/wpa_supplicant.conf &&
 echo -e "ctrl_interface=/run/wpa_supplicant" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
 echo -e "update_config=1" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
