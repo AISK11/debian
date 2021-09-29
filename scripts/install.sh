@@ -207,6 +207,14 @@ apt install rxvt-unicode-256color -y &&
 update-alternatives --set x-terminal-emulator /usr/bin/urxvt &&
 echo -e "\n[+] rxvt-unicode set as default X-terminal." || echo -e "\n[-] Error while setting up rxvt-unicode!"
 
+## If directory exists from previous git clone, then delete it:
+DIRECTORY="./debian"
+if [[ -d "${DIRECTORY}" ]]; then
+    rm -rf "${DIRECTORY}"
+    echo "[*] removed ${DIRECTORY}."
+else
+    echo "[*] ${DIRECTORY} does not exists. Skipping."
+fi
 ## Copy dotfiles from my github:
 cd ~ &&
 git clone https://github.com/AISK11/debian &&
