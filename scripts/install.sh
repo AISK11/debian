@@ -10,9 +10,9 @@
 ## EDIT variables:
 VIRTUAL=0	# change to 1 if installing on VM
 USER="changeme"	# CHANGE
-HOSTNAME=$(hostname)
+HOSTNAME="$(hostname)"
 TIMEZONE="Europe/Copenhagen"
-HOME=/home/${USER}
+HOME="/home/${USER}"
 PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin"
 
 if [[ "${USER}" = "changeme" ]]; then
@@ -207,19 +207,27 @@ apt install rxvt-unicode-256color -y &&
 update-alternatives --set x-terminal-emulator /usr/bin/urxvt &&
 echo -e "\n[+] rxvt-unicode set as default X-terminal." || echo -e "\n[-] Error while setting up rxvt-unicode!"
 
+## If directory exists from previous git clone, then delete it:
+DIRECTORY="${HOME}/debian"
+if [[ -d "${DIRECTORY}" ]]; then
+    rm -rf "${DIRECTORY}"
+    echo "[*] removed ${DIRECTORY}."
+else
+    echo "[*] ${DIRECTORY} does not exists. Skipping."
+fi
 ## Copy dotfiles from my github:
-cd ~ &&
+cd ${HOME} &&
 git clone https://github.com/AISK11/debian &&
-cp -r ~/debian/dotfiles/. ~ &&
-cp ~/debian/config_files/i3blocks.conf /etc/i3blocks.conf &&
-cp ~/debian/config_files/xorg.conf /etc/X11/xorg.conf &&
-chmod +x ~/.config/i3/scripts/* &&
+cp -r ${HOME}/debian/dotfiles/. ${HOME} &&
+cp ${HOME}/debian/config_files/i3blocks.conf /etc/i3blocks.conf &&
+cp ${HOME}/debian/config_files/xorg.conf /etc/X11/xorg.conf &&
+chmod +x ${HOME}/.config/i3/scripts/* &&
 tar xvjf .icons.tar.bz2 &&
 rm -rf .icons.tar.bz2 &&
 tar xvjf .themes.tar.bz2 && 
 rm -rf .themes.tar.bz2 &&
-rm -rf ~/debian &&
-chown -R ${USER}:${USER} ~
+rm -rf ${HOME}/debian &&
+chown -R ${USER}:${USER} ${HOME} &&
 echo -e "\n[+] custom dotfiles were applied." || echo -e "\n[-] Error while applying custom dotfiles!"
 
 ## Install Nvidia:
@@ -227,7 +235,7 @@ if [[ "${VIRTUAL}" -eq "0" ]]; then
 	apt install intel-gpu-tools nvtop nvidia-detect linux-headers-amd64 nvidia-driver firmware-misc-nonfree -y &&
 	echo -e "\n[+] Nvidia installed." || echo -e "\n[-] Error while installing Nvidia!"
 else
-	echo -e "\n [*] VIRTUAL flag set, skipping installing of Nvidia driver"
+	echo -e "\n[*] VIRTUAL flag set, skipping installing of Nvidia driver."
 fi
 
 # Install Additional Packages:
