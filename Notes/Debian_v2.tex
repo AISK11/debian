@@ -507,9 +507,9 @@ option interface_mtu
 \textcolor{comment}{## A ServerID is required by RFC2131.}
 require dhcp_server_identifier
 \textcolor{comment}{## Generate SLAAC address using the Hardware Address of the interface}
-###slaac hwaddr
+slaac hwaddr
 \textcolor{comment}{## OR generate Stable Private IPv6 Addresses based from the DUID}
-slaac private
+###slaac private
 \end{Verbatim}
     \item Purge old DHCP client:
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -559,6 +559,10 @@ nameserver 1.0.0.1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Check carrier speed}
 \begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install wireless-tools
+\end{Verbatim}
     \item Check carrier speed:
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{iwlist} <wlan0> bitrate
@@ -1206,6 +1210,8 @@ PDF to OCR PDF.
 \section{Flex}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{neofetch}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{vrms}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Gomatrix}
 
