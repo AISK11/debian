@@ -835,6 +835,7 @@ In case of mic problems, try to install pulseaudio.
 \newline File (\textbf{\textcolor{file}{\~/.bash\_profile}}||\textbf{\textcolor{file}{\~/.bashrc}}||\textbf{\textcolor{file}{\~/.zshrc}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 ...
+\textcolor{comment}{## Start Xorg on tty1:}
 if [[ -z \$DISPLAY ]] && [[ \$(tty) = /dev/tty1 ]]; then
     source /etc/profile
     startx
