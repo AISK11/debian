@@ -209,6 +209,7 @@ deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free
 \textcolor{root}{root#} \textcolor{command}{apt} update
 \textcolor{root}{root#} \textcolor{command}{apt} full-upgrade [-y]
 \textcolor{root}{root#} \textcolor{command}{apt} autoremove [-y]
+\textcolor{root}{root#} \textcolor{command}{apt} autoclean [-y]
 \textcolor{root}{root#} \textcolor{command}{init} 6
 \end{Verbatim}
 \end{enumerate}
@@ -516,6 +517,18 @@ slaac hwaddr
 \textcolor{root}{root#} \textcolor{command}{dpkg} --purge <isc-dhcp-client isc-dhcp-common>
 \end{Verbatim}
 \end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Usage}
+\begin{itemize}
+    \item Lease IP address:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{dhcpcd} <INTERFACE>
+\end{Verbatim}
+    \item Release IP address:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{dhcpcd} --release <INTERFACE>
+\end{Verbatim}
+\end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Remove DHCP lease info}
 \begin{enumerate}
