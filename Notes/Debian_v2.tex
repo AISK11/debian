@@ -449,7 +449,7 @@ BACKSPACE="guess"
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Disable IPv6}
+\section{Disable IPv6 (???)}
 \begin{enumerate}
     \item Disable IPv6 globally:
 \newline File: (\textcolor{file}{\textbf{/etc/sysctl.conf}}):
@@ -619,7 +619,22 @@ network=\{
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Connect to WiFi}
+\begin{itemize}
+    \item Anonymize interface:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{ip} l set <wlan0> down
+\textcolor{root}{root#} \textcolor{command}{ip} a flush <wlan0>
+\textcolor{root}{root#} \textcolor{command}{rm} -rf /var/lib/dhcpcd/*
+\textcolor{root}{root#} \textcolor{command}{rm} -f /run/wpa_supplicant/<wlan0>
+\textcolor{root}{root#} \textcolor{command}{macchanger} -A <wlan0>
+\end{Verbatim}
+\end{itemize}
+
 \begin{enumerate}
+    \item Turn on Interface:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{ip} l set <wlan0> up
+\end{Verbatim}
     \item Remove previous active config file (if exists):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{rm} -f \textcolor{file}{/run/wpa_supplicant/wlan0}
