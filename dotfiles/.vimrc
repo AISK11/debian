@@ -22,3 +22,9 @@ syntax on
 set laststatus=2
 "" Statusline:
 set statusline=%F\ %p%%\ [%l:%c]\ %M\ %R
+
+"" Show other bracket:
+set showmatch
+
+"" Python commands:
+let python_highlight_all = 1
