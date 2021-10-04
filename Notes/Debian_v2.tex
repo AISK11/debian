@@ -1043,7 +1043,7 @@ exec i3
 \begin{enumerate}
     \item Dependencies:
 \begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{root}{root#} \textcolor{command}{apt} install nvidia-detect nvtop linux-headers-amd64 nvidia-driver
+\textcolor{root}{root#} \textcolor{command}{apt} install nvidia-detect nvtop linux-headers-amd64 nvidia-driver 
 firmware-misc-nonfree
 \end{Verbatim}    
     \item Additional dependencies (\textbf{not needed!}):
@@ -1117,10 +1117,6 @@ USER ---> virsh (CLI) --------> libvirt -> |       QEMU       |
 \textcolor{root}{root#} \textcolor{command}{apt} install install qemu-system libvirt-clients 
 libvirt-daemon-system virt-manager
 \end{Verbatim}
-    \item Check if libvirtd is running:
-\begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{user}{user\$} \textcolor{command}{systemctl} status libvirtd.service
-\end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Permissions}
@@ -1183,12 +1179,33 @@ uri_default = "qemu:///system"
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Networking}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Programs - Sytem %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Programs - System}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Programs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Programs - WiP}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{System}
+\section{List}
+System:
+\begin{itemize}
+    \item apt-file
+    \item psmisc
+    \item htop
+    \item parted
+\end{itemize}
+Network:
+\begin{itemize}
+    \item nmap
+    \item hping3
+    \item arping
+    \item nbtscan
+    \item macchanger
+\end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{System}
 \subsection{apt-file}
 Needed for: \textbf{apt-file}
 \begin{enumerate}
