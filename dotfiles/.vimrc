@@ -13,7 +13,7 @@ set tm=500
 
 "" Copy indent on new line:
 set autoindent
-	"" Do not replace tabs with spaces:
+"" Do not replace tabs with spaces:
 set noexpandtab
 "" Tab = 4 chars:set tabstop=4
 set shiftwidth=4
