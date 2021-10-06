@@ -29,7 +29,8 @@ set noswapfile
 set autoindent
 "" Do not replace tabs with spaces:
 set noexpandtab
-"" Tab = 4 chars:set tabstop=4
+"" Tab = 4 chars:
+set tabstop=4
 set shiftwidth=4
 
 """""""""""""""""""""""
@@ -68,7 +69,7 @@ syntax on
 " HIGHLIGHT BRACKETS "
 """"""""""""""""""""""
 "" Show other bracket:
-set showmatch
+"set showmatch
 
 """"""""""""""""""""""
 "    COLOR THEME     "
@@ -88,7 +89,8 @@ call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
 " Declare the list of plugins.
 Plug 'hdima/python-syntax'
-Plug 'nvie/vim-flake8'
+"Plug 'nvie/vim-flake8'
+Plug 'Valloric/YouCompleteMe'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -97,6 +99,10 @@ call plug#end()
 "" Apply plugin highlighting on '*.py' files:
 let python_highlight_all = 1
 
-"""" Plug 'nvie/vim-flake8':
-"" Change key (def: F7 -> F3) to check python code for syntax errors:
-"autocmd FileType python map <buffer> <F3> :call flake8#Flake8()<CR>
+
+"""" Plug 'Valloric/YouCompleteMe':
+"" Make it work:
+let g:ycm_global_ycm_extra_conf = "${HOME}/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py"
+"" Set minimal amount of chars to apply autocompletion:
+let g:ycm_min_num_of_chars_for_completion = 1
+
