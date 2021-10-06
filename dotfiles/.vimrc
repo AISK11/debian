@@ -99,10 +99,10 @@ call plug#end()
 "" Apply plugin highlighting on '*.py' files:
 let python_highlight_all = 1
 
-
 """" Plug 'Valloric/YouCompleteMe':
 "" Make it work:
 let g:ycm_global_ycm_extra_conf = "${HOME}/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py"
 "" Set minimal amount of chars to apply autocompletion:
 let g:ycm_min_num_of_chars_for_completion = 1
-
+"" Disable Preview Windows (Scratch):
+let g:ycm_add_preview_to_completeopt = 0
