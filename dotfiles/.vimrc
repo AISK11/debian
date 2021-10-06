@@ -27,8 +27,8 @@ set noswapfile
 """"""""""""""""""""""
 "" Preserve indentation on new line:
 set autoindent
-"" Do not replace tabs with spaces:
-set noexpandtab
+"" Do replace tabs with spaces:
+set expandtab
 "" Tab = 4 chars:
 set tabstop=4
 set shiftwidth=4
