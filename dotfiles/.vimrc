@@ -11,10 +11,11 @@ set novisualbell
 set t_vb=
 set tm=500
 
-"" Tab = 4 chars:
+"" Copy indent on new line:
 set autoindent
+	"" Do not replace tabs with spaces:
 set noexpandtab
-set tabstop=4
+"" Tab = 4 chars:set tabstop=4
 set shiftwidth=4
 
 "" Number lines:
