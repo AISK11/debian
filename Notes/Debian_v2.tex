@@ -696,25 +696,7 @@ network=\{
     \end{enumerate}
     \item Configure:
 \newline File (\textbf{\textcolor{file}{\~/.vimrc}}):
-\begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{comment}{"" Tab = 4 chars:}
-set autoindent
-set noexpandtab
-set tabstop=4
-set shiftwidth=4
-
-\textcolor{comment}{"" Number lines:}
-"set number
-
-\textcolor{comment}{"" Colors:}
-syntax on
-"colorscheme murphy
-
-\textcolor{comment}{"" Filename edited:}
-set laststatus=2
-\textcolor{comment}{"" Statusline:}
-set statusline=\%F\char92 \%p\%\%\char92 [\%l:\%c]\char92 \%M\char92 \%R
-\end{Verbatim}
+\newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.vimrc}}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{bvi}
@@ -754,6 +736,158 @@ set memmove
 \newline File (\textbf{\textcolor{file}{\~/.zshrc}}):
 \newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.zshrc}}
 \end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% VIM as IDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{VIM as IDE}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Compile Vim from source}
+%\begin{enumerate}
+%    \item Dependencies:
+%\begin{Verbatim}[commandchars=\\\{\}]
+%\textcolor{root}{root#} \textcolor{command}{apt} install libncurses5-dev libgtk2.0-dev libatk1.0-dev
+%libcairo2-dev python-dev python3-dev git
+%\end{Verbatim}    
+%    \item Remove Vim if already installed:
+%\begin{Verbatim}[commandchars=\\\{\}]
+%\textcolor{root}{root#} \textcolor{command}{apt} vim vim-runtime gvim
+%\end{Verbatim}
+%    \item Download:
+%\begin{Verbatim}[commandchars=\\\{\}]
+%\textcolor{root}{root#} \textcolor{command}{cd} \textcolor{dir}{/usr/}
+%\textcolor{root}{root#} \textcolor{command}{git} clone https://github.com/vim/vim.git
+%\textcolor{root}{root#} \textcolor{command}{cd} \textcolor{dir}{/vim/}
+%\end{Verbatim}
+%    \item Compile:
+%\begin{Verbatim}[commandchars=\\\{\}]
+%\textcolor{root}{root#} \textcolor{command}{./configure} --with-features=huge --enable-multibyte 
+%--enable-pythoninterp=yes 
+%--with-python-config-dir=\textcolor{dir}{/usr/lib/python2.7/config-x86_64-linux-gnu} 
+%-enable-python3interp=yes 
+%--with-python3-config-dir=\textcolor{dir}{/usr/lib/python3.9/config-3.9-x86_64-linux-gnu} 
+%--enable-gui=gtk2 --enable-cscope --prefix=/usr/local
+%\textcolor{root}{root#} \textcolor{command}{make} VIMRUNTIMEDIR=\textcolor{dir}{/usr/local/share/vim/vim81}
+%
+%\textcolor{root}{root#} \textcolor{command}{cd} \textcolor{dir}{/usr/vim/}
+%\textcolor{root}{root#} \textcolor{command}{checkinstall}
+%ENTER
+%\end{Verbatim}
+%    \item Set as Default Editor:
+%\begin{Verbatim}[commandchars=\\\{\}]
+%\textcolor{root}{root#} \textcolor{command}{update-alternatives} --install /usr/bin/editor editor /usr/local/bin/vim 1
+%\textcolor{root}{root#} \textcolor{command}{update-alternatives} --set editor /usr/local/bin/vim
+%\textcolor{root}{root#} \textcolor{command}{update-alternatives} --install /usr/bin/vi vi /usr/local/bin/vim 1
+%\textcolor{root}{root#} \textcolor{command}{update-alternatives} --set vi /usr/local/bin/vim   
+%\end{Verbatim}
+%\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Plugins for Download}
+\underline{\url{https://vimawesome.com/}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Download Neovim (???)}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install neovim
+\end{Verbatim}  
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Download vim-nox}
+Compiled vim with python3 flag.
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install vim-nox
+\end{Verbatim}      
+    \item Check support for python3:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{vim} --version | \textcolor{command}{python}
+\end{Verbatim}
+    \item Sed as default editor:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{update-alternatives} --set editor \textcolor{file}{/usr/bin/vim.nox}
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{vim-plug (Plug-In Manager)}
+\textit{Minimalistic plug-in manager.}
+\newline\underline{\url{https://github.com/junegunn/vim-plug}}
+\begin{enumerate}
+    \item Download vim-plug:
+    \begin{itemize}
+        \item vim:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{curl} -fLo ~/.vim/autoload/plug.vim --create-dirs \char92
+https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+\end{Verbatim}  
+        \item nvim:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{sh} -c 'curl -fLo \char92
+"\${XDG_DATA_HOME:-\$HOME/.local/share}"/nvim/site/autoload/plug.vim \char92
+--create-dirs \char92
+https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+\end{Verbatim}  
+        \end{itemize}
+    \item Add this piece of config code:
+\newline File: (\textbf{\textcolor{file}{\~/.vimrc}}):
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{comment}{"" Plugins will be downloaded under the specified directory.}
+call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
+
+\textcolor{comment}{"" Declare the list of plugins.}
+Plug 'hdima/python-syntax'
+Plug 'Valloric/YouCompleteMe'
+
+\textcolor{comment}{"" List ends here. Plugins become visible to Vim after this call.}
+call plug#end()
+\end{Verbatim}    
+    \item Usage:
+    \begin{itemize} 
+        \item Update vim-plug: \textbf{:PlugUpgrade}
+        \item Check Status: \textbf{:PlugStatus}
+        \item Install Plugin: \textbf{:PlugInstall}
+        \item Update Installed Plugins:
+        \textbf{:PlugUpdate}
+        \item Clean unused Plugins: \textbf{:PlugClean}
+    \end{itemize}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Plugins}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{hdima/python-syntax}
+\textit{Highlight syntax for '*.py' files.}
+\begin{enumerate}
+    \item Config:
+\newline File (\textcolor{file}{\~/.vimrc}):
+\begin{Verbatim}[commandchars=\\\{\}]
+...
+\textcolor{comment}{" highlight *.py file}
+let python_highlight_all = 1 
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{hdima/python-syntax}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install build-essential cmake python3-dev
+\textcolor{user}{user\$} \textcolor{command}{cd} \textcolor{file}{~/.vim/plugged/YouCompleteMe}
+\textcolor{user}{user\$} \textcolor{command}{python3} \textcolor{file}{install.py} --all
+\end{Verbatim}
+    \item Config:
+\newline File (\textcolor{file}{\~/.vimrc}):
+\begin{Verbatim}[commandchars=\\\{\}]
+...
+\textcolor{comment}{"" Make it work:}
+let g:ycm_global_ycm_extra_conf = "\${HOME}/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py"
+\textcolor{comment}{"" Set minimal amount of chars to apply autocompletion:}
+let g:ycm_min_num_of_chars_for_completion = 1
+\textcolor{comment}{"" Disable Preview Windows (Scratch):}
+let g:ycm_add_preview_to_completeopt = 0
+\end{Verbatim}
+\end{enumerate}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Web Browser %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1084,6 +1218,30 @@ __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia \%command\%
 \end{itemize}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Steam}
+\begin{enumerate}
+    \item Download: \underline{\url{https://store.steampowered.com/about/}}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install sudo
+\textcolor{root}{root#} \textcolor{command}{apt} install </PATH/TO/steam_latest.deb>
+\textcolor{user}{user\$} \textcolor{command}{steam}
+\end{Verbatim}
+    \item Fix \textbf{libGL.so.1} is missing:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install primus-nvdia
+\textcolor{user}{user\$} \textcolor{command}{steam}
+\end{Verbatim}
+    \item Purge primus-nvidia (causing problems):
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} purge primus-nvdia
+\end{Verbatim}
+    \item Run Steam:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{steam}
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% System Hardening %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{System Hardening}
@@ -1378,5 +1536,22 @@ PDF to OCR PDF.
 
 
 
+\chapter{Networking Programs}
+\section{Serial Connection}
+\begin{enumerate}
+    \item Dependencies:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install putty
+\end{Verbatim}
+    \item Select Serial Interface
+\begin{itemize}
+    \item Cable: RS232 = device \textbf{/dev/ttyS0}
+    \item Cable: USB console = device \textbf{/dev/ttyUSB0}
+\end{itemize}
+\end{enumerate}
+\subsection{Troubleshooting}
+\begin{enumerate}
+    \item USBguard is causing problems for USB console.
+\end{enumerate}
 
 \end{document}
