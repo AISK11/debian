@@ -49,6 +49,7 @@ alias mtr='mtr -t'
 alias wireshark='doas wireshark'
 alias lightcord='cd ~/Lightcord && npm start &'
 alias mp3_download='youtube-dl -x --no-playlist --audio-format "mp3" --audio-quality 0 --console-title'
+alias mp3_download_playlist='youtube-dl -i -x --yes-playlist --audio-format "mp3" --audio-quality 0 --console-title'
 alias www='firefox'
 
 ## Functions:
