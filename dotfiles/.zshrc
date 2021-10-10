@@ -38,19 +38,31 @@ export SAVEHIST=${HISTSIZE}
 export PATH=${PATH}:/sbin:/usr/sbin
 
 ## Aliases:
+## System:
 alias ls='ls --color=always'
 alias l='ls -l'
 alias ll='ls -l'
 alias la='ls -lah'
 alias grep='grep --color=always'
 alias egrep='egrep --color=always'
-alias ip='ip -c'
-alias mtr='mtr -t'
-alias wireshark='doas wireshark'
+## UserPrograms: 
 alias lightcord='cd ~/Lightcord && npm start &'
 alias mp3_download='youtube-dl -x --no-playlist --audio-format "mp3" --audio-quality 0 --console-title'
 alias mp3_download_playlist='youtube-dl -i -x --yes-playlist --audio-format "mp3" --audio-quality 0 --console-title'
 alias www='firefox'
+## Network:
+alias ip='ip -c'
+alias mtr='mtr -t'
+alias wireshark='doas wireshark'
+## Network Advanced:
+ipv4_forward_yes()
+{
+    doas bash -c 'echo "1" > /proc/sys/net/ipv4/ip_forward'
+}
+ipv4_forward_no()
+{
+    doas bash -c 'echo "0" > /proc/sys/net/ipv4/ip_forward'
+}
 
 ## Functions:
 ## Usage: $(mem <program-name>)
