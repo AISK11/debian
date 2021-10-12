@@ -27,7 +27,7 @@ set noswapfile
 """"""""""""""""""""""
 "" Preserve indentation on new line:
 set autoindent
-"" Do replace tabs with spaces:
+"" Do not replace tabs with spaces:
 set expandtab
 "" Tab = 4 chars:
 set tabstop=4
@@ -84,25 +84,28 @@ syntax on
 "" https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 """"""""""""""""""""""
 
-" Plugins will be downloaded under the specified directory.
-call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
+"" Plugins will be downloaded under the specified directory.
+"call plug#begin(has('nvim') ? stdpath('data') . '/plugged' : '~/.vim/plugged')
 
-" Declare the list of plugins.
-Plug 'hdima/python-syntax'
-"Plug 'nvie/vim-flake8'
-Plug 'Valloric/YouCompleteMe'
+"" Declare the list of plugins.
+"Plug 'hdima/python-syntax'
+"Plug 'Valloric/YouCompleteMe'
+"Plug 'davidhalter/jedi-vim'
 
-" List ends here. Plugins become visible to Vim after this call.
-call plug#end()
+"" List ends here. Plugins become visible to Vim after this call.
+"call plug#end()
 
 """" Plug 'hdima/python-syntax':
 "" Apply plugin highlighting on '*.py' files:
-let python_highlight_all = 1
+"let python_highlight_all = 1
 
 """" Plug 'Valloric/YouCompleteMe':
 "" Make it work:
-let g:ycm_global_ycm_extra_conf = "${HOME}/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py"
+"let g:ycm_global_ycm_extra_conf = "${HOME}/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py"
 "" Set minimal amount of chars to apply autocompletion:
-let g:ycm_min_num_of_chars_for_completion = 1
+"let g:ycm_min_num_of_chars_for_completion = 1
 "" Disable Preview Windows (Scratch):
-let g:ycm_add_preview_to_completeopt = 0
+"let g:ycm_add_preview_to_completeopt = 0
+
+"" Disable vim buffer?
+"let g:jedi#auto_vim_configuration = 0
