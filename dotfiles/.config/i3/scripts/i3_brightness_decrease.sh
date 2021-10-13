@@ -7,9 +7,9 @@
 # bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/i3_brightness_decrease.sh
 # Dependencies: light
 
-if [ "$(light -G | cut -d '.' -f 1)" -le "10" ]
+if [ "$(light -G | cut -d '.' -f 1)" -le "5" ]
 then
     light -S 1
 else
-    light -U 10
+    light -U 5
 fi
