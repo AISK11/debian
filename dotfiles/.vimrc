@@ -68,6 +68,9 @@ set hlsearch
 """"""""""""""""""""""
 "" Enable syntax highlighting:
 syntax on
+"" Highlight trailing whitespace:
+:highlight ExtraWhitespace ctermbg=red guibg=red
+:match ExtraWhitespace /\s\+$/
 
 """"""""""""""""""""""
 " HIGHLIGHT BRACKETS "
