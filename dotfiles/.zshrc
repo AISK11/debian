@@ -78,7 +78,7 @@ mem()
 ## Credit: https://unix.stackexchange.com/questions/73000/zsh-check-arguments-of-a-command-before-executing-it
 accept-line() {
     if [[ $BUFFER =~ '.*rm\ .*/\*/*' ]]; then
-        zle -M "Close save!"
+        zle -M "This is not Windows"
     else
         zle .$WIDGET "$@"
     fi
