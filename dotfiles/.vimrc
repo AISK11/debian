@@ -33,8 +33,9 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-"" For HTML set tab to 2 chars:
+"" For specific file types set different tab space:
 autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
+autocmd FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 """""""""""""""""""""""
 "     STATUSLINE      "
