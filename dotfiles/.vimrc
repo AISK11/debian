@@ -32,6 +32,9 @@ set expandtab
 "" Tab = 4 chars:
 set tabstop=4
 set shiftwidth=4
+set softtabstop=4
+"" For HTML set tab to 2 chars:
+autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 """""""""""""""""""""""
 "     STATUSLINE      "
@@ -39,7 +42,7 @@ set shiftwidth=4
 "" Always show the status line:
 set laststatus=2
 "" Statusline:
-set statusline=%F\ %p%%\ [%l:%c]\ %M\ %R
+set statusline=%F\ %p%%\ [%l:%c]\ %M\ %R\ %Y\ %y
 
 """"""""""""""""""""""
 "      SCROLLING     "
