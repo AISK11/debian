@@ -45,7 +45,7 @@ alias ll='ls -l'
 alias la='ls -lah'
 alias grep='grep --color=always'
 alias egrep='egrep --color=always'
-## UserPrograms: 
+## UserPrograms:
 alias lightcord='cd ~/Lightcord && npm start &'
 alias mp3_download='youtube-dl -x --no-playlist --audio-format "mp3" --audio-quality 0 --console-title'
 alias mp3_download_playlist='youtube-dl -i -x --yes-playlist --audio-format "mp3" --audio-quality 0 --console-title'
@@ -71,9 +71,23 @@ mem()
     ps -eo rss,pid,euser,args --sort %mem | grep -i $@ | grep -v grep | awk '{printf $1/1024 "MB"; $1=""; print }'
 }
 
+## Protects against accidental
+## [doas ]rm [-rf ]/*[*]
+## Much safer syntax must be used:
+## [daos ]rm [-rf ]*
+## Credit: https://unix.stackexchange.com/questions/73000/zsh-check-arguments-of-a-command-before-executing-it
+accept-line() {
+    if [[ $BUFFER =~ '.*rm\ .*/\*/*' ]]; then
+        zle -M "Close save!"
+    else
+        zle .$WIDGET "$@"
+    fi
+}
+zle -N accept-line
+
 ## start X:
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; 
-then 
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]];
+then
     source /etc/profile
     startx
 fi
