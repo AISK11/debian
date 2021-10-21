@@ -58,13 +58,16 @@ URxvt.keysym.Control-Meta-v: builtin-string:
 
 !!! TRANSPACRENCY !!!
 !! Transparency - higher value = higher transparency:
-URxvt.transparent: true
-URxvt.shading: 50
-!!! FONTS !!!
+!URxvt.transparent: true
+!URxvt.shading: 50
+!! Blur (0 - off, 128 = max):
+URxvt.blurRadius: 10!!! FONTS !!!
+
+!!! FONT !!!
 !! Font (see 'fc-list'):
 URxvt*font: xft:DejavuSansMono:size=10
 URxvt*boldFont: xft:DejavuSansMono-Bold=10
-!Urxvt*italicFont: 
+!Urxvt*italicFont:
 !Urxvt*boldItalicFont:
 
 !!! CURSOR !!!
@@ -79,7 +82,7 @@ URxvt*cursorUnderline: False
 !! Background color [Black] and Foreground color [White]:
 URxvt*background: Black
 URxvt*foreground: White
-!! Highlighted (selected text): 
+!! Highlighted (selected text):
 URxvt*highlightColor: White
 URxvt*highlightTextColor: Black
 !! JumpScroll (True - less updates; False - more updates):
@@ -123,6 +126,3 @@ URxvt.color13:  #CB95EA
 URxvt.color14:  #00E0FF
 !! Light White:
 URxvt.color15:  #FFFFFF
-
-!! Blur (0 - off, 128 = max):
-URxvt.blurRadius: 10
