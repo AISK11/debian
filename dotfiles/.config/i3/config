@@ -6,8 +6,15 @@
 # sudo apt install apt install i3 i3bar i3blocks rofi i3lock feh numlockx scrot compton light xclip
 ##################################################################
 
-## SET MOD KEY: Window key = Mod4; Alt key = Mod1:
-set $mod Mod4
+### WALLPAPER:
+## WALLPAPER:
+#exec --no-startup-id feh --bg-scale /home/aisk/.config/i3/images/debian_chan.png
+exec --no-startup-id feh --bg-scale /home/aisk/.config/i3/images/water_bg.png
+## RENDER WALLPAPER NICELY (i3-gaps):
+exec --no-startup-id bash ${HOME}/.fehbg
+## LOCK SCREEN:
+bindsym $mod+l exec i3lock -efu -i /home/aisk/.config/i3/images/bsod.png
+
 
 ## i3-gaps SETTINGS:
 gaps inner 10
@@ -15,11 +22,15 @@ gaps outer 10
 smart_gaps on
 
 
-## Dim inactive windows [0-1]:
-exec --no-startup-id compton --xrender-sync --xrender-sync-fence --inactive-dim 0.25 -b
+## SET MOD KEY: Window key = Mod4; Alt key = Mod1:
+set $mod Mod4
+
+
+## Load compton with settings in "~/.config/compton.cong":
+exec --no-startup-id compton -b
 
 ## WINDOW BORDER SIZE:
-default_border pixel 1 
+default_border pixel 1
 #for_window [class="."] border pixel 3
 #hide_edge_borders both
 
@@ -143,6 +154,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 ## ASSIGN APP TO WINDOW ACCORDING TO CLASS: $(xprop) - use 2nd variable of WM_CLASS
 assign [class="Firefox-esr"] $ws2
+assign [class="dota2"] $ws9
 
 ### i3 BAR + i3 BLOCKS:
 ## COLOR VARIABLES:
@@ -165,21 +177,12 @@ bar {
             separator $unselected-color
             focused_workspace   $selected-color $selected-color $unselected-color
             inactive_workspace  $unselected-color $unselected-color $selected-color
-            urgent_workspace   $urgent-color $urgent-color #ffffff 
+            urgent_workspace   $urgent-color $urgent-color #ffffff
         }
 }
 
 ## EXECUTE urxvt terminal as daemon:
 exec --no-startup-id urxvtd --quiet --opendisplay --fork
-
-### WALLPAPER:
-## WALLPAPER:
-exec --no-startup-id feh --bg-scale ~/.config/i3/images/wallpaper.png
-## RENDER WALLPAPER NICELY (i3-gaps):
-exec --no-startup-id bash ${HOME}/.fehbg
-## LOCK SCREEN:
-bindsym $mod+l exec i3lock -efu -i ~/.config/i3/images/lockscreen.png
-
 
 ### OTHER FEATURES:
 ## LOAD TERMINAL EMULATOR SETTINGS:
@@ -191,7 +194,7 @@ bindsym Print exec --no-startup-id ~/.config/i3/scripts/i3_prtsc.sh
 ## PRINTSCREEN WITH CURSOR:
 bindsym $mod+Print exec --no-startup-id ~/.config/i3/scripts/i3_prtsc.sh -p
 ## KEYBOARD SWITCHING ('man xkeyboard-config'; 'localectl list-x11-keymap-variants [sk]'):
-exec --no-startup-id setxkbmap -model pc105 -layout "us,sk" -variant ",qwerty" -option 'grp:shifts_toggle' 
+exec --no-startup-id setxkbmap -model pc105 -layout "us,sk" -variant ",qwerty" -option 'grp:shifts_toggle'
 
 ## Allow GUI programs to be run as root:
 exec xhost local:root
