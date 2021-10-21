@@ -9,7 +9,7 @@
 ### WALLPAPER:
 ## WALLPAPER:
 #exec --no-startup-id feh --bg-scale /home/aisk/.config/i3/images/debian_chan.png
-exec --no-startup-id feh --bg-scale /home/aisk/.config/i3/images/water_bg.png
+exec --no-startup-id feh --bg-scale /home/aisk/.config/i3/images/water_bg.jpg
 ## RENDER WALLPAPER NICELY (i3-gaps):
 exec --no-startup-id bash ${HOME}/.fehbg
 ## LOCK SCREEN:
