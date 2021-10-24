@@ -1213,7 +1213,7 @@ nvidia-opencl-common nvidia-opencl-icd
 \end{Verbatim}
     \item Steam Game (set in Game Properties):
 \begin{Verbatim}[commandchars=\\\{\}]
-__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia \%command\%
+
 \end{Verbatim}
 \end{itemize}
 \end{enumerate}
@@ -1237,9 +1237,9 @@ __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia \%command\%
 \textcolor{root}{root#} \textcolor{command}{apt} purge primus-nvdia
 \end{Verbatim}
     \item Run Steam:
-\begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{user}{user\$} \textcolor{command}{steam}
-\end{Verbatim}
+\begin{verbatim}
+__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia %command%
+\end{verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% System Hardening %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1507,6 +1507,11 @@ PDF to OCR PDF.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Multimedia}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Snip screenshot}
+\begin{enumerate}
+    \item Dependencies: ksnip
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Play Video}
 \begin{enumerate}
     \item Dependencies: mpv
@@ -1537,6 +1542,7 @@ PDF to OCR PDF.
 
 
 \chapter{Networking Programs}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Serial Connection}
 \begin{enumerate}
     \item Dependencies:
@@ -1553,5 +1559,12 @@ PDF to OCR PDF.
 \begin{enumerate}
     \item USBguard is causing problems for USB console.
 \end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{SSH client}
+\begin{Verbatim}[commandchars=\\\{\}]
+ssh <USER>@<HOST> -c <3des-cbc> -oKexAlgorithms=<+diffie-hellman-group1-sha1>
+\end{Verbatim}
+
+
 
 \end{document}
