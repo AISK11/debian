@@ -45,6 +45,7 @@ alias ll='ls -l'
 alias la='ls -lah'
 alias grep='grep --color=always'
 alias egrep='egrep --color=always'
+alias watch='watch -n 1'
 ## UserPrograms:
 alias lightcord='cd ~/Lightcord && npm start &'
 alias mp3_download='youtube-dl -x --no-playlist --audio-format "mp3" --audio-quality 0 --console-title'
@@ -107,7 +108,7 @@ fi
 ## https://github.com/hkbakke/bash-insulter
 ## https://gist.github.com/Cysioland/021140812b7cd86c19fb
 ########################################
-ALLOW_INSULTS=0
+ALLOW_INSULTS=1
 
 if [[ ${ALLOW_INSULTS} -ne 0 ]]; then
     0=${(%):-%N}
