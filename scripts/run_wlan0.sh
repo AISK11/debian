@@ -27,3 +27,12 @@ doas systemctl start wpa_supplicant.service && echo "[+] wpa_supplicant.service 
 doas systemctl start dhcpcd.service && echo "[+] dhcpcd.service started." || echo "[-] ERROR while starting dhcpcd.service!"
 doas wpa_supplicant -B -D wext -i ${INTERFACE} -c /etc/wpa_supplicant/wpa_supplicant.conf && echo "[+] Connected to AP according to '/etc/wpa_supplicant/wpa_supplicant.conf'." || echo "[-] ERROR could not connect to AP according to '/etc/wpa_supplicant/wpa_supplicant.conf'!"
 doas dhcpcd ${INTERFACE} && echo "[+] DHCP discovery for ${INTERFACE}." || echo "[-] ERROR while DHCP discovery for ${INTERFACE}!"
+
+# print when interface is rdy to communicate:
+while [[ -z $(ip r | grep "${INTERFACE}") ]]; do
+    echo "[*] Waiting for connection to be established"
+    sleep 1
+done
+
+echo "[+] Connection was establiehed!"
+exit
