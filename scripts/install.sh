@@ -310,7 +310,7 @@ apt install mtp-tools jmtpfs -y &&
 echo -e "\n[+] Installed support for MTP devices." || echo -e "\n[-] Error! MTP tools could not be installed!"
 
 ## Networking tools:
-apt install iptables hping3 wireshark yafc putty macchanger mtr nmap dnsutils ethtool whois -y &&
+apt install ethtool macchanger iptables hping3 wireshark yafc putty mtr nmap dnsutils whois openvpn -y &&
 echo -e "\n[+] Networking tools installed." || echo -e "\n[-] Error while installing network tools!"
 
 ## Multimedia:
@@ -318,11 +318,18 @@ apt install youtube-dl imagemagick -y &&
 echo -e "\n[+] Multimedia packages installed." || echo -e "\n[-] Error while installing Multimedia packages!"
 
 ## KVM/QEMU
-
+apt install qemu-system libvirt-clients libvirt-daemon-system virt-manager -y &&
+usermod -aG libvirt ${USER} &&
+usermod -aG libvirt-qemu ${USER} &&
+cp -r /etc/libvirt/ ${HOME}/.config/libvirt/ &&
+chown -R ${USER} ${HOME}/.config/libvirt/ &&
+sed -i 's/#uri_default/uri_default/g' ${HOME}/.config/libvirt/libvirt.conf &&
+systemctl start libvirtd.service &&
+mkdir /var/lib/libvirt/iso/ &&
+echo -e "[+] KVM/QEMU Installed" || echo -e "[-] Error while instlaling KVM/QEMU"
 
 ## Lightcord
-
-
+## DEAD PROJECT!
 
 #####################
 #  System hardening #
@@ -345,8 +352,10 @@ echo "" > /etc/issue &&
 echo -e "\n[+] MOTD was cleared!" || echo -e "\n[-] Error while clearing MOTD!"
 
 ## ICMP Firewall:
-#WIP!!!!!
-apt install iptables-persistent -y &&
+# https://stackoverflow.com/questions/4880290/how-do-i-create-a-crontab-through-a-script
+apt install iptables-persistent -y
+iptables -X LOG_AND_DROP
+iptables -F
 iptables -N LOG_AND_DROP &&
 iptables -A LOG_AND_DROP -j LOG --log-prefix "iptables denied: " --log-level 4 &&
 iptables -A INPUT -s 0.0.0.0/0 -p icmp --icmp-type 8 -j LOG_AND_DROP &&
@@ -354,7 +363,7 @@ iptables -A INPUT -s 0.0.0.0/0 -p icmp --icmp-type 13 -j LOG_AND_DROP &&
 iptables -A INPUT -s 0.0.0.0/0 -p icmp --icmp-type 17 -j LOG_AND_DROP &&
 iptables -A INPUT -s 0.0.0.0/0 -p icmp --icmp-type 30 -j LOG_AND_DROP &&
 ## Change rsyslog rule:
-echo ":msg, contains, "iptables denied: " -/var/log/iptables.log" > /etc/rsyslog.d/iptables.conf &&
+echo ":msg, contains, \"iptables denied: \" -/var/log/iptables.log" > /etc/rsyslog.d/iptables.conf &&
 echo "& ~" >> /etc/rsyslog.d/iptables.conf &&
 ## Logrotate rule:
 echo "/var/log/iptables.log" > /etc/logrotate.d/iptables &&
@@ -373,14 +382,11 @@ echo "}" >> /etc/logrotate.d/iptables &&
 iptables-save > /etc/iptables/rules.v4 &&
 iptables-save > /etc/iptables/rules.v6 &&
 ## Add to root's cron:
-(crontab -u $(whoami) -l; echo "@reboot systemctl restart logrotate.service && \\" ) | crontab -u $(whoami) - &&
-(crontab -u $(whoami) -l; echo "systemctl restart rsyslog.service" ) | crontab -u $(whoami) - &&
-(crontab -u $(whoami) -l; echo "@daily systemctl restart logrotate.service && \\" ) | crontab -u $(whoami) - &&
-(crontab -u $(whoami) -l; echo "systemctl restart rsyslog.service" ) | crontab -u $(whoami) - &&
+(crontab -l 2>/dev/null; echo "@reboot systemctl restart logrotate.service && systemctl restart rsyslog.service") | crontab - &&
+(crontab -l 2>/dev/null; echo "@daily systemctl restart logrotate.service && systemctl restart rsyslog.service") | crontab - &&
 systemctl restart logrotate.service &&
 systemctl restart rsyslog.service &&
 echo -e "[+] ICMP FW block applied." || echo -e "[-] Error while applying ICMP FW block rule!"
-
 
 #### Hardening ####
 apt install usbguard -y &&
