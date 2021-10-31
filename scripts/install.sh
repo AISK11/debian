@@ -21,7 +21,9 @@ if [[ "${USER}" = "changeme" ]]; then
 fi
 
 
-#################################################
+#####################
+# POST-INSTALLATION #
+#####################
 ## Disable speaker bell:
 echo -e "set bell-style none" >> /etc/inputrc &&
 echo -e "blacklist pcspkr" > /etc/modprobe.d/blacklist.conf &&
@@ -41,10 +43,16 @@ apt install apt-file -y &&
 apt-file update &&
 echo -e "\n[+] System updated and also installed apt-file package!" || echo -e "\n[-] Error while updating system or installing apt-file package!"
 
+#####################
+#      DRIVERS      #
+#####################
 ## Driver for iwlwifi:
 apt install firmware-iwlwifi -y &&
 echo -e "\n[+] Installed firmware for iwlwifi" || echo -e "\n[-] Error while installing iwlwifi driver"
 
+#####################
+#       GRUB        #
+#####################
 ## GRUB settings:
 sed -i 's/GRUB_CMDLINE_LINUX=".*"/GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"/g' /etc/default/grub &&
 sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT=0/g' /etc/default/grub &&
@@ -52,18 +60,24 @@ sed -i 's/GRUB_TIMEOUT=.*/GRUB_TIMEOUT=1/g' /etc/default/grub &&
 sed -i 's/GRUB_TIMEOUT_STYLE=.*/GRUB_TIMEOUT_STYLE=menu/g' /etc/default/grub &&
 sed -i 's/GRUB_DISABLE_RECOVERY=.*/GRUB_DISABLE_RECOVERY=true/g' /etc/default/grub &&
 sed -i 's/#GRUB_DISABLE_RECOVERY/GRUB_DISABLE_RECOVERY/g' /etc/default/grub &&
+
 ## GRUB colors:
 echo -e "set color_normal=white/black" > /boot/grub/custom.cfg &&
 echo -e "set color_highlight=black/white" >> /boot/grub/custom.cfg &&
 echo -e "set menu_color_normal=white/black" >> /boot/grub/custom.cfg &&
 echo -e "set menu_color_highlight=black/white" >> /boot/grub/custom.cfg &&
+
+## Update GRUB:
 grub-mkconfig -o /boot/grub/grub.cfg &&
 echo -e "\n[+] GRUB configuration updated." || echo -e "\n[-] Error while updating GRUB!"
 
+#####################
+#   Local Settings  #
+#####################
 ## doas:
 apt install doas -y &&
 echo -e "permit nopass ${USER}" > /etc/doas.conf &&
-echo -e "\n[+] User ${USER} added to '/etc/doas.conf'." || echo -e "\n[-] Error while adding user ${USER} to '/etc/doas.conf'!" 
+echo -e "\n[+] User ${USER} added to '/etc/doas.conf'." || echo -e "\n[-] Error while adding user ${USER} to '/etc/doas.conf'!"
 
 ## hostname:
 echo -e "${HOSTNAME}" > /etc/hostname &&
@@ -91,6 +105,9 @@ echo -e "XKBOPTIONS=\"\"" >> /etc/default/keyboard &&
 echo -e "BACKSPACE=\"guess\"" >> /etc/default/keyboard &&
 echo -e "\n[+] CLI keyboard set." || echo -e "\n[-] Error while setting CLI keyboard!"
 
+#####################
+#     NETWORKING    #
+#####################
 ## Block bluetooth and unblock WiFi:
 apt install rfkill -y &&
 rfkill block bluetooth &&
@@ -171,6 +188,9 @@ echo -e "\tpriority=3 # To which WiFi connect first" >> /etc/wpa_supplicant/wpa_
 echo -e "}" >> /etc/wpa_supplicant/wpa_supplicant.conf &&
 echo -e "\n[+] Added template for wpasupplicant" || echo -e "\n[-] Error while setting template for wpasupplicant!"
 
+#####################
+# TEXTEDITOR & SHELL#
+#####################
 ## vim:
 apt install vim bvi -y &&
 update-alternatives --set editor /usr/bin/vim.basic &&
@@ -181,11 +201,17 @@ apt install zsh zsh-autosuggestions zsh-syntax-highlighting -y &&
 usermod -s /bin/zsh ${USER} &&
 echo -e "\n[+] zsh installed and set for user '${USER}'" || echo -e "\n[-] Error while setting up zsh for user '${USER}'!"
 
+#####################
+#    WEB BROWSER    #
+#####################
 ## Install firefox and set as default browser:
 apt install firefox-esr -y &&
 update-alternatives --set x-www-browser /usr/bin/firefox-esr &&
 echo -e "\n[+] Firefox installed and set as default browser." || echo -e "\n[-] Error while installing and setting up Firefox!"
 
+#####################
+#       AUDIO       #
+#####################
 ## Install audio control:
 apt install alsa-utils -y &&
 echo -e "\n[+] alsa-utils installed." || echo -e "\n[-] Error while installing alsa-utils!"
@@ -194,10 +220,16 @@ echo -e "\n[+] alsa-utils installed." || echo -e "\n[-] Error while installing a
 apt install pulseaudio -y &&
 echo -e "\n[+] pulseaudio installed." || echo -e "\n[-] Error while installing pulseaudio!"
 
+#####################
+#        GIT        #
+#####################
 # Install git:
 apt install git -y &&
 echo -e "\n[+] git installed." || echo -e "\n[-] Error while installing git!"
 
+#####################
+#     Xorg + i3     #
+#####################
 ## X server with i3:
 apt install xorg x11-xserver-utils xinit -y &&
 cd /etc/ &&
@@ -212,13 +244,16 @@ echo -e "\n[+] i3 compiled successfully." || echo -e "\n[-] Error while compilin
 
 ## Install other X-utlities:
 apt install i3blocks i3lock numlockx rofi feh scrot compton light xclip lxappearance -y &&
-echo -e "\n[+] additional X utilities installed." || echo -e "\n[-] Error while installing other utilities!" 
+echo -e "\n[+] additional X utilities installed." || echo -e "\n[-] Error while installing other utilities!"
 
 ## URXVT:
 apt install rxvt-unicode-256color -y &&
 update-alternatives --set x-terminal-emulator /usr/bin/urxvt &&
 echo -e "\n[+] rxvt-unicode set as default X-terminal." || echo -e "\n[-] Error while setting up rxvt-unicode!"
 
+#####################
+#      DOTFILES     #
+#####################
 ## If directory exists from previous git clone, then delete it:
 DIRECTORY="${HOME}/debian"
 if [[ -d "${DIRECTORY}" ]]; then
@@ -227,6 +262,7 @@ if [[ -d "${DIRECTORY}" ]]; then
 else
     echo "[*] ${DIRECTORY} does not exists. Skipping."
 fi
+
 ## Copy dotfiles from my github:
 cd ${HOME} &&
 git clone https://github.com/AISK11/debian &&
@@ -236,12 +272,15 @@ cp ${HOME}/debian/config_files/xorg.conf /etc/X11/xorg.conf &&
 chmod +x ${HOME}/.config/i3/scripts/* &&
 tar xvjf .icons.tar.bz2 &&
 rm -rf .icons.tar.bz2 &&
-tar xvjf .themes.tar.bz2 && 
+tar xvjf .themes.tar.bz2 &&
 rm -rf .themes.tar.bz2 &&
 rm -rf ${HOME}/debian &&
 chown -R ${USER}:${USER} ${HOME} &&
 echo -e "\n[+] custom dotfiles were applied." || echo -e "\n[-] Error while applying custom dotfiles!"
 
+#####################
+#       Nvidia      #
+#####################
 ## Install Nvidia:
 if [[ "${VIRTUAL}" -eq "0" ]]; then
 	apt install intel-gpu-tools nvtop nvidia-detect linux-headers-amd64 nvidia-driver firmware-misc-nonfree -y &&
@@ -251,14 +290,72 @@ else
 	echo -e "\n[*] VIRTUAL flag set, skipping installing of Nvidia driver."
 fi
 
-# Install Additional Packages:
-apt install psmisc htop &&
-echo -e "\n[+] Packages psmisc and htop installed." || echo -e "\n[-] Error while installing psmisc and htop!"
+#####################
+#Additional Packages#
+#####################
+## Process related:
+apt install psmisc htop -y &&
+echo -e "\n[+] Process related packages installed." || echo -e "\n[-] Error while installing process related packages!"
 
-## Install support for MTP:
+## License related:
+apt install vrms -y &&
+echo -e "\n[+] License related packages installed." || echo -e "\n[-] Error while installing license related packages!"
+
+## Password Manager:
+apt install keepassxc -y &&
+echo -e "\n[+] Password Manager packages installed." || echo -e "\n[-] Error while installing Package Manager packages!"
+
+## Install support for MTP devices:
 apt install mtp-tools jmtpfs -y &&
-echo -e "\n[+] Installed support for MTP devices." || echo -e "\n[-] MTP tools could not be installed!"
+echo -e "\n[+] Installed support for MTP devices." || echo -e "\n[-] Error! MTP tools could not be installed!"
 
+## Networking tools:
+apt install iptables hping3 wireshark yafc putty macchanger mtr nmap bind9-dnsutils ethtool -y &&
+echo -e "\n[+] Networking tools installed." || echo -e "\n[-] Error while installing network tools!"
+
+## Multimedia:
+apt install youtube-dl imagemagick -y &&
+echo -e "\n[+] Multimedia packages installed." || echo -e "\n[-] Error while installing Multimedia packages!"
+
+## KVM/QEMU
+
+
+## Lightcord
+
+
+
+#####################
+#  System hardening #
+#####################
+## Add Kali repo:
+apt install gnupg -y &&
+bash -c 'echo "deb http://http.kali.org/kali kali-rolling main non-free contrib" >> /etc/apt/sources.list' &&
+wget 'https://archive.kali.org/archive-key.asc' &&
+apt-key add "./archive-key.asc" &&
+## Assign low prio to kali pkgs:
+touch '/etc/apt/preferences' &&
+echo "Package: *" > '/etc/apt/preferences' &&
+echo "Pin: release a=kali-rolling" >> '/etc/apt/preferences' &&
+echo "Pin-Priority: 50" >> '/etc/apt/preferences' &&
+echo -e "\n[+] Kali repo added!" || echo -e "\n[-] Error while adding kali-repo!"
+
+#### ANONYMITY ####
+## Set blank MOTD:
+echo "" > /etc/issue &&
+echo -e "\n[+] MOTD was cleared!" || echo -e "\n[-] Error while clearing MOTD!"
+
+## ICMP Firewall:
+
+
+
+#### Hardening ####
+apt install usbguard -y &&
+systemctl enable usbguard.service &&
+echo -e "\n[+] USBguard addedd." || echo -e "\n[-] Error while adding USBguard!"
+
+#####################
+#     FINISHING     #
+#####################
 ## Update before restart:
 apt update &&
 apt full-upgrade -y &&
@@ -267,10 +364,3 @@ echo -e "\n[+] System updated." || echo -e "\n[-] Error while updating system!"
 
 ## Restart:
 init 6
-
-
-#apt install macchanger nmap hping3 ethtool arping mtr arpspoof aircrack-ng
-# htop imagemagick vrms
-# keepassxc kvm 
-#lightcord steam
-
