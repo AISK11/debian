@@ -276,6 +276,7 @@ tar xvjf .themes.tar.bz2 &&
 rm -rf .themes.tar.bz2 &&
 rm -rf ${HOME}/debian &&
 chown -R ${USER}:${USER} ${HOME} &&
+chmod +x ${HOME}/scripts/* &&
 echo -e "\n[+] custom dotfiles were applied." || echo -e "\n[-] Error while applying custom dotfiles!"
 
 #####################
@@ -344,6 +345,7 @@ touch '/etc/apt/preferences' &&
 echo "Package: *" > '/etc/apt/preferences' &&
 echo "Pin: release a=kali-rolling" >> '/etc/apt/preferences' &&
 echo "Pin-Priority: 50" >> '/etc/apt/preferences' &&
+rm "./archive-key.asc" &&
 echo -e "\n[+] Kali repo added!" || echo -e "\n[-] Error while adding kali-repo!"
 
 #### ANONYMITY ####
