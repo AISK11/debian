@@ -314,7 +314,7 @@ apt install ethtool macchanger iptables hping3 wireshark yafc putty mtr nmap dns
 echo -e "\n[+] Networking tools installed." || echo -e "\n[-] Error while installing network tools!"
 
 ## Multimedia:
-apt install youtube-dl imagemagick -y &&
+apt install youtube-dl imagemagick zip -y &&
 echo -e "\n[+] Multimedia packages installed." || echo -e "\n[-] Error while installing Multimedia packages!"
 
 ## KVM/QEMU
