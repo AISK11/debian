@@ -1409,7 +1409,7 @@ libvirt-daemon-system virt-manager
 \end{Verbatim}
     \item Configure for system mode:
 \begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{root}{root#} \textcolor{command}{cp} -r \textcolor{file}{/etc/libvirt/libvirt.conf} \textcolor{dir}{~/.config/libvirt}
+\textcolor{root}{root#} \textcolor{command}{cp} -r \textcolor{dir}{/etc/libvirt/} \textcolor{dir}{~/.config/libvirt/}
 \textcolor{root}{root#} \textcolor{command}{chown} <USER> \textcolor{file}{~/.config/libvirt/libvirt.conf/}
 \end{Verbatim}
 File (\textcolor{file}{~/.config/libvirt/libvirt.conf}):
@@ -1438,7 +1438,7 @@ uri_default = "qemu:///system"
     \begin{itemize}
         \item ISO dir (move here ISOs):
         \begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{root}{root#} \textcolor{command}{mkdir} \textcolor{dir}{/var/lib/libvirt/iso}
+\textcolor{root}{root#} \textcolor{command}{mkdir} \textcolor{dir}{/var/lib/libvirt/iso/}
         \end{Verbatim}
         \item VM images: (\textcolor{dir}{/var/lib/libvirt/images/}).
         \item VM config: (\textcolor{dir}{/etc/libvirt/qemu/}).
