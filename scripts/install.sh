@@ -298,6 +298,10 @@ fi
 apt install psmisc htop -y &&
 echo -e "\n[+] Process related packages installed." || echo -e "\n[-] Error while installing process related packages!"
 
+## Other system related:
+apt install neofetch inxi -y &&
+echo -e "\n[+] Other system related packages installed." || echo -e "\n[-] Error while installing other system related packages!"
+
 ## License related:
 apt install vrms -y &&
 echo -e "\n[+] License related packages installed." || echo -e "\n[-] Error while installing license related packages!"
