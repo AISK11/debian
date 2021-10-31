@@ -1259,6 +1259,108 @@ __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia %command%
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Usb Guard}
+\begin{enumerate}
+    \item \textbf{Dependencies:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install usbguard
+\end{Verbatim}
+    \item \textbf{Start USB Guard on startup:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{systemctl} enable usbguard.service
+\end{Verbatim}
+    \item \textbf{List USBs:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{lsusb}
+\textcolor{user}{user\$} \textcolor{command}{usbguard} list-devices [--allowed|--blocked]
+\textcolor{user}{user\$} \textcolor{command}{usbguard} list-rules [--allowed|--blocked]
+\end{Verbatim}
+    \item \textbf{Allow/Block USBs (permanently):}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{usbguard} <allow-device|block-device|reject-device>
+<USB-ID> [-p]
+\end{Verbatim}
+    \item \textbf{Delete rule:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{usbguard} remove-rule <RULE-ID>
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{ICMP Firewall}
+\begin{enumerate}
+    \item \textbf{Dependencies:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install iptables-persistent
+\end{Verbatim}
+    \item \textbf{List FW rules:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{iptables} -L -n -v
+\end{Verbatim}
+    \item \textbf{LOG \& DROP ICMP request, timestamp, mask and traceroute:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{iptables} -N LOG_AND_DROP
+\textcolor{root}{root#} \textcolor{command}{iptables} -A LOG_AND_DROP -j LOG --log-prefix "iptables denied: "
+--log-level <0-7>
+\textcolor{root}{root#} \textcolor{command}{iptables} -A LOG_AND_DROP -j DROP 
+\textcolor{root}{root#} \textcolor{command}{iptables} -A INPUT -s 0.0.0.0/0 -p icmp --icmp-type 8 -j LOG_AND_DROP
+\textcolor{root}{root#} \textcolor{command}{iptables} -A INPUT -s 0.0.0.0/0 -p icmp --icmp-type 13 -j LOG_AND_DROP
+\textcolor{root}{root#} \textcolor{command}{iptables} -A INPUT -s 0.0.0.0/0 -p icmp --icmp-type 17 -j LOG_AND_DROP
+\textcolor{root}{root#} \textcolor{command}{iptables} -A INPUT -s 0.0.0.0/0 -p icmp --icmp-type 30 -j LOG_AND_DROP
+\end{Verbatim}
+Log File: (\textbf{\textcolor{file}{/var/log/syslog}}).
+    \item \textbf{Change log file:}
+\begin{itemize}
+    \item \textbf{Create rsyslog rule:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{touch} \textcolor{file}{/etc/rsyslog.d/iptables.conf}
+\end{Verbatim}    
+File (\textbf{\textcolor{file}{/etc/rsyslog.d/iptables.conf}}):
+\begin{Verbatim}[commandchars=\\\{\}]
+:msg, contains, "iptables denied: " -/var/log/iptables.log
+& ~
+\end{Verbatim}
+    \item \textbf{Create log rotate rule:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{touch} \textcolor{file}{/etc/logrotate.d/iptables}
+\end{Verbatim}
+File (\textbf{\textcolor{file}{/etc/logrotate.d/iptables}}):
+\begin{Verbatim}[commandchars=\\\{\}]
+/var/log/iptables.log
+\{
+    missingok
+    notifempty
+    rotate 4
+    daily
+    create 0600 root root
+    compress
+    delaycompress
+    copytruncate
+    nomail
+    shred
+\}
+\end{Verbatim}
+    \item \textbf{Crontab (\underline{\url{https://crontab.guru/}}) for log rotation:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{crontab} -e
+@reboot systemctl restart logrotate.service && \char92
+systemctl restart rsyslog.service
+@daily systemctl restart logrotate.service && \char92
+systemctl restart rsyslog.service
+\end{Verbatim}
+    \item \textbf{Restart rsyslog:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{systemctl} restart logrotate.service &&
+\textcolor{command}{systemctl} restart rsyslog.service
+\end{Verbatim}    
+New (exclusive) log file: (\textbf{\textcolor{file}{/var/log/iptables.log}}).
+\end{itemize}
+    \item \textbf{Save to persistent iptables:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{iptables-save} > \textcolor{file}{/etc/iptables/rules.v4}
+\textcolor{root}{root#} \textcolor{command}{ip6tables-save} > \textcolor{file}{/etc/iptables/rules.v6}
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% KVM %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{KVM - WiP}
