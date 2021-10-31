@@ -386,7 +386,7 @@ echo "    nomail" >> /etc/logrotate.d/iptables &&
 echo "    shred" >> /etc/logrotate.d/iptables &&
 echo "}" >> /etc/logrotate.d/iptables &&
 iptables-save > /etc/iptables/rules.v4 &&
-iptables-save > /etc/iptables/rules.v6 &&
+ip6tables-save > /etc/iptables/rules.v6 &&
 ## Add to root's cron:
 (crontab -l 2>/dev/null; echo "@reboot systemctl restart logrotate.service && systemctl restart rsyslog.service") | crontab - &&
 (crontab -l 2>/dev/null; echo "@daily systemctl restart logrotate.service && systemctl restart rsyslog.service") | crontab - &&
