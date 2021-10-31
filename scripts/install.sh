@@ -310,7 +310,7 @@ apt install mtp-tools jmtpfs -y &&
 echo -e "\n[+] Installed support for MTP devices." || echo -e "\n[-] Error! MTP tools could not be installed!"
 
 ## Networking tools:
-apt install iptables hping3 wireshark yafc putty macchanger mtr nmap bind9-dnsutils ethtool -y &&
+apt install iptables hping3 wireshark yafc putty macchanger mtr nmap dnsutils ethtool whois -y &&
 echo -e "\n[+] Networking tools installed." || echo -e "\n[-] Error while installing network tools!"
 
 ## Multimedia:
@@ -345,7 +345,41 @@ echo "" > /etc/issue &&
 echo -e "\n[+] MOTD was cleared!" || echo -e "\n[-] Error while clearing MOTD!"
 
 ## ICMP Firewall:
-
+#WIP!!!!!
+apt install iptables-persistent -y &&
+iptables -N LOG_AND_DROP &&
+iptables -A LOG_AND_DROP -j LOG --log-prefix "iptables denied: " --log-level 4 &&
+iptables -A INPUT -s 0.0.0.0/0 -p icmp --icmp-type 8 -j LOG_AND_DROP &&
+iptables -A INPUT -s 0.0.0.0/0 -p icmp --icmp-type 13 -j LOG_AND_DROP &&
+iptables -A INPUT -s 0.0.0.0/0 -p icmp --icmp-type 17 -j LOG_AND_DROP &&
+iptables -A INPUT -s 0.0.0.0/0 -p icmp --icmp-type 30 -j LOG_AND_DROP &&
+## Change rsyslog rule:
+echo ":msg, contains, "iptables denied: " -/var/log/iptables.log" > /etc/rsyslog.d/iptables.conf &&
+echo "& ~" >> /etc/rsyslog.d/iptables.conf &&
+## Logrotate rule:
+echo "/var/log/iptables.log" > /etc/logrotate.d/iptables &&
+echo "{" >> /etc/logrotate.d/iptables &&
+echo "    missingok" >> /etc/logrotate.d/iptables &&
+echo "    notifempty" >> /etc/logrotate.d/iptables &&
+echo "    rotate 4" >> /etc/logrotate.d/iptables &&
+echo "    daily" >> /etc/logrotate.d/iptables &&
+echo "    create 0600 root root" >> /etc/logrotate.d/iptables &&
+echo "    compress" >> /etc/logrotate.d/iptables &&
+echo "    delaycompress" >> /etc/logrotate.d/iptables &&
+echo "    copytruncate" >> /etc/logrotate.d/iptables &&
+echo "    nomail" >> /etc/logrotate.d/iptables &&
+echo "    shred" >> /etc/logrotate.d/iptables &&
+echo "}" >> /etc/logrotate.d/iptables &&
+iptables-save > /etc/iptables/rules.v4 &&
+iptables-save > /etc/iptables/rules.v6 &&
+## Add to root's cron:
+(crontab -u $(whoami) -l; echo "@reboot systemctl restart logrotate.service && \\" ) | crontab -u $(whoami) - &&
+(crontab -u $(whoami) -l; echo "systemctl restart rsyslog.service" ) | crontab -u $(whoami) - &&
+(crontab -u $(whoami) -l; echo "@daily systemctl restart logrotate.service && \\" ) | crontab -u $(whoami) - &&
+(crontab -u $(whoami) -l; echo "systemctl restart rsyslog.service" ) | crontab -u $(whoami) - &&
+systemctl restart logrotate.service &&
+systemctl restart rsyslog.service &&
+echo -e "[+] ICMP FW block applied." || echo -e "[-] Error while applying ICMP FW block rule!"
 
 
 #### Hardening ####
