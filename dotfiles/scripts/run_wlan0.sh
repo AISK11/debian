@@ -34,5 +34,5 @@ while [[ -z $(ip r | grep "${INTERFACE}") ]]; do
     sleep 1
 done
 
-echo "[+] Connection was establiehed!"
+echo "[+] Connection was established!"
 exit
