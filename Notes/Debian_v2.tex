@@ -114,21 +114,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Info gathering}
 \begin{itemize}
-    \item Info about block devices:
+    \item \textbf{Info about block devices:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$}  \textcolor{command}{lsblk} [-ap | -apf]
 \textcolor{root}{root#}  \textcolor{command}{fdisk -l} <\textcolor{block}{/dev/sdX}>
 \textcolor{root}{root#}  \textcolor{command}{blkid}
 \end{Verbatim}
-    \item Get disk blocksize in bytes:
+    \item \textbf{Get disk blocksize in bytes:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{blockdev} [-v] --getbsz <\textcolor{block}{/dev/sdX[Y]}>
 \end{Verbatim}
-    \item Get disk size in bytes:
+    \item \textbf{Get disk size in bytes:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{blockdev} [-v] --getsize64 <\textcolor{block}{/dev/sdX[Y]}>
 \end{Verbatim}
-    \item Check if device is readonly (1 = ro, 0 = rw):
+    \item \textbf{Check if device is readonly (1 = ro, 0 = rw):}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{blockdev} [-v] --getro <\textcolor{block}{/dev/sdX[Y]}>
 \end{Verbatim}
@@ -136,8 +136,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Check for bad sectors}
 \begin{enumerate}
-    \item Unmount FS!
-    \item Check for bad blocks:
+    \item \textbf{Unmount FS!}
+    \item \textbf{Check for bad blocks:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{badblocks} [-b 4096] [-w [-t 0xaa]] [-v] [-s] [-o <FILE>] 
 <\textcolor{block}{/dev/sdX[Y]}>
@@ -151,9 +151,10 @@
 \section{Flash ISO to USB}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{enumerate}
-    \item Download ISO from: \underline{\url{https://www.debian.org/distrib/}}
-    \item Unmount FS!
-    \item Flash:
+    \item \textbf{Download ISO from:}
+    \newline \underline{\url{https://www.debian.org/distrib/}}
+    \item \textbf{Unmount FS!}
+    \item \textbf{Flash:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{dd} if=<\textcolor{file}{/<PATH>/<ISO.iso>}> of=<\textcolor{block}{/dev/sdX}> [bs=4M | status=progress]
 \end{Verbatim}
@@ -165,17 +166,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Disable pcspkr}
 \begin{enumerate}
-    \item Turn off bell for CLI mode:
+    \item \textbf{Turn off bell for CLI mode:}
 \newline File: (\textbf{\textcolor{file}{/etc/inputrc}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 set bell-style none
 \end{Verbatim}
-    \item Blacklist pcspkr module:
+    \item \textbf{Blacklist pcspkr module:}
 \newline File: (\textbf{\textcolor{file}{/etc/modprobe.d/blacklist.conf}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 blacklist pcspkr
 \end{Verbatim}
-    \item Update initramfs:
+    \item \textbf{Update initramfs:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{depmod} -a
 \textcolor{root}{root#} \textcolor{command}{update-initramfs} -u
@@ -185,8 +186,8 @@ blacklist pcspkr
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{APT sources}
 \begin{enumerate}
-    \item Avoid using \textit{stable}, use \textit{release-name} instead.
-    \item APT sources file:
+    \item \textbf{Avoid using \textit{stable}, use \textit{release-name} instead.}
+    \item \textbf{APT sources file:}
 \newline File (\textbf{\textcolor{file}{/etc/apt/sources.list}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{## deb http://deb.debian.org/debian testing main [contrib] [non-free]}
@@ -203,7 +204,7 @@ contrib non-free
 deb http://deb.debian.org/debian bullseye-updates main contrib non-free
 deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free
 \end{Verbatim}
-    \item Update system:
+    \item \textbf{Update system:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} clean
 \textcolor{root}{root#} \textcolor{command}{apt} update
@@ -220,8 +221,8 @@ deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{iwlwifi}
 \begin{enumerate}
-    \item Needs \textit{contrib} and \textit{non-free} packages!
-    \item Install driver:
+    \item \textbf{Needs \textit{contrib} and \textit{non-free} packages!}
+    \item \textbf{Install driver:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install firmware-iwlwifi
 \end{Verbatim}
@@ -233,7 +234,7 @@ deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Configuration}
 \begin{enumerate}
-    \item Basic GRUB settings:
+    \item \textbf{Basic GRUB settings:}
 \newline File (\textbf{\textcolor{file}{/etc/default/grub}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{## do not rename net interfaces:}
@@ -281,7 +282,7 @@ GRUB_DISABLE_RECOVERY=true
     \end{small}
 \end{center}
 \begin{enumerate}
-    \item Edit customization file:
+    \item \textbf{Edit customization file:}
 \newline File (\textbf{\textcolor{file}{/boot/grub/custom.cfg}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{## <foreground>/<background>}
@@ -295,7 +296,7 @@ set menu_color_highlight=black/white
 \section{Update GRUB}
 \label{GRUB}
 \begin{enumerate}
-    \item Update GRUB:
+    \item \textbf{Update GRUB:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{grub-mkconfig} -o \textcolor{file}{/boot/grub/grub.cfg}
 \end{Verbatim}
@@ -307,11 +308,11 @@ set menu_color_highlight=black/white
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Password}
 \begin{itemize}
-    \item User-change:
+    \item \textbf{User-change:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{passwd}
 \end{Verbatim}
-    \item Root-change:
+    \item \textbf{Root-change:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{passwd} root
 \end{Verbatim}
@@ -321,11 +322,11 @@ set menu_color_highlight=black/white
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{doas}
 \begin{enumerate}
-    \item Dependenices1:
+    \item \textbf{Dependenices:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install doas
 \end{Verbatim}
-    \item Configuration:
+    \item \textbf{Configuration:}
 \newline File (\textbf{\textcolor{file}{/etc/doas.conf}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{## <permit|deny> [nopass|persist] <USER>[:GROUP] [as <USER2>]}
@@ -336,7 +337,7 @@ permit nopass <USER>
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Run GUI programs as root}
 \begin{enumerate}
-    \item Run GUI programs as root:
+    \item \textbf{Run GUI programs as root:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{xhost} local:root
 \end{Verbatim}
@@ -344,11 +345,11 @@ permit nopass <USER>
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Hostname}
 \begin{enumerate}
-    \item Display hostname:
+    \item \textbf{Display hostname:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{hostname}
 \end{Verbatim}
-    \item Change hostname:
+    \item \textbf{Change hostname:}
 \newline File (\textbf{\textcolor{file}{/etc/hostname}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 <HOSTNAME>
@@ -363,15 +364,15 @@ File (\textbf{\textcolor{file}{/etc/hosts}}):
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Time and Date}
 \begin{enumerate}
-    \item Show current timezone:
+    \item \textbf{Show current timezone:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{timedatectl} -a
 \end{Verbatim}
-    \item List available timezones:
+    \item \textbf{List available timezones:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{timedatectl} list-timezones
 \end{Verbatim}
-    \item Change timezone:
+    \item \textbf{Change timezone:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{timedatectl} set-timezone <UTC|Europe/Copenhagen>
 \end{Verbatim}
@@ -381,11 +382,11 @@ File (\textbf{\textcolor{file}{/etc/hosts}}):
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Locales}
 \begin{enumerate}
-    \item Show current locales:
+    \item \textbf{Show current locales:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{locale}
 \end{Verbatim}
-    \item Change locales:
+    \item \textbf{Change locales:}
 \newline File: (\textbf{\textcolor{file}{/etc/default/locale}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 LANG=en_US.UTF-8
@@ -399,10 +400,11 @@ LANG=en_US.UTF-8
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{CLI Keyboard}
 \begin{itemize}
-    \item Available keyboards: \textcolor{dir}{/usr/share/keymaps/i386/}
+    \item \textbf{Available keyboards:}
+    \newline \textcolor{dir}{/usr/share/keymaps/i386/}
 \end{itemize}
 \begin{enumerate}
-    \item Set keyboard:
+    \item \textbf{Set keyboard:}
 \newline File (\textbf{\textcolor{file}{/etc/default/keyboard}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 XKBMODEL="pc105"
@@ -419,8 +421,8 @@ BACKSPACE="guess"
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Rename Interface}
 \begin{itemize}
-    \item Check GRUB settings in \underline{\textbf{\ref{GRUB}}}
-    \item Manually rename interfaces:
+    \item \textbf{Check GRUB settings in \underline{\textbf{\ref{GRUB}}}}
+    \item \textbf{Manually rename interfaces:}
 \newline File: (\textcolor{file}{\textbf{/etc/udev/rules.d/70-persistent-net.rules}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{## eth0:}
@@ -436,15 +438,15 @@ BACKSPACE="guess"
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Wireless}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install rfkill
 \end{Verbatim}
-    \item List RF devices:
+    \item \textbf{List RF devices:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{rfkill} list
 \end{Verbatim}
-    \item Block/unblock BT and WiFi:
+    \item \textbf{Block/unblock BT and WiFi:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{rfkill} <block|unblock> <bluetooth|wlan>
 \end{Verbatim}
@@ -452,7 +454,7 @@ BACKSPACE="guess"
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Disable IPv6 (???)}
 \begin{enumerate}
-    \item Disable IPv6 globally:
+    \item \textbf{Disable IPv6 globally:}
 \newline File: (\textcolor{file}{\textbf{/etc/sysctl.conf}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 net.ipv6.conf.all.disable_ipv6 = 1
@@ -461,7 +463,7 @@ net.ipv6.conf.all.disable_ipv6 = 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Disable unnecessary networking service}
 \begin{enumerate}
-    \item Disable unnecessary networking service.
+    \item \textbf{Disable unnecessary networking service:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{systemctl} disable networking.service
 \end{Verbatim}
@@ -469,7 +471,7 @@ net.ipv6.conf.all.disable_ipv6 = 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Disable interface autostart}
 \begin{enumerate}
-    \item Disable hotplug:
+    \item \textbf{Disable hotplug:}
 \newline File: (\textbf{\textcolor{file}{/etc/network/interfaces}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 ###allow-hotplug eth0
@@ -481,15 +483,15 @@ net.ipv6.conf.all.disable_ipv6 = 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Set Up DHCP client}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install dhcpcd5
 \end{Verbatim}
-    \item Do not run DHCP on startup:
+    \item \textbf{Do not run DHCP on startup:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{systemctl} disable dhcpcd.service
 \end{Verbatim}
-    \item Configure DHCP client:
+    \item \textbf{Configure DHCP client:}
 \newline File: (\textbf{\textcolor{file}{/etc/dhcpcd.conf}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{## Inform DHCP server of our hostname for DDNS.}
@@ -512,7 +514,7 @@ slaac hwaddr
 \textcolor{comment}{## OR generate Stable Private IPv6 Addresses based from the DUID}
 ###slaac private
 \end{Verbatim}
-    \item Purge old DHCP client:
+    \item \textbf{Purge old DHCP client:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{dpkg} --purge <isc-dhcp-client isc-dhcp-common>
 \end{Verbatim}
@@ -520,11 +522,11 @@ slaac hwaddr
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Usage}
 \begin{itemize}
-    \item Lease IP address:
+    \item \textbf{Lease IP address:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{dhcpcd} <INTERFACE>
 \end{Verbatim}
-    \item Release IP address:
+    \item \textbf{Release IP address:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{dhcpcd} --release <INTERFACE>
 \end{Verbatim}
@@ -532,7 +534,7 @@ slaac hwaddr
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Remove DHCP lease info}
 \begin{enumerate}
-    \item Remove previous lease info:
+    \item \textbf{Remove previous lease info:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{rm} -f /var/lib/dhcpcd/*
 \end{Verbatim}
@@ -540,7 +542,7 @@ slaac hwaddr
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{DNS}
 \begin{enumerate}
-    \item Set up custom DNS servers:
+    \item \textbf{Set up custom DNS servers:}
 \newline File: (\textbf{\textcolor{file}{/etc/resolv.conf}}) (0644):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{## Uncensored DNS - Denmark - Unicast}
@@ -558,11 +560,11 @@ nameserver 1.0.0.1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Check carrier speed}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install ethtool
 \end{Verbatim}
-    \item Check carrier speed:
+    \item \textbf{Check carrier speed:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{ethtool} <eth0>
 \end{Verbatim}
@@ -572,11 +574,11 @@ nameserver 1.0.0.1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Check carrier speed}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install wireless-tools
 \end{Verbatim}
-    \item Check carrier speed:
+    \item \textbf{Check carrier speed:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{iwlist} <wlan0> bitrate
 \end{Verbatim}
@@ -584,11 +586,11 @@ nameserver 1.0.0.1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{WLAN authentication}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install wpasupplicant
 \end{Verbatim}
-    \item Confiugre authentication file:
+    \item \textbf{Configure authentication file:}
 \newline File (\textbf{\textcolor{file}{/etc/wpa\_supplicant/wpa\_supplicant.conf}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{# Basic settings and language for zones:}
@@ -633,43 +635,32 @@ network=\{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Connect to WiFi}
 \begin{itemize}
-    \item Anonymize interface:
-\begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{root}{root#} \textcolor{command}{ip} l set <wlan0> down
-\textcolor{root}{root#} \textcolor{command}{ip} a flush <wlan0>
-\textcolor{root}{root#} \textcolor{command}{rm} -rf /var/lib/dhcpcd/*
-\textcolor{root}{root#} \textcolor{command}{rm} -f /run/wpa_supplicant/<wlan0>
-\textcolor{root}{root#} \textcolor{command}{macchanger} -A <wlan0>
-\end{Verbatim}
+    \item \textbf{Script:}
+    \newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/scripts/run_wlan0.sh}}
 \end{itemize}
-
-\begin{enumerate}
-    \item Turn on Interface:
+\begin{itemize}
+    \item \textbf{Bring everything down for restart:}
 \begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{dhcpcd} --release <wlan0>
+\textcolor{root}{root#} \textcolor{command}{ip} a flush <wlan0>
+\textcolor{root}{root#} \textcolor{command}{systemctl} stop dhcpcd.service
+\textcolor{root}{root#} \textcolor{command}{systemctl} stop wpa_supplicant.service
+\textcolor{root}{root#} \textcolor{command}{ip} l set <wlan0> down
+\end{Verbatim}
+    \item \textbf{Start anonymized interface:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{rfkill} unblock wlan
+\textcolor{root}{root#} \textcolor{command}{macchanger} -A <wlan0>
+\textcolor{root}{root#} \textcolor{command}{rm} -rf \textcolor{file}{/var/lib/dhcpcd/*}
+\textcolor{root}{root#} \textcolor{command}{rm -f} \textcolor{file}{/run/wpa_supplicant/<wlan0>}
+\textcolor{root}{root#} \textcolor{command}{killall} -9 wpa_supplicant
 \textcolor{root}{root#} \textcolor{command}{ip} l set <wlan0> up
-\end{Verbatim}
-    \item Remove previous active config file (if exists):
-\begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{root}{root#} \textcolor{command}{rm} -f \textcolor{file}{/run/wpa_supplicant/wlan0}
-\end{Verbatim}
-    \item Start wpa\_supplicant service (WiFi only):
-\begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{systemctl} start wpa_supplicant.service
-\end{Verbatim}
-    \item Start DHCP:
-\begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{systemctl} start dhcpcd.service
-\end{Verbatim}
-    \item Apply wpa\_supplicant settings (WiFi only):
-\begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{root}{root#} \textcolor{command}{wpa_supplicant} -B -D wext -i <wlan0>
--c \textcolor{file}{/etc/wpa_supplicant/wpa_supplicant.conf}
-\end{Verbatim}
-    \item Run DHCP on interface:
-\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{wpa_supplicant} -B -D wext -i <wlan0> c <\textcolor{file}{/etc/wpa_supplicant/wpa_supplicant.conf}>
 \textcolor{root}{root#} \textcolor{command}{dhcpcd} <wlan0>
 \end{Verbatim}
-\end{enumerate}
+\end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Shell and Texteditor %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -679,33 +670,33 @@ network=\{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{vim}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install vim
 \end{Verbatim}
-    \item Set as default text editor:
+    \item \textbf{Set as default text editor:}
     \begin{enumerate}
-        \item Show available editors:
+        \item \textbf{Show available editors:}
         \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{update-alternatives} --list editor
 \end{Verbatim}
-        \item Change default editor:
+        \item \textbf{Change default editor:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{update-alternatives} --set editor /usr/bin/vim.basic
 \end{Verbatim}
     \end{enumerate}
-    \item Configure:
+    \item \textbf{Configure:}
 \newline File (\textbf{\textcolor{file}{\~/.vimrc}}):
 \newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.vimrc}}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{bvi}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install bvi
 \end{Verbatim}
-    \item Configure:
+    \item \textbf{Configure:}
 \newline File (\textbf{\textcolor{file}{\~/.bvirc}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{"" Enable edit:}
@@ -717,22 +708,22 @@ set memmove
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{zsh}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install zsh zsh-autosuggestions zsh-syntax-highlighting
 \end{Verbatim}
-    \item Set as default shell:
+    \item \textbf{Set as default shell:}
     \begin{itemize}
-        \item User change:
+        \item \textbf{User change:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{chsh} -s \textcolor{file}{/bin/zsh}
 \end{Verbatim}
-        \item Root change:
+        \item \textbf{Root change:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{usermod} -s \textcolor{file}{/bin/zsh} <USER>
 \end{Verbatim}
     \end{itemize}
-    \item Configure:
+    \item \textbf{Configure:}
 \newline File (\textbf{\textcolor{file}{\~/.zshrc}}):
 \newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.zshrc}}
 \end{enumerate}
@@ -896,17 +887,17 @@ let g:ycm_add_preview_to_completeopt = 0
 \section{Firefox}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install firefox-esr
 \end{Verbatim}
-    \item Set as default browser:
+    \item \textbf{Set as default browser:}
     \begin{enumerate}
-        \item Show available browsers:
+        \item \textbf{Show available browsers:}
         \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{update-alternatives} --list x-www-browser
 \end{Verbatim}
-        \item Change default browser:
+        \item \textbf{Change default browser:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{update-alternatives} --set x-www-browser /usr/bin/firefox-esr
 \end{Verbatim}
@@ -919,27 +910,27 @@ let g:ycm_add_preview_to_completeopt = 0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Audio Control}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install alsa-utils
 \end{Verbatim}
 \end{enumerate}
 \begin{itemize}
-    \item Get Master/Capture audio:
+    \item \textbf{Get Master/Capture audio:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{amixer} get <Master/Capture>
 \end{Verbatim}
-    \item Set mute/unmute/toggle Master/Capture audio:
+    \item \textbf{Set mute/unmute/toggle Master/Capture audio:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{amixer} set <Master/Capture> <mute|unmute|toggle>
 \end{Verbatim}
-    \item Set volume Master/Capture audio:
+    \item \textbf{Set volume Master/Capture audio:}
     \begin{itemize}
-        \item Specific value:
+        \item \textbf{Specific value:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{amixer} set <Master/Capture> <0-100>\%
 \end{Verbatim}
-        \item Increase/decrease value:
+        \item \textbf{Increase/decrease value:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{amixer} set <Master/Capture> <0-100>\%<+|->    
 \end{Verbatim}
@@ -949,7 +940,7 @@ let g:ycm_add_preview_to_completeopt = 0
 \section{Microphone}
 In case of mic problems, try to install pulseaudio.
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install pulseaduio
 \end{Verbatim}
@@ -961,11 +952,11 @@ In case of mic problems, try to install pulseaudio.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Xorg}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install xorg x11-xserver-utils xinit
 \end{Verbatim}
-    \item Start X on tty1:
+    \item \textbf{Start X on tty1:}
 \newline File (\textbf{\textcolor{file}{\~/.bash\_profile}}||\textbf{\textcolor{file}{\~/.bashrc}}||\textbf{\textcolor{file}{\~/.zshrc}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 ...
@@ -976,7 +967,7 @@ if [[ -z \$DISPLAY ]] && [[ \$(tty) = /dev/tty1 ]]; then
 fi
 ...
 \end{Verbatim}
-    \item xinit configuration:
+    \item \textbf{xinit configuration:}
 \newline File (\textbf{\textcolor{file}{\~/.xinitrc}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{## Disable screen saver:}
@@ -996,7 +987,7 @@ exec i3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{i3 (do not install with i3-gaps)}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install i3 --no-install-recommends
 \textcolor{root}{root#} \textcolor{command}{apt} install i3-wm
@@ -1006,7 +997,7 @@ exec i3
 \section{i3-gaps (do not install with i3)}
 URL: (\underline{https://github.com/Airblader/i3/wiki/Building-from-source})
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install make meson git ninja-build
 dh-autoreconf libxcb-keysyms1-dev
@@ -1016,13 +1007,13 @@ libxcb-xinerama0-dev libxkbcommon-x11-dev libpango1.0-dev
 libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 
 libxcb-xrm-dev libxcb-shape0 libxcb-shape0-dev
 \end{Verbatim} 
-    \item Clone i3-haps:
+    \item \textbf{Clone i3-haps:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{cd} \textcolor{dir}{/etc/}
 \textcolor{root}{root#} \textcolor{command}{git} clone https://www.github.com/Airblader/i3 i3-gaps
 \textcolor{user}{user\$} \textcolor{command}{cd} \textcolor{dir}{./i3-gaps/}
 \end{Verbatim}
-    \item Compile:
+    \item \textbf{Compile:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{mkdir} -p \textcolor{dir}{build} && cd \textcolor{dir}{build}
 \textcolor{root}{root#} \textcolor{command}{meson} --prefix \textcolor{file}{/usr/local}
@@ -1033,7 +1024,7 @@ libxcb-xrm-dev libxcb-shape0 libxcb-shape0-dev
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{run i3 after Xorg}
 \begin{enumerate}
-    \item Run i3 on X init:
+    \item \textbf{Run i3 on X init:}
 \newline File (\textbf{\textcolor{file}{\~/.xinitrc}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{comment}{# Disable screen saver:}
@@ -1049,15 +1040,15 @@ exec i3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{i3 config}
 \begin{enumerate}
-    \item i3 configuration:
+    \item \textbf{i3 configuration:}
 \newline File (\textbf{\textcolor{file}{\~/.config/i3/config}}):
 \newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.config/i3/config}}
-    \item i3 scripts:
+    \item \textbf{i3 scripts:}
 \newline \underline{\url{https://github.com/AISK11/debian/tree/main/dotfiles/.config/i3/scripts}}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{chmod} +x \textcolor{file}{~/.config/i3/scripts/*}
 \end{Verbatim}
-    \item i3 wallpaper and lock screen:
+    \item \textbf{i3 wallpaper and lock screen:}
 \newline \underline{\url{https://github.com/AISK11/debian/tree/main/dotfiles/.config/i3/images}}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1067,29 +1058,29 @@ exec i3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{i3blocks}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install i3blocks i3lock numlockx rofi feh scrot light xclip
 \end{Verbatim}
-    \item i3blocks config:
+    \item \textbf{i3blocks config:}
 \newline File (\textbf{\textcolor{file}{/etc/i3blocks.conf}}):
 \newline \underline{\url{https://github.com/AISK11/debian/blob/main/config_files/i3blocks.conf}}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{urxvt}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install rxvt-unicode-256color compton
 \end{Verbatim}
-    \item Configuration:
+    \item \textbf{Configuration:}
 \newline File (\textbf{\textcolor{file}{\~/.Xresources}}):
 \newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.Xresources}}
-    \item Load changed config:
+    \item \textbf{Load changed config:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{xrdb} \textcolor{file}{~/.Xresources}
 \end{Verbatim}
-    \item Set as default CLI emulator:
+    \item \textbf{Set as default CLI emulator:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{update-alternatives} --list x-terminal-emulator
 \textcolor{root}{root#} \textcolor{command}{update-alternatives} --set x-terminal-emulator \textcolor{file}{/usr/bin/urxvt}
@@ -1098,35 +1089,35 @@ exec i3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Fonts}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install imagemagick
 \end{Verbatim}
-    \item List installed fonts:
+    \item \textbf{List installed fonts:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{fc-list}
 \end{Verbatim}
-    \item Display specific font:
+    \item \textbf{Display specific font:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{display} </PATH/TO/font.ttf>
 \end{Verbatim}
-    \item Font Awesome:
+    \item \textbf{Font Awesome:}
 \newline Dir (\textbf{\textcolor{dir}{\~/.fonts/}}):
 \newline \underline{\url{https://github.com/AISK11/debian/tree/main/dotfiles/.fonts}}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{lxappearance (GTK)}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install lxappearance
 \end{Verbatim}
-    \item Add themes and icons:
+    \item \textbf{Add themes and icons:}
 \newline Dir (\textbf{\textcolor{dir}{\~/.themes/}}):
 \newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.themes.tar.bz2}}
 \newline Dir (\textbf{\textcolor{dir}{\~/.icons/}}):
 \newline \underline{\url{https://github.com/AISK11/debian/blob/main/dotfiles/.icons.tar.bz2}}
-    \item Change GTK theme and icons:
+    \item \textbf{Change GTK theme and icons:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{lxappearance}
 \end{Verbatim}
@@ -1138,35 +1129,35 @@ exec i3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Detection and Xorg conf}
 \begin{enumerate}
-    \item Detect Video cards:
+    \item \textbf{Detect Video cards:}
 \begin{itemize}
-    \item Detect with lspci:
+    \item \textbf{Detect with lspci:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{egrep} -i "vga|3d"
 \end{Verbatim}
-    \item Detect with xrandr:
+    \item \textbf{Detect with xrandr:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{xrandr} --listproviders
 \end{Verbatim}
 \end{itemize}
-    \item Xorg config:
+    \item \textbf{Xorg config:}
 \newline File (\textbf{\textcolor{file}{/etc/X11/xorg.conf}}):
 \newline \underline{\url{https://github.com/AISK11/debian/blob/main/config_files/xorg.conf}}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Intel}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install intel-gpu-tools
 \end{Verbatim}
-    \item Checks:
+    \item \textbf{Checks:}
 \begin{itemize}
-    \item Check if intel module is present:
+    \item \textbf{Check if intel module is present:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{modinfo} i915
 \end{Verbatim}
-    \item Check intel GPU utilization:
+    \item \textbf{Check intel GPU utilization:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{intel_gpu_top} [-s <MILISECONDS>]
 \end{Verbatim}
@@ -1175,68 +1166,64 @@ exec i3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Nvidia}
 \begin{enumerate}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install nvidia-detect nvtop linux-headers-amd64 nvidia-driver 
 firmware-misc-nonfree
 \end{Verbatim}    
-    \item Additional dependencies (\textbf{not needed!}):
+    \item \textbf{Additional dependencies (\textbf{not needed!}):}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install nvidia-cuda-dev nvidia-cuda-toolkit 
 nvidia-opencl-common nvidia-opencl-icd
 \end{Verbatim}
-    \item Purge problematic primus-nvidia (required only during Steam install):
+    \item \textbf{Purge problematic primus-nvidia (required only during Steam install):}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} purge primus-nvidia
 \end{Verbatim}
-    \item Checks:
+    \item \textbf{Checks:}
 \begin{itemize}
-    \item Check if Nvidia module is installed:
+    \item \textbf{Check if Nvidia module is installed:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{modinfo} [-F version] nvidia-current
 \end{Verbatim}
-    \item Check suggested Nvidia packages:
+    \item \textbf{Check suggested Nvidia packages:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{nvidia-detect}
 \end{Verbatim}
-    \item Check Nvidia GPU utilization:
+    \item \textbf{Check Nvidia GPU utilization:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{nvtop}
 \end{Verbatim}
 \end{itemize}
-    \item Run program with Nvidia GPU:
+    \item \textbf{Run program with Nvidia GPU:}
 \begin{itemize}
-    \item Linux programs:
+    \item \textbf{Linux programs:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia 
 \textcolor{command}{<APPLICATION>}
-\end{Verbatim}
-    \item Steam Game (set in Game Properties):
-\begin{Verbatim}[commandchars=\\\{\}]
-
 \end{Verbatim}
 \end{itemize}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Steam}
 \begin{enumerate}
-    \item Download: \underline{\url{https://store.steampowered.com/about/}}
-    \item Dependencies:
+    \item \textbf{Download: \underline{\url{https://store.steampowered.com/about/}}}
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install sudo
 \textcolor{root}{root#} \textcolor{command}{apt} install </PATH/TO/steam_latest.deb>
 \textcolor{user}{user\$} \textcolor{command}{steam}
 \end{Verbatim}
-    \item Fix \textbf{libGL.so.1} is missing:
+    \item \textbf{Fix \textit{libGL.so.1} is missing:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install primus-nvdia
 \textcolor{user}{user\$} \textcolor{command}{steam}
 \end{Verbatim}
-    \item Purge primus-nvidia (causing problems):
+    \item \textbf{Purge primus-nvidia (causing problems):}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} purge primus-nvdia
 \end{Verbatim}
-    \item Run Steam:
+    \item \textbf{Run Steam Game:}
 \begin{verbatim}
 __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia %command%
 \end{verbatim}
@@ -1252,7 +1239,7 @@ __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia %command%
     \item Port: \textbf{UDP 5353}
 \end{itemize}
 \begin{enumerate}
-    \item Disable Avahi service:
+    \item \textbf{Disable Avahi service:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{systemctl} disable avahi-daemon.socket
 \textcolor{root}{root#} \textcolor{command}{systemctl} disable avahi-deamon.service
@@ -1385,11 +1372,11 @@ USER ---> virsh (CLI) --------> libvirt -> |       QEMU       |
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Setup}
 \begin{enumerate}
-    \item Check if KVM is supported by CPU:
+    \item \textbf{Check if KVM is supported by CPU:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{egrep} "vmx|svm" \textcolor{file}{/proc/cpuinfo}
 \end{Verbatim}
-    \item Dependencies:
+    \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install install qemu-system libvirt-clients 
 libvirt-daemon-system virt-manager
@@ -1398,16 +1385,16 @@ libvirt-daemon-system virt-manager
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Permissions}
 \begin{enumerate}
-    \item Add user to libvirt groups:
+    \item \textbf{Add user to libvirt groups:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{usermod} -aG libvirt <USER>
 \textcolor{root}{root#} \textcolor{command}{usermod} -aG libvirt-qemu <USER>
 \end{Verbatim}
-    \item Check if user can list VMs (user mode):
+    \item \textbf{Check if user can list VMs (user mode):}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{virsh} list --all
 \end{Verbatim}
-    \item Configure for system mode:
+    \item \textbf{Configure for system mode:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{cp} -r \textcolor{dir}{/etc/libvirt/} \textcolor{dir}{~/.config/libvirt/}
 \textcolor{root}{root#} \textcolor{command}{chown} <USER> \textcolor{file}{~/.config/libvirt/libvirt.conf/}
@@ -1417,7 +1404,7 @@ File (\textcolor{file}{~/.config/libvirt/libvirt.conf}):
 \textcolor{comment}{# Uri default system/user}:
 uri_default = "qemu:///system"
 \end{Verbatim}
-    \item Check if user can list VMs (system mode):
+    \item \textbf{Check if user can list VMs (system mode):}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{virsh} list --all
 \end{Verbatim}
@@ -1425,7 +1412,7 @@ uri_default = "qemu:///system"
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Start KVM/QEMU}
 \begin{enumerate}
-    \item 
+    \item \textbf{Start KVM/QEMU:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{systemctl} start libvirtd.service
 \textcolor{user}{user\$} \textcolor{command}{virt-manager}
@@ -1434,27 +1421,30 @@ uri_default = "qemu:///system"
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{VMs}
 \begin{itemize}
-    \item Files:
+    \item \textbf{Files:}
     \begin{itemize}
-        \item ISO dir (move here ISOs):
+        \item \textbf{ISO dir (move here ISOs):}
         \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{mkdir} \textcolor{dir}{/var/lib/libvirt/iso/}
         \end{Verbatim}
-        \item VM images: (\textcolor{dir}{/var/lib/libvirt/images/}).
-        \item VM config: (\textcolor{dir}{/etc/libvirt/qemu/}).
+        \item \textbf{VM images:} 
+        \newline \textcolor{dir}{/var/lib/libvirt/images/}
+        \item \textbf{VM config:}
+        \newline \textcolor{dir}{/etc/libvirt/qemu/}
     \end{itemize}
-    \item Copy Paste:
+    \item \textbf{Copy Paste:}
         \begin{itemize}
-            \item Linux:
+            \item \textbf{Linux:}
             \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} install spice-vdagent
         \end{Verbatim}
-            \item Windows:
+            \item \textbf{Windows:}
             \newline \underline{\url{http://spice-space.org/}}
         \end{itemize}
 \end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Networking}
+Done in a GUI at this moment.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Programs - Sytem %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
