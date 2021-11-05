@@ -24,7 +24,7 @@ doas ip l set ${INTERFACE} down && echo "[+] Interface '${INTERFACE}' state is D
 doas rfkill unblock wlan && echo "[+] WLAN unblocked in rfkill." || echo "[-] ERROR! WLAN was not unlocked in rfkill!"
 doas macchanger -A ${INTERFACE} && echo "[+] MAC address changed for interface '${INTERFACE}'." || echo "[-] ERROR! MAC address for interface '${INTERFACE}' was not changed!"
 doas rm -rf /var/lib/dhcpcd/* && echo "[+] All leased addresses were removed in directory '/var/lib/dhcpcd/'." || echo "[-] ERROR! Lease addresses in directory '/var/lib/dhcpcd/' were not removed!"
-doas rm -f /run/wpa_supplicant/${INTERFACE} && echo "[+] WPA_SUPPLICANT file '/run/wpa_supplicant/${INTERFACE}. was removed." || echo "[-] ERROR! WPA_SUPPLICANT file '/run/wpa_supplicant/${INTERFACE}' was not removed."
+doas rm -f /run/wpa_supplicant/${INTERFACE} && echo "[+] WPA_SUPPLICANT file '/run/wpa_supplicant/${INTERFACE}' was removed." || echo "[-] ERROR! WPA_SUPPLICANT file '/run/wpa_supplicant/${INTERFACE}' was not removed."
 doas killall -9 wpa_supplicant && echo "[+] All instances of process 'wpa_supplicant' were killed." || echo "[-] ERROR! Could not kill all instances of process 'wpa_supplicant'!"
 doas ip l set ${INTERFACE} up && echo "[+] Interface '${INTERFACE}' state is UP." || echo "[-] ERROR! Interface '${INTERFACE}' state was not set to UP!"
 doas systemctl start wpa_supplicant.service && echo "[+] Service 'wpa_supplicant.service' started." || echo "[-] ERROR! Service 'wpa_supplicant.service' was not started!"
