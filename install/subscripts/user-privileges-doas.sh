@@ -10,7 +10,7 @@ USER="${1}"
 
 
 ## Install doas package:
-apt install doas -y &&
+apt install doas -y &> /dev/null &&
 echo -e "\n[+] Package 'doas' was installed." || echo -e "\n[-] ERROR! Package 'doas' could not be installed!"
 
 ## If no user was specified, create clean '/etc/doas.conf' and exit:
