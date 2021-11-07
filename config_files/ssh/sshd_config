@@ -145,22 +145,45 @@ KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-grou
 ##################
 ## This section is currently WiP
 
+## Specifies whether sshd should ignore user's '~/.ssh/knwon_hosts' during
+## HostbasedAuthentication and use only system-wide '/etc/ssh/known_hosts'
 IgnoreUserKnownHosts yes
+## Specifies whether to ignore per-user '.rhosts' and '.shosts' files during
+## HostbasedAuthentication, system-wide '/etc/hosts.equiv' and '/etc/ssh/shosts.equiv'
+## are still used:
 IgnoreRhosts yes
 
-X11Forwarding yes
-X11UseLocalhost yes
-AllowAgentForwarding yes
-AllowStreamLocalForwarding yes # local
-AllowTcpForwarding yes
-GatewayPorts no
-
+## Specifies wheteh tun device forwarding is allowed:
 PermitTunnel no
 
-#                   PermitListen port
-#                   PermitListen host:port
+## Specifies whether sshd shoul allow remote port forwarding to bind to non-loopback address:
+GatewayPorts no
 
-#                   PermitOpen host:port
-#                   PermitOpen IPv4_addr:port
-#                   PermitOpen [IPv6_addr]:port
+## Specifies whether TCP forwarding is permitted,
+## yes (default) = allow all TCP forwarding
+## local = allow local forwarding only (from ssh perspective)
+## remote = allow remote forwarding only
+## no = disable TCP forwarding
+AllowTcpForwarding local
 
+## Specifies whether StreamLocal (UDP) forwarding is permitted
+## options: yes, local, remote, no:
+AllowStreamLocalForwarding no
+
+## Specifies whether ssh-agent (login) forwarding is permitted:
+AllowAgentForwarding no
+
+## Specifies whether X11 forwarding is permitted:
+X11Forwarding no
+
+## Specifies whether sshd should bind X11 forwarding server to loopback address:
+X11UseLocalhost yes
+
+
+
+#PermitListen port
+#PermitListen host:port
+
+#PermitOpen host:port
+#PermitOpen IPv4_addr:port
+#PermitOpen [IPv6_addr]:port
