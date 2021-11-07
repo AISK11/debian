@@ -61,7 +61,7 @@ set hlsearch
 "    LINE NUMBERS    "
 """"""""""""""""""""""
 "" Number lines:
-"set number
+set number
 
 """"""""""""""""""""""
 " PROGRAMMING SYNTAX "
