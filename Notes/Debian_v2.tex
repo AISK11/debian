@@ -1348,6 +1348,125 @@ New (exclusive) log file: (\textbf{\textcolor{file}{/var/log/iptables.log}}).
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Network Services %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Network Services}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{SSH}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Negotiation}
+\begin{verbatim}
++------+                                   +------+
+|CLIENT|-----------------------------------|SERVER|
++------+                                   +------+
+        ----------Client Protocol--------->
+        <---------Server Protocol----------
+        -------KEXINIT (ENC,KEX,MAC)------>
+        <------KEXINIT (ENC,KEX,MAC)-------
+        --------KEXINIT (KEX) Init ------->
+        <--KEXINIT (KEX) Reply, New Keys---
+        ------------- New Keys ----------->
+        --SSH_MSG_SERVICE_REQUEST (login)->
+        <-SSH_MSG_SERVICE_ACCEPT  (login)--
+        <------- ENCRYPTED TRAFFIC ------->
+\end{verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{SSH Audit}
+\begin{enumerate}
+    \item \textbf{Dependencies:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install ssh-audit
+\end{Verbatim}   
+    \item \textbf{Usage:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{ssh-audit} <HOST>
+\end{Verbatim}       
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Server}
+\begin{enumerate}
+    \item \textbf{Dependencies:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install openssh-server
+\end{Verbatim}
+    \item \textbf{Configure SSHD:}
+    \newline File (\textbf{\textcolor{file}{/etc/ssh/sshd\_config}}):
+\newline \underline{\url{https://github.com/AISK11/debian/blob/main/config_files/ssh/sshd_config}}
+    \item \textbf{Start SSH on startup:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{systemctl} <enable|disable> ssh.service
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Client}
+\begin{enumerate}
+    \item \textbf{Dependencies:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install openssh-client
+\end{Verbatim}
+    \item \textbf{Connect to server:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{ssh} [-p <PORT>] <USER>@<HOST> [-c <3des-cbc>] 
+[-oKexAlgorithms=+<diffie-hellman-group1-sha1>]
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{VNC}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Server}
+\begin{itemize}
+    \item \textbf{Virtual (standalone) display:}
+    \begin{enumerate}
+        \item \textbf{Dependencies:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install tigervnc-standalone-server
+\end{Verbatim}
+        \item \textbf{Generate passwords:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{tigervncpasswd} [\textcolor{file}{~/.vnc/newpasswordfile}]
+\end{Verbatim}
+Default file: \textbf{\textcolor{file}{\~/.vnc/passwd}}
+        \item \textbf{Run TigerVNC server:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{tigervncserver} :<DISPLAY> -rfbport <L_PORT> -localhost <no> 
+-SecurityTypes <VncAuth,TLSVnc> -PasswordFile <\textcolor{file}{~/.vnc/passwd}>
+\end{Verbatim}
+    \end{enumerate}
+    \item \textbf{Current display:}
+    \begin{enumerate}
+        \item \textbf{Dependencies:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install tigervnc-scraping-server
+\end{Verbatim}
+       \item \textbf{Generate passwords:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{tigervncpasswd} [\textcolor{file}{~/.vnc/newpasswordfile}]
+\end{Verbatim}
+Default file: \textbf{\textcolor{file}{\~/.vnc/passwd}}
+        \item \textbf{Run TigerVNC server:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{x0tigervncserver} :0 -rfbport <L_PORT> -localhost <no> 
+-SecurityTypes <VncAuth,TLSVnc> -PasswordFile <\textcolor{file}{~/.vnc/passwd}>
+\end{Verbatim}
+    \end{enumerate}
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Client}
+\begin{enumerate}
+    \item \textbf{Dependencies:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install tigervnc-viewer
+\end{Verbatim}    
+    \item \textbf{Connect:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{xtigervncviewer} <HOST>::<PORT>
+\end{Verbatim}    
+    \item \textbf{Context GUI Menu:}
+    \newline "F8"
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{HTTP}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% KVM %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{KVM - WiP}
