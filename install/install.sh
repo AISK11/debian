@@ -48,11 +48,11 @@ bash ./subscripts/system-grub.sh
 ## Timezone
 ## Locale
 ## CLI Keyboard
-bash ./subscripts/system-settings.sh ${HOSTNAME} ${DNSDOMAINNAME} ${TIMEZONE}
+bash ./subscripts/system-settings.sh "${HOSTNAME}" "${DNSDOMAINNAME}" "${TIMEZONE}"
 
 #####################
 #  User Privileges  #
 #####################
 ## Add user to '/etc/doas.conf':
-bash ./subscripts/user-privileges-doas.sh ${USER}
+bash ./subscripts/user-privileges-doas.sh "${USER}"
 
