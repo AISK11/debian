@@ -68,17 +68,15 @@ bash ./subscripts/user-privileges-doas.sh "${USER}"
 ####################
 ## Install iwlwifi driver
 ## requires 'bash ./subscripts/system-packages-nonfree.sh'
-#if [[ "${ISVIRTUAL}" -eq 0 ]]; then
-#    bash ./subscripts/driver-network-iwlwifi.sh
-#else
-#    echo -n "[*] Virtual Machine settings set, skipping installing 'iwlwifi' driver."
-#fi
-
-
+if [[ "${ISVIRTUAL}" -eq 0 ]]; then
+    bash ./subscripts/driver-network-iwlwifi.sh
+else
+    echo -n "[*] Virtual Machine settings set, skipping installing 'iwlwifi' driver."
+fi
 
 ## Disable networking service (is unnecessary):
-#systemctl disable networking.service &> /dev/null &&
-#echo -e "\n[+] 'networking.service' disabled." || echo -e "\n[-] ERROR! Could not disable 'networking.service'!"
+systemctl disable networking.service &> /dev/null &&
+echo -e "\n[+] 'networking.service' disabled." || echo -e "\n[-] ERROR! Could not disable 'networking.service'!"
 
 ## Block bluetooth and unblock WiFi:
 #apt install rfkill -y &&
