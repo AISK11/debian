@@ -25,19 +25,19 @@ fi
 # POST-INSTALLATION #
 #####################
 ## Disable speaker bell:
-./subscripts/system-disable-pcspkr.sh
+bash ./subscripts/system-disable-pcspkr.sh
 
 ## Add contrib and non-free packages to debian:
-./subscripts/system-packages-nonfree.sh
+bash ./subscripts/system-packages-nonfree.sh
 
 ## Update system:
-./subscripts/system-update.sh
+bash ./subscripts/system-update.sh
 
 #####################
 #       GRUB        #
 #####################
 ## Set up GRUB Bootloader:
-./subscripts/system-grub.sh
+bash ./subscripts/system-grub.sh
 
 #####################
 #   Local Settings  #
@@ -48,11 +48,11 @@ fi
 ## Timezone
 ## Locale
 ## CLI Keyboard
-./subscripts/system-settings.sh ${HOSTNAME} ${DNSDOMAINNAME} ${TIMEZONE}
+bash ./subscripts/system-settings.sh ${HOSTNAME} ${DNSDOMAINNAME} ${TIMEZONE}
 
 #####################
 #  User Privileges  #
 #####################
 ## Add user to '/etc/doas.conf':
-./subscripts/user-privileges-doas.sh ${USER}
+bash ./subscripts/user-privileges-doas.sh ${USER}
 
