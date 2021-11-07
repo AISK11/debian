@@ -1,1 +1,124 @@
+## Name: AISK Hardened OpenSSH-server Configuration
+## File Location: /etc/ssh/sshd_config
+## Author AISK
+## Heavily inspired by 'https://github.com/k4yt3x/sshd_config/blob/master/sshd_config'
+## Date Created: November 7, 2021
+## Last Updated: November 7, 2021
 
+###########
+# Binding #
+###########
+## Listen to any|IPv4|IPv6 address (default any):
+AddressFamily any
+#AddressFamily inet
+#AddressFamily inet6
+
+## Listen for incoming connection for all sources:
+ListenAddress 0.0.0.0
+ListenAddress ::
+
+## Listen on specific port (default 22):
+Port 2
+
+############
+# Features #
+############
+## Do not permit User environment features:
+PermitUserEnvironment no
+
+## Compression before encryption might cause security issues:
+Compression no
+
+## SSH Protocol version (v1 is disabled, but specified for compatibility):
+Protocol 2
+
+## Disable reverse DNS lookups:
+UseDNS no
+
+#################
+# Banner & MOTD #
+#################
+## Disable distribution-specified extra version suffix:
+DebianBanner no
+
+## Do not specify additional text to append to SSH protocol banner:
+VersionAddendum none
+
+## Do not print Banner for user before authentication:
+Banner none
+#Banner /etc/sshd/sshd_banner
+
+## Supress '/etc/motd' message after user logs in (default: yes):
+PrintMotd no
+
+##################
+# Authentication #
+##################
+### PUB-KEY AUTH:
+## Uncomment these options to allow only pubkey authentication:
+#AuthenticationMethods publickey
+#PubkeyAuthentication yes
+#PasswordAuthentication no
+#UsePAM no
+
+### Password AUTH:
+PubkeyAuthentication no
+PasswordAuthentication yes
+UsePAM yes
+ChallengeResponseAuthentication no
+
+## Permit only specified users and groups to login:
+AllowUsers aisk
+AllowGroups aisk
+
+## Don't allow to login with empty passwords:
+PermitEmptyPasswords no
+
+## Prevent root login via SSH (not only after normal user auth):
+#PermitRootLogin no
+## Prevent root login via Authentication:
+PermitRootLogin prohibit-password
+
+## Maximum authentication retries to prevent brute-force:
+MaxAuthTries 1
+
+## Max number of unauthenticated connection:
+MaxStartups 1
+
+## Time after server expires connection:
+LoginGraceTime 60
+
+## Allow send TCP keepalive messages to notice connection crash (spoofable):
+#TCPKeepAlive yes
+TCPKeepAlive no
+
+# Timeout interval in seconds after which if no data received from client, sshd will
+## send messaage through encrypted channel to request respinse
+ClientAliveInterval 300
+## Set number of client alive messages sent without client responding (not spoofable):
+## Formula: InactiveDisconnect = ClientAliveInterval * ClientAliveCountMax
+ClientAliveCountMax 2
+
+## Specify max number of open shell, login or subsystem (sftp) sessions:
+MaxSessions 1
+
+################
+# Cryptography #
+################
+## Explicitly define cryptography algorithms to avoid the use of weak algorithms:
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+HostKeyAlgorithms rsa-sha2-512,rsa-sha2-256,ssh-ed25519
+MACs hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,umac-128-etm@openssh.com
+
+## Short moduli should be deactivated before enabling 'diffie-hellman-group-exchange-sha256':
+#KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256
+KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group14-sha256
+
+############################################
+## Deactivate Short Diffie-Hellman Moduli: #
+## 1. Backup original moduli file:
+## Linux: cp  /etc/ssh/moduli /etc/ssh/moduli.backup
+## 2. Find lines with moduli >= 3071 bits and save them to 'moduli.tmp':
+## Linux: awk '$5 >= 3071' /etc/ssh/moduli > /etc/ssh/moduli.tmp
+## 3. Overwrites original moduli file with updated one:
+## Linux: mv /etc/ssh/moduli.tmp /etc/ssh/moduli
