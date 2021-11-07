@@ -26,6 +26,9 @@ Port 2
 ## Do not permit User environment features:
 PermitUserEnvironment no
 
+## Specifies whether any ~/.ssh/rc file is executed (default: yes):
+PermitUserRC no
+
 ## Compression before encryption might cause security issues:
 Compression no
 
@@ -51,6 +54,18 @@ Banner none
 ## Supress '/etc/motd' message after user logs in (default: yes):
 PrintMotd no
 
+###########
+# LOGGING #
+###########
+## Specifies whether sshd should print date and time of last user interactive login:
+PrintLastLog yes
+
+## Gives facility code for sshd logging messages:
+SyslogFacility AUTH
+
+## Verbosity level for sshd logging messages:
+LogLevel VERBOSE
+
 ##################
 # Authentication #
 ##################
@@ -58,14 +73,15 @@ PrintMotd no
 ## Uncomment these options to allow only pubkey authentication:
 #AuthenticationMethods publickey
 #PubkeyAuthentication yes
-#PasswordAuthentication no
 #UsePAM no
+#PasswordAuthentication no
+#PasswordAuthentication no
 
 ### Password AUTH:
 PubkeyAuthentication no
-PasswordAuthentication yes
 UsePAM yes
 ChallengeResponseAuthentication no
+PasswordAuthentication yes
 
 ## Permit only specified users and groups to login:
 AllowUsers aisk
@@ -99,7 +115,8 @@ ClientAliveInterval 300
 ## Formula: InactiveDisconnect = ClientAliveInterval * ClientAliveCountMax
 ClientAliveCountMax 2
 
-## Specify max number of open shell, login or subsystem (sftp) sessions:
+## Specify max number of open shell, login or subsystem (sftp) sessions,
+## new session can be opened, but user has to authenticate again:
 MaxSessions 1
 
 ################
@@ -122,3 +139,11 @@ KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-grou
 ## Linux: awk '$5 >= 3071' /etc/ssh/moduli > /etc/ssh/moduli.tmp
 ## 3. Overwrites original moduli file with updated one:
 ## Linux: mv /etc/ssh/moduli.tmp /etc/ssh/moduli
+
+##################
+# SSH Forwarding #
+##################
+## This section is currently WiP
+X11Forwarding yes
+
+
