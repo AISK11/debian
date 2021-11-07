@@ -144,6 +144,23 @@ KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-grou
 # SSH Forwarding #
 ##################
 ## This section is currently WiP
-X11Forwarding yes
 
+IgnoreUserKnownHosts yes
+IgnoreRhosts yes
+
+X11Forwarding yes
+X11UseLocalhost yes
+AllowAgentForwarding yes
+AllowStreamLocalForwarding yes # local
+AllowTcpForwarding yes
+GatewayPorts no
+
+PermitTunnel no
+
+#                   PermitListen port
+#                   PermitListen host:port
+
+#                   PermitOpen host:port
+#                   PermitOpen IPv4_addr:port
+#                   PermitOpen [IPv6_addr]:port
 
