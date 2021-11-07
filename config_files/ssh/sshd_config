@@ -179,11 +179,3 @@ X11Forwarding no
 ## Specifies whether sshd should bind X11 forwarding server to loopback address:
 X11UseLocalhost yes
 
-
-
-#PermitListen port
-#PermitListen host:port
-
-#PermitOpen host:port
-#PermitOpen IPv4_addr:port
-#PermitOpen [IPv6_addr]:port
