@@ -17,5 +17,5 @@ echo -e "set menu_color_normal=white/black" >> /boot/grub/custom.cfg &&
 echo -e "set menu_color_highlight=black/white" >> /boot/grub/custom.cfg &&
 
 ## Update GRUB:
-grub-mkconfig -o /boot/grub/grub.cfg &&
+grub-mkconfig -o /boot/grub/grub.cfg &> /dev/null &&
 echo -e "\n[+] GRUB configuration updated." || echo -e "\n[-] ERROR! GRUB configuration did not successfully updated!"

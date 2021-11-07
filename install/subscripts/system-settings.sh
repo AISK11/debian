@@ -34,15 +34,18 @@ fi
 ## Set hostname:
 echo -e "${HOSTNAME}" > /etc/hostname &&
 sed -i "s/127\.0\.1\.1.*/127\.0\.1\.1\t${HOSTNAME}/g" /etc/hosts &&
-echo -e "\n[+] Hostname updated with ${HOSTNAME}." || echo -e "\n[-] ERROR! Could not change hostname with ${HOSTNAME}!"
+echo -e "\n[+] Hostname updated with '${HOSTNAME}'." || echo -e "\n[-] ERROR! Could not change hostname with '${HOSTNAME}'!"
 
 ## Set domainname:
-sed -i "s/${HOSTNAME}/&.${DNSDOMAINNAME} ${HOSTNAME}/g" /etc/hosts &&
-echo -e "\n[+] DNSDomainname updated with ${DNSDOMAINNAME}." || echo -e "\n[-] ERROR! Could not change DNSDomainname with ${DNSDOMAINNAME}!"
+if [[ ! -z ${DNSDOMAINNAME} ]]; then
+    sed -i "s/${HOSTNAME}/&.${DNSDOMAINNAME} ${HOSTNAME}/g" /etc/hosts &&
+    echo -e "\n[+] DNSDomainname updated with '${DNSDOMAINNAME}'." || echo -e "\n[-] ERROR! Could not change DNSDomainname with '${DNSDOMAINNAME}'!"
+fi
+
 
 ## Set timezone:
 timedatectl set-timezone ${TIMEZONE} &&
-echo -e "\n[+] Timezone ${TIMEZONE} updated." || echo -e "\n[-] Error! Timezone '${TIMEZONE}' could not be changed!"
+echo -e "\n[+] Timezone '${TIMEZONE}' updated." || echo -e "\n[-] Error! Timezone '${TIMEZONE}' could not be changed!"
 
 ## Set locale:
 echo -e "LANG=en_US.UTF-8" > /etc/default/locale &&
