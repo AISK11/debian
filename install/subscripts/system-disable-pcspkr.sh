@@ -2,9 +2,6 @@
 
 ## This script disables pcspkr (that annoying debian beeping).
 
-### Disable speaker bell:
-sed -i "s/^# set bell-style none/set bell-style none/" /etc/inputrc &&
-
 ### blacklist pcspkr module:
 ## If file does not exists:
 if [[ ! -e /etc/modprobe.d/blacklist.conf ]]; then
@@ -17,6 +14,9 @@ elif [[ -d /etc/modprobe.d/blacklist.conf ]]; then
 ## grep returns 1 if does not find match:
 elif grep "^blacklist pcspkr$"; then
     echo -e "blacklist pcspkr" >> /etc/modprobe.d/blacklist.conf
+
+### Disable speaker bell:
+sed -i "s/^# set bell-style none/set bell-style none/" /etc/inputrc &&
 
 ### Generate modules.dep and map files:
 depmod -a &> /dev/null &&
