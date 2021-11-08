@@ -214,7 +214,6 @@ echo -e "\n[+] Multimedia packages installed." || echo -e "\n[-] ERROR! Multimed
 apt install qemu-system libvirt-clients libvirt-daemon-system virt-manager -y &> /dev/null &&
 /sbin/usermod -aG libvirt ${USER} &&
 /sbin/usermod -aG libvirt-qemu ${USER} &&
-
 cp -r /etc/libvirt/ ${HOME}/.config/ &> /dev/null &&
 chown -R ${USER}:${USER} ${HOME} &> &&
 sed -i 's/#uri_default/uri_default/g' ${HOME}/.config/libvirt/libvirt.conf &> /dev/null &&
