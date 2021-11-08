@@ -50,19 +50,19 @@ fi
 # POST-INSTALLATION #
 #####################
 ## Disable speaker bell:
-bash ${HOME}/subscripts/system-disable-pcspkr.sh
+bash ${HOME}/debian/install/subscripts/system-disable-pcspkr.sh
 
 ## Add contrib and non-free packages to debian:
-bash ${HOME}/subscripts/system-packages-nonfree.sh
+bash ${HOME}/debian/install/subscripts/system-packages-nonfree.sh
 
 ## Update system:
-bash ${HOME}/subscripts/system-update.sh
+bash ${HOME}/debian/install/subscripts/system-update.sh
 
 #####################
 #       GRUB        #
 #####################
 ## Set up GRUB Bootloader:
-bash ${HOME}/subscripts/system-grub.sh
+bash ${HOME}/debian/install/subscripts/system-grub.sh
 
 #####################
 #   Local Settings  #
@@ -73,97 +73,97 @@ bash ${HOME}/subscripts/system-grub.sh
 ## Timezone
 ## Locale
 ## CLI Keyboard
-bash ${HOME}/subscripts/system-settings.sh "${HOSTNAME}" "${DNSDOMAINNAME}" "${TIMEZONE}"
+bash ${HOME}/debian/install/subscripts/system-settings.sh "${HOSTNAME}" "${DNSDOMAINNAME}" "${TIMEZONE}"
 
 #####################
 #  User Privileges  #
 #####################
 ## Add user to '/etc/doas.conf':
-bash ${HOME}/subscripts/user-privileges-doas.sh "${USER}"
+bash ${HOME}/debian/install/subscripts/user-privileges-doas.sh "${USER}"
 
 ####################
 #    NETWORKING    #
 ####################
 ## Install iwlwifi driver:
-## Requires 'bash ${HOME}/subscripts/system-packages-nonfree.sh'.
+## Requires 'bash ${HOME}/debian/install/subscripts/system-packages-nonfree.sh'.
 if [[ "${ISVIRTUAL}" -eq 0 ]]; then
-    bash ${HOME}/subscripts/driver-network-iwlwifi.sh
+    bash ${HOME}/debian/install/subscripts/driver-network-iwlwifi.sh
 else
     echo -e "\n[*] Virtual Machine settings set, skipping installing 'iwlwifi' driver."
 fi
 
 ## Disable networking service (is unnecessary):
-bash ${HOME}/subscripts/net-disable-networking-service.sh
+bash ${HOME}/debian/install/subscripts/net-disable-networking-service.sh
 
 ## Set up Rfkill (block bluetooth and unblock WiFi:
-bash ${HOME}/subscripts/net-rfkill.sh
+bash ${HOME}/debian/install/subscripts/net-rfkill.sh
 
 ## Disable network interface hotplug autostart and autoconnect:
-## requires 'bash ${HOME}/subscripts/system-grub.sh' for set up 'normal' interface names.
-bash ${HOME}/subscripts/net-disable-hotplug.sh
+## requires 'bash ${HOME}/debian/install/subscripts/system-grub.sh' for set up 'normal' interface names.
+bash ${HOME}/debian/install/subscripts/net-disable-hotplug.sh
 
 ## Better DHCP client:
-bash ${HOME}/subscripts/net-dhcp-client.sh
+bash ${HOME}/debian/install/subscripts/net-dhcp-client.sh
 
 ## Set up DNS servers:
-bash ${HOME}/subscripts/net-dns-servers.sh
+bash ${HOME}/debian/install/subscripts/net-dns-servers.sh
 
 ## Set wpasupplicant:
-bash ${HOME}/subscripts/net-wpasupplicant.sh
+bash ${HOME}/debian/install/subscripts/net-wpasupplicant.sh
 
 #####################
 # TEXTEDITOR & SHELL#
 #####################
 ## Install 'vim' and 'bvi' and set 'vim' as default editor:
-bash ${HOME}/subscripts/app-vim.sh
+bash ${HOME}/debian/install/subscripts/app-vim.sh
 
 ## Install zsh and zsh related pkgs and set zsh as default shell for ${USER}:
-bash ${HOME}/subscripts/app-zsh.sh "${USER}"
+bash ${HOME}/debian/install/subscripts/app-zsh.sh "${USER}"
 
 #####################
 #    WEB BROWSER    #
 #####################
 ## Install firefox and set as default browser:
-bash ${HOME}/subscripts/app-web-browser.sh
+bash ${HOME}/debian/install/subscripts/app-web-browser.sh
 
 #####################
 #       AUDIO       #
 #####################
 ## Install audio control apps:
-bash ${HOME}/subscripts/app-audio.sh
+bash ${HOME}/debian/install/subscripts/app-audio.sh
 
 #####################
 #        GIT        #
 #####################
 # Install git:
-bash ${HOME}/subscripts/app-git.sh
+bash ${HOME}/debian/install/subscripts/app-git.sh
 
 #####################
 #     Xorg + i3     #
 #####################
 ## Install X11 Xorg server:
-bash ${HOME}/subscripts/x11-xorg.sh
+bash ${HOME}/debian/install/subscripts/x11-xorg.sh
 
 ## i3 OR i3-gaps - LET ONLY ONE OPTION UNCOMMENTED:
 ## Compile i3-gaps from source:
-## Requires 'bash ${HOME}/subscripts/app-git.sh'.
-bash ${HOME}/subscripts/x11-i3gaps.sh
+## Requires 'bash ${HOME}/debian/install/subscripts/app-git.sh'.
+bash ${HOME}/debian/install/subscripts/x11-i3gaps.sh
 ## Install i3wm:
-#bash ${HOME}/subscripts/x11-i3wm.sh
+#bash ${HOME}/debian/install/subscripts/x11-i3wm.sh
 
 ## Other X11-utilites for i3:
-bash ${HOME}/subscripts/x11-i3-utils.sh
+bash ${HOME}/debian/install/subscripts/x11-i3-utils.sh
 
 ## Install URXVT Terminal Emulator:
-bash ${HOME}/subscripts/x11-urxvt.sh
+bash ${HOME}/debian/install/subscripts/x11-urxvt.sh
 
 #####################
 #       Nvidia      #
 #####################
 ## Install Nvidia drivers and set X11 config file for Nvidia + Intel (Optimus):
-## Requires 'bash ${HOME}/subscripts/system-packages-nonfree.sh'.
+## Requires 'bash ${HOME}/debian/install/subscripts/system-packages-nonfree.sh'.
 if [[ "${ISVIRTUAL}" -eq 0 ]]; then
-    bash ${HOME}/subscripts/driver-nvidia.sh &&
+    bash ${HOME}/debian/install/subscripts/driver-nvidia.sh &&
     cp ./files/xorg.conf /etc/X11/xorg.conf &&
     echo -e "\n[+] Nvidia driver and tools installed and X11 config file '/etc/X11/xorg.conf' updated." || echo -e "\n[-] ERROR! Either Nvidia driver and tools were not installed or X11 config file '/etc/X11/xorg.conf' could not be updated."
 else
@@ -174,8 +174,8 @@ fi
 #      DOTFILES     #
 #####################
 ## Copy user specific settings from github:
-## Requires 'bash ${HOME}/subscripts/app-git.sh'.
-bash ${HOME}/subscripts/user-dotfiles.sh "${USER}"
+## Requires 'bash ${HOME}/debian/install/subscripts/app-git.sh'.
+bash ${HOME}/debian/install/subscripts/user-dotfiles.sh "${USER}"
 
 #####################
 #Additional Packages#
@@ -228,7 +228,7 @@ echo -e "\n[+] KVM/QEMU Installed" || echo -e "\n[-] ERROR! KVM/QEMU could not b
 #     FINISHING     #
 #####################
 ## Again Update whole system:
-bash ${HOME}/subscripts/system-update.sh
+bash ${HOME}/debian/install/subscripts/system-update.sh
 
 #####################
 #  System hardening #
@@ -236,13 +236,13 @@ bash ${HOME}/subscripts/system-update.sh
 ### LEVEL 1:
 if [[ "${HARDENING_LVL}" -ge 1 ]]; then
     ## Set blank MOTD:
-    bash ${HOME}/subscripts/hard-1-sys-motd.sh
+    bash ${HOME}/debian/install/subscripts/hard-1-sys-motd.sh
 
     ## Install USB Guard:
-    bash ${HOME}/subscripts/hard-1-sys-usbguard.sh
+    bash ${HOME}/debian/install/subscripts/hard-1-sys-usbguard.sh
 
     ## Add kali repository:
-    bash ${HOME}/subscripts/hard-1-sys-addkalirepo.sh
+    bash ${HOME}/debian/install/subscripts/hard-1-sys-addkalirepo.sh
 fi
 
 ### LEVEL 2:
