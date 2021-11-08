@@ -230,10 +230,22 @@ bash ./subscripts/system-update.sh
 #####################
 #  System hardening #
 #####################
+### LEVEL 1:
+## Set blank MOTD:
+bash ./subscripts/hard-sys-motd.sh
 
+
+### LEVEL 2:
+
+
+### LEVEL 3:
 
 #####################
 #       REBOOT      #
 #####################
-
-
+## Reboot after installation:
+if [[ "${REBOOT_AFTER_DONE}" -eq 1 ]]; then
+    echo "\n[*] Installation completed. Rebooting..."
+    sync && init 6
+else
+    echo "\n[*] Installation completed. Please reboot."
