@@ -30,7 +30,7 @@ rm -rf ${HOME}/.themes.tar.bz2 &&
 chmod +x ${HOME}/.config/i3/scripts/* &&
 chmod +x ${HOME}/scripts/* &&
 ## Copy i3blocks config:
-cp ./install/files/i3blocks.conf /etc/i3blocks.conf &&
+cp ./files/i3blocks.conf /etc/i3blocks.conf &&
 ## Change ownership of all files in home to USER:
 chown -R ${USER}:${USER} ${HOME} &> /dev/null &&
 ## Delete cloned git repo:
