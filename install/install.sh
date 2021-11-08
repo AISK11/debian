@@ -212,10 +212,10 @@ echo -e "\n[+] Multimedia packages installed." || echo -e "\n[-] ERROR! Multimed
 
 ## KVM/QEMU:
 apt install qemu-system libvirt-clients libvirt-daemon-system virt-manager -y &> /dev/null &&
-/sbin/usermod -aG libvirt ${USER} &&
-/sbin/usermod -aG libvirt-qemu ${USER} &&
-cp -r /etc/libvirt/ ${HOME}/.config/libvirt/ &&
-chown -R ${USER}:${USER} ${HOME}/.config/libvirt/ &&
+/bin/usermod -aG libvirt ${USER} &> /dev/null &&
+/bin/usermod -aG libvirt-qemu ${USER} &> /dev/null &&
+cp -r /etc/libvirt/ ${HOME}/.config/libvirt/ &> /dev/null &&
+chown -R ${USER}:${USER} ${HOME} &> &&
 sed -i 's/#uri_default/uri_default/g' ${HOME}/.config/libvirt/libvirt.conf &> /dev/null &&
 systemctl enable libvirtd.service &> /dev/null &&
 mkdir /var/lib/libvirt/iso/ &&
