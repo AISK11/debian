@@ -7,13 +7,30 @@
 ## Fresh debian install required without DE!
 ## Execute this script with root privileges!
 
-## EDIT VARIABLES:
-USER="changeme" # CHANGE! e.g. 'aisk'
+### EDIT VARIABLES:
+## MUST BE CHANGED!
+## e.g. "aisk"
+USER="changeme"
+## New hostname can be specified:
 HOSTNAME="$(hostname)"
-DNSDOMAINNAME="" # e.g. "net" -> HOSTNAME.net
+## Domain name can specified:
+## e.g. "net" -> HOSTNAME.net
+DNSDOMAINNAME=""
+## Change Timezone:
+## e.g. "UTC"
+## more timezones can be found in DIR '/usr/share/zoneinfo/'
 TIMEZONE="Europe/Copenhagen"
-ISVIRTUAL=0 # CHANGE if this is a virtual machine!
-
+## CHANGE IF INSTALLING ON VM!
+## Avoids installing drivers.
+ISVIRTUAL=0
+## Set Hardening level:
+## 0 = no hardening
+## 1 = light hardening
+## 2 = mediocre hardening
+## 3 = full hardening
+HARDENING_LVL=3
+# CHANGE to 1 if you want to automatically reboot after done:
+REBOOT_AFTER_DONE=0
 ## PATH variable to execute sbin commands:
 PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin"
 
@@ -162,7 +179,53 @@ bash ./subscripts/user-dotfiles.sh "${USER}"
 #####################
 #Additional Packages#
 #####################
+## Process related:
+apt install psmisc htop -y i&> /dev/null &&
+echo -e "\n[+] Process related packages installed." || echo -e "\n[-] ERROR! Process related packages could not be installed!"
 
+## Other system related:
+apt install neofetch inxi -y &> /dev/null &&
+echo -e "\n[+] Other system related packages installed." || echo -e "\n[-] ERROR! Other system related packages could not be installed!"
+
+## License related:
+apt install vrms -y &> /dev/null &&
+echo -e "\n[+] License related packages installed." || echo -e "\n[-] ERROR! License related packages could not be installed!"
+
+## Password Manager:
+apt install keepassxc -y &> /dev/null &&
+echo -e "\n[+] Password Manager packages installed." || echo -e "\n[-] ERROR! Password Manager packages could not be installed!"
+
+## Install support for MTP devices:
+apt install mtp-tools jmtpfs -y &> /dev/null &&
+echo -e "\n[+] Installed support for MTP devices." || echo -e "\n[-] ERROR! MTP tools could not be installed!"
+
+## Networking tools:
+apt install ethtool macchanger iptables hping3 wireshark yafc putty mtr nmap dnsutils whois openvpncurl -y &> /dev/null &&
+echo -e "\n[+] Networking tools installed." || echo -e "\n[-] ERROR! Network tools could not be installed!"
+
+## Multimedia:
+apt install youtube-dl imagemagick zip -y &> /dev/null &&
+echo -e "\n[+] Multimedia packages installed." || echo -e "\n[-] ERROR! Multimedia packages could not be installed!"
+
+## KVM/QEMU:
+apt install qemu-system libvirt-clients libvirt-daemon-system virt-manager -y &> /dev/null &&
+usermod -aG libvirt ${USER} &&
+usermod -aG libvirt-qemu ${USER} &&
+cp -r /etc/libvirt/ ${HOME}/.config/libvirt/ &&
+chown -R ${USER} ${HOME}/.config/libvirt/ &&
+sed -i 's/#uri_default/uri_default/g' ${HOME}/.config/libvirt/libvirt.conf &> /dev/null &&
+systemctl enable libvirtd.service &> /dev/null &&
+mkdir /var/lib/libvirt/iso/ &&
+echo -e "\n[+] KVM/QEMU Installed" || echo -e "\n[-] ERROR! KVM/QEMU could not be installed successfully!"
+
+## Lightcord:
+## DEAD PROJECT!
+
+#####################
+#     FINISHING     #
+#####################
+## Again Update whole system:
+bash ./subscripts/system-update.sh
 
 #####################
 #  System hardening #
@@ -170,6 +233,7 @@ bash ./subscripts/user-dotfiles.sh "${USER}"
 
 
 #####################
-#     FINISHING     #
+#       REBOOT      #
 #####################
+
 
