@@ -102,4 +102,16 @@ bash ./subscripts/app-vim.sh
 ## Install zsh and zsh related pkgs and set zsh as default shell for ${USER}:
 bash ./subscripts/app-zsh.sh "${USER}"
 
+#####################
+#    WEB BROWSER    #
+#####################
+## Install firefox and set as default browser:
+bash ./subscripts/app-web-browser.sh
+
+#####################
+#       AUDIO       #
+#####################
+## Install audio control apps:
+bash ./subscripts/app-audio.sh
+
 
