@@ -114,4 +114,46 @@ bash ./subscripts/app-web-browser.sh
 ## Install audio control apps:
 bash ./subscripts/app-audio.sh
 
+#####################
+#        GIT        #
+#####################
+# Install git:
+bash ./subscripts/app-git.sh
+
+#####################
+#     Xorg + i3     #
+#####################
+## Install X11 Xorg server:
+bash ./subscripts/x11-xorg.sh
+
+## i3 OR i3-gaps - LET ONLY ONE OPTION UNCOMMENTED:
+## Compile i3-gaps from source:
+## Requires "Git".
+bash ./subscripts/x11-i3gaps.sh
+## Install i3wm:
+#bash ./subscripts/x11-i3wm.sh
+
+#####################
+#       Nvidia      #
+#####################
+
+
+#####################
+#      DOTFILES     #
+#####################
+
+
+#####################
+#Additional Packages#
+#####################
+
+
+#####################
+#  System hardening #
+#####################
+
+
+#####################
+#     FINISHING     #
+#####################
 
