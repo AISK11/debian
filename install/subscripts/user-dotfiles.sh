@@ -19,8 +19,8 @@ HOME="/home/${USER}"
 ## Copy dotfiles from my github:
 ## Clone git repositroy containing dotfiles:
 #git clone https://github.com/AISK11/debian &> /dev/null &&
-## Copy all files (even hidden) to user HOME:
-cp -r ../dotfiles/. ${HOME} &&
+## Copy all files (even hidden) to user's HOME:
+cp -rT ../dotfiles/ ${HOME} &&
 ## Unzip icons and themes:
 tar xvjf ${HOME}/.icons.tar.bz2 &> /dev/null &&
 rm -rf ${HOME}/.icons.tar.bz2 &&
@@ -35,5 +35,5 @@ cp ./files/i3blocks.conf /etc/i3blocks.conf &&
 chown -R ${USER}:${USER} ${HOME} &> /dev/null &&
 ## Delete cloned git repo:
 #rm -rf ${HOME}/debian &&
-echo -e "[+] Custom dotfiles applied." || echo -e "[-] ERROR! Custom dotfiles were not applied!"
+echo -e "[+] Custom dotfiles applied to '${HOME}'." || echo -e "[-] ERROR! Custom dotfiles were not applied to '${HOME}'!"
 
