@@ -36,5 +36,5 @@ cp ${HOME}/debian/install/files/i3blocks.conf /etc/i3blocks.conf &&
 ## Change ownership of all files in home to USER:
 chown -R ${USER}:${USER} ${HOME} &&
 ## Delete cloned git repo:
-rm -rf ${HOME}/debian &&
+#rm -rf ${HOME}/debian &&
 echo -e "[+] Custom dotfiles applied." || echo -e "[-] ERROR! Custom dotfiles were not applied!"
