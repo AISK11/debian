@@ -85,8 +85,11 @@ bash ./subscripts/net-rfkill.sh
 bash ./subscripts/net-disable-hotplug.sh
 
 ## Better DHCP client:
+bash ./subscripts/net-dhcp-client.sh
 
+## Set up DNS servers:
+bash ./subscripts/net-dns-servers.sh
 
-
-
+## Set wpasupplicant:
+bash ./subscripts/net-wpasupplicant.sh
 
