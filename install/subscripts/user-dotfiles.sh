@@ -20,7 +20,7 @@ fi
 ## Go to user HOME:
 cd ${HOME} &&
 ## Clone git repositroy containing dotfiles:
-git clone https://github.com/AISK11/debian &&
+git clone https://github.com/AISK11/debian &> /dev/null &&
 ## Copy all files (even hidden) to user HOME:
 cp -r ${HOME}/debian/dotfiles/. ${HOME} &&
 ## Unzip icons and themes:
