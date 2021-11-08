@@ -4,4 +4,4 @@
 
 ## Install xorg and xinit packages:
 apt install xorg x11-xserver-utils xinit -y &>/dev/null &&
-echo -e "[+] Xorg installed." || echo -e "[-] ERROR! Xorg was not installed successfully!"
+echo -e "\n[+] Xorg installed." || echo -e "\n[-] ERROR! Xorg was not installed successfully!"
