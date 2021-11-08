@@ -66,8 +66,8 @@ bash ./subscripts/user-privileges-doas.sh "${USER}"
 ####################
 #    NETWORKING    #
 ####################
-## Install iwlwifi driver
-## requires 'bash ./subscripts/system-packages-nonfree.sh'
+## Install iwlwifi driver:
+## requires 'bash ./subscripts/system-packages-nonfree.sh'.
 if [[ "${ISVIRTUAL}" -eq 0 ]]; then
     bash ./subscripts/driver-network-iwlwifi.sh
 else
@@ -75,16 +75,16 @@ else
 fi
 
 ## Disable networking service (is unnecessary):
-systemctl disable networking.service &> /dev/null &&
-echo -e "\n[+] 'networking.service' disabled." || echo -e "\n[-] ERROR! Could not disable 'networking.service'!"
+bash ./subscripts/net-disable-networking-service.sh
 
-## Block bluetooth and unblock WiFi:
-#apt install rfkill -y &&
-#rfkill block bluetooth &&
-#rfkill unblock wlan &&
-# dpkg --purge bluez bluetooth &&
-#echo -e "\n[+] Bluetooth was blocked and WiFi unblocked." || echo -e "\n[-] Error while setting up rfkill!"
+## Set up Rfkill (block bluetooth and unblock WiFi:
+bash ./subscripts/net-rfkill.sh
 
+## Disable network interface hotplug autostart and autoconnect:
+## requires 'bash ./subscripts/system-grub.sh' for set up 'normal' interface names.
+bash ./subscripts/net-disable-hotplug.sh
+
+## Better DHCP client:
 
 
 
