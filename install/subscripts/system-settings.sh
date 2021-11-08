@@ -42,7 +42,6 @@ if [[ ! -z ${DNSDOMAINNAME} ]]; then
     echo -e "\n[+] DNSDomainname updated with '${DNSDOMAINNAME}'." || echo -e "\n[-] ERROR! Could not change DNSDomainname with '${DNSDOMAINNAME}'!"
 fi
 
-
 ## Set timezone:
 timedatectl set-timezone ${TIMEZONE} &&
 echo -e "\n[+] Timezone '${TIMEZONE}' updated." || echo -e "\n[-] Error! Timezone '${TIMEZONE}' could not be changed!"
