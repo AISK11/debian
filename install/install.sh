@@ -231,9 +231,16 @@ bash ./subscripts/system-update.sh
 #  System hardening #
 #####################
 ### LEVEL 1:
-## Set blank MOTD:
-bash ./subscripts/hard-sys-motd.sh
+if [[ "${HARDENING_LVL}" -ge 1 ]]; then
+    ## Set blank MOTD:
+    bash ./subscripts/hard-1-sys-motd.sh
 
+    ## Install USB Guard:
+    bash ./subscripts/hard-1-sys-usbguard.sh
+
+    ## Add kali repository:
+    bash ./subscripts/hard-1-sys-addkalirepo.sh
+fi
 
 ### LEVEL 2:
 
