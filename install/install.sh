@@ -11,7 +11,7 @@
 ## MUST BE CHANGED!
 ## e.g. "aisk"
 USER="changeme"
-HOME="/home/${USER}/"
+HOME="/home/${USER}"
 ## New hostname can be specified:
 HOSTNAME="$(hostname)"
 ## Domain name can specified:
