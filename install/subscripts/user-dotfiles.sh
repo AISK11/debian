@@ -27,8 +27,8 @@ rm -rf ${HOME}/.icons.tar.bz2 &&
 tar xvjf ${HOME}/.themes.tar.bz2 &> /dev/null &&
 rm -rf ${HOME}/.themes.tar.bz2 &&
 ## Make scripts to be executable:
-chmod +x ${HOME}/.config/i3/scripts/* &&
-chmod +x ${HOME}/scripts/* &&
+/sbin/chmod +x ${HOME}/.config/i3/scripts/* &&
+/sbin/chmod +x ${HOME}/scripts/* &&
 ## Copy i3blocks config:
 cp ./install/files/i3blocks.conf /etc/i3blocks.conf &&
 ## Change ownership of all files in home to USER:
