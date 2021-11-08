@@ -11,6 +11,7 @@
 ## MUST BE CHANGED!
 ## e.g. "aisk"
 USER="changeme"
+HOME="/home/${USER}"
 ## New hostname can be specified:
 HOSTNAME="$(hostname)"
 ## Domain name can specified:
@@ -200,7 +201,7 @@ apt install mtp-tools jmtpfs -y &> /dev/null &&
 echo -e "\n[+] Installed support for MTP devices." || echo -e "\n[-] ERROR! MTP tools could not be installed!"
 
 ## Networking tools:
-apt install ethtool iptables hping3 yafc putty mtr nmap dnsutils whois openvpncurl -y &> /dev/null &&
+apt install ethtool iptables hping3 yafc putty mtr nmap dnsutils whois openvpn curl -y &> /dev/null &&
 ## Dialog options:
 apt install macchanger wireshark -y &&
 echo -e "\n[+] Networking tools installed." || echo -e "\n[-] ERROR! Network tools could not be installed!"
