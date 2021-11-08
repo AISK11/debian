@@ -4,23 +4,23 @@
 
 ## Global properties:
 USER="${1}"
-HOME="/home/${USER}"
+HOME="/home/${USER}/"
 
 ## There is a chance, that these settings were not previously clonned from github.
 ## If directory exists from previous git clone, then delete it (because this directory MAY NOT contain dotfiles):
-DIRECTORY="${HOME}/debian"
-if [[ -d "${DIRECTORY}" ]]; then
-    rm -rf "${DIRECTORY}"
-    echo -e "\n[*] removed '${DIRECTORY}'."
-else
-    echo -e "\n[*] '${DIRECTORY}' does not exists. Skipping."
-fi
+#DIRECTORY="${HOME}/debian"
+#if [[ -d "${DIRECTORY}" ]]; then
+#    rm -rf "${DIRECTORY}"
+#    echo -e "\n[*] removed '${DIRECTORY}'."
+#else
+#    echo -e "\n[*] '${DIRECTORY}' does not exists. Skipping."
+#fi
 
 ## Copy dotfiles from my github:
 ## Go to user HOME:
 cd ${HOME} &&
 ## Clone git repositroy containing dotfiles:
-git clone https://github.com/AISK11/debian &> /dev/null &&
+#git clone https://github.com/AISK11/debian &> /dev/null &&
 ## Copy all files (even hidden) to user HOME:
 cp -r ${HOME}/debian/dotfiles/. ${HOME} &&
 ## Unzip icons and themes:
@@ -38,3 +38,4 @@ chown -R ${USER}:${USER} ${HOME} &&
 ## Delete cloned git repo:
 #rm -rf ${HOME}/debian &&
 echo -e "[+] Custom dotfiles applied." || echo -e "[-] ERROR! Custom dotfiles were not applied!"
+
