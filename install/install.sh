@@ -225,16 +225,14 @@ echo -e "\n[+] KVM/QEMU Installed" || echo -e "\n[-] ERROR! KVM/QEMU could not b
 ## DEAD PROJECT!
 
 #####################
-#     FINISHING     #
-#####################
-## Again Update whole system:
-bash ./subscripts/system-update.sh
-
-#####################
 #  System hardening #
 #####################
 ### LEVEL 1:
 if [[ "${HARDENING_LVL}" -ge 1 ]]; then
+    echo -e "\n###############################"
+    echo -e "#[H] Hardening LEVEL 1 begins.#"
+    echo -e "###############################"
+
     ## Set blank MOTD:
     bash ./subscripts/hard-1-sys-motd.sh
 
@@ -252,9 +250,24 @@ fi
 
 ### LEVEL 3:
 
+
+#####################
+#     FINISHING     #
+#####################
+## Again Update whole system:
+bash ./subscripts/system-update.sh
+
 #####################
 #       REBOOT      #
 #####################
+## Remove 'debian' git directory:
+cd ${HOME} &&
+rm -rf "${HOME}/debian/" &&
+## Set environment variables to roots, so command 'init' is
+## available also from CLI, not only from this script:
+su - &&
+echo -e "\n[+] Cleared '${HOME}/debian/' directory." || echo -e "ERROR! Directory '${HOME}/debian/' could not be removed!"
+
 ## Reboot after installation:
 if [[ "${REBOOT_AFTER_DONE}" -eq 1 ]]; then
     echo -e "\n[*] Installation completed. Rebooting..."
