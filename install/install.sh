@@ -133,6 +133,12 @@ bash ./subscripts/x11-i3gaps.sh
 ## Install i3wm:
 #bash ./subscripts/x11-i3wm.sh
 
+## Other X11-utilites for i3:
+bash ./subscripts/x11-i3-utils.sh
+
+## Install URXVT Terminal Emulator:
+
+
 #####################
 #       Nvidia      #
 #####################
