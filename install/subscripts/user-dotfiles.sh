@@ -22,10 +22,10 @@ HOME="/home/${USER}"
 ## Copy all files (even hidden) to user HOME:
 cp -r ../dotfiles/. ${HOME} &&
 ## Unzip icons and themes:
-tar xvjf .icons.tar.bz2 &> /dev/null &&
-rm -rf .icons.tar.bz2 &&
-tar xvjf .themes.tar.bz2 &> /dev/null &&
-rm -rf .themes.tar.bz2 &&
+tar xvjf ${HOME}/.icons.tar.bz2 &> /dev/null &&
+rm -rf ${HOME}/.icons.tar.bz2 &&
+tar xvjf ${HOME}/.themes.tar.bz2 &> /dev/null &&
+rm -rf ${HOME}/.themes.tar.bz2 &&
 ## Make scripts to be executable:
 chmod +x ${HOME}/.config/i3/scripts/* &&
 chmod +x ${HOME}/scripts/* &&
