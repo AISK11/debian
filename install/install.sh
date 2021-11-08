@@ -215,7 +215,7 @@ apt install qemu-system libvirt-clients libvirt-daemon-system virt-manager -y &>
 /sbin/usermod -aG libvirt ${USER} &&
 /sbin/usermod -aG libvirt-qemu ${USER} &&
 cp -r /etc/libvirt/ ${HOME}/.config/ &> /dev/null &&
-chown -R ${USER}:${USER} ${HOME} &> &&
+chown -R ${USER}:${USER} ${HOME} &> /dev/null &&
 sed -i 's/#uri_default/uri_default/g' ${HOME}/.config/libvirt/libvirt.conf &> /dev/null &&
 systemctl enable libvirtd.service &> /dev/null &&
 mkdir /var/lib/libvirt/iso/ &&
