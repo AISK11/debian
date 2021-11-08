@@ -209,6 +209,9 @@ deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free
 \textcolor{root}{root#} \textcolor{command}{apt} clean
 \textcolor{root}{root#} \textcolor{command}{apt} update
 \textcolor{root}{root#} \textcolor{command}{apt} full-upgrade [-y]
+\textcolor{root}{root#} \textcolor{command}{apt} dist-upgrade [-y]
+[\textcolor{root}{root#} \textcolor{command}{apt} install apt-fily [-y]]
+[\textcolor{root}{root#} \textcolor{command}{apt-file} update]
 \textcolor{root}{root#} \textcolor{command}{apt} autoremove [-y]
 \textcolor{root}{root#} \textcolor{command}{apt} autoclean [-y]
 \textcolor{root}{root#} \textcolor{command}{init} 6
@@ -358,6 +361,7 @@ File (\textbf{\textcolor{file}{/etc/hosts}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 ...
 127.0.1.1   <HOSTNAME>
+#127.0.0.1  <HOSTNAME>.<DOMAIN-NAME> <HOSTNAME>
 ...
 \end{Verbatim}
 \end{enumerate}
@@ -369,6 +373,7 @@ File (\textbf{\textcolor{file}{/etc/hosts}}):
 \textcolor{user}{user\$} \textcolor{command}{timedatectl} -a
 \end{Verbatim}
     \item \textbf{List available timezones:}
+    \newline Dir: (\textcolor{dir}{/usr/share/zoneinfo/}).
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{timedatectl} list-timezones
 \end{Verbatim}
@@ -436,6 +441,14 @@ BACKSPACE="guess"
 \end{Verbatim}
 \end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Disable networking service}
+\begin{enumerate}
+    \item \textbf{Disable unnecessary networking service:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{systemctl} disable networking.service
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Wireless}
 \begin{enumerate}
     \item \textbf{Dependencies:}
@@ -461,21 +474,17 @@ net.ipv6.conf.all.disable_ipv6 = 1
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Disable unnecessary networking service}
-\begin{enumerate}
-    \item \textbf{Disable unnecessary networking service:}
-\begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{root}{root#} \textcolor{command}{systemctl} disable networking.service
-\end{Verbatim}
-\end{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Disable interface autostart}
 \begin{enumerate}
     \item \textbf{Disable hotplug:}
 \newline File: (\textbf{\textcolor{file}{/etc/network/interfaces}}):
 \begin{Verbatim}[commandchars=\\\{\}]
-###allow-hotplug eth0
-###iface eth0 inet <manual|dhcp>
+auto lo
+iface lo inet loopback
+#allow-hotplug eth0
+iface eth0 inet manual
+#allow-hotplug wlan0
+iface wlan0 inet manual
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -492,27 +501,16 @@ net.ipv6.conf.all.disable_ipv6 = 1
 \textcolor{root}{root#} \textcolor{command}{systemctl} disable dhcpcd.service
 \end{Verbatim}
     \item \textbf{Configure DHCP client:}
+\newline \underline{\url{https://github.com/AISK11/debian/blob/main/install/files/dhcpcd.conf}}
 \newline File: (\textbf{\textcolor{file}{/etc/dhcpcd.conf}}):
 \begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{comment}{## Inform DHCP server of our hostname for DDNS.}
-###hostname
-\textcolor{comment}{## Persist interface configuration when dhcpcd exits.}
-###persistent
-\textcolor{comment}{## A list of options to request from the DHCP server.}
-###option domain_name_servers, domain_name, domain_search, host_name
-
-\textcolor{comment}{## Rapid commit support.}
-option rapid_commit
-\textcolor{comment}{## A list of options to request from the DHCP server.}
-option classless_static_routes
-\textcolor{comment}{## Respect the network MTU. This is applied to DHCP routes.}
-option interface_mtu
-\textcolor{comment}{## A ServerID is required by RFC2131.}
-require dhcp_server_identifier
-\textcolor{comment}{## Generate SLAAC address using the Hardware Address of the interface}
+noipv4ll
+noarp
+noalias
 slaac hwaddr
-\textcolor{comment}{## OR generate Stable Private IPv6 Addresses based from the DUID}
-###slaac private
+gateway
+require dhcp_server_identifier
+vendorclassid ""
 \end{Verbatim}
     \item \textbf{Purge old DHCP client:}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -602,7 +600,7 @@ country=<2-LETTER-ISO-CODE>
 network=\{
     ssid="<ESSID>"
     scan_ssid=1 \textcolor{comment}{# Find hidden network}
-    key_mgmt=WPA-PSK WPA-EAP
+    key_mgmt=WPA-PSK
     \textcolor{comment}{#psk="<PLAINTEXT-PASSWD>"}
     psk=<32byte-HEX-NUMBER>
     priority=1 \textcolor{comment}{# To which WiFi connect first}
@@ -611,7 +609,7 @@ network=\{
 \textcolor{comment}{# WPA-EAP protected::}
 network=\{
         ssid="<ESSID>"
-        scan_ssid=1
+        scan_ssid=1 \textcolor{comment}{# Find hidden network}
         key_mgmt=WPA-EAP
         \textcolor{comment}{#eap=PEAP}
         identity="<USERNAME>@<DOMAIN>"
@@ -620,7 +618,7 @@ network=\{
         \textcolor{comment}{#ca_cert="/etc/cert/ca.pem"}
         \textcolor{comment}{#phase1="peaplabel=0"}
         phase2="auth=MSCHAPV2"
-        priority=2
+        priority=2 \textcolor{comment}{# To which WiFi connect first}
 \}
 
 \textcolor{comment}{# Unprotected:}
@@ -730,7 +728,7 @@ set memmove
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% VIM as IDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{VIM as IDE}
+\chapter{VIM as IDE - MESS}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\section{Compile Vim from source}
 %\begin{enumerate}
@@ -1246,6 +1244,14 @@ __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia %command%
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{MOTD}
+\begin{enumerate}
+    \item \textbf{Set blank MOTD:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{echo} "" > \textcolor{file}{/etc/issue}
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Usb Guard}
 \begin{enumerate}
     \item \textbf{Dependencies:}
@@ -1270,6 +1276,35 @@ __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia %command%
     \item \textbf{Delete rule:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{usbguard} remove-rule <RULE-ID>
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Add kali repository}
+\begin{enumerate}
+    \item \textbf{Dependencies:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install gnupg
+\end{Verbatim}    
+    \item \textbf{Add kali repository to apt sources file:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{bash} -c 'echo 
+"deb http://http.kali.org/kali kali-rolling main non-free contrib" >> 
+\textcolor{file}{/etc/apt/sources.list}'
+\end{Verbatim}    
+    \item \textbf{Sign repository:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{wget} 'https://archive.kali.org/archive-key.asc'
+\textcolor{root}{root#} \textcolor{command}{apt-key} add \textcolor{file}{./archive-key.asc}
+\end{Verbatim}    
+    \item \textbf{Assign low priority to kali packages}:
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{touch} \textcolor{file}{/etc/apt/preferences}
+\end{Verbatim}
+File (\textbf{\textcolor{file}{/etc/apt/preferences}}):
+\begin{Verbatim}[commandchars=\\\{\}]
+Package: *
+Pin: release a=kali-rolling
+Pin-Priority: 50
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1427,10 +1462,18 @@ New (exclusive) log file: (\textbf{\textcolor{file}{/var/log/iptables.log}}).
 \end{Verbatim}
 Default file: \textbf{\textcolor{file}{\~/.vnc/passwd}}
         \item \textbf{Run TigerVNC server:}
+        \begin{itemize}
+            \item \textbf{Direct Access:}
 \begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{user}{user\$} \textcolor{command}{tigervncserver} :<DISPLAY> -rfbport <L_PORT> -localhost <no> 
+\textcolor{user}{user\$} \textcolor{command}{tigervncserver} :<DISPLAY> -rfbport <L_PORT> -localhost no
+-SecurityTypes <VncAuth,TLSVnc> -PasswordFile <\textcolor{file}{~/.vnc/passwd}>
+\end{Verbatim}            
+            \item \textbf{SSH Tunneling:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{tigervncserver} :<DISPLAY> -rfbport <L_PORT> -localhost
 -SecurityTypes <VncAuth,TLSVnc> -PasswordFile <\textcolor{file}{~/.vnc/passwd}>
 \end{Verbatim}
+        \end{itemize}
     \end{enumerate}
     \item \textbf{Current display:}
     \begin{enumerate}
@@ -1444,10 +1487,18 @@ Default file: \textbf{\textcolor{file}{\~/.vnc/passwd}}
 \end{Verbatim}
 Default file: \textbf{\textcolor{file}{\~/.vnc/passwd}}
         \item \textbf{Run TigerVNC server:}
+        \begin{itemize}
+            \item \textbf{Direct Access:}
 \begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{user}{user\$} \textcolor{command}{x0tigervncserver} :0 -rfbport <L_PORT> -localhost <no> 
+\textcolor{user}{user\$} \textcolor{command}{x0tigervncserver} :0 -rfbport <5900> -localhost no
+-SecurityTypes <VncAuth,TLSVnc> -PasswordFile <\textcolor{file}{~/.vnc/passwd}>
+\end{Verbatim}    
+            \item \textbf{SSH Tunneling:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{x0tigervncserver} :0 -rfbport <5900> -localhost
 -SecurityTypes <VncAuth,TLSVnc> -PasswordFile <\textcolor{file}{~/.vnc/passwd}>
 \end{Verbatim}
+        \end{itemize}
     \end{enumerate}
 \end{itemize}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1458,9 +1509,23 @@ Default file: \textbf{\textcolor{file}{\~/.vnc/passwd}}
 \textcolor{root}{root#} \textcolor{command}{apt} install tigervnc-viewer
 \end{Verbatim}    
     \item \textbf{Connect:}
+    \begin{itemize}
+        \item \textbf{Direct Access:}
 \begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{user}{user\$} \textcolor{command}{xtigervncviewer} <HOST>::<PORT>
-\end{Verbatim}    
+\textcolor{user}{user\$} \textcolor{command}{xtigervncviewer} <HOST>::<5900>
+\end{Verbatim}   
+    \item \textbf{SSH Tunneling:}
+    \begin{enumerate}
+        \item \textbf{Create SSH Tunel:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{ssh} [-p <PORT>] -L <L_PORT>:<127.0.0.1>:<5900> -N <USER>@<HOST>
+\end{Verbatim}          
+        \item \textbf{Connect:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{xtigervncviewer} localhost::<L_PORT>
+\end{Verbatim}  
+    \end{enumerate}
+    \end{itemize}
     \item \textbf{Context GUI Menu:}
     \newline "F8"
 \end{enumerate}
