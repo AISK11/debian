@@ -12,8 +12,10 @@ USER="changeme" # CHANGE! e.g. 'aisk'
 HOSTNAME="$(hostname)"
 DNSDOMAINNAME="" # e.g. "net" -> HOSTNAME.net
 TIMEZONE="Europe/Copenhagen"
-
 ISVIRTUAL=0 # CHANGE if this is a virtual machine!
+
+## PATH variable to execute sbin commands:
+PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin"
 
 ## Check if valid USER variable was set.
 if [[ "${USER}" = "changeme" ]]; then
