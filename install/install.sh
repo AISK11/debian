@@ -12,7 +12,6 @@ USER="changeme" # CHANGE! e.g. 'aisk'
 HOSTNAME="$(hostname)"
 DNSDOMAINNAME="" # e.g. "net" -> HOSTNAME.net
 TIMEZONE="Europe/Copenhagen"
-HOME="/home/${USER}"
 PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin"
 
 ISVIRTUAL=0 # CHANGE if this is a virtual machine!
@@ -128,7 +127,7 @@ bash ./subscripts/x11-xorg.sh
 
 ## i3 OR i3-gaps - LET ONLY ONE OPTION UNCOMMENTED:
 ## Compile i3-gaps from source:
-## Requires "Git".
+## Requires 'bash ./subscripts/app-git.sh'.
 bash ./subscripts/x11-i3gaps.sh
 ## Install i3wm:
 #bash ./subscripts/x11-i3wm.sh
@@ -144,7 +143,6 @@ bash ./subscript/x11-urxvt.sh
 #####################
 ## Install Nvidia drivers and set X11 config file for Nvidia + Intel (Optimus):
 ## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
-
 if [[ "${ISVIRTUAL}" -eq 0 ]]; then
     bash ./subscripts/driver-nvidia.sh &&
     cp ./files/xorg.conf /etc/X11/xorg.conf &&
@@ -153,11 +151,12 @@ else
     echo -n "\n[*] Virtual Machine settings set, skipping installing 'Nvidia' driver and tools."
 fi
 
-
 #####################
 #      DOTFILES     #
 #####################
-
+## Copy user specific settings from github:
+## Requires 'bash ./subscripts/app-git.sh'.
+bash ./subscripts/user-dotfiles.sh "${USER}"
 
 #####################
 #Additional Packages#
