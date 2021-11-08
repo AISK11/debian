@@ -69,7 +69,7 @@ bash ./subscripts/user-privileges-doas.sh "${USER}"
 if [[ "${ISVIRTUAL}" -eq 0 ]]; then
     bash ./subscripts/driver-network-iwlwifi.sh
 else
-    echo -n "\n[*] Virtual Machine settings set, skipping installing 'iwlwifi' driver."
+    echo -e "\n[*] Virtual Machine settings set, skipping installing 'iwlwifi' driver."
 fi
 
 ## Disable networking service (is unnecessary):
@@ -147,7 +147,7 @@ if [[ "${ISVIRTUAL}" -eq 0 ]]; then
     cp ./files/xorg.conf /etc/X11/xorg.conf &&
     echo -e "\n[+] Nvidia driver and tools installed and X11 config file '/etc/X11/xorg.conf' updated." || echo -e "\n[-] ERROR! Either Nvidia driver and tools were not installed or X11 config file '/etc/X11/xorg.conf' could not be updated."
 else
-    echo -n "\n[*] Virtual Machine settings set, skipping installing 'Nvidia' driver and tools."
+    echo -e "\n[*] Virtual Machine settings set, skipping installing 'Nvidia' driver and tools."
 fi
 
 #####################
