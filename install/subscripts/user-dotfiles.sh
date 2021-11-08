@@ -11,9 +11,9 @@ HOME="/home/${USER}"
 DIRECTORY="${HOME}/debian"
 if [[ -d "${DIRECTORY}" ]]; then
     rm -rf "${DIRECTORY}"
-    echo "\n[*] removed ${DIRECTORY}."
+    echo -e "\n[*] removed '${DIRECTORY}'."
 else
-    echo "\n[*] ${DIRECTORY} does not exists. Skipping."
+    echo -e "\n[*] '${DIRECTORY}' does not exists. Skipping."
 fi
 
 ## Copy dotfiles from my github:
@@ -24,15 +24,15 @@ git clone https://github.com/AISK11/debian &&
 ## Copy all files (even hidden) to user HOME:
 cp -r ${HOME}/debian/dotfiles/. ${HOME} &&
 ## Unzip icons and themes:
-tar xvjf .icons.tar.bz2 &&
+tar xvjf .icons.tar.bz2 &> /dev/null &&
 rm -rf .icons.tar.bz2 &&
-tar xvjf .themes.tar.bz2 &&
+tar xvjf .themes.tar.bz2 &> /dev/null &&
 rm -rf .themes.tar.bz2 &&
 ## Make scripts to be executable:
 chmod +x ${HOME}/.config/i3/scripts/* &&
 chmod +x ${HOME}/scripts/* &&
 ## Copy i3blocks config:
-cp ${HOME}/debian/install/files/i3blocks.con /etc/i3blocks.conf &&
+cp ${HOME}/debian/install/files/i3blocks.conf /etc/i3blocks.conf &&
 ## Change ownership of all files in home to USER:
 chown -R ${USER}:${USER} ${HOME} &&
 ## Delete cloned git repo:
