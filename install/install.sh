@@ -180,7 +180,7 @@ bash ./subscripts/user-dotfiles.sh "${USER}"
 #Additional Packages#
 #####################
 ## Process related:
-apt install psmisc htop -y i&> /dev/null &&
+apt install psmisc htop -y &> /dev/null &&
 echo -e "\n[+] Process related packages installed." || echo -e "\n[-] ERROR! Process related packages could not be installed!"
 
 ## Other system related:
@@ -200,7 +200,9 @@ apt install mtp-tools jmtpfs -y &> /dev/null &&
 echo -e "\n[+] Installed support for MTP devices." || echo -e "\n[-] ERROR! MTP tools could not be installed!"
 
 ## Networking tools:
-apt install ethtool macchanger iptables hping3 wireshark yafc putty mtr nmap dnsutils whois openvpncurl -y &> /dev/null &&
+apt install ethtool iptables hping3 yafc putty mtr nmap dnsutils whois openvpncurl -y &> /dev/null &&
+## Dialog options:
+apt install macchanger wireshark -y &&
 echo -e "\n[+] Networking tools installed." || echo -e "\n[-] ERROR! Network tools could not be installed!"
 
 ## Multimedia:
@@ -209,10 +211,10 @@ echo -e "\n[+] Multimedia packages installed." || echo -e "\n[-] ERROR! Multimed
 
 ## KVM/QEMU:
 apt install qemu-system libvirt-clients libvirt-daemon-system virt-manager -y &> /dev/null &&
-usermod -aG libvirt ${USER} &&
-usermod -aG libvirt-qemu ${USER} &&
+/sbin/usermod -aG libvirt ${USER} &&
+/sbin/usermod -aG libvirt-qemu ${USER} &&
 cp -r /etc/libvirt/ ${HOME}/.config/libvirt/ &&
-chown -R ${USER} ${HOME}/.config/libvirt/ &&
+chown -R ${USER}:${USER} ${HOME}/.config/libvirt/ &&
 sed -i 's/#uri_default/uri_default/g' ${HOME}/.config/libvirt/libvirt.conf &> /dev/null &&
 systemctl enable libvirtd.service &> /dev/null &&
 mkdir /var/lib/libvirt/iso/ &&
