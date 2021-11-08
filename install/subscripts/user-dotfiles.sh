@@ -27,12 +27,12 @@ rm -rf ${HOME}/.icons.tar.bz2 &&
 tar xvjf ${HOME}/.themes.tar.bz2 &> /dev/null &&
 rm -rf ${HOME}/.themes.tar.bz2 &&
 ## Make scripts to be executable:
-/sbin/chmod +x ${HOME}/.config/i3/scripts/* &&
-/sbin/chmod +x ${HOME}/scripts/* &&
+chmod +x ${HOME}/.config/i3/scripts/* &&
+chmod +x ${HOME}/scripts/* &&
 ## Copy i3blocks config:
 cp ./install/files/i3blocks.conf /etc/i3blocks.conf &&
 ## Change ownership of all files in home to USER:
-chown -R ${USER}:${USER} ${HOME} &&
+chown -R ${USER}:${USER} ${HOME} &> /dev/null &&
 ## Delete cloned git repo:
 #rm -rf ${HOME}/debian &&
 echo -e "[+] Custom dotfiles applied." || echo -e "[-] ERROR! Custom dotfiles were not applied!"
