@@ -93,3 +93,13 @@ bash ./subscripts/net-dns-servers.sh
 ## Set wpasupplicant:
 bash ./subscripts/net-wpasupplicant.sh
 
+#####################
+# TEXTEDITOR & SHELL#
+#####################
+## Install 'vim' and 'bvi' and set 'vim' as default editor:
+bash ./subscripts/app-vim.sh
+
+## Install zsh and zsh related pkgs and set zsh as default shell for ${USER}:
+bash ./subscripts/app-zsh.sh "${USER}"
+
+
