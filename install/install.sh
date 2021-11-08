@@ -136,7 +136,7 @@ bash ./subscripts/x11-i3gaps.sh
 bash ./subscripts/x11-i3-utils.sh
 
 ## Install URXVT Terminal Emulator:
-bash ./subscript/x11-urxvt.sh
+bash ./subscripts/x11-urxvt.sh
 
 #####################
 #       Nvidia      #
