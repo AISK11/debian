@@ -4,7 +4,7 @@
 
 ## Global properties:
 USER="${1}"
-HOME="/home/${USER}/"
+HOME="/home/${USER}"
 
 ## There is a chance, that these settings were not previously clonned from github.
 ## If directory exists from previous git clone, then delete it (because this directory MAY NOT contain dotfiles):
@@ -20,7 +20,7 @@ HOME="/home/${USER}/"
 ## Clone git repositroy containing dotfiles:
 #git clone https://github.com/AISK11/debian &> /dev/null &&
 ## Copy all files (even hidden) to user HOME:
-cp -r ../dotfiles/dotfiles/. ${HOME} &&
+cp -r ../dotfiles/. ${HOME} &&
 ## Unzip icons and themes:
 tar xvjf .icons.tar.bz2 &> /dev/null &&
 rm -rf .icons.tar.bz2 &&
