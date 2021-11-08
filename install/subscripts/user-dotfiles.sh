@@ -17,12 +17,10 @@ HOME="/home/${USER}/"
 #fi
 
 ## Copy dotfiles from my github:
-## Go to user HOME:
-cd ${HOME} &&
 ## Clone git repositroy containing dotfiles:
 #git clone https://github.com/AISK11/debian &> /dev/null &&
 ## Copy all files (even hidden) to user HOME:
-cp -r ${HOME}/debian/dotfiles/. ${HOME} &&
+cp -r ../dotfiles/dotfiles/. ${HOME} &&
 ## Unzip icons and themes:
 tar xvjf .icons.tar.bz2 &> /dev/null &&
 rm -rf .icons.tar.bz2 &&
@@ -32,7 +30,7 @@ rm -rf .themes.tar.bz2 &&
 chmod +x ${HOME}/.config/i3/scripts/* &&
 chmod +x ${HOME}/scripts/* &&
 ## Copy i3blocks config:
-cp ${HOME}/debian/install/files/i3blocks.conf /etc/i3blocks.conf &&
+cp ./install/files/i3blocks.conf /etc/i3blocks.conf &&
 ## Change ownership of all files in home to USER:
 chown -R ${USER}:${USER} ${HOME} &&
 ## Delete cloned git repo:
