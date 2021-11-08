@@ -50,19 +50,19 @@ fi
 # POST-INSTALLATION #
 #####################
 ## Disable speaker bell:
-bash ./subscripts/system-disable-pcspkr.sh
+bash ${HOME}/subscripts/system-disable-pcspkr.sh
 
 ## Add contrib and non-free packages to debian:
-bash ./subscripts/system-packages-nonfree.sh
+bash ${HOME}/subscripts/system-packages-nonfree.sh
 
 ## Update system:
-bash ./subscripts/system-update.sh
+bash ${HOME}/subscripts/system-update.sh
 
 #####################
 #       GRUB        #
 #####################
 ## Set up GRUB Bootloader:
-bash ./subscripts/system-grub.sh
+bash ${HOME}/subscripts/system-grub.sh
 
 #####################
 #   Local Settings  #
@@ -73,97 +73,97 @@ bash ./subscripts/system-grub.sh
 ## Timezone
 ## Locale
 ## CLI Keyboard
-bash ./subscripts/system-settings.sh "${HOSTNAME}" "${DNSDOMAINNAME}" "${TIMEZONE}"
+bash ${HOME}/subscripts/system-settings.sh "${HOSTNAME}" "${DNSDOMAINNAME}" "${TIMEZONE}"
 
 #####################
 #  User Privileges  #
 #####################
 ## Add user to '/etc/doas.conf':
-bash ./subscripts/user-privileges-doas.sh "${USER}"
+bash ${HOME}/subscripts/user-privileges-doas.sh "${USER}"
 
 ####################
 #    NETWORKING    #
 ####################
 ## Install iwlwifi driver:
-## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
+## Requires 'bash ${HOME}/subscripts/system-packages-nonfree.sh'.
 if [[ "${ISVIRTUAL}" -eq 0 ]]; then
-    bash ./subscripts/driver-network-iwlwifi.sh
+    bash ${HOME}/subscripts/driver-network-iwlwifi.sh
 else
     echo -e "\n[*] Virtual Machine settings set, skipping installing 'iwlwifi' driver."
 fi
 
 ## Disable networking service (is unnecessary):
-bash ./subscripts/net-disable-networking-service.sh
+bash ${HOME}/subscripts/net-disable-networking-service.sh
 
 ## Set up Rfkill (block bluetooth and unblock WiFi:
-bash ./subscripts/net-rfkill.sh
+bash ${HOME}/subscripts/net-rfkill.sh
 
 ## Disable network interface hotplug autostart and autoconnect:
-## requires 'bash ./subscripts/system-grub.sh' for set up 'normal' interface names.
-bash ./subscripts/net-disable-hotplug.sh
+## requires 'bash ${HOME}/subscripts/system-grub.sh' for set up 'normal' interface names.
+bash ${HOME}/subscripts/net-disable-hotplug.sh
 
 ## Better DHCP client:
-bash ./subscripts/net-dhcp-client.sh
+bash ${HOME}/subscripts/net-dhcp-client.sh
 
 ## Set up DNS servers:
-bash ./subscripts/net-dns-servers.sh
+bash ${HOME}/subscripts/net-dns-servers.sh
 
 ## Set wpasupplicant:
-bash ./subscripts/net-wpasupplicant.sh
+bash ${HOME}/subscripts/net-wpasupplicant.sh
 
 #####################
 # TEXTEDITOR & SHELL#
 #####################
 ## Install 'vim' and 'bvi' and set 'vim' as default editor:
-bash ./subscripts/app-vim.sh
+bash ${HOME}/subscripts/app-vim.sh
 
 ## Install zsh and zsh related pkgs and set zsh as default shell for ${USER}:
-bash ./subscripts/app-zsh.sh "${USER}"
+bash ${HOME}/subscripts/app-zsh.sh "${USER}"
 
 #####################
 #    WEB BROWSER    #
 #####################
 ## Install firefox and set as default browser:
-bash ./subscripts/app-web-browser.sh
+bash ${HOME}/subscripts/app-web-browser.sh
 
 #####################
 #       AUDIO       #
 #####################
 ## Install audio control apps:
-bash ./subscripts/app-audio.sh
+bash ${HOME}/subscripts/app-audio.sh
 
 #####################
 #        GIT        #
 #####################
 # Install git:
-bash ./subscripts/app-git.sh
+bash ${HOME}/subscripts/app-git.sh
 
 #####################
 #     Xorg + i3     #
 #####################
 ## Install X11 Xorg server:
-bash ./subscripts/x11-xorg.sh
+bash ${HOME}/subscripts/x11-xorg.sh
 
 ## i3 OR i3-gaps - LET ONLY ONE OPTION UNCOMMENTED:
 ## Compile i3-gaps from source:
-## Requires 'bash ./subscripts/app-git.sh'.
-bash ./subscripts/x11-i3gaps.sh
+## Requires 'bash ${HOME}/subscripts/app-git.sh'.
+bash ${HOME}/subscripts/x11-i3gaps.sh
 ## Install i3wm:
-#bash ./subscripts/x11-i3wm.sh
+#bash ${HOME}/subscripts/x11-i3wm.sh
 
 ## Other X11-utilites for i3:
-bash ./subscripts/x11-i3-utils.sh
+bash ${HOME}/subscripts/x11-i3-utils.sh
 
 ## Install URXVT Terminal Emulator:
-bash ./subscripts/x11-urxvt.sh
+bash ${HOME}/subscripts/x11-urxvt.sh
 
 #####################
 #       Nvidia      #
 #####################
 ## Install Nvidia drivers and set X11 config file for Nvidia + Intel (Optimus):
-## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
+## Requires 'bash ${HOME}/subscripts/system-packages-nonfree.sh'.
 if [[ "${ISVIRTUAL}" -eq 0 ]]; then
-    bash ./subscripts/driver-nvidia.sh &&
+    bash ${HOME}/subscripts/driver-nvidia.sh &&
     cp ./files/xorg.conf /etc/X11/xorg.conf &&
     echo -e "\n[+] Nvidia driver and tools installed and X11 config file '/etc/X11/xorg.conf' updated." || echo -e "\n[-] ERROR! Either Nvidia driver and tools were not installed or X11 config file '/etc/X11/xorg.conf' could not be updated."
 else
@@ -174,8 +174,8 @@ fi
 #      DOTFILES     #
 #####################
 ## Copy user specific settings from github:
-## Requires 'bash ./subscripts/app-git.sh'.
-bash ./subscripts/user-dotfiles.sh "${USER}"
+## Requires 'bash ${HOME}/subscripts/app-git.sh'.
+bash ${HOME}/subscripts/user-dotfiles.sh "${USER}"
 
 #####################
 #Additional Packages#
@@ -228,7 +228,7 @@ echo -e "\n[+] KVM/QEMU Installed" || echo -e "\n[-] ERROR! KVM/QEMU could not b
 #     FINISHING     #
 #####################
 ## Again Update whole system:
-bash ./subscripts/system-update.sh
+bash ${HOME}/subscripts/system-update.sh
 
 #####################
 #  System hardening #
@@ -236,13 +236,13 @@ bash ./subscripts/system-update.sh
 ### LEVEL 1:
 if [[ "${HARDENING_LVL}" -ge 1 ]]; then
     ## Set blank MOTD:
-    bash ./subscripts/hard-1-sys-motd.sh
+    bash ${HOME}/subscripts/hard-1-sys-motd.sh
 
     ## Install USB Guard:
-    bash ./subscripts/hard-1-sys-usbguard.sh
+    bash ${HOME}/subscripts/hard-1-sys-usbguard.sh
 
     ## Add kali repository:
-    bash ./subscripts/hard-1-sys-addkalirepo.sh
+    bash ${HOME}/subscripts/hard-1-sys-addkalirepo.sh
 fi
 
 ### LEVEL 2:
