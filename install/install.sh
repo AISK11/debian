@@ -67,11 +67,11 @@ bash ./subscripts/user-privileges-doas.sh "${USER}"
 #    NETWORKING    #
 ####################
 ## Install iwlwifi driver:
-## requires 'bash ./subscripts/system-packages-nonfree.sh'.
+## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
 if [[ "${ISVIRTUAL}" -eq 0 ]]; then
     bash ./subscripts/driver-network-iwlwifi.sh
 else
-    echo -n "[*] Virtual Machine settings set, skipping installing 'iwlwifi' driver."
+    echo -n "\n[*] Virtual Machine settings set, skipping installing 'iwlwifi' driver."
 fi
 
 ## Disable networking service (is unnecessary):
@@ -137,11 +137,21 @@ bash ./subscripts/x11-i3gaps.sh
 bash ./subscripts/x11-i3-utils.sh
 
 ## Install URXVT Terminal Emulator:
-
+bash ./subscript/x11-urxvt.sh
 
 #####################
 #       Nvidia      #
 #####################
+## Install Nvidia drivers and set X11 config file for Nvidia + Intel (Optimus):
+## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
+
+if [[ "${ISVIRTUAL}" -eq 0 ]]; then
+    bash ./subscripts/driver-nvidia.sh &&
+    cp ./files/xorg.conf /etc/X11/xorg.conf &&
+    echo -e "\n[+] Nvidia driver and tools installed and X11 config file '/etc/X11/xorg.conf' updated." || echo -e "\n[-] ERROR! Either Nvidia driver and tools were not installed or X11 config file '/etc/X11/xorg.conf' could not be updated."
+else
+    echo -n "\n[*] Virtual Machine settings set, skipping installing 'Nvidia' driver and tools."
+fi
 
 
 #####################
