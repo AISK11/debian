@@ -203,7 +203,7 @@ echo -e "\n[+] Installed support for MTP devices." || echo -e "\n[-] ERROR! MTP 
 ## Networking tools:
 apt install ethtool iptables hping3 yafc putty mtr nmap dnsutils whois openvpn curl -y &> /dev/null &&
 ## Dialog options:
-apt install macchanger wireshark -y &&
+apt install macchanger wireshark 2> /dev/null -y &&
 echo -e "\n[+] Networking tools installed." || echo -e "\n[-] ERROR! Network tools could not be installed!"
 
 ## Multimedia:
