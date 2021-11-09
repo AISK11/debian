@@ -1,0 +1,19 @@
+## Name: Logrotation for '/etc/rsyslog.d/ip6tables'
+## File Location: /etc/logrotate.d/ip6tables
+## Author AISK
+## Date Created: November 9, 2021
+## Last Updated: November 9, 2021
+
+/var/log/ip6tables.log
+{
+    missingok
+    notifempty
+    rotate 4
+    daily
+    create 0600 root root
+    compress
+    delaycompress
+    copytruncate
+    nomail
+    shred
+}
