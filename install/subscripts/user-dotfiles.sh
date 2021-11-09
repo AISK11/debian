@@ -33,5 +33,5 @@ chmod +x ${HOME}/scripts/* &&
 chown -R ${USER}:${USER} ${HOME} &> /dev/null &&
 ## Delete cloned git repo:
 #rm -rf ${HOME}/debian &&
-echo -e "[+] Custom dotfiles applied to '${HOME}'." || echo -e "[-] ERROR! Custom dotfiles were not applied to '${HOME}'!"
+echo -e "\n[+] Custom dotfiles applied to '${HOME}'." || echo -e "\n[-] ERROR! Custom dotfiles were not applied to '${HOME}'!"
 
