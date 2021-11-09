@@ -273,9 +273,6 @@ bash ./subscripts/system-update.sh
 ## Remove 'debian' git directory:
 cd ${HOME} &&
 rm -rf "${HOME}/debian/" &&
-## Set environment variables to roots, so command 'init' is
-## available also from CLI, not only from this script:
-su - &&
 echo -e "\n[+] Cleared '${HOME}/debian/' directory." || echo -e "ERROR! Directory '${HOME}/debian/' could not be removed!"
 
 ## Reboot after installation:
