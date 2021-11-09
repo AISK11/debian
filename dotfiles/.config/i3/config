@@ -8,12 +8,12 @@
 
 ### WALLPAPER:
 ## WALLPAPER:
-#exec --no-startup-id feh --bg-scale ~/.config/i3/images/debian_chan.png
-exec --no-startup-id feh --bg-scale ~/.config/i3/images/wallpaper.png
+#exec --no-startup-id feh --bg-scale /home/aisk/.config/i3/images/debian_chan.png
+exec --no-startup-id feh --bg-scale /home/aisk/.config/i3/images/wallpaper.png
 ## RENDER WALLPAPER NICELY (i3-gaps):
 exec --no-startup-id bash ${HOME}/.fehbg
 ## LOCK SCREEN:
-bindsym $mod+l exec i3lock -efu -i ~/.config/i3/images/bsod.png
+bindsym $mod+l exec i3lock -efu -i /home/aisk/.config/i3/images/bsod.png
 
 
 ## i3-gaps SETTINGS:
@@ -169,7 +169,7 @@ client.urgent               #000000    $urgent-color  #000000     #000000
 set $bar-bg     #222831
 ## i3 BAR:
 bar {
-        status_command i3blocks -c /etc/i3blocks.conf
+        status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
         position top
         separator_symbol "|"
         colors {
