@@ -50,7 +50,7 @@ fi
 # POST-INSTALLATION #
 #####################
 echo -e "\n###############################"
-echo -e "#[H]   Installation started.#  "
+echo -e "#    Installation started.#    "
 echo -e "###############################"
     
 ## Disable speaker bell:
@@ -274,7 +274,7 @@ fi
 #     FINISHING     #
 #####################
 echo -e "\n###############################"
-echo -e "#[H]  Finishing Installation .#"
+echo -e "#   Finishing Installation   .#"
 echo -e "###############################"
 ## Again Update whole system:
 bash ./subscripts/system-update.sh
