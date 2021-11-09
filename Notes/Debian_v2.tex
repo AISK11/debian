@@ -1317,17 +1317,32 @@ Pin-Priority: 50
     \item \textbf{List FW rules:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{iptables} -L -n -v
+\textcolor{root}{root#} \textcolor{command}{ip6tables} -vnL
 \end{Verbatim}
     \item \textbf{LOG \& DROP ICMP request, timestamp, mask and traceroute:}
 \begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{iptables} -F
+\textcolor{root}{root#} \textcolor{command}{iptables} -X
+\textcolor{root}{root#} \textcolor{command}{iptables} -Z
 \textcolor{root}{root#} \textcolor{command}{iptables} -N LOG_AND_DROP
 \textcolor{root}{root#} \textcolor{command}{iptables} -A LOG_AND_DROP -j LOG --log-prefix "iptables denied: "
 --log-level <0-7>
 \textcolor{root}{root#} \textcolor{command}{iptables} -A LOG_AND_DROP -j DROP 
+\textcolor{root}{root#} \textcolor{command}{iptables} -A INPUT -s 127.0.0.0/8 -d 127.0.0.0/8 -j ACCEPT
 \textcolor{root}{root#} \textcolor{command}{iptables} -A INPUT -s 0.0.0.0/0 -p icmp --icmp-type 8 -j LOG_AND_DROP
 \textcolor{root}{root#} \textcolor{command}{iptables} -A INPUT -s 0.0.0.0/0 -p icmp --icmp-type 13 -j LOG_AND_DROP
 \textcolor{root}{root#} \textcolor{command}{iptables} -A INPUT -s 0.0.0.0/0 -p icmp --icmp-type 17 -j LOG_AND_DROP
 \textcolor{root}{root#} \textcolor{command}{iptables} -A INPUT -s 0.0.0.0/0 -p icmp --icmp-type 30 -j LOG_AND_DROP
+
+\textcolor{root}{root#} \textcolor{command}{ip6tables} -F
+\textcolor{root}{root#} \textcolor{command}{ip6tables} -X
+\textcolor{root}{root#} \textcolor{command}{ip6tables} -Z
+\textcolor{root}{root#} \textcolor{command}{ip6tables} -N LOG_AND_DROP
+\textcolor{root}{root#} \textcolor{command}{ip6tables} -A LOG_AND_DROP -j LOG --log-prefix "ip6tables denied: "
+--log-level <0-7>
+\textcolor{root}{root#} \textcolor{command}{ip6tables} -A LOG_AND_DROP -j DROP 
+\textcolor{root}{root#}
+\textcolor{root}{root#} \textcolor{command}{ip6tables} -A INPUT -s ::/0 -p icmpv6 --icmpv6-type 128 -j LOG_AND_DROP
 \end{Verbatim}
 Log File: (\textbf{\textcolor{file}{/var/log/syslog}}).
     \item \textbf{Change log file:}
