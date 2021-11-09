@@ -52,7 +52,7 @@ fi
 echo -e "\n###############################"
 echo -e "#    Installation started.#    "
 echo -e "###############################"
-    
+
 ## Disable speaker bell:
 bash ./subscripts/system-disable-pcspkr.sh
 
@@ -261,7 +261,7 @@ if [[ "${HARDENING_LVL}" -ge 2 ]]; then
     echo -e "###############################"
 
     ## Set persistent ICMP Firewall with custom logs in syslog:
-
+    bash ./subscripts/hard-2-fw-icmp.sh
 else
     echo "\n[*] Hardening level is lower than 2. Skipping..."
 fi
