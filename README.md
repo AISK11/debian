@@ -1,4 +1,4 @@
 # debian
 
-DISCLAIMER: This github repository was created with idea of quick copy of some of my settings. 
-It is not optimalized in any case. Use at own liability!
+DISCLAIMER: This is my personal github repository containing my Debian configuration script with my dotfiles and some config files for various programs.
+Use at your own liability!
