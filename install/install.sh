@@ -246,6 +246,16 @@ else
 fi
 
 ### LEVEL 2:
+if [[ "${HARDENING_LVL}" -ge 2 ]]; then
+    echo -e "\n###############################"
+    echo -e "#[H] Hardening LEVEL 2 begins.#"
+    echo -e "###############################"
+
+    ## Set persistent ICMP Firewall with custom logs in syslog:
+
+else
+    echo "\n[*] Hardening level is lower than 2. Skipping..."
+fi
 
 
 ### LEVEL 3:
