@@ -293,4 +293,5 @@ if [[ "${REBOOT_AFTER_DONE}" -eq 1 ]]; then
     sync && init 6
 else
     echo -e "\n[*] Installation completed. Please reboot."
+    su -
 fi
