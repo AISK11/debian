@@ -164,7 +164,7 @@ bash ./subscripts/x11-urxvt.sh
 ## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
 if [[ "${ISVIRTUAL}" -eq 0 ]]; then
     bash ./subscripts/driver-nvidia.sh &&
-    cp ./files/xorg.conf /etc/X11/xorg.conf &&
+    cp ../config_files/xorg.conf /etc/X11/xorg.conf &&
     echo -e "\n[+] Nvidia driver and tools installed and X11 config file '/etc/X11/xorg.conf' updated." || echo -e "\n[-] ERROR! Either Nvidia driver and tools were not installed or X11 config file '/etc/X11/xorg.conf' could not be updated."
 else
     echo -e "\n[*] Virtual Machine settings set, skipping installing 'Nvidia' driver and tools."
