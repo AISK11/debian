@@ -8,6 +8,9 @@
 ## Execute this script with root privileges!
 
 ### EDIT VARIABLES:
+## CHANGE IF INSTALLING ON VM!
+## Avoids installing drivers.
+ISVIRTUAL=0
 ## MUST BE CHANGED!
 ## e.g. "aisk"
 USER="changeme"
@@ -21,9 +24,6 @@ DNSDOMAINNAME=""
 ## e.g. "UTC"
 ## more timezones can be found in DIR '/usr/share/zoneinfo/'
 TIMEZONE="Europe/Copenhagen"
-## CHANGE IF INSTALLING ON VM!
-## Avoids installing drivers.
-ISVIRTUAL=0
 ## Set Hardening level:
 ## 0 = no hardening
 ## 1 = light hardening
@@ -49,7 +49,7 @@ fi
 #####################
 # POST-INSTALLATION #
 #####################
-echo -e "\n###############################"
+echo -e "###############################"
 echo -e "#    Installation started.#    "
 echo -e "###############################"
 
