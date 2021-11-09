@@ -49,6 +49,10 @@ fi
 #####################
 # POST-INSTALLATION #
 #####################
+echo -e "\n###############################"
+echo -e "#[H]   Installation started.#  "
+echo -e "###############################"
+    
 ## Disable speaker bell:
 bash ./subscripts/system-disable-pcspkr.sh
 
@@ -221,6 +225,11 @@ systemctl enable libvirtd.service &> /dev/null &&
 mkdir /var/lib/libvirt/iso/ &&
 echo -e "\n[+] KVM/QEMU Installed" || echo -e "\n[-] ERROR! KVM/QEMU could not be installed successfully!"
 
+## MISC:
+apt install ascii &&
+echo -e "\n[+] Misc packages installed." || echo -e "\n[-] ERROR! Could not install misc packages!"
+
+
 ## Lightcord:
 ## DEAD PROJECT!
 
@@ -264,6 +273,9 @@ fi
 #####################
 #     FINISHING     #
 #####################
+echo -e "\n###############################"
+echo -e "#[H]  Finishing Installation .#"
+echo -e "###############################"
 ## Again Update whole system:
 bash ./subscripts/system-update.sh
 
