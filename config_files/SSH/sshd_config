@@ -1,1 +1,181 @@
+## Name: AISK Hardened OpenSSH-server Configuration
+## File Location: /etc/ssh/sshd_config
+## Author AISK
+## Heavily inspired by 'https://github.com/k4yt3x/sshd_config/blob/master/sshd_config'
+## Date Created: November 7, 2021
+## Last Updated: November 7, 2021
+
+###########
+# Binding #
+###########
+## Listen to any|IPv4|IPv6 address (default any):
+AddressFamily any
+#AddressFamily inet
+#AddressFamily inet6
+
+## Listen for incoming connection for all sources:
+ListenAddress 0.0.0.0
+ListenAddress ::
+
+## Listen on specific port (default 22):
+Port 2
+
+############
+# Features #
+############
+## Do not permit User environment features:
+PermitUserEnvironment no
+
+## Specifies whether any ~/.ssh/rc file is executed (default: yes):
+PermitUserRC no
+
+## Compression before encryption might cause security issues:
+Compression no
+
+## SSH Protocol version (v1 is disabled, but specified for compatibility):
+Protocol 2
+
+## Disable reverse DNS lookups:
+UseDNS no
+
+#################
+# Banner & MOTD #
+#################
+## Disable distribution-specified extra version suffix:
+DebianBanner no
+
+## Do not specify additional text to append to SSH protocol banner:
+VersionAddendum none
+
+## Do not print Banner for user before authentication:
+Banner none
+#Banner /etc/sshd/sshd_banner
+
+## Supress '/etc/motd' message after user logs in (default: yes):
+PrintMotd no
+
+###########
+# LOGGING #
+###########
+## Specifies whether sshd should print date and time of last user interactive login:
+PrintLastLog yes
+
+## Gives facility code for sshd logging messages:
+SyslogFacility AUTH
+
+## Verbosity level for sshd logging messages:
+LogLevel VERBOSE
+
+##################
+# Authentication #
+##################
+### PUB-KEY AUTH:
+## Uncomment these options to allow only pubkey authentication:
+#AuthenticationMethods publickey
+#PubkeyAuthentication yes
+#UsePAM no
+#PasswordAuthentication no
+#PasswordAuthentication no
+
+### Password AUTH:
+PubkeyAuthentication no
+UsePAM yes
+ChallengeResponseAuthentication no
+PasswordAuthentication yes
+
+## Permit only specified users and groups to login:
+AllowUsers aisk
+AllowGroups aisk
+
+## Don't allow to login with empty passwords:
+PermitEmptyPasswords no
+
+## Prevent root login via SSH (not only after normal user auth):
+#PermitRootLogin no
+## Prevent root login via Authentication:
+PermitRootLogin prohibit-password
+
+## Maximum authentication retries to prevent brute-force:
+MaxAuthTries 1
+
+## Max number of unauthenticated connection:
+MaxStartups 1
+
+## Time after server expires connection:
+LoginGraceTime 60
+
+## Allow send TCP keepalive messages to notice connection crash (spoofable):
+#TCPKeepAlive yes
+TCPKeepAlive no
+
+# Timeout interval in seconds after which if no data received from client, sshd will
+## send messaage through encrypted channel to request respinse
+ClientAliveInterval 300
+## Set number of client alive messages sent without client responding (not spoofable):
+## Formula: InactiveDisconnect = ClientAliveInterval * ClientAliveCountMax
+ClientAliveCountMax 2
+
+## Specify max number of open shell, login or subsystem (sftp) sessions,
+## new session can be opened, but user has to authenticate again:
+MaxSessions 1
+
+################
+# Cryptography #
+################
+## Explicitly define cryptography algorithms to avoid the use of weak algorithms:
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
+HostKeyAlgorithms rsa-sha2-512,rsa-sha2-256,ssh-ed25519
+MACs hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,umac-128-etm@openssh.com
+
+## Short moduli should be deactivated before enabling 'diffie-hellman-group-exchange-sha256':
+#KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group-exchange-sha256,diffie-hellman-group14-sha256
+KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group14-sha256
+
+############################################
+## Deactivate Short Diffie-Hellman Moduli: #
+## 1. Backup original moduli file:
+## Linux: cp  /etc/ssh/moduli /etc/ssh/moduli.backup
+## 2. Find lines with moduli >= 3071 bits and save them to 'moduli.tmp':
+## Linux: awk '$5 >= 3071' /etc/ssh/moduli > /etc/ssh/moduli.tmp
+## 3. Overwrites original moduli file with updated one:
+## Linux: mv /etc/ssh/moduli.tmp /etc/ssh/moduli
+
+##################
+# SSH Forwarding #
+##################
+## This section is currently WiP
+
+## Specifies whether sshd should ignore user's '~/.ssh/knwon_hosts' during
+## HostbasedAuthentication and use only system-wide '/etc/ssh/known_hosts'
+IgnoreUserKnownHosts yes
+## Specifies whether to ignore per-user '.rhosts' and '.shosts' files during
+## HostbasedAuthentication, system-wide '/etc/hosts.equiv' and '/etc/ssh/shosts.equiv'
+## are still used:
+IgnoreRhosts yes
+
+## Specifies wheteh tun device forwarding is allowed:
+PermitTunnel no
+
+## Specifies whether sshd shoul allow remote port forwarding to bind to non-loopback address:
+GatewayPorts no
+
+## Specifies whether TCP forwarding is permitted,
+## yes (default) = allow all TCP forwarding
+## local = allow local forwarding only (from ssh perspective)
+## remote = allow remote forwarding only
+## no = disable TCP forwarding
+AllowTcpForwarding local
+
+## Specifies whether StreamLocal (UDP) forwarding is permitted
+## options: yes, local, remote, no:
+AllowStreamLocalForwarding no
+
+## Specifies whether ssh-agent (login) forwarding is permitted:
+AllowAgentForwarding no
+
+## Specifies whether X11 forwarding is permitted:
+X11Forwarding no
+
+## Specifies whether sshd should bind X11 forwarding server to loopback address:
+X11UseLocalhost yes
 
