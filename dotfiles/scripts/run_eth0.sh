@@ -4,14 +4,14 @@
 # Author: AISK11                                                #
 #                                                               #
 # Dependencies:                                                 #
-# sudo apt install doas macchanger wpa_supplicant dhcpcd        #
+# sudo apt install doas macchanger dhcpcd                       #
 #                                                               #
 # Usage:                                                        #
 # this is personal script that run ${INTERFACE} and requires    #
 # additional config to work                                     #
 #################################################################
 
-INTERFACE="wlan0"
+INTERFACE="eth0"
 
 ## Bring everything down in case of a restart:
 doas dhcpcd --release ${INTERFACE} && echo "[+] DHCP released for interface '${INTERFACE}'." || echo "[-] ERROR! DHCP was not released for interface '${INTERFACE}'!"
