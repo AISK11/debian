@@ -262,6 +262,13 @@ if [[ "${HARDENING_LVL}" -ge 2 ]]; then
 
     ## Set persistent ICMP Firewall with custom logs in syslog:
     bash ./subscripts/hard-2-fw-icmp.sh
+
+    ## Install OpenSSH server and apply hardening config,
+    ## (this also sets SSH to be on port 2):
+    bash ./subscripts/hard-2-ssh-openssh.sh
+
+    ## Install and sets Endlessh (honeypot/tarpit) on port 22:
+    bash ./subscripts/hard-2-ssh-endlessh.sh
 else
     echo "\n[*] Hardening level is lower than 2. Skipping..."
 fi
