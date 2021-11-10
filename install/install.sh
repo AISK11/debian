@@ -50,7 +50,7 @@ fi
 # POST-INSTALLATION #
 #####################
 echo -e "###############################"
-echo -e "#    Installation started.     #"
+echo -e "#    Installation started.    #"
 echo -e "###############################"
 
 ## Disable speaker bell:
