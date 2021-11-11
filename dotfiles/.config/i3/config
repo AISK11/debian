@@ -168,7 +168,7 @@ assign [class="Wireshark"] $ws4
 assign [class="Virt-manager"] $ws5
 assign [class="KeePassXC"] $ws8
 assign [class="dota2"] $ws9
-assign [class="lightcord" $ws10
+assign [class="lightcord"] $ws10
 
 ### i3 BAR + i3 BLOCKS:
 ## COLOR VARIABLES:
