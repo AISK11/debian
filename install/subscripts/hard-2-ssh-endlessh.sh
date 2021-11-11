@@ -22,8 +22,8 @@ SYSTEMD_SERVICE=$(find /usr/ -regex ".*endlessh\.service$" 2> /dev/null | grep -
 echo -e "[+] Found Endlessh systemd service at '${SYSTEMD_SERVICE}'." || echo -e "[-] ERROR! No systemd service found for Endlessh!"
 ## Edit endlessh.service:
 echo -e "[*] Editing '${SYSTEMD_SERVICE}..."
-sed -i "s/#AmbientCapabilities=CAP_NET_BIND_SERVICE/AmbientCapabilities=CAP_NET_BIND_SERVICE/" ${SYSTEMD_SERVICE} &> /dev/null &&
-sed -i "s/PrivateUsers=true/#&/" ${SYSTEMD_SERVICE} &> /dev/null &&
+sed -i "s/^#AmbientCapabilities=CAP_NET_BIND_SERVICE/AmbientCapabilities=CAP_NET_BIND_SERVICE/" ${SYSTEMD_SERVICE} &> /dev/null &&
+sed -i "s/^PrivateUsers=true/#&/" ${SYSTEMD_SERVICE} &> /dev/null &&
 echo -e "[+] Successfully edited settings in '${SYSTEMD_SERVICE}'." || echo -e "[-] ERROR! Could not edit settings in '${SYSTEMD_SERVICE}"
 
 ## Kill current process instance on default port:
@@ -33,9 +33,6 @@ echo -e "[+] Service 'endlessh.service' instance on default port 2222 was killed
 ## Enable on startup:
 systemctl enable endlessh.service &> /dev/null &&
 echo -e "[+] Service 'endlessh.service' enabled on startup." || echo -e "[-] Service 'endlessh.service' could not be enabled to run on startup!"
-## Reload daemon:
-doas systemctl daemon-reload &> /dev/null &&
-echo -e "[+] Restarted systemd daemons." || echo -e "[-] ERROR! Could not restart systemd daemons!"
 
 ## Finished:
 echo -e "[*] Endlessh installation finished."
