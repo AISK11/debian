@@ -28,8 +28,9 @@ echo -e "[+]   Successfully edited settings in '${SYSTEMD_SERVICE}'." || echo -e
 
 ## Kill current process instance on default port:
 echo -e "[*]   Setting Endlessh for systemd..."
+systemctl stop endlessh.service &> /dev/null &&
 systemctl kill endlessh.service &> /dev/null &&
-echo -e "[+]   Service 'endlessh.service' instance on default port 2222 was killed." || echo -e "[-] ! ERROR! Could not kill service 'endlessh.service' instance on default port 2222!"
+echo -e "[+]   Service 'endlessh.service' instance on default port 2222 was stopped." || echo -e "[-] ! ERROR! Could not stop service 'endlessh.service' instance on default port 2222!"
 ## Enable on startup:
 systemctl enable endlessh.service &> /dev/null &&
 echo -e "[+]   Service 'endlessh.service' enabled on startup." || echo -e "[-] ! ERROR! Service 'endlessh.service' could not be enabled to run on startup!"
