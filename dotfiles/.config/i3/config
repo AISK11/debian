@@ -125,8 +125,9 @@ set $ws1 "1"
 set $ws2 "2"
 ## Firefox:
 set $ws3 "3"
+## Auxiliary - temporary apps:
+set $ws4 "4"
 ## Wireshark:
-set $ws4 "4"
 ## virt-manager:
 set $ws5 "5"
 ## VM1:
@@ -164,7 +165,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 
 ## ASSIGN APP TO WINDOW ACCORDING TO CLASS: $(xprop) - use 2nd variable of WM_CLASS
 assign [class="Firefox-esr"] $ws3
-assign [class="Wireshark"] $ws4
+assign [class="Wireshark"] $ws5
 assign [class="Virt-manager"] $ws5
 assign [class="KeePassXC"] $ws8
 assign [class="dota2"] $ws9
