@@ -27,7 +27,7 @@ sed -i "s/PrivateUsers=true/#&/" ${SYSTEMD_SERVICE} &> /dev/null &&
 echo -e "[+] Successfully edited settings in '${SYSTEMD_SERVICE}'." || echo -e "[-] ERROR! Could not edit settings in '${SYSTEMD_SERVICE}"
 
 ## Kill current process instance on default port:
-echo -e "[*] "
+echo -e "[*] Setting Endlessh for systemd..."
 systemctl kill endlessh.service &> /dev/null &&
 echo -e "[+] Service 'endlessh.service' instance on default port 2222 was killed." || echo -e "[-] ERROR! Could not kill service 'endlessh.service' instance on default port 2222!"
 ## Enable on startup:
