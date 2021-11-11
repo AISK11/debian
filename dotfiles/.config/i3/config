@@ -119,16 +119,26 @@ bindsym $mod+Shift+r restart
 
 ### WORKSPACES:
 ## DEFINE WORKSPACES:
-set $ws1 "1: CLI"
-set $ws2 "2: WWW"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+## CLI:
+set $ws1 ""
+## Programming:
+set $ws2 ""
+## Firefox:
+set $ws3 ""
+## Wireshark:
+set $ws4 ""
+## virt-manager:
+set $ws5 ""
+## VM1:
+set $ws6 ""
+## VM2:
+set $ws7 ""
+## KeePassXC:
+set $ws8 ""
+## Steam:
+set $ws9 ""
+## Discord:
+set $ws10 ""
 ## SWITCH TO WORKSPACE:
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -153,8 +163,12 @@ bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
 ## ASSIGN APP TO WINDOW ACCORDING TO CLASS: $(xprop) - use 2nd variable of WM_CLASS
-assign [class="Firefox-esr"] $ws2
+assign [class="Firefox-esr"] $ws3
+assign [class="Wireshark"] $ws4
+assign [class="Virt-manager"] $ws5
+assign [class="KeePassXC"] $ws8
 assign [class="dota2"] $ws9
+assign [class="lightcord" $ws10
 
 ### i3 BAR + i3 BLOCKS:
 ## COLOR VARIABLES:
