@@ -120,25 +120,25 @@ bindsym $mod+Shift+r restart
 ### WORKSPACES:
 ## DEFINE WORKSPACES:
 ## CLI:
-set $ws1 ""
+set $ws1 "1"
 ## Programming:
-set $ws2 ""
+set $ws2 "2"
 ## Firefox:
-set $ws3 ""
+set $ws3 "3"
 ## Wireshark:
-set $ws4 ""
+set $ws4 "4"
 ## virt-manager:
-set $ws5 ""
+set $ws5 "5"
 ## VM1:
-set $ws6 ""
+set $ws6 "6"
 ## VM2:
-set $ws7 ""
+set $ws7 "7"
 ## KeePassXC:
-set $ws8 ""
+set $ws8 "8"
 ## Steam:
-set $ws9 ""
+set $ws9 "9"
 ## Discord:
-set $ws10 ""
+set $ws10 "10"
 ## SWITCH TO WORKSPACE:
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -186,6 +186,7 @@ bar {
         status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
         position top
         separator_symbol "|"
+        strip_workspace_numbers yes
         colors {
             background $bar-bg
             separator $unselected-color
