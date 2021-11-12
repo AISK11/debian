@@ -1,22 +1,27 @@
 #!/bin/bash
 
-## This script customizes GRUB bootloader settings:
+## Author AISK
+## Description: This script customizes GRUB bootloader settings.
+## Date Created: November 12, 2021
+## Last Updated: November 12, 2021
+
+## Script start banner:
+echo -e "\n##########################"
+echo -e   "###   Configure GRUB   ###"
+echo -e   "##########################"
 
 ## GRUB settings:
-sed -i 's/^GRUB_CMDLINE_LINUX=".*"/GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"/g' /etc/default/grub &&
-sed -i 's/^GRUB_DEFAULT=.*/GRUB_DEFAULT=0/g' /etc/default/grub &&
-sed -i 's/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=1/g' /etc/default/grub &&
-#sed -i 's/GRUB_TIMEOUT_STYLE=.*/GRUB_TIMEOUT_STYLE=menu/g' /etc/default/grub &&
-echo -e "GRUB_TIMEOUT_STYLE=menu" >> /etc/default/grub &&
-sed -i 's/GRUB_DISABLE_RECOVERY=.*/GRUB_DISABLE_RECOVERY=true/g' /etc/default/grub &&
-sed -i 's/^#GRUB_DISABLE_RECOVERY/GRUB_DISABLE_RECOVERY/g' /etc/default/grub &&
+cp ../config_files/SYSTEM/GRUB/grub /etc/default/grub &&
+echo -e "[+]   GRUB configured in '/etc/default/grub'." || echo -e "[-] ! ERROR! Could not configure GRUB in '/etc/default/grub'!"
 
 ## GRUB colors:
-echo -e "set color_normal=white/black" > /boot/grub/custom.cfg &&
-echo -e "set color_highlight=black/white" >> /boot/grub/custom.cfg &&
-echo -e "set menu_color_normal=white/black" >> /boot/grub/custom.cfg &&
-echo -e "set menu_color_highlight=black/white" >> /boot/grub/custom.cfg &&
+cp ../config_files/SYSTEM/GRUB/custom.cfg /boot/grub/custom.cfg &&
+echo -e "[+]   GRUB menu colors in '/boot/grub/custom.cfg'." || echo -e "[-] ! ERROR! Could not configure GRUB menu colors in '/boot/grub/custom.cfg'!"
 
 ## Update GRUB:
 grub-mkconfig -o /boot/grub/grub.cfg &> /dev/null &&
-echo -e "\n[+] GRUB configuration updated." || echo -e "\n[-] ERROR! GRUB configuration did not successfully updated!"
+echo -e "[+] GRUB configuration updated to '/boot/grub/grub.cfg'." || echo -e "[-] ! ERROR! Could not update GRUB configuration to '/boot/grub/grub.cfg'!"
+
+## Script end banner:
+echo -e   "##########################"
+
