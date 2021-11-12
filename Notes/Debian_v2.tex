@@ -213,20 +213,6 @@ deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free
 \textcolor{root}{root#} \textcolor{command}{apt} update [-y]
 \textcolor{root}{root#} \textcolor{command}{apt} <full-upgrade [-y] | dist-upgrade [-y]>
 \textcolor{root}{root#} \textcolor{command}{apt} autoremove [-y]
-\textcolor{root}{root#} \textcolor{command}{init} 6
-\end{Verbatim}
-\end{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Drivers}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Network Drivers}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{iwlwifi}
-\begin{enumerate}
-    \item \textbf{Needs \textit{contrib} and \textit{non-free} packages!}
-    \item \textbf{Install driver:}
-\begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{root}{root#} \textcolor{command}{apt} install firmware-iwlwifi
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -311,48 +297,12 @@ set menu_color_highlight=black/white
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Local Settings}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Password}
-\begin{itemize}
-    \item \textbf{User-change:}
-\begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{user}{user\$} \textcolor{command}{passwd}
-\end{Verbatim}
-    \item \textbf{Root-change:}
-\begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{root}{root#} \textcolor{command}{passwd} root
-\end{Verbatim}
-\end{itemize}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Privilege escalation}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{doas}
+\section{Hostname and DNSDomainname}
 \begin{enumerate}
-    \item \textbf{Dependenices:}
-\begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{root}{root#} \textcolor{command}{apt} install doas
-\end{Verbatim}
-    \item \textbf{Configuration:}
-\newline File (\textbf{\textcolor{file}{/etc/doas.conf}}):
-\begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{comment}{## <permit|deny> [nopass|persist] <USER>[:GROUP] [as <USER2>]}
-\textcolor{comment}{[cmd <COMMAND> [args <ARGUMENTS>]}
-permit nopass <USER>
-\end{Verbatim}    
-\end{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Run GUI programs as root}
-\begin{enumerate}
-    \item \textbf{Run GUI programs as root:}
-\begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{user}{user\$} \textcolor{command}{xhost} local:root
-\end{Verbatim}
-\end{enumerate}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Hostname}
-\begin{enumerate}
-    \item \textbf{Display hostname:}
+    \item \textbf{Display hostname and dnsdomainname:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{hostname}
+\textcolor{user}{user\$} \textcolor{command}{dnsdomainname}
 \end{Verbatim}
     \item \textbf{Change hostname:}
 \newline File (\textbf{\textcolor{file}{/etc/hostname}}):
@@ -419,6 +369,43 @@ XKBLAYOUT="us"
 XKBVARIANT=""
 XKBOPTIONS=""
 BACKSPACE="guess"
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Password}
+\begin{itemize}
+    \item \textbf{User-change:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{passwd}
+\end{Verbatim}
+    \item \textbf{Root-change:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{passwd} root
+\end{Verbatim}
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Privilege escalation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{doas}
+\begin{enumerate}
+    \item \textbf{Dependenices:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install doas
+\end{Verbatim}
+    \item \textbf{Configuration:}
+\newline File (\textbf{\textcolor{file}{/etc/doas.conf}}):
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{comment}{## <permit|deny> [nopass|persist] <USER>[:GROUP] [as <USER2>]}
+\textcolor{comment}{[cmd <COMMAND> [args <ARGUMENTS>]}
+permit nopass <USER>
+\end{Verbatim}    
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Run GUI programs as root}
+\begin{enumerate}
+    \item \textbf{Run GUI programs as root:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{xhost} local:root
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1120,6 +1107,21 @@ exec i3
     \item \textbf{Change GTK theme and icons:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{lxappearance}
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Drivers %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Drivers}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Network Drivers}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{iwlwifi}
+\begin{enumerate} 
+    \item \textbf{Needs \textit{contrib} and \textit{non-free} packages!}
+    \item \textbf{Install driver:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install firmware-iwlwifi
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
