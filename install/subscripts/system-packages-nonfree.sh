@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Author AISK
-## Description: This script adds contrib and non-free packages to debian:
+## Description: This script adds contrib and non-free packages to debian.
 ## Date Created: November 12, 2021
 ## Last Updated: November 12, 2021
 
