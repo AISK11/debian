@@ -15,16 +15,16 @@ echo -e   "##########################"
 apt autoclean -y &> /dev/null &&
 echo -e "[+]   Cleaned." || echo -e "[-] ! ERROR! Could not clean!"
 
-apt update &> /dev/null &&
+apt update -y &> /dev/null &&
 echo -e "[+]   Updated." || echo -e "[-] ! ERROR! Could not update!"
 
-apt upgrade &> /dev/null &&
+apt upgrade -y &> /dev/null &&
 echo -e "[+]   Upgraded." || echo -e "[-] ! ERROR! Could not upgrade!"
 
 apt full-upgrade -y &> /dev/null &&
 echo -e "[+]   Fully upgraded." || echo -e "[-] ! ERROR! Could not fully upgrade!"
 
-apt autoremove &> /dev/null &&
+apt autoremove -y &> /dev/null &&
 echo -e "[+]   Removed no longer needed packages." || echo -e "[-] ! ERROR! Could not remove no longer needed packages!"
 
 ## Script end banner:
