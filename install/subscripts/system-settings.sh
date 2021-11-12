@@ -62,7 +62,7 @@ echo -e "#LC_TIME=\"en_GB.UTF-8\"" >> /etc/default/locale &&
 echo -e "# Default paper size:" >> /etc/default/locale &&
 echo -e "#LC_PAPER=\"en_GB.UTF-8\"" >> /etc/default/locale &&
 echo -e "#LC_MEASUREMENT=\"en_GB.UTF-8\"" >> /etc/default/locale &&
-echo -e "[+]   Locales updated!" || echo -e "[-] ! ERROR! Locales could not be changed!"
+echo -e "[+]   Locales updated." || echo -e "[-] ! ERROR! Locales could not be changed!"
 
 ## Set CLI keyboard:
 echo -e "XKBMODEL=\"pc105\"" > /etc/default/keyboard &&
