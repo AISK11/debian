@@ -18,6 +18,13 @@ GRUB_TIMEOUT=1
 ## Disable recovery mode entry in GRUB menu:
 GRUB_DISABLE_RECOVERY=true
 
+## GRUB BG image (*.jpg or *.png) - gfxterm only:
+#GRUB_BACKGROUND="/boot/grub/<image.png>"
+
+## Theme - gfxterm only:
+#GRUB_THEME="/boot/grub/themes/<THEME>/theme.txt"
+
+
 ## Default Debian options:
 GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
 GRUB_CMDLINE_LINUX_DEFAULT="quiet"
