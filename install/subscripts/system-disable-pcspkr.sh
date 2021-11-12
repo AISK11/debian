@@ -2,8 +2,8 @@
 
 ## Author AISK
 ## Description: This script disables pcspkr (that annoying debian beeping).
-## Date Created: November 9, 2021
-## Last Updated: November 9, 2021
+## Date Created: November 12, 2021
+## Last Updated: November 12, 2021
 
 ## Script start banner:
 echo -e "\n##########################"
