@@ -31,7 +31,11 @@ elif grep "^blacklist pcspkr$"; then
     echo -e "[+]   Successfully added pcspkr to '/etc/modprobe.d/blacklist.conf'." || echo -e "[-] ! ERROR! Could not add pcspkr to '/etc/modprobe.d/blacklist.conf'!"
 fi
 
-### Generate modules.dep and update initramfs:
+### 3. Generate modules.dep and update initramfs:
 depmod -a 1> /dev/null &&
 update-initramfs -u 1> /dev/null &&
 echo -e "[+]   Updated initramfs with blacklisted pcspkr module." || echo -e "[-] ! ERROR! Could not update initramfs with blacklisted pcspkr module!"
+
+## Script end banner:
+echo -e   "##########################"
+
