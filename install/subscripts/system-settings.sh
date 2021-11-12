@@ -20,7 +20,7 @@
 
 # Script start banner:
 echo -e "\n##########################"
-echo -e   "### Set Local Settings ###"
+echo -e   "### Set local settings ###"
 echo -e   "##########################"
 
 ### Global properties:
@@ -49,6 +49,8 @@ echo -e "[+]   Hostname updated with '${HOSTNAME}' in '/etc/hostname' and '/etc/
 if [[ ! -z ${DNSDOMAINNAME} ]]; then
     sed -i "s/${HOSTNAME}/&.${DNSDOMAINNAME} ${HOSTNAME}/g" /etc/hosts &&
     echo -e "[+]   DNSDomainname updated with '${DNSDOMAINNAME}' in '/etc/hosts'." || echo -e "\n[-] ! ERROR! Could not change DNSDomainname with '${DNSDOMAINNAME}' in '/etc/hosts'!"
+else
+    echo -e "[*]   DNSDomainname not set. Skipped."
 fi
 
 ## Set timezone:
