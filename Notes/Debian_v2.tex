@@ -166,22 +166,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Disable pcspkr}
 \begin{enumerate}
-    \item \textbf{Turn off bell for CLI mode:}
+    \item \textbf{Turn off bell for CLI mode (still enabled for vim, etc...):}
 \newline File: (\textbf{\textcolor{file}{/etc/inputrc}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 set bell-style none
 \end{Verbatim}
-    \item \textbf{Blacklist pcspkr module:}
+    \item \textbf{Blacklist pcspkr module for the whole system:}
+    \begin{itemize}
+        \item \textbf{Add module to be blacklisted:}
 \newline File: (\textbf{\textcolor{file}{/etc/modprobe.d/blacklist.conf}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 blacklist pcspkr
 \end{Verbatim}
-    \item \textbf{Update initramfs:}
+        \item \textbf{Update initramfs with blacklisted pcspkr module:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{depmod} -a
 \textcolor{root}{root#} \textcolor{command}{update-initramfs} -u
 \textcolor{root}{root#} \textcolor{command}{reboot}
 \end{Verbatim}
+    \end{itemize}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{APT sources}
@@ -206,23 +209,19 @@ deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free
 \end{Verbatim}
     \item \textbf{Update system:}
 \begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{root}{root#} \textcolor{command}{apt} clean
-\textcolor{root}{root#} \textcolor{command}{apt} update
-\textcolor{root}{root#} \textcolor{command}{apt} full-upgrade [-y]
-\textcolor{root}{root#} \textcolor{command}{apt} dist-upgrade [-y]
-[\textcolor{root}{root#} \textcolor{command}{apt} install apt-fily [-y]]
-[\textcolor{root}{root#} \textcolor{command}{apt-file} update]
+\textcolor{root}{root#} \textcolor{command}{apt} <autoclean | clean> [-y]
+\textcolor{root}{root#} \textcolor{command}{apt} update [-y]
+\textcolor{root}{root#} \textcolor{command}{apt} <full-upgrade [-y] | dist-upgrade [-y]>
 \textcolor{root}{root#} \textcolor{command}{apt} autoremove [-y]
-\textcolor{root}{root#} \textcolor{command}{apt} autoclean [-y]
 \textcolor{root}{root#} \textcolor{command}{init} 6
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Drivers}
+\chapter{Drivers}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Network Drivers}
+\section{Network Drivers}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{iwlwifi}
+\subsection{iwlwifi}
 \begin{enumerate}
     \item \textbf{Needs \textit{contrib} and \textit{non-free} packages!}
     \item \textbf{Install driver:}
@@ -240,21 +239,24 @@ deb-src http://deb.debian.org/debian bullseye-updates main contrib non-free
     \item \textbf{Basic GRUB settings:}
 \newline File (\textbf{\textcolor{file}{/etc/default/grub}}):
 \begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{comment}{## do not rename net interfaces:}
+\textcolor{comment}{## Do not rename network interfaces and preserve default ethX and wlanX names:}
 GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"
-
-\textcolor{comment}{## highlighted default entry:}
+\textcolor{comment}{## GRUB menu default option:}
 GRUB_DEFAULT=0
-\textcolor{comment}{## boot default entry in X seconds, 0=immediately, -1=never:}
+\textcolor{comment}{## GRUB menu timeout:}
 GRUB_TIMEOUT=1
-\textcolor{comment}{## menu=timeout to select entry, hidden=timeout to show grub:}
-GRUB_TIMEOUT_STYLE=menu
-\textcolor{comment}{## disable recovery menu entry:}
+\textcolor{comment}{## Disable recovery mode entry in GRUB menu:}
 GRUB_DISABLE_RECOVERY=true
+
 \textcolor{comment}{## GRUB BG image (*.jpg or *.png) - gfxterm only:}
 #GRUB_BACKGROUND="\textcolor{file}{/boot/grub/<image.png>}"
-\textcolor{comment}{## theme - gfxterm only:}
+
+\textcolor{comment}{## Theme - gfxterm only:}
 #GRUB_THEME="\textcolor{file}{/boot/grub/themes/<THEME>/theme.txt}"
+
+\textcolor{comment}{## Default Debian options:GRUB_CMDLINE_LINUX}
+GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
+GRUB_CMDLINE_LINUX_DEFAULT="quiet"
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1398,6 +1400,28 @@ New (exclusive) log file: (\textbf{\textcolor{file}{/var/log/iptables.log}}).
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Honeypots}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{endlessh}
+\begin{enumerate}
+    \item \textbf{Dependencies:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install endlessh
+\end{Verbatim}    
+    \item \textbf{Configuration:}
+\newline (\textbf{\textbf{file}{/etc/endlessh/config}}):
+\begin{Verbatim}[commandchars=\\\{\}]
+Port 22
+\end{Verbatim}
+    \item \textbf{Restart service:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{systemctl} enable endlessh.service
+\textcolor{root}{root#} \textcolor{command}{systemctl} restart endlessh.service
+\end{Verbatim}    
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Network Services %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Network Services}
@@ -1679,7 +1703,7 @@ Needed for: \textbf{apt-file}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root} \textcolor{command}{apt} install apt-file
 \end{Verbatim}
-    \item Initialize:
+    \item Initialize (not really, just like apt update):
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root} \textcolor{command}{apt-file} update
 \end{Verbatim}
