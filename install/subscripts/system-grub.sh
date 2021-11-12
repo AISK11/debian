@@ -20,7 +20,7 @@ echo -e "[+]   GRUB menu colors in '/boot/grub/custom.cfg'." || echo -e "[-] ! E
 
 ## Update GRUB:
 grub-mkconfig -o /boot/grub/grub.cfg &> /dev/null &&
-echo -e "[+] GRUB configuration updated to '/boot/grub/grub.cfg'." || echo -e "[-] ! ERROR! Could not update GRUB configuration to '/boot/grub/grub.cfg'!"
+echo -e "[+]   GRUB configuration updated to '/boot/grub/grub.cfg'." || echo -e "[-] ! ERROR! Could not update GRUB configuration to '/boot/grub/grub.cfg'!"
 
 ## Script end banner:
 echo -e   "##########################"
