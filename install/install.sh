@@ -183,8 +183,8 @@ else
     echo -e   "##########################"
     echo -e "[*] Virtual Machine settings set, skipping installing 'iwlwifi' driver."
     echo -e "[*] Virtual Machine settings set, skipping installing Nvidia driver and tools."
+    echo -e   "##########################"
 fi
-echo -e   "##########################"
 
 #####################
 #      DOTFILES     #
@@ -232,7 +232,7 @@ apt install youtube-dl imagemagick zip -y &> /dev/null &&
 echo -e "[+]   Multimedia packages 'youtube-dl imagemagick zip' installed." || echo -e "[-] ! ERROR! Multimedia packages 'youtube-dl imagemagick zip' could not be installed!"
 
 ## MISC:
-apt install ascii &&
+apt install ascii -y &> /dev/null &&
 echo -e "[+]   Misc packages 'ascii' installed." || echo -e "[-] ! ERROR! Could not install misc packages 'ascii'!"
 
 echo -e   "##########################"
