@@ -2,8 +2,8 @@
 
 ## Author AISK
 ## Description: This script sets up rfkill (it unblocks wlan (wi-fi) and blocks bluetooth.
-## Date Created: November 12, 2021
-## Last Updated: November 12, 2021
+## Date Created: November 13, 2021
+## Last Updated: November 13, 2021
 
 ## Script start banner:
 echo -e "\n##########################"
@@ -24,4 +24,3 @@ echo -e "[+]   Wi-Fi (wlan) were unblocked." || echo -e "[-] ! ERROR! Wi-Fi (wla
 
 ## Script end banner:
 echo -e   "##########################"
-
