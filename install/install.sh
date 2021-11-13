@@ -169,21 +169,22 @@ bash ./subscripts/x11-urxvt.sh
 ####################
 #     DRIVERS      #
 ####################
-## Install iwlwifi driver:
-## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
-if [[ "${ISVIRTUAL}" -eq 0 ]]; then
+if [[ "${INSTALL_DRIVER}" -eq 0 ]]; then
+    ## Install iwlwifi driver:
+    ## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
     bash ./subscripts/driver-network-iwlwifi.sh
-else
-    echo -e "\n[*] Virtual Machine settings set, skipping installing 'iwlwifi' driver."
-fi
 
-## Install Nvidia drivers and set X11 config file for Nvidia + Intel (Optimus):
-## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
-if [[ "${ISVIRTUAL}" -eq 0 ]]; then
-    bash ./subscripts/driver-nvidia-optimus.sh &&
+    ## Install Nvidia drivers and set X11 config file for Nvidia + Intel (Optimus):
+    ## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
+    bash ./subscripts/driver-nvidia-optimus.sh
 else
-    echo -e "\n[*] Virtual Machine settings set, skipping installing 'Nvidia' driver and tools."
+    echo -e "\n##########Driver##########"
+    echo -e   "###       Drivers      ###"
+    echo -e   "##########################"
+    echo -e "[*] Virtual Machine settings set, skipping installing 'iwlwifi' driver."
+    echo -e "[*] Virtual Machine settings set, skipping installing Nvidia driver and tools."
 fi
+echo -e   "##########################"
 
 #####################
 #      DOTFILES     #
