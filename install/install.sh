@@ -238,7 +238,7 @@ echo -e "[+]   Misc packages 'ascii' installed." || echo -e "[-] ! ERROR! Could 
 echo -e   "##########################"
 
 ## KVM/QEMU:
-bash ./subscripts/app-virt-kvm_qemu.sh
+bash ./subscripts/app-virt-kvm_qemu.sh "${USER}"
 
 ## Lightcord:
 ## DEAD PROJECT!
