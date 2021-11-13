@@ -12,7 +12,7 @@ echo -e   "##########################"
 
 ## Install wpasupplicant package with additional wireless tools:
 apt install wpasupplicant wireless-tools -y &> /dev/null &&
-echo -e "[+]   Packages 'wpasupplicant' and 'wireless-tools' were installed." || echo -e "[-] ! ERROR! Could not install packages 'wpasupplicant' and 'wireless-tools'!"
+echo -e "[+]   Packages 'wpasupplicant wireless-tools' were installed." || echo -e "[-] ! ERROR! Could not install packages 'wpasupplicant wireless-tools'!"
 
 ## Copy wpa_supplicant template to right location:
 cp ../config_files/WI-FI/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf &&
