@@ -107,17 +107,6 @@ bash ./subscripts/net-dns-servers.sh
 ## Set wpasupplicant:
 bash ./subscripts/net-wpasupplicant.sh
 
-####################
-#     DRIVERS      #
-####################
-## Install iwlwifi driver:
-## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
-if [[ "${ISVIRTUAL}" -eq 0 ]]; then
-    bash ./subscripts/driver-network-iwlwifi.sh
-else
-    echo -e "\n[*] Virtual Machine settings set, skipping installing 'iwlwifi' driver."
-fi
-
 #####################
 # TEXTEDITOR & SHELL#
 #####################
@@ -164,9 +153,17 @@ bash ./subscripts/x11-i3-utils.sh
 ## Install URXVT Terminal Emulator:
 bash ./subscripts/x11-urxvt.sh
 
-#####################
-#       Nvidia      #
-#####################
+####################
+#     DRIVERS      #
+####################
+## Install iwlwifi driver:
+## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
+if [[ "${ISVIRTUAL}" -eq 0 ]]; then
+    bash ./subscripts/driver-network-iwlwifi.sh
+else
+    echo -e "\n[*] Virtual Machine settings set, skipping installing 'iwlwifi' driver."
+fi
+
 ## Install Nvidia drivers and set X11 config file for Nvidia + Intel (Optimus):
 ## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
 if [[ "${ISVIRTUAL}" -eq 0 ]]; then
