@@ -167,9 +167,7 @@ fi
 ## Install Nvidia drivers and set X11 config file for Nvidia + Intel (Optimus):
 ## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
 if [[ "${ISVIRTUAL}" -eq 0 ]]; then
-    bash ./subscripts/driver-nvidia.sh &&
-    cp ../config_files/xorg.conf /etc/X11/xorg.conf &&
-    echo -e "\n[+] Nvidia driver and tools installed and X11 config file '/etc/X11/xorg.conf' updated." || echo -e "\n[-] ERROR! Either Nvidia driver and tools were not installed or X11 config file '/etc/X11/xorg.conf' could not be updated."
+    bash ./subscripts/driver-nvidia-optimus.sh &&
 else
     echo -e "\n[*] Virtual Machine settings set, skipping installing 'Nvidia' driver and tools."
 fi
