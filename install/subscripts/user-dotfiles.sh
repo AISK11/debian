@@ -50,7 +50,7 @@ echo -e "[+]   Files in '${HOME}/scripts/' were made executable." || echo -e "[-
 
 ## Change ownership of all files in home to USER:
 chown -R ${USER}:${USER} ${HOME} &> /dev/null &&
-echo -e "User '${USER}' was set as an owner of all files in '${HOME}/'." || echo -e "User '${USER}' could not be set as an owner of all files in '${HOME}/'!"
+echo -e "[+]   User '${USER}' was set as an owner of all files in '${HOME}/'." || echo -e "[-] ! User '${USER}' could not be set as an owner of all files in '${HOME}/'!"
 
 ## Delete cloned git repo:
 #rm -rf ${HOME}/debian &&
