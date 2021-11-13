@@ -13,7 +13,7 @@ exec --no-startup-id feh --bg-scale ~/.config/i3/images/wallpaper.png
 ## RENDER WALLPAPER NICELY (i3-gaps):
 exec --no-startup-id bash ${HOME}/.fehbg
 ## LOCK SCREEN:
-bindsym $mod+l exec i3lock -efu -i ~/.config/i3/images/bsod.png
+bindsym $mod+l exec i3lock -efu -i ~/.config/i3/images/bsod_linux.png
 
 
 ## i3-gaps SETTINGS:
