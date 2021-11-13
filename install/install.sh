@@ -169,7 +169,7 @@ bash ./subscripts/x11-urxvt.sh
 ####################
 #     DRIVERS      #
 ####################
-if [[ "${INSTALL_DRIVER}" -eq 0 ]]; then
+if [[ "${INSTALL_DRIVER}" -ne 0 ]]; then
     ## Install iwlwifi driver:
     ## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
     bash ./subscripts/driver-network-iwlwifi.sh
