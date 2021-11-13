@@ -7,33 +7,46 @@
 ## Fresh debian install required without DE!
 ## Execute this script with root privileges!
 
-### EDIT VARIABLES:
-## CHANGE IF INSTALLING ON VM!
+#######################
+### EDIT VARIABLES: ###
+#######################
+### IMPORTANT! ###
+## CHANGE TO 0 IF INSTALLING ON VM!
 ## Avoids installing drivers.
-ISVIRTUAL=0
-## MUST BE CHANGED!
+INSTALL_DRIVERS=1
+
+## USER - MUST BE CHANGED!
 ## e.g. "aisk"
 USER="changeme"
-HOME="/home/${USER}"
-## New hostname can be specified:
-HOSTNAME="$(hostname)"
-## Domain name can specified:
-## e.g. "net" -> HOSTNAME.net
-DNSDOMAINNAME=""
-## Change Timezone:
-## e.g. "UTC"
-## more timezones can be found in DIR '/usr/share/zoneinfo/'
-TIMEZONE="Europe/Copenhagen"
+
 ## Set Hardening level:
 ## 0 = no hardening
 ## 1 = light hardening
 ## 2 = mediocre hardening
 ## 3 = full hardening
 HARDENING_LVL=3
+
+### OPTIONAL ###
+## New hostname can be specified:
+HOSTNAME="$(hostname)"
+
+## Domain name can specified:
+## e.g. "net" -> HOSTNAME.net
+DNSDOMAINNAME=""
+
+## Change Timezone:
+## e.g. "UTC"
+## more timezones can be found in DIR '/usr/share/zoneinfo/'
+TIMEZONE="Europe/Copenhagen"
+
 # CHANGE to 1 if you want to automatically reboot after done:
 REBOOT_AFTER_DONE=0
+
+### DO NOT EDIT! ###
 ## PATH variable to execute sbin commands:
 PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/sbin:/usr/sbin"
+HOME="/home/${USER}"
+
 
 ## Check if valid USER variable was set.
 if [[ "${USER}" = "changeme" ]]; then
@@ -182,51 +195,49 @@ bash ./subscripts/user-dotfiles.sh "${USER}"
 #####################
 #Additional Packages#
 #####################
+echo -e "\n##########################"
+echo -e   "### Additional Packages###"
+echo -e   "##########################"
 ## Process related:
-apt install psmisc htop -y &> /dev/null &&
-echo -e "\n[+] Process related packages installed." || echo -e "\n[-] ERROR! Process related packages could not be installed!"
+apt install apt-file psmisc htop -y &> /dev/null &&
+echo -e "[+]   Process related packages 'apt-file psmisc htop' installed." || echo -e "[-] ! ERROR! Process related packages 'apt-file psmisc htop' could not be installed!"
 
 ## Other system related:
 apt install neofetch inxi -y &> /dev/null &&
-echo -e "\n[+] Other system related packages installed." || echo -e "\n[-] ERROR! Other system related packages could not be installed!"
+echo -e "[+]   Other system related packages 'neofetch inxi' installed." || echo -e "[-] ! ERROR! Other system related packages 'neofetch inxi' could not be installed!"
 
 ## License related:
 apt install vrms -y &> /dev/null &&
-echo -e "\n[+] License related packages installed." || echo -e "\n[-] ERROR! License related packages could not be installed!"
+echo -e "[+]   License related packages 'vrms' installed." || echo -e "[-] ! ERROR! License related packages 'vrms' could not be installed!"
 
 ## Password Manager:
 apt install keepassxc -y &> /dev/null &&
-echo -e "\n[+] Password Manager packages installed." || echo -e "\n[-] ERROR! Password Manager packages could not be installed!"
+echo -e "[+]   Password Manager packages 'keepassxc' installed." || echo -e "[-] ! ERROR! Password Manager packages 'keepassxc' could not be installed!"
 
 ## Install support for MTP devices:
 apt install mtp-tools jmtpfs -y &> /dev/null &&
-echo -e "\n[+] Installed support for MTP devices." || echo -e "\n[-] ERROR! MTP tools could not be installed!"
+echo -e "[+]   MTP support packages 'mtp-tools jmtpfs' installed." || echo -e "[-] ! ERROR! MTP support packages 'mtp-tools jmtpfs' could not be installed!"
 
 ## Networking tools:
-apt install ethtool iptables hping3 yafc putty mtr nmap dnsutils whois openvpn curl -y &> /dev/null &&
+apt install ethtool iptables nmap mtr hping3 dnsutils yafc putty whois openvpn curl -y &> /dev/null &&
+echo -e "[+]   Networking packages 'ethtool iptables nmap mtr hping3 dnsutils yafc putty whois openvpn curl' installed." || echo -e "[-] ! ERROR! Networking packages 'ethtool iptables nmap mtr hping3 dnsutils yafc putty whois openvpn curl' could not be installed!"
+
 ## Dialog options:
 apt install macchanger wireshark 2> /dev/null -y &&
-echo -e "\n[+] Networking tools installed." || echo -e "\n[-] ERROR! Network tools could not be installed!"
+echo -e "[+]   Networking tools requiring dialog 'macchanger wireshark' installed." || echo -e "[-] ! ERROR! Networking tools requiring dialog 'macchanger wireshark' installed!"
 
 ## Multimedia:
 apt install youtube-dl imagemagick zip -y &> /dev/null &&
-echo -e "\n[+] Multimedia packages installed." || echo -e "\n[-] ERROR! Multimedia packages could not be installed!"
-
-## KVM/QEMU:
-apt install qemu-system libvirt-clients libvirt-daemon-system virt-manager -y &> /dev/null &&
-/sbin/usermod -aG libvirt ${USER} &&
-/sbin/usermod -aG libvirt-qemu ${USER} &&
-cp -r /etc/libvirt/ ${HOME}/.config/ &> /dev/null &&
-chown -R ${USER}:${USER} ${HOME} &> /dev/null &&
-sed -i 's/#uri_default/uri_default/g' ${HOME}/.config/libvirt/libvirt.conf &> /dev/null &&
-systemctl enable libvirtd.service &> /dev/null &&
-mkdir /var/lib/libvirt/iso/ &&
-echo -e "\n[+] KVM/QEMU Installed" || echo -e "\n[-] ERROR! KVM/QEMU could not be installed successfully!"
+echo -e "[+]   Multimedia packages 'youtube-dl imagemagick zip' installed." || echo -e "[-] ! ERROR! Multimedia packages 'youtube-dl imagemagick zip' could not be installed!"
 
 ## MISC:
 apt install ascii &&
-echo -e "\n[+] Misc packages installed." || echo -e "\n[-] ERROR! Could not install misc packages!"
+echo -e "[+]   Misc packages 'ascii' installed." || echo -e "[-] ! ERROR! Could not install misc packages 'ascii'!"
 
+echo -e   "##########################"
+
+## KVM/QEMU:
+bash ./subscripts/app-virt-kvm_qemu.sh
 
 ## Lightcord:
 ## DEAD PROJECT!
