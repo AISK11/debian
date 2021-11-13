@@ -225,7 +225,7 @@ echo -e "[+]   Networking packages 'ethtool iptables nmap mtr hping3 dnsutils ya
 
 ## Dialog options:
 apt install macchanger wireshark 2> /dev/null -y &&
-echo -e "[+]   Networking tools requiring dialog 'macchanger wireshark' installed." || echo -e "[-] ! ERROR! Networking tools requiring dialog 'macchanger wireshark' installed!"
+echo -e "[+]   Networking tools requiring dialog 'macchanger wireshark' installed." || echo -e "[-] ! ERROR! Networking tools requiring dialog 'macchanger wireshark' could not be installed!"
 
 ## Multimedia:
 apt install youtube-dl imagemagick zip -y &> /dev/null &&
