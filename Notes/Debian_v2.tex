@@ -448,9 +448,13 @@ permit nopass <USER>
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{rfkill} list
 \end{Verbatim}
-    \item \textbf{Block/unblock BT and WiFi:}
+    \item \textbf{Block everything except Wi-Fi:}
 \begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{root}{root#} \textcolor{command}{rfkill} <block|unblock> <bluetooth|wlan>
+\textcolor{root}{root#} \textcolor{command}{rfkill} block bluetooth fm gps nfc uwb wimax wwan
+\end{Verbatim}
+    \item \textbf{Unblock WiFi:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{rfkill} unblock wlan
 \end{Verbatim}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -490,7 +494,7 @@ iface wlan0 inet manual
 \textcolor{root}{root#} \textcolor{command}{systemctl} disable dhcpcd.service
 \end{Verbatim}
     \item \textbf{Configure DHCP client:}
-\newline \underline{\url{https://github.com/AISK11/debian/blob/main/install/files/dhcpcd.conf}}
+\newline \underline{\url{https://github.com/AISK11/debian/blob/main/config_files/DHCP/dhcpcd.conf}}
 \newline File: (\textbf{\textcolor{file}{/etc/dhcpcd.conf}}):
 \begin{Verbatim}[commandchars=\\\{\}]
 noipv4ll
