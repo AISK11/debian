@@ -10,7 +10,7 @@ echo -e "\n##########################"
 echo -e   "### Networking.service ###"
 echo -e   "##########################"
 
-systemctl disable networking.service 1> /dev/null &&
+systemctl disable networking.service &> /dev/null &&
 echo -e "[+]   Service 'networking.service' disabled." || echo -e "[-] ! ERROR! Service 'networking.service' could not be disabled!"
 
 ## Script end banner:
