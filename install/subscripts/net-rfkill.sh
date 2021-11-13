@@ -1,9 +1,27 @@
 #!/bin/bash
 
-## This script sets up rfkill (it unblocks wlan (wi-fi) and blocks bluetooth.
+## Author AISK
+## Description: This script sets up rfkill (it unblocks wlan (wi-fi) and blocks bluetooth.
+## Date Created: November 12, 2021
+## Last Updated: November 12, 2021
 
+## Script start banner:
+echo -e "\n##########################"
+echo -e   "###   Configure GRUB   ###"
+echo -e   "##########################"
+
+## Install rfkill:
 apt install rfkill -y &> /dev/null &&
-rfkill block bluetooth uwb wimax wwan gps fm nfc &&
+echo -e "[+]   Package 'rfkill' installed." || echo -e "[-] ! ERROR! Package 'rfkill' could not be installed!"
+
+## Block all wireless tehnologies except for Wi-Fi:
+rfkill block bluetooth fm gps nfc uwb wimax wwan &&
+echo -e "[+]   Following wireless technologies were blocked: bluetooth, fm, gps, nfc, uwb, wimax, wwan." || echo -e "[-] ! ERROR! Could not block one or more of the following tehcnologies: bluetooth, fm, gps, nfc, uwb, wimax, wwan."
+
+## Unblock Wi-Fi
 rfkill unblock wlan &&
-#dpkg --purge bluez bluetooth &&
-echo -e "\n[+] Rfkill set up." || echo -e "\n[-] ERROR! Rfkill could not be set up!"
+echo -e "[+]   Wi-Fi (wlan) were unblocked." || echo -e "[-] ! ERROR! Wi-Fi (wlan) could not be unblocked!"
+
+## Script end banner:
+echo -e   "##########################"
+
