@@ -7,7 +7,7 @@
 
 ## Script start banner:
 echo -e "\n##########################"
-echo -e   "###   Configure GRUB   ###"
+echo -e   "###       Rfkill       ###"
 echo -e   "##########################"
 
 ## Install rfkill:
