@@ -181,8 +181,8 @@ else
     echo -e "\n##########Driver##########"
     echo -e   "###       Drivers      ###"
     echo -e   "##########################"
-    echo -e "[*] Virtual Machine settings set, skipping installing 'iwlwifi' driver."
-    echo -e "[*] Virtual Machine settings set, skipping installing Nvidia driver and tools."
+    echo -e "[*]   Virtual Machine settings set, skipping installing 'iwlwifi' driver."
+    echo -e "[*]   Virtual Machine settings set, skipping installing Nvidia driver and tools."
     echo -e   "##########################"
 fi
 
