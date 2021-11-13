@@ -248,8 +248,8 @@ bash ./subscripts/app-virt-kvm_qemu.sh "${USER}"
 #####################
 ### LEVEL 1:
 if [[ "${HARDENING_LVL}" -ge 1 ]]; then
-    echo -e "\n###############################"
-    echo -e "#[H] Hardening LEVEL 1 begins.#"
+    echo -e "###############################"
+    echo -e "#[H] Hardening LEVEL 1 begins #"
     echo -e "###############################"
 
     ## Set blank MOTD:
