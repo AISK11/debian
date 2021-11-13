@@ -88,14 +88,6 @@ bash ./subscripts/user-privileges-doas.sh "${USER}"
 ####################
 #    NETWORKING    #
 ####################
-## Install iwlwifi driver:
-## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
-if [[ "${ISVIRTUAL}" -eq 0 ]]; then
-    bash ./subscripts/driver-network-iwlwifi.sh
-else
-    echo -e "\n[*] Virtual Machine settings set, skipping installing 'iwlwifi' driver."
-fi
-
 ## Disable networking service (is unnecessary):
 bash ./subscripts/net-disable-networking-service.sh
 
@@ -114,6 +106,17 @@ bash ./subscripts/net-dns-servers.sh
 
 ## Set wpasupplicant:
 bash ./subscripts/net-wpasupplicant.sh
+
+####################
+#     DRIVERS      #
+####################
+## Install iwlwifi driver:
+## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
+if [[ "${ISVIRTUAL}" -eq 0 ]]; then
+    bash ./subscripts/driver-network-iwlwifi.sh
+else
+    echo -e "\n[*] Virtual Machine settings set, skipping installing 'iwlwifi' driver."
+fi
 
 #####################
 # TEXTEDITOR & SHELL#
