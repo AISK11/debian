@@ -7,7 +7,7 @@
 ## Requires: non-free and contrib packages.
 
 ## Script start banner:
-echo -e "\n##########################"
+echo -e "\n##########Driver##########"
 echo -e   "###Driver - Intel Wi-Fi###"
 echo -e   "##########################"
 
