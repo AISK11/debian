@@ -14,5 +14,9 @@ echo -e   "##########################"
 apt install intel-gpu-tools nvtop nvidia-detect linux-headers-amd64 nvidia-driver firmware-misc-nonfree -y &> /dev/null &&
 echo -e "[+]   Packages 'intel-gpu-tools nvtop nvidia-detect linux-headers-amd64 nvidia-driver firmware-misc-nonfree' were installed." || echo -e "[-] ! ERROR! Packages 'intel-gpu-tools nvtop nvidia-detect linux-headers-amd64 nvidia-driver firmware-misc-nonfree' could not be installed!"
 
+## Set Xorg config for Nvidia Optimus:
+cp ../config_files/xorg.conf /etc/X11/xorg.conf &&
+echo -e "[+]   Xorg config file was set in '/etc/X11/xorg.conf'." || echo -e "[-] ! ERROR! Xorg config file could not be set in '/etc/X11/xorg.conf'!"
+
 ## Script end banner:
 echo -e   "##########################"
