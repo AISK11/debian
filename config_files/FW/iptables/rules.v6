@@ -2,7 +2,7 @@
 ## File Location: /etc/iptables/rules.v6
 ## Author AISK
 ## Date Created: November 9, 2021
-## Last Updated: November 9, 2021
+## Last Updated: November 14, 2021
 
 ## Requires: iptables-persistent
 ## Current functionality:
@@ -16,7 +16,7 @@
 :LOG_AND_DROP - [0:0]
 -A INPUT -s ::1/128 -d ::1/128 -j ACCEPT
 -A INPUT -p ipv6-icmp -m icmp6 --icmpv6-type 128 -j LOG_AND_DROP
--A LOG_AND_DROP -j LOG --log-prefix "ip6tables denied: "
+-A LOG_AND_DROP -j LOG --log-prefix "ip6tables denied: " --log-level 7
 -A LOG_AND_DROP -j DROP
 COMMIT
 # Completed on Tue Nov  9 22:48:11 2021
