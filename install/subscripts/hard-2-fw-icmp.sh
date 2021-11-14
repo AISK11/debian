@@ -57,9 +57,26 @@ cp ../config_files/Logging/Logrotate/ip6tables /etc/logrotate.d/ip6tables &&
 echo -e "[+]   Logrotate rule for IPv6 FW copied to '/etc/logrotate.d/ip6tables'." || echo -e "[-] ! ERROR! Logroate rule for IPv6 FW could not be copied to '/etc/logrotate.d/ip6tables'!"
 
 ## Add crontab rules to root's cron:
-(crontab -l &> /dev/null; echo "@reboot systemctl restart logrotate.service && systemctl restart rsyslog.service") | crontab - &&
-(crontab -l &> /dev/null; echo "@daily systemctl restart logrotate.service && systemctl restart rsyslog.service") | crontab - &&
-echo -e "[+]   Added @reboot and @daily crontab rules for services 'logrotate.service rsyslog.service'." || echo -e "[-] ! ERROR! Crontab @reboot and @daily rules for services 'logrotate.service rsyslog.service' could not be added!"
+#(crontab -l &> /dev/null; echo "@reboot systemctl restart logrotate.service && systemctl restart rsyslog.service") | crontab - &&
+#(crontab -l &> /dev/null; echo "@daily systemctl restart logrotate.service && systemctl restart rsyslog.service") | crontab - &&
+#echo -e "[+]   Added @reboot and @daily crontab rules for services 'logrotate.service rsyslog.service'." || echo -e "[-] ! ERROR! Crontab @reboot and @daily rules for services 'logrotate.service rsyslog.service' could not be added!"
+
+### Add crontab rules to root's cron:
+## Note: grep returns 0 on match, 1 otherwise:
+## On reboot:
+if grep "^@reboot systemctl restart logrotate.service && systemctl restart rsyslog.service"; then
+    echo "[*]   Reboot rule for services 'logrotate.service rsyslog.service' already exists.";
+else
+    echo -e "@reboot systemctl restart logrotate.service && systemctl restart rsyslog.service" >> /var/spool/cron/crontabs/root &&
+    echo -e "[+]   Reboot rule added for services 'logrotate.service rsyslog.service' added to '/var/spool/cron/crontabs/root'" || echo -e "[-] ! ERROR! Reboot rule for services 'logrotate.service rsyslog.service' could not be added to '/var/spool/cron/crontabs/root'!"
+fi
+## Daily:
+if grep "^@daily systemctl restart logrotate.service && systemctl restart rsyslog.service"; then
+    echo "[*]   Daily rule for services 'logrotate.service rsyslog.service' already exists.";
+else
+    echo -e "@daily systemctl restart logrotate.service && systemctl restart rsyslog.service" >> /var/spool/cron/crontabs/root &&
+    echo -e "[+]   Daily rule added for services 'logrotate.service rsyslog.service' added to '/var/spool/cron/crontabs/root'" || echo -e "[-] ! ERROR! Daily rule for services 'logrotate.service rsyslog.service' could not be added to '/var/spool/cron/crontabs/root'!"
+fi
 
 ## Restart services with updated config:
 systemctl restart logrotate.service &&
