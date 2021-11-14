@@ -48,12 +48,11 @@ else
     echo -e "[+]   Daily rule added for services 'logrotate.service rsyslog.service' added to '/var/spool/cron/crontabs/root'" || echo -e "[-] ! ERROR! Daily rule for services 'logrotate.service rsyslog.service' could not be added to '/var/spool/cron/crontabs/root'!"
 fi
 ## Restart cron service:
-systemctl restart cron.service anacron.service &&
-echo -e "[+]   Services 'cron.service anacron.service' were restarted." || echo -e "[-] ! ERROR! Services 'cron.service anacron.service' could not be restarted!"
+systemctl restart cron.service &&
+echo -e "[+]   Service 'cron.service' were restarted." || echo -e "[-] ! ERROR! Service 'cron.service' could not be restarted!"
 
 ## Restart services with updated config:
-systemctl restart logrotate.service &&
-systemctl restart rsyslog.service &&
+systemctl restart logrotate.service rsyslog.service &&
 echo -e "[+]   Services 'logrotate.service rsyslog.service' were restarted". || echo -e "[-] ! ERROR! Services 'logrotate.service rsyslog.service' could not be restarted!"
 
 ## Script end banner:
