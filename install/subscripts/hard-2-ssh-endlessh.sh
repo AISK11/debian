@@ -29,6 +29,38 @@ sed -i "s/^#AmbientCapabilities=CAP_NET_BIND_SERVICE/AmbientCapabilities=CAP_NET
 sed -i "s/^PrivateUsers=true/#&/" ${SYSTEMD_SERVICE} &> /dev/null &&
 echo -e "[+]   Successfully edited settings in '${SYSTEMD_SERVICE} to be able to run on ports <1024'." || echo -e "[-] ! ERROR! Could not edit settings in '${SYSTEMD_SERVICE}. Endlessh will be able to run only on ports >= 1024!"
 
+## Copy rsyslog rule:
+cp ../config_files/Logging/Rsyslog/endlessh.conf /etc/rsyslog.d/endlessh.conf &&
+echo -e "[+]   Logging for Endlessh were applied in '/etc/rsyslog.d/endlessh.conf'." || echo -e "[-] ! ERROR! Logging for Endlessh could not be applied in '/etc/rsyslog.d/endlessh.conf'!"
+
+## Copy logrotate rule:
+cp ../config_files/Logging/Logrotate/endlessh /etc/logrotate.d/endlessh &&
+echo -e "[+]   Logrotate rule for Endlessh copied to '/etc/logrotate.d/endlessh'." || echo -e "[-] ! ERROR! Logrotate rule for Endlessh could not be copied to '/etc/logrotate.d/endlessh'!"
+
+### Add crontab rules to root's cron:
+## Note: grep returns 0 on match, 1 otherwise:
+## On reboot:
+if grep "^@reboot systemctl restart logrotate.service && systemctl restart rsyslog.service" /var/spool/cron/crontabs/root &> /dev/null; then
+    echo "[*]   Reboot rule for services 'logrotate.service rsyslog.service' already exists."
+else
+    echo -e "@reboot systemctl restart logrotate.service && systemctl restart rsyslog.service" >> /var/spool/cron/crontabs/root &&
+    echo -e "[+]   Reboot rule added for services 'logrotate.service rsyslog.service' added to '/var/spool/cron/crontabs/root'" || echo -e "[-] ! ERROR! Reboot rule for services 'logrotate.service rsyslog.service' could not be added to '/var/spool/cron/crontabs/root'!"
+fi
+## Daily:
+if grep "^@daily systemctl restart logrotate.service && systemctl restart rsyslog.service" /var/spool/cron/crontabs/root &> /dev/null; then
+    echo "[*]   Daily rule for services 'logrotate.service rsyslog.service' already exists."
+else
+    echo -e "@daily systemctl restart logrotate.service && systemctl restart rsyslog.service" >> /var/spool/cron/crontabs/root &&
+    echo -e "[+]   Daily rule added for services 'logrotate.service rsyslog.service' added to '/var/spool/cron/crontabs/root'" || echo -e "[-] ! ERROR! Daily rule for services 'logrotate.service rsyslog.service' could not be added to '/var/spool/cron/crontabs/root'!"
+fi
+## Restart cron service:
+systemctl restart cron.service &&
+echo -e "[+]   Service 'cron.service' were restarted." || echo -e "[-] ! ERROR! Service 'cron.service' could not be restarted!"
+
+## Restart services with updated config:
+systemctl restart logrotate.service rsyslog.service &&
+echo -e "[+]   Services 'logrotate.service rsyslog.service' were restarted". || echo -e "[-] ! ERROR! Services 'logrotate.service rsyslog.service' could not be restarted!"
+
 ## Kill current process instance on default port:
 systemctl stop endlessh.service &> /dev/null &&
 systemctl kill endlessh.service &> /dev/null &&
