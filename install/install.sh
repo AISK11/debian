@@ -243,6 +243,9 @@ bash ./subscripts/app-virt-kvm_qemu.sh "${USER}"
 ## Lightcord:
 ## DEAD PROJECT!
 
+## Steam
+## Do it manually!
+
 #####################
 #  System hardening #
 #####################
@@ -279,6 +282,8 @@ if [[ "${HARDENING_LVL}" -ge 2 ]]; then
 
     ## Install and sets Endlessh (honeypot/tarpit) on port 22:
     bash ./subscripts/hard-2-ssh-endlessh.sh
+
+    ## TODO: TigerVNC via SSH Tunnel.
 else
     echo "[*]   Hardening level is lower than 2. Skipping..."
 fi
