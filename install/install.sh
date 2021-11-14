@@ -307,7 +307,7 @@ bash ./subscripts/system-update.sh
 ## Remove 'debian' git directory:
 cd ${HOME} &&
 rm -rf "${HOME}/debian/" &&
-echo -e "[+]   Cleared '${HOME}/debian/' directory." || echo -e "[-] ! ERROR! Directory '${HOME}/debian/' could not be removed!"
+echo -e "\n[+]   Cleared '${HOME}/debian/' directory." || echo -e "\n[-] ! ERROR! Directory '${HOME}/debian/' could not be removed!"
 
 ## Reboot after installation:
 if [[ "${REBOOT_AFTER_DONE}" -eq 1 ]]; then
