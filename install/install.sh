@@ -220,8 +220,8 @@ apt install mtp-tools jmtpfs -y &> /dev/null &&
 echo -e "[+]   MTP support packages 'mtp-tools jmtpfs' installed." || echo -e "[-] ! ERROR! MTP support packages 'mtp-tools jmtpfs' could not be installed!"
 
 ## Networking tools:
-apt install ethtool iptables nmap mtr hping3 dnsutils yafc putty whois openvpn curl -y &> /dev/null &&
-echo -e "[+]   Networking packages 'ethtool iptables nmap mtr hping3 dnsutils yafc putty whois openvpn curl' installed." || echo -e "[-] ! ERROR! Networking packages 'ethtool iptables nmap mtr hping3 dnsutils yafc putty whois openvpn curl' could not be installed!"
+apt install ethtool iptables nmap mtr hping3 dnsutils yafc putty whois openvpn curl ssh-audit -y &> /dev/null &&
+echo -e "[+]   Networking packages 'ethtool iptables nmap mtr hping3 dnsutils yafc putty whois openvpn curl ssh-audit' installed." || echo -e "[-] ! ERROR! Networking packages 'ethtool iptables nmap mtr hping3 dnsutils yafc putty whois openvpn curl' could not be installed!"
 
 ## Dialog options:
 apt install macchanger wireshark 2> /dev/null -y &&
