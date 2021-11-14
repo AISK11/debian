@@ -4,7 +4,7 @@
 ## Date Created: November 14, 2021
 ## Last Updated: November 14, 2021
 
-/var/log/iptables.log
+/var/log/sshd.log
 {
     missingok
     notifempty
