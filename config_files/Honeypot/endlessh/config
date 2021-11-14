@@ -2,7 +2,7 @@
 ## File Location: /etc/endlessh/config
 ## Author AISK
 ## Date Created: November 9, 2021
-## Last Updated: November 9, 2021
+## Last Updated: November 14, 2021
 ## Source: https://github.com/skeeto/endlessh
 
 ## The port on which to listen for new SSH connections.
@@ -27,7 +27,7 @@ MaxClients 4096
 ##   0 = Quiet
 ##   1 = Standard, useful log messages
 ##   2 = Very noisy debugging information
-LogLevel 0
+LogLevel 1
 
 ## Set the family of the listening socket
 ##   0 = Use IPv4 Mapped IPv6 (Both v4 and v6, default)
