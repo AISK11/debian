@@ -1,14 +1,14 @@
-## Name: Logrotation for '/etc/rsyslog.d/ip6tables'
+## Name: Logrotation for '/etc/rsyslog.d/ip6tables.conf'
 ## File Location: /etc/logrotate.d/ip6tables
 ## Author AISK
 ## Date Created: November 9, 2021
-## Last Updated: November 9, 2021
+## Last Updated: November 14, 2021
 
 /var/log/ip6tables.log
 {
     missingok
     notifempty
-    rotate 4
+    rotate 7
     daily
     create 0600 root root
     compress
