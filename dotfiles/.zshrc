@@ -72,6 +72,11 @@ mem()
     ps -eo rss,pid,euser,args --sort %mem | grep -i $@ | grep -v grep | awk '{printf $1/1024 "MB"; $1=""; print }'
 }
 
+### Usefull commands
+## Remove audio from video:
+#ffmpeg -i <input_file.mp4> -vcodec copy -an <output_file.mp4>
+
+
 ## Protects against accidental
 ## [doas ]rm [-rf ]/*[*]
 ## Much safer syntax must be used:
