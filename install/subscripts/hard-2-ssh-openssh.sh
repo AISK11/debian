@@ -23,5 +23,35 @@ echo -e "[+]   Service 'ssh.service' disabled on startup." || echo -e "[-] ! ERR
 cp ../config_files/SSH/sshd_config /etc/ssh/sshd_config &&
 echo -e "[+]   SSH server config was copied to '/etc/ssh/sshd_config'." || echo -e "[-] ! ERROR! SSH server config could not be copied to '/etc/ssh/sshd_config'!"
 
+## Change logging file:
+cp ../config_files/Logging/Rsyslog/sshd.conf /etc/rsyslog.d/sshd.conf &&
+echo -e "[+]   Logging for SSHD were applied in '/etc/rsyslog.d/sshd.conf'." || echo -e "[-] ! ERROR! Logging for SSHD could not be applied in '/etc/rsyslog.d/sshd.conf'!"
+
+## Copy logrotate:
+cp ../config_files/Logging/Logrotate/sshd /etc/logrotate.d/sshd
+echo -e "[+]   Logrotate rule for SSHD copied to '/etc/logrotate.d/sshd'." || echo -e "[-] ! ERROR! Logrotate rule for SSHD could not be copied to '/etc/logrotate.d/sshd'!"
+
+### Add crontab rules to root's cron:
+## Note: grep returns 0 on match, 1 otherwise:
+## On reboot:
+if grep "^@reboot systemctl restart logrotate.service && systemctl restart rsyslog.service"; then
+    echo "[*]   Reboot rule for services 'logrotate.service rsyslog.service' already exists.";
+else
+    echo -e "@reboot systemctl restart logrotate.service && systemctl restart rsyslog.service" >> /var/spool/cron/crontabs/root &&
+    echo -e "[+]   Reboot rule added for services 'logrotate.service rsyslog.service' added to '/var/spool/cron/crontabs/root'" || echo -e "[-] ! ERROR! Reboot rule for services 'logrotate.service rsyslog.service' could not be added to '/var/spool/cron/crontabs/root'!"
+fi
+## Daily:
+if grep "^@daily systemctl restart logrotate.service && systemctl restart rsyslog.service"; then
+    echo "[*]   Daily rule for services 'logrotate.service rsyslog.service' already exists.";
+else
+    echo -e "@daily systemctl restart logrotate.service && systemctl restart rsyslog.service" >> /var/spool/cron/crontabs/root &&
+    echo -e "[+]   Daily rule added for services 'logrotate.service rsyslog.service' added to '/var/spool/cron/crontabs/root'" || echo -e "[-] ! ERROR! Daily rule for services 'logrotate.service rsyslog.service' could not be added to '/var/spool/cron/crontabs/root'!"
+fi
+
+## Restart services with updated config:
+systemctl restart logrotate.service &&
+systemctl restart rsyslog.service &&
+echo -e "[+]   Services 'logrotate.service rsyslog.service' were restarted". || echo -e "[-] ! ERROR! Services 'logrotate.service rsyslog.service' could not be restarted!"
+
 ## Script end banner:
 echo -e   "##########################"
