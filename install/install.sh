@@ -261,7 +261,7 @@ if [[ "${HARDENING_LVL}" -ge 1 ]]; then
     ## Add kali repository:
     bash ./subscripts/hard-1-sys-addkalirepo.sh
 else
-    echo "   [*] Hardening level is lower than 1. Skipping..."
+    echo "[*]   Hardening level is lower than 1. Skipping..."
 fi
 
 ### LEVEL 2:
