@@ -82,8 +82,7 @@ systemctl restart cron.service &&
 echo -e "[+]   Service 'cron.service' were restarted." || echo -e "[-] ! ERROR! Service 'cron.service' could not be restarted!"
 
 ## Restart services with updated config:
-systemctl restart logrotate.service &&
-systemctl restart rsyslog.service &&
+systemctl restart logrotate.service rsyslog.service &&
 echo -e "[+]   Services 'logrotate.service rsyslog.service' were restarted". || echo -e "[-] ! ERROR! Services 'logrotate.service rsyslog.service' could not be restarted!"
 
 ## Script end banner:
