@@ -248,9 +248,9 @@ bash ./subscripts/app-virt-kvm_qemu.sh "${USER}"
 #####################
 ### LEVEL 1:
 if [[ "${HARDENING_LVL}" -ge 1 ]]; then
-    echo -e "###############################"
-    echo -e "#[H] Hardening LEVEL 1 begins #"
-    echo -e "###############################"
+    echo -e "\n###############################"
+    echo -e   "#[H] Hardening LEVEL 1 begins #"
+    echo -e   "###############################"
 
     ## Set blank MOTD:
     bash ./subscripts/hard-1-sys-motd.sh
@@ -261,14 +261,14 @@ if [[ "${HARDENING_LVL}" -ge 1 ]]; then
     ## Add kali repository:
     bash ./subscripts/hard-1-sys-addkalirepo.sh
 else
-    echo "\n[*] Hardening level is lower than 1. Skipping..."
+    echo "   [*] Hardening level is lower than 1. Skipping..."
 fi
 
 ### LEVEL 2:
 if [[ "${HARDENING_LVL}" -ge 2 ]]; then
     echo -e "\n###############################"
-    echo -e "#[H] Hardening LEVEL 2 begins.#"
-    echo -e "###############################"
+    echo -e   "#[H] Hardening LEVEL 2 begins #"
+    echo -e   "###############################"
 
     ## Set persistent ICMP Firewall with custom logs in syslog:
     bash ./subscripts/hard-2-fw-icmp.sh
@@ -280,9 +280,8 @@ if [[ "${HARDENING_LVL}" -ge 2 ]]; then
     ## Install and sets Endlessh (honeypot/tarpit) on port 22:
     bash ./subscripts/hard-2-ssh-endlessh.sh
 else
-    echo "\n[*] Hardening level is lower than 2. Skipping..."
+    echo "[*]   Hardening level is lower than 2. Skipping..."
 fi
-
 
 ### LEVEL 3:
 
@@ -291,8 +290,9 @@ fi
 #     FINISHING     #
 #####################
 echo -e "\n###############################"
-echo -e "#   Finishing Installation   .#"
-echo -e "###############################"
+echo -e   "#    Finishing Installation   #"
+echo -e   "###############################"
+
 ## Again Update whole system:
 bash ./subscripts/system-update.sh
 
@@ -302,13 +302,13 @@ bash ./subscripts/system-update.sh
 ## Remove 'debian' git directory:
 cd ${HOME} &&
 rm -rf "${HOME}/debian/" &&
-echo -e "\n[+] Cleared '${HOME}/debian/' directory." || echo -e "ERROR! Directory '${HOME}/debian/' could not be removed!"
+echo -e "[+]   Cleared '${HOME}/debian/' directory." || echo -e "[-] ! ERROR! Directory '${HOME}/debian/' could not be removed!"
 
 ## Reboot after installation:
 if [[ "${REBOOT_AFTER_DONE}" -eq 1 ]]; then
-    echo -e "\n[*] Installation completed. Rebooting..."
+    echo -e "[*]   Installation completed. Rebooting..."
     sync && init 6
 else
-    echo -e "\n[*] Installation completed. Please reboot."
+    echo -e "[*]   Installation completed. Please reboot."
     su -
 fi
