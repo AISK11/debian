@@ -16,6 +16,7 @@ exec --no-startup-id bash ${HOME}/.fehbg
 #exec --no-startup-id ~/.config/i3/scripts/i3_wallpaper_24hour.sh
 
 ## ANIMATED_WALLPAPER (warning: CPU and storate expensive):
+## NOTE: not quite working, unable to run as daemon from conf file, so only manually can be set.
 #exec --nostartup-id ~/.config/i3/scripts/i3_wallpaper_animated.sh ~/.config/i3/animated/animated_starry_night_sky_nosound.mp4
 
 ## LOCK SCREEN:
