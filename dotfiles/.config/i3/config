@@ -13,7 +13,7 @@ exec --no-startup-id feh --bg-scale ~/.config/i3/images/wallpaper.png
 ## RENDER WALLPAPER NICELY (i3-gaps):
 exec --no-startup-id bash ${HOME}/.fehbg
 
-## ANIMATED_WALLPAPER:
+## ANIMATED_WALLPAPER (warning: CPU expensive):
 #exec --nostartip-id ${HOME}/.config/i3/scripts/i3_set_anim_wallpaper.sh ${HOME}/.config/i3/animated/animated_starry_night_sky_nosound.mp4
 
 ## LOCK SCREEN:
