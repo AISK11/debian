@@ -30,3 +30,6 @@ HOUR=$(date "+%H") ## 00 - 23
 if [[ -f "${DIRECTORY}/${HOUR}.png" ]]; then
     feh --bg-scale --force-aliasing "${DIRECTORY}/${HOUR}.png"
 fi
+
+## Known BUG:
+## If specified other directory, edit crontab.
