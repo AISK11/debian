@@ -32,6 +32,7 @@ VIDEO_BASENAME=$(basename ${VIDEO})
 ## Check if subdirectory for specified video exists, if does not exists, then create it:
 if [[ -d "${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}" ]]; then
     #echo "Debug: Directory '${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}' exists."
+    true
 elif [[ -f "${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}" ]]; then
     echo "ERROR! File '${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}' must be directory!"
 else
@@ -67,6 +68,7 @@ if [[ -z "$(ls -A ${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME})" ]]; then
     ffmpeg -i ${VIDEO} "${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}/img-%04d.png"
 else
     #echo "Debug: Directory '${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}' is not empty."
+    true
 fi
 
 ## Speed in miliseconds:
