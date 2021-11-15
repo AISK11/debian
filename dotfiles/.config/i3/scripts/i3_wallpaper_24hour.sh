@@ -14,7 +14,9 @@ fi
 ### Add crontab rules to user's cron to execute each hour.
 ## Note: grep returns 0 on match, 1 otherwise, 2 if file does not exists.
 ## If crontab rule does not exist, create it:
-if crontab -l | grep "^0 * * * * ${HOME}/.config/i3/scripts/i3_wallpaper_daytime.sh" &> /dev/null; then
+if ! crontab -l 2> /dev/null; then
+    (crontab -l ; echo "0 * * * *  ${HOME}/.config/i3/scripts/i3_wallpaper_daytime.sh") | crontab -
+elif crontab -l 2> /dev/null | grep "^0 * * * * ${HOME}/.config/i3/scripts/i3_wallpaper_daytime.sh" &> /dev/null; then
     (crontab -l ; echo "0 * * * *  ${HOME}/.config/i3/scripts/i3_wallpaper_daytime.sh") | crontab -
 fi
 ## Restart cron service:
