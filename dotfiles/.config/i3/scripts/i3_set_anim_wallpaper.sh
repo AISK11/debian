@@ -95,7 +95,7 @@ for ((i = 1; i <= ${IMAGES}; i++)); do
     elif [[ ${#IMAGE} -eq 3 ]]; then
         IMAGE="0${IMAGE}"
     fi
-    echo "${IMAGE}"
+    #echo "Debug: ${IMAGE}"
     feh --force-aliasing --bg-scale "${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}/img-${IMAGE}.png"
     #sleep ${SPEED}
 
