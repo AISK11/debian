@@ -13,7 +13,7 @@ exec --no-startup-id feh --bg-scale ~/.config/i3/images/wallpaper.png
 exec --no-startup-id bash ${HOME}/.fehbg
 
 ## DYNAMIC WALLPAPER:
-#exec --no-startup-id ~/.config/i3/scripts/i3_wallpaper_24hour.sh "~/.config/i3/images/24hour/forest" "1"
+#exec --no-startup-id ~/.config/i3/scripts/i3_wallpaper_24hour.sh "~/.config/i3/images/24hour/forest"
 
 ## ANIMATED_WALLPAPER (warning: CPU expensive):
 #exec --nostartip-id ${HOME}/.config/i3/scripts/i3_wallpaper_animated.sh ${HOME}/.config/i3/animated/animated_starry_night_sky_nosound.mp4
