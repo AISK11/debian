@@ -116,9 +116,9 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 ## RELOAD THE CONFIG FILE:
-#bindsym $mod+Shift+c reload
+#bindsym $mod+Shift+c restart
 ## RESTART i3 INPLACE (preserves your layout/session, can be used to upgrade i3):
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+r reload
 ## EXIT i3:
 #bindsym $mod+Shift+e exec killall -9 startx
 
