@@ -12,9 +12,9 @@ DIRECTORY="${HOME}/.config/i3/images/24hour/forest"
 ## Note: grep returns 0 on match, 1 otherwise, 2 if file does not exists.
 ## If crontab rule does not exist, create it:
 if ! crontab -l 2> /dev/null; then
-    (echo "0 * * * *  ${HOME}/.config/i3/scripts/i3_wallpaper_24hour.sh") | crontab -
-elif crontab -l 2> /dev/null | grep "^0 * * * * ${HOME}/.config/i3/scripts/i3_wallpaper_24hour.sh" &> /dev/null; then
-    (echo "0 * * * *  ${HOME}/.config/i3/scripts/i3_wallpaper_24hour.sh") | crontab -
+    (echo "0 * * * * DISPLAY=:0 ${HOME}/.config/i3/scripts/i3_wallpaper_24hour.sh") | crontab -
+elif crontab -l 2> /dev/null | grep "^0 * * * * DISPLAY=:0 ${HOME}/.config/i3/scripts/i3_wallpaper_24hour.sh" &> /dev/null; then
+    (echo "0 * * * * DISPLAY=:0 ${HOME}/.config/i3/scripts/i3_wallpaper_24hour.sh") | crontab -
 fi
 ## Restart cron service:
 #systemctl restart cron.service &&
