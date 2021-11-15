@@ -1,33 +1,21 @@
 #!/bin/bash
 
-## This script sets background according to datetime:
+## This script sets background according to datetime.
+## USAGE:
+## ./i3_wallpaper_24hour.sh [DIRECTORY]
 
 ## Image location directory
 ## Images should be in form: 00.png - 23.png:
 DIRECTORY="${1}"
 if [[ -z ${DIRECTORY} ]]; then
-    DIRECTORY="${HOME}/.config/i3/24hour/forest"
-fi
-
-## Set Lock screen:
-## Lockscren should be called 'lock.png'.
-LOCKSCREEN=${2}
-if [[ -z ${LOCKSCREEN} ]]; then
-    LOCKSCREEN=0
-fi
-
-if [[ LOCKSCREEN -ne 0 ]]; then
-    bindsym $mod+l exec i3lock -efu -i "${HOME}/.config/i3/24hour/forest/lock.png"
+    DIRECTORY="${HOME}/.config/i3/images/24hour/forest"
 fi
 
 ### Add crontab rules to user's cron to execute each hour.
-## Note: grep returns 0 on match, 1 otherwise.
+## Note: grep returns 0 on match, 1 otherwise, 2 if file does not exists.
 ## If crontab rule does not exist, create it:
-if grep "^0 * * * * ${HOME}/.config/i3/scripts/i3_wallpaper_daytime.sh"
-  /var/spool/cron/crontabs/$(whoami) &> /dev/null; then
-    echo "[*]   Reboot rule for services 'logrotate.service rsyslog.service' already exists."
-else
-    echo -e "0 * * * * ${HOME}/.config/i3/scripts/i3_wallpaper_daytime.sh" >> /var/spool/cron/crontabs/$(whoami) &&
+if crontab -l | grep "^0 * * * * ${HOME}/.config/i3/scripts/i3_wallpaper_daytime.sh" &> /dev/null; then
+    (crontab -l ; echo "0 * * * *  ${HOME}/.config/i3/scripts/i3_wallpaper_daytime.sh") | crontab -
 fi
 ## Restart cron service:
 #systemctl restart cron.service &&
@@ -37,6 +25,6 @@ fi
 HOUR=$(date "+%H") ## 00 - 23
 
 ## Set wallpaper:
-if [[ -f "${HOME}/.config/i3/24hour/forest/${HOUR}.png" ]]; then
-    feh --bg-scale --force-aliasing "${HOME}/.config/i3/24hour/forest/${HOUR}.png"
+if [[ -f "${DIRECTORY}/${HOUR}.png" ]]; then
+    feh --bg-scale --force-aliasing "${DIRECTORY}/${HOUR}.png"
 fi
