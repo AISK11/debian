@@ -5,6 +5,8 @@ WALLPAPER_DIRECTORY="${HOME}/.wallpaper"
 
 ## Video which will be set as wallpaper in 1st CLI argument:
 VIDEO="${1}"
+## Specify hardcoded wallpaper if needed:
+#VIDEO=""
 
 
 ## Check if video was specified:
