@@ -4,13 +4,20 @@
 
 ## Image location directory
 ## Images should be in form: 00.png - 23.png:
-DIRECTORY="${HOME}/.config/i3/24hour/forest"
+DIRECTORY="${1}"
+if [[ -z ${DIRECTORY} ]]; then
+    DIRECTORY="${HOME}/.config/i3/24hour/forest"
+fi
 
 ## Set Lock screen:
-LOCKSCREEN=0
+## Lockscren should be called 'lock.png'.
+LOCKSCREEN=${2}
+if [[ -z ${LOCKSCREEN} ]]; then
+    LOCKSCREEN=0
+fi
 
 if [[ LOCKSCREEN -ne 0 ]]; then
-    bindsym $mod+l exec i3lock -efu -i "${HOME}/.config/i3/24hour/forest/default.png"
+    bindsym $mod+l exec i3lock -efu -i "${HOME}/.config/i3/24hour/forest/lock.png"
 fi
 
 ### Add crontab rules to user's cron to execute each hour.
