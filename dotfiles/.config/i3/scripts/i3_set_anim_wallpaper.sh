@@ -1,9 +1,10 @@
 #!/bin/bash
 
+## Specify default video wallpaper directory:
+WALLPAPER_DIRECTORY="${HOME}/.wallpaper"
+
 ## Video which will be set as wallpaper in 1st CLI argument:
 VIDEO="${1}"
-
-WALLPAPER_DIRECTORY="${HOME}/.wallpaper"
 
 
 ## Check if video was specified:
