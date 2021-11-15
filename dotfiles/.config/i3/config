@@ -15,8 +15,8 @@ exec --no-startup-id bash ${HOME}/.fehbg
 ## DYNAMIC WALLPAPER:
 #exec --no-startup-id ~/.config/i3/scripts/i3_wallpaper_24hour.sh
 
-## ANIMATED_WALLPAPER (warning: CPU expensive):
-#exec --nostartip-id ~/.config/i3/scripts/i3_wallpaper_animated.sh ~/.config/i3/animated/animated_starry_night_sky_nosound.mp4
+## ANIMATED_WALLPAPER (warning: CPU and storate expensive):
+#exec --nostartup-id ~/.config/i3/scripts/i3_wallpaper_animated.sh ~/.config/i3/animated/animated_starry_night_sky_nosound.mp4
 
 ## LOCK SCREEN:
 bindsym $mod+l exec i3lock -efu -i ~/.config/i3/images/bsod_linux.png
