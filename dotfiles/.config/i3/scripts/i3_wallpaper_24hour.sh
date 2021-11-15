@@ -6,10 +6,7 @@
 
 ## Image location directory
 ## Images should be in form: 00.png - 23.png:
-DIRECTORY="${1}"
-if [[ -z ${DIRECTORY} ]]; then
-    DIRECTORY="${HOME}/.config/i3/images/24hour/forest"
-fi
+DIRECTORY="${HOME}/.config/i3/images/24hour/forest"
 
 ### Add crontab rules to user's cron to execute each hour.
 ## Note: grep returns 0 on match, 1 otherwise, 2 if file does not exists.
@@ -30,6 +27,3 @@ HOUR=$(date "+%H") ## 00 - 23
 if [[ -f "${DIRECTORY}/${HOUR}.png" ]]; then
     feh --bg-scale --force-aliasing "${DIRECTORY}/${HOUR}.png"
 fi
-
-## Known BUG:
-## If specified other directory, edit crontab.
