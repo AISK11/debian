@@ -1,0 +1,311 @@
+\documentclass[10pt, a4paper, onecolumn, openany]{book} % openany make chapter start whenever, DELETE in OFFICIAL
+
+% PACKAGES:
+% Font Encoding
+\usepackage[utf8]{inputenc}     % Use UTF-8
+\usepackage[T1]{fontenc}        % T1 font encoding (latin characters)
+% Header
+\usepackage{fancyhdr}           % fancy page header options
+\usepackage{titlesec}           % used to have \thechapter in same line as \chaptertitlename
+% MISC
+\usepackage{hyperref}           % \url{}
+\usepackage{xurl}
+\usepackage{graphicx}           % images
+\usepackage{xcolor}            % colors
+\usepackage{fancyvrb}          % colors in Verbatin, header: \begin{Verbatim}[commandchars=\\\{\}]
+
+% DECORATIVE LINES + CHAPTER IN SAME LINE:
+\renewcommand{\headrulewidth}{2pt}  % Top decorative line
+\renewcommand{\footrulewidth}{2pt}  % Bottom decorative line
+\pagestyle{fancy}                   % better header for normal pages, not only chapter ones
+\fancyhf{}                          % clear header and adjust as wanted:
+    \chead{\leftmark}               % header
+    \cfoot{Page \thepage}           % footer
+\fancypagestyle{plain}{
+\fancyhf{} 
+    \chead{\leftmark}       % header
+    \cfoot{Page \thepage}   % footer
+}
+\renewcommand{\chaptername}{}       % change word chapter to {}
+\titleformat{\chapter}[hang]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter.}{1em}{} % Chapter in same line as chapter name
+
+% SIZES OF SECTIONS:
+\titleformat*{\section}{\LARGE\bfseries}
+\titleformat*{\subsection}{\Large\bfseries}
+\titleformat*{\subsubsection}{\large\bfseries}
+
+% DISABLE huge space after (paragraph indent) section name before text starts:
+\setlength{\parindent}{0pt}
+
+% COLOR EXAMPLES:
+% \definecolor{MyColor}{RGB}{219, 48, 122}  % define
+% \textcolor{MyColor}{Some random text}     % usage in document
+\definecolor{root}{RGB}{222, 0, 0}
+\definecolor{user}{RGB}{0, 150, 00}
+\definecolor{dir}{RGB}{0, 100, 200}
+\definecolor{file}{RGB}{77, 187, 101}
+\definecolor{block}{RGB}{255, 80, 0}
+\definecolor{command}{RGB}{41, 182, 0}
+\definecolor{comment}{RGB}{0, 182, 182}
+\definecolor{background}{RGB}{240, 240, 240}
+\definecolor{nocommand}{RGB}{222, 0, 0}
+\definecolor{showcommand}{RGB}{255, 80, 0}
+
+% COLORS FOR CODE in document:
+%\begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,fontsize=\footnotesize,linenos]{js}
+%\end{minted}
+
+% IMAGES:
+\graphicspath{./images/} % define directory
+% \includegraphics[scale=1.5]{./images/random_image.png} % usage in document
+
+% TABLE:
+% \begin{center}
+%    \begin{small}
+%    \begin{tabular}{|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|}
+%    \hline
+%    + & - & * & / & \% & ** & () \\
+%    \hline
+%    1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+%    \hline
+%    \end{tabular}
+%    \end{small}
+%\end{center}
+
+%\titlespacing*{\section}{0pt}{1.5cm}{0.2cm}
+%\titlespacing*{\subsection}{0pt}{0.2cm}{0.2cm}
+
+% colored verbatim BG:
+%\let\oldv\verbatim
+%\let\oldendv\endverbatim
+%\def\verbatim{\par\setbox0\vbox\bgroup\oldv}
+%\def\endverbatim{\oldendv\egroup\fboxsep0pt \noindent\colorbox[gray]{0.9}{\usebox0}\par}
+% colored Verbatim BG (supported colors: https://linuxhint.com/change-text-colors-latex/):
+\renewcommand{\FancyVerbFormatLine}[1]{\colorbox{background}{#1}}
+
+% Section starts on new page:
+%\newcommand{\sectionbreak}{\clearpage}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% TITLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\textbf{Linux Services}}
+\author{AISK}
+\date{November, 2021}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% START %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\maketitle
+%\clearpage % official blank page
+\tableofcontents
+
+
+% DHCP, DNS, IPTABLES...
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SSH %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{SSH}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{SSH Audit}
+\begin{enumerate}
+    \item \textbf{Dependencies:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install ssh-audit [-y]
+\end{Verbatim}   
+    \item \textbf{Usage:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{ssh-audit} [-p <PORT>] <HOST>
+\end{Verbatim}       
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Client}
+\begin{enumerate}
+    \item \textbf{Dependencies:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install openssh-client [-y]
+\end{Verbatim}
+    \item \textbf{Connect:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{ssh} [-p <PORT>] <USER>@<HOST> [-c <3des-cbc>] 
+[-oKexAlgorithms=+<diffie-hellman-group1-sha1>]
+\end{Verbatim}
+    \item \textbf{SCP}
+    \begin{itemize}
+        \item \textbf{GET:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{scp} [-r] [-P <PORT>] <USER>@<HOST>:</home/USER/DIR/> <.>
+\end{Verbatim}
+        \item \textbf{PUT:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{scp} [-r] [-P <PORT>] <.> <USER>@<HOST>:</home/USER/DIR/>
+\end{Verbatim}
+    \end{itemize}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Server}
+\subsection{Configuration}
+\begin{enumerate}
+    \item \textbf{Dependencies:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install openssh-server [-y]
+\end{Verbatim}
+    \item \textbf{Configure SSHD:}
+    \newline File (\textbf{\textcolor{file}{/etc/ssh/sshd\_config}}):
+\newline \underline{\url{https://github.com/AISK11/debian/blob/main/config_files/ssh/sshd_config}}
+    \item \textbf{Start SSH on startup:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{systemctl} <enable|disable> ssh.service
+\end{Verbatim}
+\end{enumerate}
+\subsection{Logging}
+\begin{itemize}
+    \item \textbf{Default file:} (\textbf{\textcolor{file}{/var/log/auth.log}}).
+\end{itemize}
+\begin{enumerate}
+    \item \textbf{Create rsyslog rule:}
+\newline File: (\textbf{\textcolor{file}{/etc/rsyslog.d/sshd.conf}}):
+\begin{verbatim}
+if $programname == 'sshd' then /var/log/sshd.log
+\end{verbatim}
+    \item \textbf{Create logrotate rule:}
+\newline File: (\textbf{\textcolor{file}{/etc/logrotate.d/sshd}}):
+\begin{verbatim}
+/var/log/sshd.log
+{
+    missingok
+    notifempty
+    rotate 4
+    weekly
+    create 0600 root root
+    compress
+    delaycompress
+    copytruncate
+    nomail
+    shred
+}
+\end{verbatim}
+    \item \textbf{Add crontab rules:}
+\newline File: (\textbf{\textcolor{file}{/etc/logrotate.d/sshd}}):
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{echo} -e "@reboot systemctl restart logrotate.service 
+&& systemctl restart rsyslog.service" >> \textcolor{file}{/var/spool/cron/crontabs/root}
+\textcolor{root}{root#} \textcolor{command}{echo} -e "@daily systemctl restart logrotate.service 
+&& systemctl restart rsyslog.service" >> \textcolor{file}{/var/spool/cron/crontabs/root}
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Endlessh %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Endlessh}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Configuration}
+\begin{enumerate}
+    \item \textbf{Dependencies:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install endlessh [-y]
+\end{Verbatim}
+    \item \textbf{Configure Endlessh:}
+\newline File (\textbf{\textcolor{file}{/etc/endlessh/config}}).
+\newline \underline{\url{https://github.com/AISK11/debian/blob/main/config_files/Honeypot/endlessh/config}}
+    \item \textbf{Start Endlessh on startup:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{systemctl} enable endlessh.service
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Logging}
+\begin{itemize}
+    \item \textbf{Default file:} (\textbf{\textcolor{file}{/etc/var/syslog}}).
+\end{itemize}
+\begin{enumerate}
+    \item \textbf{Create rsyslog rule:}
+\newline File: (\textbf{\textcolor{file}{/etc/rsyslog.d/endlessh.conf}}):
+\begin{verbatim}
+if $programname == 'endlessh' then /var/log/endlessh.log
+\end{verbatim}
+    \item \textbf{Create logrotate rule:}
+\newline File: (\textbf{\textcolor{file}{/etc/logrotate.d/endlessh}}):
+\begin{verbatim}
+/var/log/endlessh.log
+{
+    missingok
+    notifempty
+    rotate 4
+    weekly
+    create 0600 root root
+    compress
+    delaycompress
+    copytruncate
+    nomail
+    shred
+}
+\end{verbatim}
+    \item \textbf{Add crontab rules:}
+\newline File: (\textbf{\textcolor{file}{/etc/logrotate.d/sshd}}):
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{echo} -e "@reboot systemctl restart logrotate.service 
+&& systemctl restart rsyslog.service" >> \textcolor{file}{/var/spool/cron/crontabs/root}
+\textcolor{root}{root#} \textcolor{command}{echo} -e "@daily systemctl restart logrotate.service 
+&& systemctl restart rsyslog.service" >> \textcolor{file}{/var/spool/cron/crontabs/root}
+\end{Verbatim}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% VNC %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{VNC}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Client}
+\begin{enumerate}
+    \item \textbf{Dependencies:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install tigervnc-viewer [-y]
+\end{Verbatim}    
+    \item \textbf{Connect:}
+    \begin{itemize}
+        \item \textbf{Direct Access:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{xtigervncviewer} <HOST>::<5900>
+\end{Verbatim}   
+    \item \textbf{SSH Tunneling:}
+    \begin{enumerate}
+        \item \textbf{Create SSH Tunel:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{ssh} [-p <PORT>] -L <L_PORT>:<127.0.0.1>:<5900> -N <USER>@<HOST>
+\end{Verbatim}          
+        \item \textbf{Connect:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{user}{user\$} \textcolor{command}{xtigervncviewer} localhost::<L_PORT>
+\end{Verbatim}  
+    \end{enumerate}
+    \end{itemize}
+    \item \textbf{Context GUI Menu:}
+    \newline "F8"
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Server}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Virtual (standalone) Server}
+\begin{enumerate}
+    \item \textbf{Dependencies:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install tigervnc-standalone-server [-y]
+\end{Verbatim}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Current display Server}
+\begin{enumerate}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{apt} install tigervnc-scraping-server [-y]
+\end{Verbatim}
+\end{enumerate}
+
+
+
+\end{document}
