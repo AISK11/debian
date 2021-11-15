@@ -27,10 +27,6 @@ echo -e "[+]   User '${USER}' was added to KVM/QEMU groups 'libvirt libvirt-qemu
 cp -r /etc/libvirt/ ${HOME}/.config/ &> /dev/null &&
 echo -e "[+]   Libvirt config files copied to local '${HOME}/.config/'." || echo -e "[-] ! ERROR! Libvirt config files could not be copied to local '${HOME}/.config/'!"
 
-## Change ownership for these copied files:
-chown -R ${USER}:${USER} ${HOME} &> /dev/null &&
-echo -e "[+]   User '${USER}' was set as an owner of all files in '${HOME}/'." || echo -e "User '${USER}' could not be set as an owner of all files in '${HOME}/'!"
-
 ## Edit config file to use virsh fully without root:
 sed -i 's/^#uri_default/uri_default/g' ${HOME}/.config/libvirt/libvirt.conf &> /dev/null &&
 echo -e "[+]   Config file '${HOME}/.config/libvirt/libvirt.conf' were updated." || echo -e "[-] ! ERROR! Config file '${HOME}/.config/libvirt/libvirt.conf' could not be updated!"
@@ -43,6 +39,10 @@ echo -e "[+]   Service 'libvirtd.service' was enabled." || echo -e "[-] ! ERROR!
 mkdir /var/lib/libvirt/iso/ &&
 mkdir "${HOME}/.iso/" &&
 echo -e "[+]   Directories for ISO files were created ('/var/lib/libvirt/iso/' and '${HOME}/.iso/')." || echo -e "[-] ! ERROR! Directories for ISO files could not be created ('/var/lib/libvirt/iso/' and '${HOME}/.iso/')!"
+
+## Change ownership for these copied files:
+chown -R ${USER}:${USER} ${HOME} &> /dev/null &&
+echo -e "[+]   User '${USER}' was set as an owner of all files in '${HOME}/'." || echo -e "User '${USER}' could not be set as an owner of all files in '${HOME}/'!"
 
 ## Script end banner:
 echo -e   "##########################"
