@@ -289,6 +289,10 @@ else
 fi
 
 ### LEVEL 3:
+    ## TODO: VPN, Tor, Proxy
+
+## Some additional wanted sw:
+## gimp, libreoffice, ksnip, openshot-qt obs-studio
 
 
 #####################
