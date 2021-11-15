@@ -68,19 +68,19 @@ else
 fi
 
 ## Speed in miliseconds:
-SPEED=$((1000/${FPS}))
+#SPEED=$((1000/${FPS}))
 
 ## Get proper value for speed to be used in sleep:
-if [[ ${#SPEED} -eq 1 ]]; then
-    SPEED="0.00${SPEED}"
-elif [[ ${#SPEED} -eq 2 ]]; then
-    SPEED="0.0${SPEED}"
-elif [[ ${#SPEED} -eq 4 ]]; then
-    SPEED="0.${SPEED}"
-else
-    echo "ERROR! Speed is too slow!"
-    exit
-fi
+#if [[ ${#SPEED} -eq 1 ]]; then
+#    SPEED="0.00${SPEED}"
+#elif [[ ${#SPEED} -eq 2 ]]; then
+#    SPEED="0.0${SPEED}"
+#elif [[ ${#SPEED} -eq 4 ]]; then
+#    SPEED="0.${SPEED}"
+#else
+#    echo "ERROR! Speed is too slow!"
+#    exit
+#fi
 
 ## Play images frame by frame in background:
 IMAGES=$(ls -1 "${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}" | wc -l)
@@ -97,7 +97,7 @@ for ((i = 1; i <= ${IMAGES}; i++)); do
     fi
     echo "${IMAGE}"
     feh --force-aliasing --bg-scale "${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}/img-${IMAGE}.png"
-    sleep ${SPEED}
+    #sleep ${SPEED}
 
     if [[ i -ge 1800 ]]; then
         i=0
