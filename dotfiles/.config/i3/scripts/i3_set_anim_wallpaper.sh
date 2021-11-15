@@ -29,7 +29,7 @@ VIDEO_BASENAME=$(basename ${VIDEO})
 
 ## Check if subdirectory for specified video exists, if does not exists, then create it:
 if [[ -d "${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}" ]]; then
-    echo "Debug: Directory '${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}' exists."
+    #echo "Debug: Directory '${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}' exists."
 elif [[ -f "${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}" ]]; then
     echo "ERROR! File '${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}' must be directory!"
 else
@@ -64,7 +64,7 @@ if [[ -z "$(ls -A ${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME})" ]]; then
     ## Note: PNG is still large, but lot better than BMP and anti-aliasing is working.
     ffmpeg -i ${VIDEO} "${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}/img-%04d.png"
 else
-    echo "Debug: Directory '${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}' is not empty."
+    #echo "Debug: Directory '${WALLPAPER_DIRECTORY}/${VIDEO_BASENAME}' is not empty."
 fi
 
 ## Speed in miliseconds:
