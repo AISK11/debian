@@ -169,7 +169,7 @@ bash ./subscripts/x11-urxvt.sh
 ####################
 #     DRIVERS      #
 ####################
-if [[ "${INSTALL_DRIVER}" -ne 0 ]]; then
+if [[ "${INSTALL_DRIVERS}" -ne 0 ]]; then
     ## Install iwlwifi driver:
     ## Requires 'bash ./subscripts/system-packages-nonfree.sh'.
     bash ./subscripts/driver-network-iwlwifi.sh
@@ -278,7 +278,7 @@ if [[ "${HARDENING_LVL}" -ge 2 ]]; then
 
     ## Install OpenSSH server and apply hardening config,
     ## (this also sets SSH to be on port 2):
-    bash ./subscripts/hard-2-ssh-openssh.sh
+    bash ./subscripts/hard-2-ssh-openssh.sh "${USER}"
 
     ## Install and sets Endlessh (honeypot/tarpit) on port 22:
     bash ./subscripts/hard-2-ssh-endlessh.sh
