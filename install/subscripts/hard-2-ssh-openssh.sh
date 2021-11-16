@@ -29,12 +29,12 @@ echo -e "[+]   SSH server config was copied to '/etc/ssh/sshd_config'." || echo 
 
 ## Select user:
 if [[ -z ${USER} ]]; then
-    sed -i 's/^AllowUsers .*/#&/' /etc/ssh/sshd_config &&
-    sed -i 's/^AllowGroups .*/#&/' /etc/ssh/sshd_config &&
+    sed -i "s/^AllowUsers .*/#&/" /etc/ssh/sshd_config &&
+    sed -i "s/^AllowGroups .*/#&/" /etc/ssh/sshd_config &&
     echo -e "[*]   No user set to be allowed, disabled options 'AllowUsers' and 'AllowGroups'." || echo -e "[-] ! ERROR! Could not disable options 'AllowUsers' and 'AllowGroups'!"
 else
-    sed -i 's/^AllowUsers .*/AllowUsers ${USER}/' /etc/ssh/sshd_config &&
-    sed -i 's/^AllowGroups .*/AllowGroups ${USER}/' /etc/ssh/sshd_config &&
+    sed -i "s/^AllowUsers .*/AllowUsers ${USER}/" /etc/ssh/sshd_config &&
+    sed -i "s/^AllowGroups .*/AllowGroups ${USER}/" /etc/ssh/sshd_config &&
     echo -e "[+]   Set options 'AllowUsers' and 'AllowGroups' for user '${USER}'." || echo -e "[-] ! ERROR! Could not set options 'AllowUsers' and 'AllowGroups' for user '${USER}'!"
 fi
 
