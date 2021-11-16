@@ -11,7 +11,7 @@ echo -e   "###   Nvidia Optimus   ###"
 echo -e   "##########################"
 
 ## Install Nvidia driver and Nvidia tools:
-apt install intel-gpu-tools nvtop nvidia-detect linux-headers-amd64 nvidia-driver firmware-misc-nonfree -y &> /dev/null &&
+apt install intel-gpu-tools nvtop nvidia-detect linux-headers-amd64 nvidia-driver firmware-misc-nonfree -y 2> /dev/null &&
 echo -e "[+]   Packages 'intel-gpu-tools nvtop nvidia-detect linux-headers-amd64 nvidia-driver firmware-misc-nonfree' were installed." || echo -e "[-] ! ERROR! Packages 'intel-gpu-tools nvtop nvidia-detect linux-headers-amd64 nvidia-driver firmware-misc-nonfree' could not be installed!"
 
 ## Set Xorg config for Nvidia Optimus:
