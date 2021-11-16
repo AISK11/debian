@@ -5,6 +5,10 @@
 ## Date Created: November 14, 2021
 ## Last Updated: November 14, 2021
 
+## Global Properties:
+USER=${1}
+
+
 ## Script start banner:
 echo -e "\n##########################"
 echo -e   "### OpenSSH-server conf###"
@@ -22,6 +26,17 @@ echo -e "[+]   Service 'ssh.service' disabled on startup." || echo -e "[-] ! ERR
 ## Copy SSHD settings:
 cp ../config_files/SSH/sshd_config /etc/ssh/sshd_config &&
 echo -e "[+]   SSH server config was copied to '/etc/ssh/sshd_config'." || echo -e "[-] ! ERROR! SSH server config could not be copied to '/etc/ssh/sshd_config'!"
+
+## Select user:
+if [[ -z ${USER} ]]; then
+    sed -i 's/^AllowUsers .*/#&/' /etc/ssh/sshd_config &&
+    sed -i 's/^AllowGroups .*/#&/' /etc/ssh/sshd_config &&
+    echo -e "[*]   No user set to be allowed, disabled options 'AllowUsers' and 'AllowGroups'." || echo -e "[-] ! ERROR! Could not disable options 'AllowUsers' and 'AllowGroups'!"
+else
+    sed -i 's/^AllowUsers .*/AllowUsers ${USER}/' /etc/ssh/sshd_config &&
+    sed -i 's/^AllowGroups .*/AllowGroups ${USER}/' /etc/ssh/sshd_config &&
+    echo -e "[+]   Set options 'AllowUsers' and 'AllowGroups' for user '${USER}'." || echo -e "[-] ! ERROR! Could not set options 'AllowUsers' and 'AllowGroups' for user '${USER}'!"
+fi
 
 ## Change logging file:
 cp ../config_files/Logging/Rsyslog/sshd.conf /etc/rsyslog.d/sshd.conf &&
