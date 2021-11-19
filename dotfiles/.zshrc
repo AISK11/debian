@@ -48,7 +48,7 @@ alias egrep='egrep --color=always'
 alias watch='watch -n 1'
 ## UserPrograms:
 alias lightcord='cd ~/Lightcord && npm start &'
-alias mp3_download='youtube-dl -x --no-playlist --audio-format "mp3" --audio-quality 0 --console-title'
+alias mp3_download='youtube-dl --ignore-errors --format bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --output "%(title)s.%(ext)s" --no-playlist'
 alias mp3_download_playlist='youtube-dl -i -x --yes-playlist --audio-format "mp3" --audio-quality 0 --console-title'
 alias www='firefox'
 ## Network:
