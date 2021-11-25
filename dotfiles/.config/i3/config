@@ -175,6 +175,7 @@ assign [class="Firefox-esr"] $ws3
 assign [class="Wireshark"] $ws5
 #assign [class="Virt-manager"] $ws5
 assign [class="KeePassXC"] $ws8
+assign [class="Steam"] $ws9
 assign [class="dota2"] $ws9
 assign [class="lightcord"] $ws10
 
