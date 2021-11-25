@@ -64,6 +64,8 @@ ipv4_forward_no()
 {
     doas bash -c 'echo "0" > /proc/sys/net/ipv4/ip_forward'
 }
+## Nvidia:
+alias run_with_nvidia='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia'
 
 ## Functions:
 ## Usage: $(mem <program-name>)
