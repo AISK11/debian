@@ -1185,6 +1185,8 @@ nvidia-opencl-common nvidia-opencl-icd
     \item \textbf{Purge problematic primus-nvidia (required only during Steam install):}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{apt} purge primus-nvidia
+\textcolor{root}{root#} \textcolor{command}{apt} clean
+\textcolor{root}{root#} \textcolor{command}{apt} autoremove [-y]
 \end{Verbatim}
     \item \textbf{Checks:}
 \begin{itemize}
@@ -1222,7 +1224,7 @@ nvidia-opencl-common nvidia-opencl-icd
 \end{Verbatim}
     \item \textbf{Fix \textit{libGL.so.1} is missing:}
 \begin{Verbatim}[commandchars=\\\{\}]
-\textcolor{root}{root#} \textcolor{command}{apt} install primus-nvdia
+\textcolor{root}{root#} \textcolor{command}{apt} install primus-nvidia
 \textcolor{user}{user\$} \textcolor{command}{steam}
 \end{Verbatim}
     \item \textbf{Purge primus-nvidia (causing problems):}
@@ -1317,6 +1319,33 @@ Pin-Priority: 50
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{ICMP Firewall}
+\begin{center}
+    \begin{small}
+    \begin{tabular}{|p{2cm}|p{4cm}|p{1cm}|}
+    \hline
+    \textbf{LogLevel} & \textbf{Code} & \textbf{Color} \\
+    \hline
+    7 & KERN\_DEBUG & Grey \\
+    \hline
+    6 & KERN\_INFO & White \\
+    \hline
+    5 & KERN\_NOTICE & White \\
+    \hline
+    4 & KERN\_WARNING & Yellow \\
+    \hline
+    3 & KERN\_ERR & Red \\
+    \hline
+    2 & KERN\_CRIT & Red \\
+    \hline
+    1 & KERN\_ALERT & Red \\
+    \hline
+    0 & KERN\_EMERG & Red \\
+    \hline
+    \end{tabular}
+    \end{small}
+\end{center}
+
+
 \begin{enumerate}
     \item \textbf{Dependencies:}
 \begin{Verbatim}[commandchars=\\\{\}]
@@ -1505,7 +1534,7 @@ Port 22
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{user}{user\$} \textcolor{command}{tigervncpasswd} [\textcolor{file}{~/.vnc/newpasswordfile}]
 \end{Verbatim}
-Default file: \textbf{\textcolor{file}{\~/.vnc/passwd}}
+Default file: (\textbf{\textcolor{file}{\~/.vnc/passwd}}).
         \item \textbf{Run TigerVNC server:}
         \begin{itemize}
             \item \textbf{Direct Access:}
