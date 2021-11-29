@@ -228,8 +228,8 @@ apt install macchanger wireshark 2> /dev/null -y &&
 echo -e "[+]   Networking tools requiring dialog 'macchanger wireshark' installed." || echo -e "[-] ! ERROR! Networking tools requiring dialog 'macchanger wireshark' could not be installed!"
 
 ## Multimedia:
-apt install youtube-dl imagemagick zip -y &> /dev/null &&
-echo -e "[+]   Multimedia packages 'youtube-dl imagemagick zip' installed." || echo -e "[-] ! ERROR! Multimedia packages 'youtube-dl imagemagick zip' could not be installed!"
+apt install youtube-dl imagemagick zip unrar rar -y &> /dev/null &&
+echo -e "[+]   Multimedia packages 'youtube-dl imagemagick zip unrar rar' installed." || echo -e "[-] ! ERROR! Multimedia packages 'youtube-dl imagemagick zip' could not be installed!"
 
 ## MISC:
 apt install ascii -y &> /dev/null &&
