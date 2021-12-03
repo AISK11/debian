@@ -232,8 +232,8 @@ apt install youtube-dl imagemagick zip unrar rar -y &> /dev/null &&
 echo -e "[+]   Multimedia packages 'youtube-dl imagemagick zip unrar rar' installed." || echo -e "[-] ! ERROR! Multimedia packages 'youtube-dl imagemagick zip' could not be installed!"
 
 ## MISC:
-apt install ascii -y &> /dev/null &&
-echo -e "[+]   Misc packages 'ascii' installed." || echo -e "[-] ! ERROR! Could not install misc packages 'ascii'!"
+apt install ascii tldr -y &> /dev/null &&
+echo -e "[+]   Misc packages 'ascii tldr' installed." || echo -e "[-] ! ERROR! Could not install misc packages 'ascii tldr'!"
 
 echo -e   "##########################"
 
