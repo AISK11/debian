@@ -1054,15 +1054,21 @@ exec i3
 \end{Verbatim}
     \item \textbf{Edit script:}
 \newline File (\textbf{\textcolor{file}{/lib/systemd/system-sleep/<SCRIPT>}}):
-\begin{Verbatim}[commandchars=\\\{\}]
+\begin{verbatim}
 ...
 \textcolor{comment}{## Start Xorg on tty1:}
 #!/bin/bash
 
-<COMMAND1>
-<COMMAND2>
-...
-\end{Verbatim}
+## Source: https://blog.christophersmart.com/2016/05/11/running-scripts-before-and-after-suspend-with-systemd/
+
+if [ "${1}" == "pre" ]; then
+  ## Executes before suspend:
+  <COMMAND1>
+elif [ "${1}" == "post" ]; then
+  ## Executes on resume:
+  <COMMAND2>
+fi
+\end{verbatim}
     \item \textbf{Make script executable:}
 \begin{Verbatim}[commandchars=\\\{\}]
 \textcolor{root}{root#} \textcolor{command}{chmod} +x \textcolor{file}{/lib/systemd/system-sleep/<SCRIPT>}
