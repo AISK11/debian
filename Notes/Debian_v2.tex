@@ -1043,6 +1043,32 @@ exec i3
 \newline \underline{\url{https://github.com/AISK11/debian/tree/main/dotfiles/.config/i3/images}}
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Power Management %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Power Management}
+\section{Run script on sleep + wakeup}
+\begin{enumerate}
+    \item \textbf{Create script:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{touch} \textcolor{file}{/lib/systemd/system-sleep/<SCRIPT>}
+\end{Verbatim}
+    \item \textbf{Edit script:}
+\newline File (\textbf{\textcolor{file}{/lib/systemd/system-sleep/<SCRIPT>}}):
+\begin{Verbatim}[commandchars=\\\{\}]
+...
+\textcolor{comment}{## Start Xorg on tty1:}
+#!/bin/bash
+
+<COMMAND1>
+<COMMAND2>
+...
+\end{Verbatim}
+    \item \textbf{Make script executable:}
+\begin{Verbatim}[commandchars=\\\{\}]
+\textcolor{root}{root#} \textcolor{command}{chmod} +x \textcolor{file}{/lib/systemd/system-sleep/<SCRIPT>}
+\end{Verbatim}    
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% i3 Programs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{i3 Programs}
