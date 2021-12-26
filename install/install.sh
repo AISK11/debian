@@ -204,8 +204,8 @@ apt install apt-file psmisc htop -y &> /dev/null &&
 echo -e "[+]   Process related packages 'apt-file psmisc htop' installed." || echo -e "[-] ! ERROR! Process related packages 'apt-file psmisc htop' could not be installed!"
 
 ## Other system related:
-apt install neofetch inxi -y &> /dev/null &&
-echo -e "[+]   Other system related packages 'neofetch inxi' installed." || echo -e "[-] ! ERROR! Other system related packages 'neofetch inxi' could not be installed!"
+apt install neofetch inxi ncdu -y &> /dev/null &&
+echo -e "[+]   Other system related packages 'neofetch inxi ncdu' installed." || echo -e "[-] ! ERROR! Other system related packages 'neofetch inxi ncdu' could not be installed!"
 
 ## License related:
 apt install vrms -y &> /dev/null &&
