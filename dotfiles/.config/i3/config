@@ -6,56 +6,150 @@
 # sudo apt install apt install i3 i3bar i3blocks rofi i3lock feh numlockx scrot compton light xclip
 ##################################################################
 
-### WALLPAPER:
+
+##########################
+###       IMAGES       ###
+##########################
+
+#################
+### WALLPAPER ###
+#################
 ## STATIC WALLPAPER:
-exec --no-startup-id feh --bg-scale ~/.config/i3/images/wallpaper.png
+#exec --no-startup-id feh --bg-scale ~/.config/i3/images/wallpaper.png
 ## RENDER WALLPAPER NICELY (i3-gaps):
-exec --no-startup-id bash ${HOME}/.fehbg
+#exec --no-startup-id bash ${HOME}/.fehbg
 
 ## DYNAMIC WALLPAPER:
-#exec --no-startup-id DISPLAY=:0 ~/.config/i3/scripts/i3_wallpaper_24hour.sh
+exec --no-startup-id DISPLAY=:0 ~/.config/i3/scripts/i3_wallpaper_24hour.sh
 
 ## ANIMATED_WALLPAPER (warning: CPU and storate expensive):
 ## NOTE: not quite working, unable to run as daemon from conf file, so only manually can be set.
 #exec --nostartup-id ~/.config/i3/scripts/i3_wallpaper_animated.sh ~/.config/i3/animated/animated_starry_night_sky_nosound.mp4
 
-## LOCK SCREEN:
+#################
+## LOCK SCREEN ##
+#################
 bindsym $mod+l exec i3lock -efu -i ~/.config/i3/images/bsod_linux.png
 #bindsym $mod+l exec i3lock -efu -i ~/.config/i3/images/24hour/forest/lock.png
 
-## i3-gaps SETTINGS:
+
+#########################
+###    COMPOSITOR     ###
+#########################
+## Load compton with settings in "~/.config/compton.cong":
+exec --no-startup-id compton -b
+
+
+#########################
+### i3-gaps SETTINGS  ###
+#########################
 gaps inner 10
 gaps outer 10
 smart_gaps on
 
 
-## SET MOD KEY: Window key = Mod4; Alt key = Mod1:
-set $mod Mod4
+##########################
+###    i3 SETTINGS     ###
+##########################
 
-
-## Load compton with settings in "~/.config/compton.cong":
-exec --no-startup-id compton -b
-
-## WINDOW BORDER SIZE:
+###################
+## WINDOW BORDER ##
+###################
+## Window border size in pixels:
 default_border pixel 1
 #for_window [class="."] border pixel 3
 #hide_edge_borders both
 
+###################
+###    FONT     ###
+###################
 ## FONT FOR WINDOW TITLES AND BAR (also bar size):
 font pango:DejavuSansMono 11
 
 
-### SHORTCUTS:
+##########################
+###    FN SHORTCUTS    ###
+##########################
+
+#################
+## BRIGHTNESS  ##
+#################
+### LIGHT CONTROL:
+## Set Default brightness:
+#exec doas light -S 50
+## Increase/Decrease backlight:
+bindsym XF86MonBrightnessUp exec light -A 5
+bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/i3_brightness_decrease.sh
+
+#################
+##    AUDIO    ##
+#################
+### AUDIO CONTROL:
+## Set Default audio volume:
+exec amixer set Master 50%
+## Set default audio mute:
+exec amixer set Master mute
+## Mute/Unmute audio:
+bindsym XF86AudioMute exec amixer set Master toggle
+## Increase/Decrease audio volume:
+bindsym XF86AudioLowerVolume exec amixer set Master 5%-
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
+### MIC CONTROL:
+## Set Default mic volume:
+exec amixer set Capture 30%
+## Set default mic cpature mute:
+exec amixer set Capture nocap
+## Mute/Unmute mic:
+bindsym XF86AudioMicMute exec amixer set Capture toggle
+
+
+##########################
+###     SHORTCUTS     ###
+##########################
+
+#################
+##   MOD KEY   ##
+#################
+## Window key = Mod4; Alt key = Mod1:
+set $mod Mod4
+
+#################
+##  TERMINAL   ##
+#################
 ## START TEMINAL:
 bindsym $mod+Return exec i3-sensible-terminal
-## KILL FOCUSED WINDOW:
-bindsym $mod+Shift+q kill
+## EXECUTE urxvt terminal as daemon:
+exec --no-startup-id urxvtd --quiet --opendisplay --fork
+## LOAD TERMINAL EMULATOR SETTINGS:
+exec xrdb ~/.Xresources
+
+#################
+## SEARCH PROC ##
+#################
 ## DMENU:
 #bindsym $mod+d exec dmenu_run -b -fn monospace -nb "#393e46" -nf "#ffd369" -sb "#ffd369" -sf "#393e46" -i
 ## ROFI ('rofi -dump-xresources'):
 bindsym $mod+d exec "PATH=${PATH}:/sbin:/usr/sbin rofi -modi run -show run -width 25 -lines 10 -columns 1 -font 'DejavuSansMono 11' -bw 1 -location 0 -disable-history -sidebar-mode:false -hide-scrollbar -color-window '#393e46, #ffd369, #ffd369' -color-normal '#393e46, #ffd369, #454b54, #ffd369, #393e46'"
 
+#################
+## KILL WINDOW ##
+#################
+## KILL FOCUSED WINDOW:
+bindsym $mod+Shift+q kill
 
+#################
+## RESTART i3  ##
+#################
+## RELOAD THE CONFIG FILE (refresh if buggy):
+bindsym $mod+Shift+r reload
+## RESTART i3 INPLACE (preserves your layout/session, can be used to upgrade i3):
+#bindsym $mod+Shift+c restart
+## EXIT i3:
+#bindsym $mod+Shift+e exec killall -9 startx
+
+#################
+## WINDOW MGMT ##
+#################
 ## CHANGE FOCUS:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -94,6 +188,10 @@ bindsym $mod+f fullscreen toggle
 #bindsym $mod+a focus parent
 ## FOCUS CHILD CONTAINER:
 #bindsym $mod+d focus child
+
+#################
+##  RESIZING   ##
+#################
 ## RESIZE WINDOW:
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -116,15 +214,15 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 bindsym $mod+r mode "resize"
-## RESTART i3 INPLACE (preserves your layout/session, can be used to upgrade i3):
-#bindsym $mod+Shift+c restart
-## RELOAD THE CONFIG FILE (refresh if buggy):
-bindsym $mod+Shift+r reload
-## EXIT i3:
-#bindsym $mod+Shift+e exec killall -9 startx
 
 
-### WORKSPACES:
+##########################
+###     WORKSPACES     ###
+##########################
+
+####################
+##   WORKSPACES   ##
+####################
 ## DEFINE WORKSPACES:
 ## CLI:
 set $ws1 "1"
@@ -170,17 +268,28 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
+####################
+## ASSIGNED PROGS ##
+####################
 ## ASSIGN APP TO WINDOW ACCORDING TO CLASS: $(xprop) - use 2nd variable of WM_CLASS
-assign [class="Firefox-esr"] $ws3
-assign [class="Wireshark"] $ws5
-#assign [class="Virt-manager"] $ws5
-assign [class="KeePassXC"] $ws8
-assign [class="Steam"] $ws9
-assign [class="dota2"] $ws9
-assign [class="lightcord"] $ws10
+assign [class="Firefox-esr"]    $ws3
+assign [class="Wireshark"]      $ws5
+#assign [class="Virt-manager"]  $ws5
+assign [class="KeePassXC"]      $ws8
+assign [class="Steam"]          $ws9
+assign [class="dota2"]          $ws7
+assign [class="lightcord"]      $ws10
+assign [class="Atom"]           $ws2
+assign [class="Unity"]          $ws4
 
-### i3 BAR + i3 BLOCKS:
-## COLOR VARIABLES:
+
+##########################
+###  i3bar & i3blocks  ###
+##########################
+
+#################
+##   COLORS    ##
+#################
 set $selected-color     #ffd369
 #set $selected-color     #3366ff
 set $unselected-color   #393e46
@@ -190,7 +299,10 @@ client.unfocused            #000000    $unselected-color  #000000     #000000
 client.focused_inactive     #000000    $unselected-color  #000000     #000000
 client.urgent               #000000    $urgent-color  #000000     #000000
 set $bar-bg     #222831
-## i3 BAR:
+
+#################
+##    i3bar    ##
+#################
 bar {
         status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
         position top
@@ -205,40 +317,34 @@ bar {
         }
 }
 
-## EXECUTE urxvt terminal as daemon:
-exec --no-startup-id urxvtd --quiet --opendisplay --fork
 
-### OTHER FEATURES:
-## LOAD TERMINAL EMULATOR SETTINGS:
-exec xrdb ~/.Xresources
+##########################
+###   OTHER FEATURES   ###
+##########################
+
+######################
+##   PRINTSCREEN    ##
+######################
+## TAKE PRINTSCREEN:
+bindsym Print exec --no-startup-id ~/.config/i3/scripts/i3_prtsc.sh
+## TAKE PRINTSCREEN WITH CURSOR:
+bindsym $mod+Print exec --no-startup-id ~/.config/i3/scripts/i3_prtsc.sh -p
+
+######################
+##     NUMLOCK      ##
+######################
 ## NUMLOCK ON START OF i3:
 exec numlockx on
-## PRINTSCREEN:
-bindsym Print exec --no-startup-id ~/.config/i3/scripts/i3_prtsc.sh
-## PRINTSCREEN WITH CURSOR:
-bindsym $mod+Print exec --no-startup-id ~/.config/i3/scripts/i3_prtsc.sh -p
+
+######################
+## KEYBOARD LAYOUTS ##
+######################
 ## KEYBOARD SWITCHING ('man xkeyboard-config'; 'localectl list-x11-keymap-variants [sk]'):
 exec --no-startup-id setxkbmap -model pc105 -layout "us,sk" -variant ",qwerty" -option 'grp:shifts_toggle'
 
+######################
+##   GUI AS ROOT    ##
+######################
 ## Allow GUI programs to be run as root:
 exec xhost local:root
 
-### Fn KEY SHORTCUTS:
-## BACKLIGHT CONTROL:
-#exec xbacklight -set 50
-#bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-#bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/i3_brightness_decrease.sh
-## LIGHT CONTROL:
-## exec doas light -S 50
-bindsym XF86MonBrightnessUp exec light -A 5
-bindsym XF86MonBrightnessDown exec ~/.config/i3/scripts/i3_brightness_decrease.sh
-## AUDIO CONTROL:
-exec amixer set Master 50%
-exec amixer set Master mute
-bindsym XF86AudioMute exec amixer set Master toggle
-bindsym XF86AudioLowerVolume exec amixer set Master 5%-
-bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
-## MIC CONTROL:
-exec amixer set Capture 30%
-exec amixer set Capture nocap
-bindsym XF86AudioMicMute exec amixer set Capture toggle
